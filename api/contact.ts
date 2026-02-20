@@ -1,31 +1,36 @@
-import type { VercelRequest, VercelResponse } from '@vercel/node'
-import { Resend } from 'resend'
+import { Resend } from 'resend';
 
-const resend = new Resend(process.env.RESEND_API_KEY)
+const resend = new Resend(process.env.RESEND_API_KEY);
 
-export default async function handler(req: VercelRequest, res: VercelResponse) {
+export default async function handler(req: Request) {
   if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Method not allowed' })
+    return new Response('Method not allowed', { status: 405 });
   }
 
-  const { email, message } = req.body ?? {}
+  const { name, email, message } = await req.json();
 
-  if (!email || !message) {
-    return res.status(400).json({ error: 'Email and message are required' })
+  if (!name || !email || !message) {
+    return new Response(JSON.stringify({ error: 'Missing fields' }), { 
+      status: 400,
+      headers: { 'Content-Type': 'application/json' }
+    });
   }
 
-  try {
-    await resend.emails.send({
-      from: 'Dome Website <onboarding@resend.dev>',
-      to: process.env.CONTACT_EMAIL ?? 'hello@domelayer.com',
-      replyTo: email,
-      subject: `New contact from ${email}`,
-      text: `From: ${email}\n\n${message}`,
-    })
+  const { error } = await resend.emails.send({
+    from: 'Dome Contact Form <onboarding@resend.dev>', // change after domain verification
+    to: 'ipprodo@gmail.com', // ← your actual email
+    subject: `New enquiry from ${name}`,
+    html: `<p><strong>Name:</strong> ${name}</p>
+           <p><strong>Email:</strong> ${email}</p>
+           <p><strong>Message:</strong> ${message}</p>`,
+  });
 
-    return res.status(200).json({ success: true })
-  } catch (error) {
-    console.error('Contact form error:', error)
-    return res.status(500).json({ error: 'Failed to send message' })
+  if (error) {
+    return new Response(JSON.stringify({ error }), { status: 500 });
   }
+
+  return new Response(JSON.stringify({ success: true }), { 
+    status: 200,
+    headers: { 'Content-Type': 'application/json' }
+  });
 }
