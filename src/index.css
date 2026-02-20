@@ -1,0 +1,140 @@
+@import "tailwindcss";
+
+@theme {
+  /* ── Dome v2 Dark Authority Colour System ── */
+  --color-dome-void: #0C0C0E;
+  --color-dome-onyx: #161619;
+  --color-dome-warm-white: #E8E6E1;
+  --color-dome-nickel: #8A8A8F;
+  --color-dome-signal-blue: #5B9CB5;
+  --color-dome-ice-blue: #7BB8CF;
+  --color-dome-carbon-edge: #2A2A2E;
+  --color-dome-graphite: #1C1C20;
+  --color-dome-off-white: #F0EDE8;
+  --color-dome-true-black: #000000;
+
+  /* ── Functional Colours ── */
+  --color-dome-status-active: #5B9CB5;
+  --color-dome-status-success: #6B9E78;
+  --color-dome-status-warning: #C4A35A;
+  --color-dome-status-error: #B85C5C;
+
+  /* ── Spacing Scale ── */
+  --spacing-section: 6rem;
+  --spacing-section-sm: 3.5rem;
+
+  /* ── Font Family ── */
+  --font-display: 'Space Grotesk', 'Helvetica Neue', sans-serif;
+  --font-body: 'Outfit', 'Helvetica Neue', sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+
+  /* ── Font Size Scale ── */
+  --text-display: 4rem;
+  --text-h1: 3rem;
+  --text-h2: 2.25rem;
+  --text-h3: 1.375rem;
+  --text-h4: 1.25rem;
+  --text-body-lg: 1.25rem;
+  --text-body: 1rem;
+  --text-body-sm: 0.875rem;
+  --text-caption: 0.6875rem;
+  --text-nav: 0.875rem;
+}
+
+/* Lenis smooth scroll base styles */
+html.lenis, html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    font-family: var(--font-body);
+    color: var(--color-dome-warm-white);
+    background-color: var(--color-dome-void);
+    line-height: 1.7;
+    font-size: var(--text-body);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    font-weight: 600;
+    color: var(--color-dome-off-white);
+  }
+
+  ::selection {
+    background: rgba(91, 156, 181, 0.3);
+    color: var(--color-dome-off-white);
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* Dot grid background pattern */
+.dome-dot-grid {
+  background-image: radial-gradient(circle, rgba(138, 138, 143, 0.15) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* Scan-line texture for hero */
+.dome-scanlines {
+  background-image: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(138, 138, 143, 0.03) 2px,
+    rgba(138, 138, 143, 0.03) 4px
+  );
+}
+
+/* Terminal cursor blink */
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+.dome-cursor {
+  animation: blink 1s step-end infinite;
+  color: var(--color-dome-signal-blue);
+}
+
+/* Data flow animation for infrastructure diagram */
+@keyframes flow-down {
+  0% { transform: translateY(0); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { transform: translateY(40px); opacity: 0; }
+}
+.animate-flow-down {
+  animation: flow-down 1.2s ease-in-out infinite;
+}
+
+/* Focus styles for accessibility */
+*:focus-visible {
+  outline: 2px solid var(--color-dome-signal-blue);
+  outline-offset: 2px;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
