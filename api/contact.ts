@@ -17,7 +17,7 @@ export default async function handler(req: Request) {
   }
 
   const { error } = await resend.emails.send({
-    from: 'Dome Contact Form <onboarding@resend.dev>',
+    from: 'Dome Contact Form <contact@domelayer.com>',
     to: 'ipprodo@gmail.com',
     subject: `New enquiry via domelayer.com`,
     html: `<p><strong>From:</strong> ${email}</p>
