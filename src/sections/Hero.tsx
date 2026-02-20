@@ -233,7 +233,7 @@ export function Hero() {
             className="flex justify-start mb-6 lg:hidden pointer-events-none"
             aria-hidden="true"
           >
-            <GovernanceNetwork className="w-[280px] h-[280px]" />
+            <GovernanceNetwork className="w-[168px] h-[168px]" />
           </motion.div>
 
           <div className="flex items-center gap-8 lg:gap-16">
