@@ -189,17 +189,7 @@ export function Infrastructure() {
                   }}
                   className="flex items-start gap-3 text-body text-dome-warm-white"
                 >
-                  <motion.span
-                    initial={{ scale: 0 }}
-                    whileInView={{ scale: 1 }}
-                    viewport={viewportConfig}
-                    transition={{
-                      duration: 0.3,
-                      delay: i * 0.08 + 0.1,
-                      ease: [0.25, 0.1, 0.25, 1],
-                    }}
-                    className="mt-2 block w-2 h-2 rounded-full bg-dome-signal-blue flex-shrink-0"
-                  />
+                  <span className="mt-2 block w-2 h-2 rounded-full bg-dome-signal-blue flex-shrink-0" />
                   {cap}
                 </motion.li>
               ))}
