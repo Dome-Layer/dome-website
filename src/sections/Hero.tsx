@@ -268,7 +268,7 @@ export function Hero() {
 
               {/* Main headline */}
               {showContent && (
-                <h1 className="text-h1 sm:text-display font-display font-bold text-dome-off-white leading-[1.05] tracking-[-0.03em] text-balance">
+                <h1 className="text-[2.25rem] sm:text-h1 md:text-display font-display font-bold text-dome-off-white leading-[1.05] tracking-[-0.03em] text-balance">
                   <SplitHeadline text="Architected for Production" delay={0.2} />
                   <br />
                   <span className="text-dome-nickel">
@@ -283,7 +283,7 @@ export function Hero() {
                   initial={prefersReduced ? undefined : { opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8, delay: 1.0, ease: [0.25, 0.1, 0.25, 1] }}
-                  className="mt-8 text-body-lg text-dome-nickel max-w-xl leading-relaxed tracking-[0.01em]"
+                  className="mt-6 text-body sm:text-body-lg text-dome-nickel max-w-xl leading-relaxed tracking-[0.01em]"
                 >
                   We treat AI as operational infrastructure — engineered for governance before deployment.
                 </motion.p>
@@ -295,7 +295,7 @@ export function Hero() {
                   initial={prefersReduced ? undefined : { opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 1.2, ease: [0.25, 0.1, 0.25, 1] }}
-                  className="mt-10 flex flex-wrap gap-4"
+                  className="mt-8 sm:mt-10 flex flex-wrap gap-4"
                 >
                   <MagneticButton
                     href="#contact"

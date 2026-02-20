@@ -69,7 +69,7 @@ export function LightPillar({
 
     let effectiveQuality = quality
     if (isLowEndDevice && quality === 'high') effectiveQuality = 'medium'
-    if (isMobile && quality !== 'low') effectiveQuality = 'low'
+    if (isMobile && effectiveQuality === 'high') effectiveQuality = 'medium'
 
     const qualitySettings = {
       low: { iterations: 24, waveIterations: 1, pixelRatio: 0.5, precision: 'mediump' as const, stepMultiplier: 1.5 },
