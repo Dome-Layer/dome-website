@@ -7,9 +7,9 @@ export default async function handler(req: Request) {
     return new Response('Method not allowed', { status: 405 });
   }
 
-  const { name, email, message } = await req.json();
+  const { email, message } = await req.json();
 
-  if (!name || !email || !message) {
+  if (!email || !message) {
     return new Response(JSON.stringify({ error: 'Missing fields' }), { 
       status: 400,
       headers: { 'Content-Type': 'application/json' }
@@ -17,11 +17,10 @@ export default async function handler(req: Request) {
   }
 
   const { error } = await resend.emails.send({
-    from: 'Dome Contact Form <onboarding@resend.dev>', // change after domain verification
-    to: 'ipprodo@gmail.com', // ← your actual email
-    subject: `New enquiry from ${name}`,
-    html: `<p><strong>Name:</strong> ${name}</p>
-           <p><strong>Email:</strong> ${email}</p>
+    from: 'Dome Contact Form <onboarding@resend.dev>',
+    to: 'ipprodo@gmail.com',
+    subject: `New enquiry via domelayer.com`,
+    html: `<p><strong>From:</strong> ${email}</p>
            <p><strong>Message:</strong> ${message}</p>`,
   });
 
