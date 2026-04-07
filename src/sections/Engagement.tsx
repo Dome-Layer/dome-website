@@ -52,7 +52,7 @@ export function Engagement() {
           </TextReveal>
         </motion.div>
 
-        <ChromaGrid items={programmes} radius={250} />
+        <ChromaGrid items={programmes} />
 
         <TextReveal
           as="p"
