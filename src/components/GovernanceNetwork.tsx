@@ -317,10 +317,10 @@ export function GovernanceNetwork({ className }: GovernanceNetworkProps) {
             x={node.x + offset.dx}
             y={node.y + offset.dy}
             textAnchor="middle"
-            fill="var(--color-dome-warm-white)"
+            fill="#0A0A0A"
             fontSize="24"
             fontWeight="600"
-            fontFamily="'Space Grotesk', sans-serif"
+            fontFamily="'Inter', sans-serif"
             letterSpacing="0.05em"
             opacity={prefersReduced ? 1 : 0}
           >

@@ -14,7 +14,7 @@ import { Partners } from './sections/Partners'
 export default function App() {
   return (
     <SmoothScroll>
-      <div className="min-h-screen bg-dome-void dome-dot-grid">
+      <div className="min-h-screen bg-white">
         <ScrollProgress />
         <Navigation />
         <main>

@@ -10,9 +10,9 @@ interface SectionProps {
 }
 
 const bgMap = {
-  default: 'bg-dome-void',
-  surface: 'bg-dome-onyx',
-  elevated: 'bg-dome-graphite',
+  default: 'bg-white',
+  surface: 'bg-[#FAFAFA]',
+  elevated: 'bg-[#F5F5F5]',
 }
 
 export function Section({ id, children, className = '', background = 'default' }: SectionProps) {

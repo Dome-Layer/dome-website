@@ -1,373 +1,146 @@
 /**
- * LightPillar — WebGL shader-based light pillar effect.
- * Adapted from React Bits (MIT license).
- * https://www.reactbits.dev/backgrounds/light-pillar
+ * LightPillar — Canvas 2D animated blue lightning beam.
+ * Designed for light/white backgrounds. Transparent canvas — no blend tricks.
+ *
+ * Structure:
+ *  - Four gradient layers from wide+faint (haze) to narrow+bright (core)
+ *  - Whole-beam sway: the beam shifts left/right slowly
+ *  - Width pulse: the beam breathes in and out
+ *  - Subtle horizontal drift along the beam's length for a fluid feel
+ *  - Layered flicker at multiple frequencies for electric quality
  */
 
-import { useRef, useEffect, useState, type CSSProperties } from 'react'
-import * as THREE from 'three'
+import { useRef, useEffect } from 'react'
 
 interface LightPillarProps {
-  topColor?: string
-  bottomColor?: string
+  /** Clockwise rotation in degrees. */
+  rotation?: number
+  /** Overall brightness 0–1. */
   intensity?: number
-  rotationSpeed?: number
-  interactive?: boolean
+  /** Animation speed multiplier. */
+  speed?: number
+  /** Base beam width multiplier. */
+  beamWidth?: number
   className?: string
-  glowAmount?: number
-  pillarWidth?: number
-  pillarHeight?: number
-  noiseIntensity?: number
-  mixBlendMode?: CSSProperties['mixBlendMode']
-  pillarRotation?: number
-  quality?: 'low' | 'medium' | 'high'
 }
 
 export function LightPillar({
-  topColor = '#7BB8CF',
-  bottomColor = '#5B9CB5',
-  intensity = 0.6,
-  rotationSpeed = 0.15,
-  interactive = false,
+  rotation  = -9,
+  intensity = 1,
+  speed     = 1,
+  beamWidth = 1,
   className = '',
-  glowAmount = 0.004,
-  pillarWidth = 2.5,
-  pillarHeight = 0.35,
-  noiseIntensity = 0.3,
-  mixBlendMode = 'screen',
-  pillarRotation = 0,
-  quality = 'high',
 }: LightPillarProps) {
-  const containerRef = useRef<HTMLDivElement>(null)
-  const rafRef = useRef<number | null>(null)
-  const rendererRef = useRef<THREE.WebGLRenderer | null>(null)
-  const materialRef = useRef<THREE.ShaderMaterial | null>(null)
-  const sceneRef = useRef<THREE.Scene | null>(null)
-  const cameraRef = useRef<THREE.OrthographicCamera | null>(null)
-  const geometryRef = useRef<THREE.PlaneGeometry | null>(null)
-  const mouseRef = useRef<THREE.Vector2>(new THREE.Vector2(0, 0))
-  const timeRef = useRef<number>(0)
-  const [webGLSupported, setWebGLSupported] = useState<boolean>(true)
+  const canvasRef = useRef<HTMLCanvasElement>(null)
+  const rafRef    = useRef<number | null>(null)
+  const timeRef   = useRef(0)
 
   useEffect(() => {
-    const canvas = document.createElement('canvas')
-    const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl')
-    if (!gl) {
-      setWebGLSupported(false)
+    const canvas = canvasRef.current
+    if (!canvas) return
+    const ctx = canvas.getContext('2d')
+    if (!ctx) return
+
+    const setSize = () => {
+      const dpr = window.devicePixelRatio || 1
+      canvas.width  = canvas.offsetWidth  * dpr
+      canvas.height = canvas.offsetHeight * dpr
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
     }
-  }, [])
+    setSize()
+    const ro = new ResizeObserver(setSize)
+    ro.observe(canvas)
 
-  useEffect(() => {
-    if (!containerRef.current || !webGLSupported) return
+    const draw = () => {
+      const w = canvas.offsetWidth
+      const h = canvas.offsetHeight
 
-    const container = containerRef.current
-    const width = container.clientWidth
-    const height = container.clientHeight
+      // Fully transparent every frame
+      ctx.clearRect(0, 0, w, h)
 
-    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
-    const isLowEndDevice = isMobile || (navigator.hardwareConcurrency !== undefined && navigator.hardwareConcurrency <= 4)
+      const t = timeRef.current * speed
 
-    let effectiveQuality = quality
-    if (isLowEndDevice && quality === 'high') effectiveQuality = 'medium'
-    if (isMobile && effectiveQuality === 'high') effectiveQuality = 'medium'
+      // ── Flicker ─────────────────────────────────────────────────────────
+      // Multiple sine frequencies: slow pulse + mid rhythm + fast electric snap
+      const flicker = Math.max(0.4, (
+        0.75
+        + Math.sin(t * 1.8)  * 0.12   // slow breathe
+        + Math.sin(t * 4.3)  * 0.07   // mid rhythm
+        + Math.sin(t * 10.1) * 0.04   // fast flicker
+        + Math.sin(t * 23.7) * 0.02   // electric snap
+      ) * intensity)
 
-    const qualitySettings = {
-      low: { iterations: 24, waveIterations: 1, pixelRatio: 0.5, precision: 'mediump' as const, stepMultiplier: 1.5 },
-      medium: { iterations: 40, waveIterations: 2, pixelRatio: 0.65, precision: 'mediump' as const, stepMultiplier: 1.2 },
-      high: {
-        iterations: 80,
-        waveIterations: 4,
-        pixelRatio: Math.min(window.devicePixelRatio, 2),
-        precision: 'highp' as const,
-        stepMultiplier: 1.0,
-      },
-    }
+      // ── Sway ────────────────────────────────────────────────────────────
+      // Slow left/right drift of the entire beam
+      const sway = (
+        Math.sin(t * 0.42) * w * 0.018 +
+        Math.sin(t * 0.97) * w * 0.009
+      )
 
-    const settings = qualitySettings[effectiveQuality] || qualitySettings.medium
+      // ── Width pulse ─────────────────────────────────────────────────────
+      // Beam breathes wider and narrower over time
+      const widthPulse = beamWidth * (1 + Math.sin(t * 0.65) * 0.18 + Math.sin(t * 1.4) * 0.08)
 
-    const scene = new THREE.Scene()
-    sceneRef.current = scene
-    const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1)
-    cameraRef.current = camera
+      ctx.save()
+      ctx.translate(w / 2 + sway, h / 2)
+      ctx.rotate((rotation * Math.PI) / 180)
 
-    let renderer: THREE.WebGLRenderer
-    try {
-      renderer = new THREE.WebGLRenderer({
-        antialias: false,
-        alpha: true,
-        powerPreference: effectiveQuality === 'low' ? 'low-power' : 'high-performance',
-        stencil: false,
-        depth: false,
-      })
-    } catch {
-      setWebGLSupported(false)
-      return
-    }
+      // Span long enough that rotation never clips the beam at the corners
+      const span = Math.sqrt(w * w + h * h)
+      const half = span / 2
 
-    renderer.setSize(width, height)
-    renderer.setPixelRatio(settings.pixelRatio)
-    container.appendChild(renderer.domElement)
-    rendererRef.current = renderer
+      // ── Subtle path drift ────────────────────────────────────────────────
+      // Instead of a perfectly straight beam, a very gentle horizontal drift
+      // along the length — drawn as 3 gradient strips offset by a small amount.
+      // Keeps the "straight pillar" character while adding organic life.
+      const drift = Math.sin(t * 0.55) * w * 0.012
 
-    const parseColor = (hex: string): THREE.Vector3 => {
-      const color = new THREE.Color(hex)
-      return new THREE.Vector3(color.r, color.g, color.b)
-    }
-
-    const vertexShader = `
-      varying vec2 vUv;
-      void main() {
-        vUv = uv;
-        gl_Position = vec4(position, 1.0);
-      }
-    `
-
-    const fragmentShader = `
-      precision ${settings.precision} float;
-      uniform float uTime;
-      uniform vec2 uResolution;
-      uniform vec2 uMouse;
-      uniform vec3 uTopColor;
-      uniform vec3 uBottomColor;
-      uniform float uIntensity;
-      uniform bool uInteractive;
-      uniform float uGlowAmount;
-      uniform float uPillarWidth;
-      uniform float uPillarHeight;
-      uniform float uNoiseIntensity;
-      uniform float uRotCos;
-      uniform float uRotSin;
-      uniform float uPillarRotCos;
-      uniform float uPillarRotSin;
-      uniform float uWaveSin;
-      uniform float uWaveCos;
-      varying vec2 vUv;
-
-      const float PI = 3.141592653589793;
-      const float E = 2.71828182845904523536;
-
-      float noise(vec2 coord) {
-        vec2 r = (E * sin(E * coord));
-        return fract(r.x * r.y * (1.0 + coord.x));
+      // Helper: draw one horizontal-gradient strip centred at (offsetX, 0)
+      const fillStrip = (
+        offsetX: number,
+        halfW:   number,
+        colorMid: string,
+        alpha:    number,
+      ) => {
+        const grad = ctx.createLinearGradient(offsetX - halfW, 0, offsetX + halfW, 0)
+        grad.addColorStop(0,   'rgba(0,0,0,0)')
+        grad.addColorStop(0.5, colorMid.replace(')', `,${alpha.toFixed(3)})`).replace('rgb', 'rgba'))
+        grad.addColorStop(1,   'rgba(0,0,0,0)')
+        ctx.fillStyle = grad
+        ctx.fillRect(offsetX - halfW, -half, halfW * 2, span)
       }
 
-      void main() {
-        vec2 fragCoord = vUv * uResolution;
-        vec2 uv = (fragCoord * 2.0 - uResolution) / uResolution.y;
+      // ── Layer 1 – wide atmospheric haze ──────────────────────────────────
+      fillStrip(0,     w * 0.44 * widthPulse, 'rgb(0,110,230)',   0.048 * flicker)
 
-        uv = vec2(
-          uv.x * uPillarRotCos - uv.y * uPillarRotSin,
-          uv.x * uPillarRotSin + uv.y * uPillarRotCos
-        );
+      // ── Layer 2 – mid glow ────────────────────────────────────────────────
+      fillStrip(drift * 0.3, w * 0.16 * widthPulse, 'rgb(30,140,255)',  0.19  * flicker)
 
-        vec3 origin = vec3(0.0, 0.0, -10.0);
-        vec3 direction = normalize(vec3(uv, 1.0));
+      // ── Layer 3 – inner bright beam ───────────────────────────────────────
+      fillStrip(drift * 0.7, w * 0.055 * widthPulse, 'rgb(110,190,255)', 0.75  * flicker)
 
-        float maxDepth = 50.0;
-        float depth = 0.1;
+      // ── Layer 4 – hot white core ──────────────────────────────────────────
+      fillStrip(drift,       w * 0.012 * widthPulse, 'rgb(240,250,255)', flicker)
 
-        float rotCos = uRotCos;
-        float rotSin = uRotSin;
-        if(uInteractive && length(uMouse) > 0.0) {
-          float mouseAngle = uMouse.x * PI * 2.0;
-          rotCos = cos(mouseAngle);
-          rotSin = sin(mouseAngle);
-        }
+      ctx.restore()
 
-        vec3 col = vec3(0.0);
-
-        const int ITERATIONS = ${settings.iterations};
-        const int WAVE_ITERATIONS = ${settings.waveIterations};
-        const float STEP_MULT = ${settings.stepMultiplier.toFixed(1)};
-
-        for(int i = 0; i < ITERATIONS; i++) {
-          vec3 p = origin + direction * depth;
-
-          float newX = p.x * rotCos - p.z * rotSin;
-          float newZ = p.x * rotSin + p.z * rotCos;
-          p.x = newX;
-          p.z = newZ;
-
-          vec3 deformed = p;
-          deformed.y *= uPillarHeight;
-          deformed = deformed + vec3(0.0, uTime, 0.0);
-
-          float frequency = 1.0;
-          float amplitude = 1.0;
-          for(int j = 0; j < WAVE_ITERATIONS; j++) {
-            float wx = deformed.x * uWaveCos - deformed.z * uWaveSin;
-            float wz = deformed.x * uWaveSin + deformed.z * uWaveCos;
-            deformed.x = wx;
-            deformed.z = wz;
-
-            float phase = uTime * float(j) * 2.0;
-            vec3 oscillation = cos(deformed.zxy * frequency - phase);
-            deformed += oscillation * amplitude;
-            frequency *= 2.0;
-            amplitude *= 0.5;
-          }
-
-          vec2 cosinePair = cos(deformed.xz);
-          float d = length(cosinePair) - 0.2;
-
-          float bound = length(p.xz) - uPillarWidth;
-          float k = 4.0;
-          float h = max(k - abs(-bound - (-d)), 0.0);
-          d = -(min(-bound, -d) - h * h * 0.25 / k);
-
-          d = abs(d) * 0.15 + 0.01;
-
-          float grad = smoothstep(15.0, -15.0, p.y);
-          vec3 gradient = mix(uBottomColor, uTopColor, grad);
-          col += gradient / d;
-
-          if(d < 0.001 || depth > maxDepth) break;
-          depth += d * STEP_MULT;
-        }
-
-        float widthNormalization = uPillarWidth / 3.0;
-        col = tanh(col * uGlowAmount / widthNormalization);
-
-        float rnd = noise(gl_FragCoord.xy);
-        col -= rnd / 15.0 * uNoiseIntensity;
-
-        gl_FragColor = vec4(col * uIntensity, 1.0);
-      }
-    `
-
-    const waveAngle = 0.4
-    const waveSin = Math.sin(waveAngle)
-    const waveCos = Math.cos(waveAngle)
-
-    const pillarRotRad = (pillarRotation * Math.PI) / 180.0
-    const pillarRotCos = Math.cos(pillarRotRad)
-    const pillarRotSin = Math.sin(pillarRotRad)
-
-    const material = new THREE.ShaderMaterial({
-      vertexShader,
-      fragmentShader,
-      uniforms: {
-        uTime: { value: 0 },
-        uResolution: { value: new THREE.Vector2(width, height) },
-        uMouse: { value: mouseRef.current },
-        uTopColor: { value: parseColor(topColor) },
-        uBottomColor: { value: parseColor(bottomColor) },
-        uIntensity: { value: intensity },
-        uInteractive: { value: interactive },
-        uGlowAmount: { value: glowAmount },
-        uPillarWidth: { value: pillarWidth },
-        uPillarHeight: { value: pillarHeight },
-        uNoiseIntensity: { value: noiseIntensity },
-        uRotCos: { value: 1.0 },
-        uRotSin: { value: 0.0 },
-        uPillarRotCos: { value: pillarRotCos },
-        uPillarRotSin: { value: pillarRotSin },
-        uWaveSin: { value: waveSin },
-        uWaveCos: { value: waveCos },
-      },
-      transparent: true,
-      depthWrite: false,
-      depthTest: false,
-    })
-    materialRef.current = material
-
-    const geometry = new THREE.PlaneGeometry(2, 2)
-    geometryRef.current = geometry
-    const mesh = new THREE.Mesh(geometry, material)
-    scene.add(mesh)
-
-    let mouseMoveTimeout: number | null = null
-    const handleMouseMove = (event: MouseEvent) => {
-      if (!interactive) return
-      if (mouseMoveTimeout) return
-      mouseMoveTimeout = window.setTimeout(() => {
-        mouseMoveTimeout = null
-      }, 16)
-      const rect = container.getBoundingClientRect()
-      const x = ((event.clientX - rect.left) / rect.width) * 2 - 1
-      const y = -((event.clientY - rect.top) / rect.height) * 2 + 1
-      mouseRef.current.set(x, y)
+      timeRef.current += 0.016
+      rafRef.current = requestAnimationFrame(draw)
     }
 
-    if (interactive) {
-      container.addEventListener('mousemove', handleMouseMove, { passive: true })
-    }
-
-    let lastTime = performance.now()
-    const targetFPS = effectiveQuality === 'low' ? 30 : 60
-    const frameTime = 1000 / targetFPS
-
-    const animate = (currentTime: number) => {
-      if (!materialRef.current || !rendererRef.current || !sceneRef.current || !cameraRef.current) return
-
-      const deltaTime = currentTime - lastTime
-
-      if (deltaTime >= frameTime) {
-        timeRef.current += 0.016 * rotationSpeed
-        materialRef.current.uniforms.uTime.value = timeRef.current
-
-        const rotAngle = timeRef.current * 0.3
-        materialRef.current.uniforms.uRotCos.value = Math.cos(rotAngle)
-        materialRef.current.uniforms.uRotSin.value = Math.sin(rotAngle)
-
-        rendererRef.current.render(sceneRef.current, cameraRef.current)
-        lastTime = currentTime - (deltaTime % frameTime)
-      }
-
-      rafRef.current = requestAnimationFrame(animate)
-    }
-    rafRef.current = requestAnimationFrame(animate)
-
-    let resizeTimeout: number | null = null
-    const handleResize = () => {
-      if (resizeTimeout) clearTimeout(resizeTimeout)
-      resizeTimeout = window.setTimeout(() => {
-        if (!rendererRef.current || !materialRef.current || !containerRef.current) return
-        const newWidth = containerRef.current.clientWidth
-        const newHeight = containerRef.current.clientHeight
-        rendererRef.current.setSize(newWidth, newHeight)
-        materialRef.current.uniforms.uResolution.value.set(newWidth, newHeight)
-      }, 150)
-    }
-
-    window.addEventListener('resize', handleResize, { passive: true })
+    rafRef.current = requestAnimationFrame(draw)
 
     return () => {
-      window.removeEventListener('resize', handleResize)
-      if (interactive) {
-        container.removeEventListener('mousemove', handleMouseMove)
-      }
+      ro.disconnect()
       if (rafRef.current) cancelAnimationFrame(rafRef.current)
-      if (rendererRef.current) {
-        rendererRef.current.dispose()
-        rendererRef.current.forceContextLoss()
-        if (container.contains(rendererRef.current.domElement)) {
-          container.removeChild(rendererRef.current.domElement)
-        }
-      }
-      if (materialRef.current) materialRef.current.dispose()
-      if (geometryRef.current) geometryRef.current.dispose()
-
-      rendererRef.current = null
-      materialRef.current = null
-      sceneRef.current = null
-      cameraRef.current = null
-      geometryRef.current = null
-      rafRef.current = null
     }
-  }, [
-    topColor, bottomColor, intensity, rotationSpeed, interactive,
-    glowAmount, pillarWidth, pillarHeight, noiseIntensity,
-    pillarRotation, webGLSupported, quality,
-  ])
-
-  if (!webGLSupported) return null
+  }, [rotation, intensity, speed, beamWidth])
 
   return (
-    <div
-      ref={containerRef}
-      className={`w-full h-full absolute top-0 left-0 ${className}`}
-      style={{ mixBlendMode }}
+    <canvas
+      ref={canvasRef}
+      className={`w-full h-full ${className}`}
+      style={{ display: 'block' }}
     />
   )
 }

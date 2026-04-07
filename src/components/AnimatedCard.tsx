@@ -13,10 +13,10 @@ export function AnimatedCard({ children, className = '' }: AnimatedCardProps) {
       variants={dramaticFadeUp}
       whileHover={{
         scale: 1.01,
-        borderColor: 'rgba(91, 156, 181, 0.4)',
+        borderColor: '#99CCFF',
         transition: { duration: 0.2 },
       }}
-      className={`relative p-8 bg-dome-onyx border border-dome-carbon-edge rounded-sm transition-colors duration-300 ${className}`}
+      className={`relative p-8 bg-white border border-[#E8E8E8] rounded-xl transition-colors duration-300 ${className}`}
     >
       {children}
     </motion.div>

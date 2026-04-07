@@ -3,7 +3,6 @@ import { useRef, useEffect, useState } from 'react'
 import { Section } from '../components/Section'
 import { Container } from '../components/Container'
 import { TextReveal } from '../components/TextReveal'
-import { GradientText } from '../components/GradientText'
 import { gsap } from '../lib/gsap'
 import { useReducedMotion } from '../lib/useReducedMotion'
 import { dramaticFadeUp, viewportConfig } from '../lib/motion'
@@ -48,21 +47,15 @@ function AnimatedDiagram() {
       },
     })
 
-    if (enterprise) {
-      tl.to(enterprise, { x: 0, opacity: 1, duration: 0.2, ease: 'power3.out' }, 0)
-    }
+    if (enterprise) tl.to(enterprise, { x: 0, opacity: 1, duration: 0.2, ease: 'power3.out' }, 0)
     middleBlocks.forEach((el, i) => {
       tl.to(el, { scale: 1, opacity: 1, duration: 0.15, ease: 'power3.out' }, 0.15 + i * 0.08)
     })
-    if (governance) {
-      tl.to(governance, { x: 0, opacity: 1, duration: 0.2, ease: 'power3.out' }, 0.45)
-    }
+    if (governance) tl.to(governance, { x: 0, opacity: 1, duration: 0.2, ease: 'power3.out' }, 0.45)
     bottomBlocks.forEach((el, i) => {
       tl.to(el, { scale: 1, opacity: 1, duration: 0.15, ease: 'power3.out' }, 0.6 + i * 0.08)
     })
-    if (workflows) {
-      tl.to(workflows, { y: 0, opacity: 1, duration: 0.2, ease: 'power3.out' }, 0.8)
-    }
+    if (workflows) tl.to(workflows, { y: 0, opacity: 1, duration: 0.2, ease: 'power3.out' }, 0.8)
 
     tl.call(() => setBuilt(true))
 
@@ -71,40 +64,40 @@ function AnimatedDiagram() {
 
   return (
     <motion.div variants={dramaticFadeUp} className="relative" aria-hidden="true">
-      <div ref={diagramRef} className="relative border border-dome-carbon-edge p-8 bg-dome-onyx rounded-sm">
+      <div ref={diagramRef} className="relative border border-[#E8E8E8] p-8 bg-white rounded-xl">
         <div className="space-y-3">
-          <div className="layer-enterprise h-10 border border-dome-carbon-edge bg-dome-signal-blue/[0.06] flex items-center px-4 rounded-sm hover:border-dome-signal-blue/30 transition-all duration-200">
-            <span className="font-mono text-caption tracking-[0.08em] text-dome-nickel uppercase">Enterprise Systems</span>
+          <div className="layer-enterprise h-10 border border-[#E8E8E8] bg-[#E8F3FF] flex items-center px-4 rounded-lg hover:border-[#99CCFF] transition-all duration-200">
+            <span className="text-[11px] font-semibold uppercase tracking-[0.1em] text-[#525252]">Enterprise Systems</span>
           </div>
 
           <div className="grid grid-cols-3 gap-3">
             {['Data', 'Orchestration', 'Models'].map((label) => (
               <div
                 key={label}
-                className="layer-middle h-16 border border-dome-carbon-edge bg-dome-signal-blue/[0.04] flex items-center justify-center rounded-sm hover:border-dome-signal-blue/30 transition-all duration-200"
+                className="layer-middle h-16 border border-[#E8E8E8] bg-[#FAFAFA] flex items-center justify-center rounded-lg hover:border-[#99CCFF] transition-all duration-200"
               >
-                <span className="font-mono text-caption tracking-[0.08em] text-dome-nickel/60 uppercase hover:text-dome-nickel transition-colors duration-200">{label}</span>
+                <span className="text-[11px] font-semibold uppercase tracking-[0.08em] text-[#A3A3A3] hover:text-[#525252] transition-colors duration-200">{label}</span>
               </div>
             ))}
           </div>
 
-          <div className="layer-governance h-10 border border-dome-signal-blue/30 bg-dome-signal-blue/[0.08] flex items-center px-4 rounded-sm">
-            <span className="font-mono text-caption tracking-[0.08em] text-dome-signal-blue uppercase">Governance & Monitoring Layer</span>
+          <div className="layer-governance h-10 border border-[#99CCFF] bg-[#E8F3FF] flex items-center px-4 rounded-lg">
+            <span className="text-[11px] font-semibold uppercase tracking-[0.08em] text-[#0080FF]">Governance &amp; Monitoring Layer</span>
           </div>
 
           <div className="grid grid-cols-2 gap-3">
             {['Guardrails', 'Evaluation'].map((label) => (
               <div
                 key={label}
-                className="layer-bottom h-12 border border-dome-carbon-edge bg-dome-signal-blue/[0.04] flex items-center justify-center rounded-sm hover:border-dome-signal-blue/30 transition-all duration-200"
+                className="layer-bottom h-12 border border-[#E8E8E8] bg-[#FAFAFA] flex items-center justify-center rounded-lg hover:border-[#99CCFF] transition-all duration-200"
               >
-                <span className="font-mono text-caption tracking-[0.08em] text-dome-nickel/60 uppercase hover:text-dome-nickel transition-colors duration-200">{label}</span>
+                <span className="text-[11px] font-semibold uppercase tracking-[0.08em] text-[#A3A3A3] hover:text-[#525252] transition-colors duration-200">{label}</span>
               </div>
             ))}
           </div>
 
-          <div className="layer-workflows h-10 border border-dome-carbon-edge bg-dome-signal-blue/[0.06] flex items-center px-4 rounded-sm hover:border-dome-signal-blue/30 transition-all duration-200">
-            <span className="font-mono text-caption tracking-[0.08em] text-dome-nickel uppercase">Operational Workflows</span>
+          <div className="layer-workflows h-10 border border-[#E8E8E8] bg-[#E8F3FF] flex items-center px-4 rounded-lg hover:border-[#99CCFF] transition-all duration-200">
+            <span className="text-[11px] font-semibold uppercase tracking-[0.08em] text-[#525252]">Operational Workflows</span>
           </div>
         </div>
 
@@ -114,7 +107,7 @@ function AnimatedDiagram() {
             {[0, 1, 2].map((i) => (
               <div
                 key={`flow-top-${i}`}
-                className="absolute w-[3px] h-[3px] rounded-full bg-dome-signal-blue/40 animate-flow-down"
+                className="absolute w-[3px] h-[3px] rounded-full bg-[#0080FF]/40 animate-flow-down"
                 style={{
                   left: `${20 + i * 30}%`,
                   top: '12%',
@@ -126,7 +119,7 @@ function AnimatedDiagram() {
             {[0, 1].map((i) => (
               <div
                 key={`flow-bottom-${i}`}
-                className="absolute w-[3px] h-[3px] rounded-full bg-dome-signal-blue/40 animate-flow-down"
+                className="absolute w-[3px] h-[3px] rounded-full bg-[#0080FF]/40 animate-flow-down"
                 style={{
                   left: `${30 + i * 40}%`,
                   top: '58%',
@@ -148,30 +141,28 @@ export function Infrastructure() {
       <Container>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start">
           <div>
-            <p className="font-mono text-caption font-medium tracking-[0.12em] uppercase text-dome-signal-blue mb-4">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#0080FF] mb-4">
               Architecture
             </p>
-            <GradientText colors={['#006bdf', '#5B9CB5', '#9a00ff', '#E8E6E1']}>
-              <TextReveal
-                as="h2"
-                splitBy="word"
-                stagger={0.06}
-                className="text-h1 sm:text-display font-display font-semibold"
-              >
-                AI as Operational Infrastructure
-              </TextReveal>
-            </GradientText>
+            <TextReveal
+              as="h2"
+              splitBy="word"
+              stagger={0.06}
+              className="text-h1 sm:text-display font-display font-semibold text-[#0A0A0A]"
+            >
+              AI as operational infrastructure
+            </TextReveal>
 
             <TextReveal
               as="p"
               splitBy="word"
               stagger={0.03}
-              className="mt-6 text-body text-dome-nickel leading-relaxed"
+              className="mt-6 text-body text-[#525252] leading-relaxed"
             >
               Dome designs AI systems as part of enterprise architecture — not as isolated tools.
             </TextReveal>
 
-            <motion.p variants={dramaticFadeUp} className="mt-4 text-body text-dome-nickel leading-relaxed">
+            <motion.p variants={dramaticFadeUp} className="mt-4 text-body text-[#525252] leading-relaxed">
               Our approach includes:
             </motion.p>
 
@@ -182,14 +173,10 @@ export function Infrastructure() {
                   initial={{ opacity: 0, x: -15 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={viewportConfig}
-                  transition={{
-                    duration: 0.5,
-                    delay: i * 0.08,
-                    ease: [0.25, 0.1, 0.25, 1],
-                  }}
-                  className="flex items-start gap-3 text-body text-dome-warm-white"
+                  transition={{ duration: 0.5, delay: i * 0.08, ease: [0.25, 0.1, 0.25, 1] }}
+                  className="flex items-start gap-3 text-body text-[#0A0A0A]"
                 >
-                  <span className="mt-2 block w-2 h-2 rounded-full bg-dome-signal-blue flex-shrink-0" />
+                  <span className="mt-2 block w-2 h-2 rounded-full bg-[#0080FF] flex-shrink-0" />
                   {cap}
                 </motion.li>
               ))}
@@ -199,12 +186,12 @@ export function Infrastructure() {
           <AnimatedDiagram />
         </div>
 
-        <motion.div variants={dramaticFadeUp} className="mt-12 lg:mt-16 border-t border-dome-carbon-edge pt-8">
+        <motion.div variants={dramaticFadeUp} className="mt-12 lg:mt-16 border-t border-[#E8E8E8] pt-8">
           <TextReveal
             as="p"
             splitBy="word"
             stagger={0.05}
-            className="text-body-lg font-display font-semibold text-dome-off-white"
+            className="text-body-lg font-display font-semibold text-[#0A0A0A]"
           >
             AI is treated as infrastructure.
           </TextReveal>
@@ -213,7 +200,7 @@ export function Infrastructure() {
             splitBy="word"
             stagger={0.05}
             duration={0.4}
-            className="text-body text-dome-nickel mt-1"
+            className="text-body text-[#525252] mt-1"
           >
             Infrastructure demands discipline.
           </TextReveal>
