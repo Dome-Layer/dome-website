@@ -1,6 +1,5 @@
 import { useEffect } from 'react'
 import { motion } from 'framer-motion'
-import { useNavigate } from 'react-router-dom'
 import { ToolPageLayout } from '../layouts/ToolPageLayout'
 import { Section } from '../components/Section'
 import { Container } from '../components/Container'
@@ -26,8 +25,6 @@ const steps = [
 ]
 
 export function ProcessAnalyzerPage() {
-  const navigate = useNavigate()
-
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [])
@@ -45,7 +42,7 @@ export function ProcessAnalyzerPage() {
           >
             <div className="flex items-center gap-3 mb-6">
               <button
-                onClick={() => navigate('/#tools')}
+                onClick={() => { window.location.href = '/#tools' }}
                 className="text-[13px] text-[#A3A3A3] hover:text-[#525252] transition-colors duration-150"
               >
                 ← Tools

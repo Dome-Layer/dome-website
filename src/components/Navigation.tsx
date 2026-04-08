@@ -58,6 +58,17 @@ export function Navigation() {
     return () => window.removeEventListener('scroll', getActiveSection)
   }, [isHomePage])
 
+  // Scroll to hash on initial load (e.g. navigating back from a tool page via /#tools)
+  useEffect(() => {
+    if (!isHomePage || !lenis) return
+    const hash = window.location.hash
+    if (!hash) return
+    const id = setTimeout(() => {
+      lenis.scrollTo(hash, { offset: -64 })
+    }, 300)
+    return () => clearTimeout(id)
+  }, [isHomePage, lenis])
+
   useEffect(() => {
     document.body.style.overflow = mobileOpen ? 'hidden' : ''
     return () => { document.body.style.overflow = '' }
