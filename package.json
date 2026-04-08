@@ -18,6 +18,7 @@
     "ogl": "^1.0.11",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
+    "react-router-dom": "^7.14.0",
     "resend": "^6.9.2",
     "splitting": "^1.1.0",
     "three": "^0.183.0"

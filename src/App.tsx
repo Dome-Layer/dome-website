@@ -1,3 +1,4 @@
+import { Routes, Route } from 'react-router-dom'
 import { Navigation } from './components/Navigation'
 import { Footer } from './components/Footer'
 import { SmoothScroll } from './components/SmoothScroll'
@@ -8,10 +9,13 @@ import { Initiative } from './sections/Initiative'
 import { Deliver } from './sections/Deliver'
 import { Method } from './sections/Method'
 import { Infrastructure } from './sections/Infrastructure'
+import { Tools } from './sections/Tools'
 import { Engagement } from './sections/Engagement'
 import { Partners } from './sections/Partners'
+import { ProcessAnalyzerPage } from './pages/ProcessAnalyzerPage'
+import { DataIntelligencePage } from './pages/DataIntelligencePage'
 
-export default function App() {
+function HomeLayout() {
   return (
     <SmoothScroll>
       <div className="min-h-screen bg-white">
@@ -28,6 +32,8 @@ export default function App() {
           <SectionDivider />
           <Infrastructure />
           <SectionDivider />
+          <Tools />
+          <SectionDivider />
           <Engagement />
           <SectionDivider />
           <Partners />
@@ -35,5 +41,15 @@ export default function App() {
         <Footer />
       </div>
     </SmoothScroll>
+  )
+}
+
+export default function App() {
+  return (
+    <Routes>
+      <Route path="/" element={<HomeLayout />} />
+      <Route path="/tools/process-analyzer" element={<ProcessAnalyzerPage />} />
+      <Route path="/tools/data-intelligence" element={<DataIntelligencePage />} />
+    </Routes>
   )
 }

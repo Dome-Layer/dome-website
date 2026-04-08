@@ -1,21 +1,27 @@
 import { useState, useEffect, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { useLocation } from 'react-router-dom'
+import { useLenis } from 'lenis/react'
 import { DomeLogo } from './DomeLogo'
 
 const navItems = [
   { label: 'Method', href: '#method' },
   { label: 'Architecture', href: '#architecture' },
+  { label: 'Tools', href: '#tools' },
   { label: 'Engagement', href: '#engagement' },
   { label: 'About', href: '#about' },
   { label: 'Contact', href: '#contact' },
 ]
 
-const sectionIds = ['method', 'architecture', 'engagement', 'about', 'contact']
+const sectionIds = ['method', 'architecture', 'tools', 'engagement', 'about', 'contact']
 
 export function Navigation() {
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
   const [activeSection, setActiveSection] = useState<number>(-1)
+  const location = useLocation()
+  const isHomePage = location.pathname === '/'
+  const lenis = useLenis()
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40)
@@ -23,8 +29,10 @@ export function Navigation() {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
-  // Track active section
+  // Track active section (homepage only)
   useEffect(() => {
+    if (!isHomePage) return
+
     const getActiveSection = () => {
       const offset = window.innerHeight * 0.35
       const atBottom = (window.innerHeight + window.scrollY) >= document.body.scrollHeight - 2
@@ -48,7 +56,7 @@ export function Navigation() {
     getActiveSection()
     window.addEventListener('scroll', getActiveSection, { passive: true })
     return () => window.removeEventListener('scroll', getActiveSection)
-  }, [])
+  }, [isHomePage])
 
   useEffect(() => {
     document.body.style.overflow = mobileOpen ? 'hidden' : ''
@@ -56,17 +64,23 @@ export function Navigation() {
   }, [mobileOpen])
 
   const handleNavClick = useCallback((_index: number, href: string) => {
-    const el = document.querySelector(href)
-    if (el) el.scrollIntoView({ behavior: 'smooth' })
-  }, [])
+    if (isHomePage) {
+      lenis?.scrollTo(href, { offset: -64 })
+    } else {
+      window.location.href = '/' + href
+    }
+  }, [isHomePage, lenis])
 
   const handleMobileNavClick = useCallback((href: string) => {
     setMobileOpen(false)
-    setTimeout(() => {
-      const el = document.querySelector(href)
-      if (el) el.scrollIntoView({ behavior: 'smooth' })
-    }, 100)
-  }, [])
+    if (isHomePage) {
+      setTimeout(() => {
+        lenis?.scrollTo(href, { offset: -64 })
+      }, 100)
+    } else {
+      window.location.href = '/' + href
+    }
+  }, [isHomePage, lenis])
 
   return (
     <>
@@ -78,7 +92,7 @@ export function Navigation() {
         }`}
       >
         <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 sm:px-8 lg:px-12 h-16">
-          <a href="#" className="relative z-10 flex-shrink-0" aria-label="Dome — Home">
+          <a href="/" className="relative z-10 flex-shrink-0" aria-label="Dome — Home">
             <DomeLogo size="md" />
           </a>
 
@@ -105,7 +119,7 @@ export function Navigation() {
               ))}
             </ul>
             <a
-              href="#contact"
+              href={isHomePage ? '#contact' : '/#contact'}
               onClick={(e) => {
                 e.preventDefault()
                 handleNavClick(-1, '#contact')
@@ -180,7 +194,7 @@ export function Navigation() {
                   }}
                 >
                   <a
-                    href="#contact"
+                    href={isHomePage ? '#contact' : '/#contact'}
                     onClick={() => handleMobileNavClick('#contact')}
                     className="inline-flex px-8 py-3.5 text-[13px] font-semibold bg-[#0080FF] text-white rounded-lg"
                   >
