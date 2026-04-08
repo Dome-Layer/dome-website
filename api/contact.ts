@@ -15,7 +15,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   }
 
   const { error } = await resend.emails.send({
-    from: 'Dome Contact Form <contact@domelayer.com>',
+    from: 'DOME Contact Form <contact@domelayer.com>',
     to: 'francesco.prodomo@gmail.com',
     subject: `New enquiry via domelayer.com`,
     html: `<p><strong>From:</strong> ${email}</p>

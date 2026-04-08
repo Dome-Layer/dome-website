@@ -159,7 +159,7 @@ export function Infrastructure() {
               stagger={0.03}
               className="mt-6 text-body text-[#525252] leading-relaxed"
             >
-              Dome designs AI systems as part of enterprise architecture — not as isolated tools.
+              DOME designs AI systems as part of enterprise architecture — not as isolated tools.
             </TextReveal>
 
             <motion.p variants={dramaticFadeUp} className="mt-4 text-body text-[#525252] leading-relaxed">

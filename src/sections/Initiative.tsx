@@ -53,7 +53,7 @@ export function Initiative() {
 
           {/* Emphasis sweep */}
           <p ref={emphasisRef} className="mt-6 text-body-lg font-semibold">
-            {'Dome ensures it is.'.split('').map((char, i) => (
+            {'DOME ensures it is.'.split('').map((char, i) => (
               <motion.span
                 key={i}
                 initial={{ color: 'rgba(82, 82, 82, 0.3)' }}

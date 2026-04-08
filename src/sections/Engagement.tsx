@@ -1,25 +1,24 @@
 import { motion } from 'framer-motion'
 import { Section } from '../components/Section'
 import { Container } from '../components/Container'
-import { ChromaGrid, type ChromaItem } from '../components/ChromaGrid'
 import { TextReveal } from '../components/TextReveal'
-import { dramaticFadeUp } from '../lib/motion'
+import { dramaticFadeUp, viewportConfig } from '../lib/motion'
 
-const programmes: ChromaItem[] = [
+const programmes = [
   {
-    title: 'Dome Architecture Programme',
+    title: 'DOME Architecture Programme',
     subtitle: 'AI architecture blueprint and governance design.',
     label: 'ARCHITECTURE',
     borderColor: '#0080FF',
   },
   {
-    title: 'Dome Deployment Programme',
+    title: 'DOME Deployment Programme',
     subtitle: 'Governed integration into enterprise workflows.',
     label: 'DEPLOYMENT',
     borderColor: '#40A8FF',
   },
   {
-    title: 'Dome Operational Stewardship',
+    title: 'DOME Operational Stewardship',
     subtitle: 'Continuous oversight, optimisation, and alignment.',
     label: 'OPERATIONS',
     borderColor: '#99CCFF',
@@ -48,11 +47,36 @@ export function Engagement() {
             stagger={0.03}
             className="mt-4 text-body text-[#525252] max-w-xl"
           >
-            Dome operates through defined programmes.
+            DOME operates through defined programmes.
           </TextReveal>
         </motion.div>
 
-        <ChromaGrid items={programmes} />
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportConfig}
+          className="divide-y divide-[#E8E8E8]"
+        >
+          {programmes.map((prog, i) => (
+            <motion.div
+              key={prog.title}
+              variants={dramaticFadeUp}
+              custom={i}
+              className="flex items-start gap-8 py-8"
+            >
+              <span
+                className="text-[11px] font-semibold uppercase tracking-[0.18em] pt-1 w-36 shrink-0"
+                style={{ color: prog.borderColor }}
+              >
+                {prog.label}
+              </span>
+              <div>
+                <h3 className="text-h3 font-display font-semibold text-[#0A0A0A] mb-2">{prog.title}</h3>
+                <p className="text-body-sm text-[#525252] leading-relaxed">{prog.subtitle}</p>
+              </div>
+            </motion.div>
+          ))}
+        </motion.div>
 
         <TextReveal
           as="p"

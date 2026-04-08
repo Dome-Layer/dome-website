@@ -30,7 +30,7 @@ export function Partners() {
             </TextReveal>
 
             <motion.p variants={dramaticFadeUp} className="mt-6 text-body text-[#525252]">
-              Dome partners with:
+              DOME partners with:
             </motion.p>
 
             <motion.ul variants={dramaticFadeUp} className="mt-5 space-y-3">

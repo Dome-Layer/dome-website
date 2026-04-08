@@ -163,7 +163,7 @@ export function DataIntelligencePage() {
               stagger={0.025}
               className="text-body text-[#525252] leading-relaxed"
             >
-              The Orchestrate and Model phases define how AI components are coordinated and configured within a governance framework. Data Intelligence is a practical demonstration of this: the language model is confined to column classification — a bounded, low-risk task — while a deterministic rules engine makes the consequential decisions about data presentation. This separation of responsibilities is the architectural pattern Dome applies across all governed AI deployments.
+              The Orchestrate and Model phases define how AI components are coordinated and configured within a governance framework. Data Intelligence is a practical demonstration of this: the language model is confined to column classification — a bounded, low-risk task — while a deterministic rules engine makes the consequential decisions about data presentation. This separation of responsibilities is the architectural pattern DOME applies across all governed AI deployments.
             </TextReveal>
           </motion.div>
         </Container>

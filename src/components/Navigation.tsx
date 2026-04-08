@@ -103,7 +103,7 @@ export function Navigation() {
         }`}
       >
         <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 sm:px-8 lg:px-12 h-16">
-          <a href="/" className="relative z-10 flex-shrink-0" aria-label="Dome — Home">
+          <a href="/" className="relative z-10 flex-shrink-0" aria-label="DOME — Home">
             <DomeLogo size="md" />
           </a>
 

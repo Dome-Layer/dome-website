@@ -184,7 +184,7 @@ export function Footer() {
 
         <div className="mt-16 pt-8 border-t border-dome-dark-edge flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 text-caption text-dome-nickel/60">
           <span>domelayer.com</span>
-          <span>&copy; {new Date().getFullYear()} Dome. All rights reserved.</span>
+          <span>&copy; {new Date().getFullYear()} DOME. All rights reserved.</span>
         </div>
       </Container>
     </footer>

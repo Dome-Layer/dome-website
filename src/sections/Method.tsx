@@ -114,7 +114,7 @@ function MethodDesktop() {
             <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#0080FF] mb-4">
               The Method
             </p>
-            <h2 className="text-h1 sm:text-display font-display font-semibold text-[#0A0A0A]">The Dome Method</h2>
+            <h2 className="text-h1 sm:text-display font-display font-semibold text-[#0A0A0A]">The DOME Method</h2>
             <p className="mt-4 text-body text-[#525252] max-w-xl">
               A structured lifecycle for engineering governed AI systems.
             </p>
@@ -195,7 +195,7 @@ function MethodMobile() {
             The Method
           </p>
           <TextReveal as="h2" splitBy="word" stagger={0.05} className="text-h1 font-display font-semibold text-[#0A0A0A]">
-            The Dome Method
+            The DOME Method
           </TextReveal>
           <p className="mt-4 text-body text-[#525252] max-w-xl">
             A structured lifecycle for engineering governed AI systems.
