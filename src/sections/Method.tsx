@@ -64,7 +64,7 @@ function MethodDesktop() {
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: sectionRef.current,
-          start: 'top top',
+          start: 'top 64px',
           end: '+=300%',
           pin: true,
           scrub: 1,
