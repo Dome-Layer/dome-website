@@ -70,13 +70,13 @@ function AnimatedDiagram() {
             <span className="text-[11px] font-semibold uppercase tracking-[0.1em] text-[#525252]">Enterprise Systems</span>
           </div>
 
-          <div className="grid grid-cols-3 gap-3">
+          <div className="grid grid-cols-[2fr_5fr_3fr] gap-3">
             {['Data', 'Orchestration', 'Models'].map((label) => (
               <div
                 key={label}
                 className="layer-middle h-16 border border-[#E8E8E8] bg-[#FAFAFA] flex items-center justify-center rounded-lg hover:border-[#99CCFF] transition-all duration-200"
               >
-                <span className="text-[11px] font-semibold uppercase tracking-[0.08em] text-[#A3A3A3] hover:text-[#525252] transition-colors duration-200">{label}</span>
+                <span className="text-[11px] font-semibold uppercase tracking-[0.08em] text-[#A3A3A3] hover:text-[#525252] transition-colors duration-200 text-center leading-tight">{label}</span>
               </div>
             ))}
           </div>
