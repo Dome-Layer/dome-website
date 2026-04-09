@@ -1,3 +1,5 @@
+@import "@fontsource-variable/inter";
+@import "@fontsource-variable/jetbrains-mono";
 @import "tailwindcss";
 
 @theme {
@@ -53,6 +55,12 @@
   --color-dome-status-warning: #D97706;
   --color-dome-status-error:   #DC2626;
 
+  /* Status — dark-section variants (used in footer success/error states) */
+  --color-dome-success-bg:     #052E16;
+  --color-dome-success-border: #166534;
+  --color-dome-success-text:   #22C55E;
+  --color-dome-error-text:     #EF4444;
+
   /* ── Spacing ── */
   --spacing-section:    6rem;
   --spacing-section-sm: 3.5rem;
@@ -64,11 +72,11 @@
   --radius-xl:   16px;
   --radius-full: 9999px;
 
-  /* ── Font Families — Inter only ── */
-  --font-sans:    'Inter', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
-  --font-display: 'Inter', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
-  --font-body:    'Inter', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
-  --font-mono:    'JetBrains Mono', 'SF Mono', 'Fira Code', monospace;
+  /* ── Font Families ── */
+  --font-sans:    'Inter Variable', 'Inter', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+  --font-display: 'Inter Variable', 'Inter', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+  --font-body:    'Inter Variable', 'Inter', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+  --font-mono:    'JetBrains Mono Variable', 'JetBrains Mono', 'SF Mono', 'Fira Code', monospace;
 
   /* ── Type Scale ── */
   --text-display: clamp(2.5rem, 5vw, 3.5rem);

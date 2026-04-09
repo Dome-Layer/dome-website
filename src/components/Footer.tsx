@@ -7,6 +7,7 @@ import { fadeUp, viewportConfig } from '../lib/motion'
 export function Footer() {
   const [email, setEmail] = useState('')
   const [message, setMessage] = useState('')
+  const [honeypot, setHoneypot] = useState('')
   const [submitted, setSubmitted] = useState(false)
   const [sending, setSending] = useState(false)
   const [error, setError] = useState<string | null>(null)
@@ -20,7 +21,7 @@ export function Footer() {
       const res = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, message }),
+        body: JSON.stringify({ email, message, hp: honeypot }),
       })
 
       if (!res.ok) throw new Error('Failed to send')
@@ -64,12 +65,12 @@ export function Footer() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -12 }}
                 transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                className="border border-[#166534] bg-[#052E16] rounded-lg px-6 py-8 max-w-2xl"
+                className="border border-dome-success-border bg-dome-success-bg rounded-lg px-6 py-8 max-w-2xl"
               >
                 <div className="flex items-start gap-3">
-                  <span className="mt-0.5 h-5 w-5 rounded-full border-2 border-[#22C55E] flex items-center justify-center shrink-0">
-                    <svg width="10" height="8" viewBox="0 0 10 8" fill="none">
-                      <path d="M1 4L3.5 6.5L9 1" stroke="#22C55E" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                  <span className="mt-0.5 h-5 w-5 rounded-full border-2 border-dome-success-text flex items-center justify-center shrink-0">
+                    <svg width="10" height="8" viewBox="0 0 10 8" fill="none" className="text-dome-success-text">
+                      <path d="M1 4L3.5 6.5L9 1" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
                   </span>
                   <div>
@@ -157,8 +158,20 @@ export function Footer() {
                   )}
                 </button>
 
+                {/* Honeypot — hidden from real users, traps bots */}
+                <input
+                  name="hp"
+                  type="text"
+                  value={honeypot}
+                  onChange={(e) => setHoneypot(e.target.value)}
+                  tabIndex={-1}
+                  autoComplete="off"
+                  aria-hidden="true"
+                  style={{ display: 'none' }}
+                />
+
                 {error && (
-                  <p className="text-[#EF4444] text-body-sm mt-3">{error}</p>
+                  <p className="text-dome-error-text text-body-sm mt-3">{error}</p>
                 )}
               </motion.form>
             )}

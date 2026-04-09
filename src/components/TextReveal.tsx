@@ -33,7 +33,7 @@ export function TextReveal({
   }, [children, splitBy])
 
   return (
-    <Tag ref={containerRef} className={className} aria-label={children}>
+    <Tag ref={containerRef} className={className}>
       {units.map((unit, i) => {
         if (unit.match(/^\s+$/)) {
           return <span key={i}>{unit}</span>

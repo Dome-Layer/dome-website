@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { ToolPageLayout } from '../layouts/ToolPageLayout'
 import { Section } from '../components/Section'
@@ -25,12 +26,16 @@ const steps = [
 ]
 
 export function DataIntelligencePage() {
+  const navigate = useNavigate()
+
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [])
 
   return (
     <ToolPageLayout>
+      <title>Data Intelligence — DOME</title>
+      <meta name="description" content="Upload a spreadsheet and receive a governed analytics dashboard with automatic chart selection and a natural language Q&A panel." />
       {/* Hero */}
       <Section id="hero" background="default">
         <Container narrow>
@@ -42,7 +47,7 @@ export function DataIntelligencePage() {
           >
             <div className="flex items-center gap-3 mb-6">
               <button
-                onClick={() => { window.location.href = '/#tools' }}
+                onClick={() => navigate('/#tools')}
                 className="text-[13px] text-[#A3A3A3] hover:text-[#525252] transition-colors duration-150"
               >
                 ← Tools
