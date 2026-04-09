@@ -210,7 +210,7 @@ export function Hero() {
                 <img
                   src="/DOME iPad Mockup.png"
                   alt="DOME platform on iPad"
-                  className="max-w-full h-auto object-contain max-h-[560px]"
+                  className="w-full max-w-[520px] h-auto object-contain"
                   draggable={false}
                 />
               </motion.div>
