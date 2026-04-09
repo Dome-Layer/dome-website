@@ -202,15 +202,15 @@ export function Hero() {
             {/* Right column: hero image — tablet/desktop only */}
             {showContent && (
               <motion.div
-                initial={prefersReduced ? undefined : { opacity: 0, x: 40 }}
-                animate={{ opacity: 1, x: 0 }}
+                initial={prefersReduced ? undefined : { opacity: 0, x: 40, y: -60 }}
+                animate={{ opacity: 1, x: 0, y: -60 }}
                 transition={{ duration: 0.8, delay: 1.2, ease: [0.25, 0.1, 0.25, 1] }}
-                className="hidden md:flex flex-1 justify-center items-center pl-12"
+                className="hidden md:flex shrink-0 w-[50%] justify-center items-center overflow-visible"
               >
                 <img
                   src="/DOME iPad Mockup.png"
                   alt="DOME platform on iPad"
-                  className="w-full max-w-[520px] h-auto object-contain"
+                  className="w-full h-auto object-contain scale-[1.3] origin-center"
                   draggable={false}
                 />
               </motion.div>
