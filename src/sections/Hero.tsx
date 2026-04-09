@@ -199,6 +199,23 @@ export function Hero() {
               )}
             </div>
 
+            {/* Right column: hero image — tablet/desktop only */}
+            {showContent && (
+              <motion.div
+                initial={prefersReduced ? undefined : { opacity: 0, x: 40 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8, delay: 1.2, ease: [0.25, 0.1, 0.25, 1] }}
+                className="hidden md:flex flex-1 justify-center items-center pl-12"
+              >
+                <img
+                  src="/DOME iPad Mockup.png"
+                  alt="DOME platform on iPad"
+                  className="max-w-full h-auto object-contain max-h-[480px]"
+                  draggable={false}
+                />
+              </motion.div>
+            )}
+
           </div>
         </Container>
       </motion.div>
