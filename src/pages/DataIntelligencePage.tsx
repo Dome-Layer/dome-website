@@ -48,20 +48,20 @@ export function DataIntelligencePage() {
             <div className="flex items-center gap-3 mb-6">
               <button
                 onClick={() => navigate('/#tools')}
-                className="text-[13px] text-[#A3A3A3] hover:text-[#525252] transition-colors duration-150"
+                className="text-[13px] text-[var(--color-text-tertiary)] hover:text-[var(--color-text-secondary)] transition-colors duration-150"
               >
                 ← Tools
               </button>
-              <span className="text-[#E8E8E8]">/</span>
+              <span className="text-[var(--color-border-default)]">/</span>
               <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#0080FF]">
                 Orchestrate & Model
               </span>
             </div>
 
-            <h1 className="text-h1 sm:text-display font-display font-semibold text-[#0A0A0A] mb-5">
+            <h1 className="text-h1 sm:text-display font-display font-semibold text-[var(--color-text-primary)] mb-5">
               Data Intelligence
             </h1>
-            <p className="text-body text-[#525252] max-w-lg mb-8">
+            <p className="text-body text-[var(--color-text-secondary)] max-w-lg mb-8">
               Upload a spreadsheet and receive a governed analytics dashboard with automatic chart selection and a natural language Q&A panel.
             </p>
             <a
@@ -95,7 +95,7 @@ export function DataIntelligencePage() {
               as="p"
               splitBy="word"
               stagger={0.025}
-              className="text-body text-[#525252] leading-relaxed"
+              className="text-body text-[var(--color-text-secondary)] leading-relaxed"
             >
               Data Intelligence transforms structured spreadsheet data into a governed analytics dashboard without manual configuration. The system classifies each column by type — date, category, metric — then applies a rules engine to determine which chart types are appropriate. Chart selection is deterministic and auditable: the same data always produces the same chart decisions, and every governance rule applied is recorded. A natural language Q&A panel allows analysts to interrogate the data after the dashboard is generated.
             </TextReveal>
@@ -120,7 +120,7 @@ export function DataIntelligencePage() {
               as="h2"
               splitBy="word"
               stagger={0.06}
-              className="text-h2 font-display font-semibold text-[#0A0A0A]"
+              className="text-h2 font-display font-semibold text-[var(--color-text-primary)]"
             >
               Upload, classify, analyse.
             </TextReveal>
@@ -135,14 +135,14 @@ export function DataIntelligencePage() {
                 whileInView="visible"
                 viewport={viewportConfig}
                 custom={i}
-                className="flex gap-6 p-6 rounded-xl border border-[#E8E8E8] bg-white"
+                className="flex gap-6 p-6 rounded-xl border border-[var(--color-border-default)] bg-[var(--color-bg-base)]"
               >
-                <span className="text-[13px] font-semibold tabular-nums text-[#D4D4D4] flex-shrink-0 mt-0.5">
+                <span className="text-[13px] font-semibold tabular-nums text-[var(--color-border-strong)] flex-shrink-0 mt-0.5">
                   {step.number}
                 </span>
                 <div>
-                  <h3 className="text-[15px] font-semibold text-[#0A0A0A] mb-2">{step.title}</h3>
-                  <p className="text-body-sm text-[#525252] leading-relaxed">{step.body}</p>
+                  <h3 className="text-[15px] font-semibold text-[var(--color-text-primary)] mb-2">{step.title}</h3>
+                  <p className="text-body-sm text-[var(--color-text-secondary)] leading-relaxed">{step.body}</p>
                 </div>
               </motion.div>
             ))}
@@ -166,7 +166,7 @@ export function DataIntelligencePage() {
               as="p"
               splitBy="word"
               stagger={0.025}
-              className="text-body text-[#525252] leading-relaxed"
+              className="text-body text-[var(--color-text-secondary)] leading-relaxed"
             >
               The Orchestrate and Model phases define how AI components are coordinated and configured within a governance framework. Data Intelligence is a practical demonstration of this: the language model is confined to column classification — a bounded, low-risk task — while a deterministic rules engine makes the consequential decisions about data presentation. This separation of responsibilities is the architectural pattern DOME applies across all governed AI deployments.
             </TextReveal>

@@ -37,7 +37,7 @@ export function Engagement() {
             as="h2"
             splitBy="word"
             stagger={0.06}
-            className="text-h1 sm:text-display font-display font-semibold text-[#0A0A0A]"
+            className="text-h1 sm:text-display font-display font-semibold text-[var(--color-text-primary)]"
           >
             Structured engagement
           </TextReveal>
@@ -45,7 +45,7 @@ export function Engagement() {
             as="p"
             splitBy="word"
             stagger={0.03}
-            className="mt-4 text-body text-[#525252] max-w-xl"
+            className="mt-4 text-body text-[var(--color-text-secondary)] max-w-xl"
           >
             DOME operates through defined programmes.
           </TextReveal>
@@ -55,7 +55,7 @@ export function Engagement() {
           initial="hidden"
           whileInView="visible"
           viewport={viewportConfig}
-          className="divide-y divide-[#E8E8E8]"
+          className="divide-y divide-[var(--color-border-default)]"
         >
           {programmes.map((prog, i) => (
             <motion.div
@@ -71,8 +71,8 @@ export function Engagement() {
                 {prog.label}
               </span>
               <div>
-                <h3 className="text-h3 font-display font-semibold text-[#0A0A0A] mb-2">{prog.title}</h3>
-                <p className="text-body-sm text-[#525252] leading-relaxed">{prog.subtitle}</p>
+                <h3 className="text-h3 font-display font-semibold text-[var(--color-text-primary)] mb-2">{prog.title}</h3>
+                <p className="text-body-sm text-[var(--color-text-secondary)] leading-relaxed">{prog.subtitle}</p>
               </div>
             </motion.div>
           ))}
@@ -82,7 +82,7 @@ export function Engagement() {
           as="p"
           splitBy="word"
           stagger={0.03}
-          className="mt-10 text-body text-[#525252] max-w-xl"
+          className="mt-10 text-body text-[var(--color-text-secondary)] max-w-xl"
         >
           Engagements begin with architecture and extend through operational maturity.
         </TextReveal>

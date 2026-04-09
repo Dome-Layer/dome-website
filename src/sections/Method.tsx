@@ -108,14 +108,14 @@ function MethodDesktop() {
 
   return (
     <div ref={sectionRef} className="hidden md:block">
-      <div className="min-h-screen flex flex-col justify-center py-section-sm lg:py-section bg-white">
+      <div className="min-h-screen flex flex-col justify-center py-section-sm lg:py-section bg-[var(--color-bg-base)]">
         <Container>
           <div className="mb-12 lg:mb-16">
             <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#0080FF] mb-4">
               The Method
             </p>
-            <h2 className="text-h1 sm:text-display font-display font-semibold text-[#0A0A0A]">The DOME Method</h2>
-            <p className="mt-4 text-body text-[#525252] max-w-xl">
+            <h2 className="text-h1 sm:text-display font-display font-semibold text-[var(--color-text-primary)]">The DOME Method</h2>
+            <p className="mt-4 text-body text-[var(--color-text-secondary)] max-w-xl">
               A structured lifecycle for engineering governed AI systems.
             </p>
           </div>
@@ -137,7 +137,7 @@ function MethodDesktop() {
 
             <div className="grid grid-cols-4 gap-0">
               {phases.map((phase, i) => (
-                <div key={phase.letter} className="relative border-t border-[#E8E8E8] p-6 sm:p-8">
+                <div key={phase.letter} className="relative border-t border-[var(--color-border-default)] p-6 sm:p-8">
                   {/* Node dot */}
                   <div
                     ref={(el) => { dotRefs.current[i] = el }}
@@ -153,11 +153,11 @@ function MethodDesktop() {
                     <span className="inline-block text-[11px] font-semibold uppercase tracking-[0.18em] text-[#0080FF] mb-2">
                       Phase {String(i + 1).padStart(2, '0')} — {phase.name}
                     </span>
-                    <span className="block text-h2 font-bold text-[#E8E8E8] mb-2 tracking-tight">
+                    <span className="block text-h2 font-bold text-[var(--color-border-default)] mb-2 tracking-tight">
                       {phase.letter}
                     </span>
-                    <h3 className="text-h3 font-display font-semibold text-[#0A0A0A] mb-3">{phase.name}</h3>
-                    <p className="text-body-sm text-[#525252] leading-relaxed">{phase.description}</p>
+                    <h3 className="text-h3 font-display font-semibold text-[var(--color-text-primary)] mb-3">{phase.name}</h3>
+                    <p className="text-body-sm text-[var(--color-text-secondary)] leading-relaxed">{phase.description}</p>
                   </div>
                 </div>
               ))}
@@ -167,7 +167,7 @@ function MethodDesktop() {
           {/* Governance strip */}
           <div
             ref={govRef}
-            className="mt-10 lg:mt-12 origin-left bg-[#E8F3FF] border border-[#99CCFF] px-6 py-4 flex items-center gap-3 rounded-lg"
+            className="mt-10 lg:mt-12 origin-left bg-[var(--color-bg-accent)] border border-[var(--color-border-accent)] px-6 py-4 flex items-center gap-3 rounded-lg"
           >
             <div className="w-2 h-2 rounded-full bg-[#0080FF] flex-shrink-0" />
             <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#0080FF]">
@@ -187,17 +187,17 @@ function MethodMobile() {
       initial="hidden"
       whileInView="visible"
       viewport={viewportConfig}
-      className="md:hidden relative py-section-sm bg-white"
+      className="md:hidden relative py-section-sm bg-[var(--color-bg-base)]"
     >
       <Container>
         <motion.div variants={dramaticFadeUp} className="mb-6">
           <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#0080FF] mb-4">
             The Method
           </p>
-          <TextReveal as="h2" splitBy="word" stagger={0.05} className="text-h1 font-display font-semibold text-[#0A0A0A]">
+          <TextReveal as="h2" splitBy="word" stagger={0.05} className="text-h1 font-display font-semibold text-[var(--color-text-primary)]">
             The DOME Method
           </TextReveal>
-          <p className="mt-4 text-body text-[#525252] max-w-xl">
+          <p className="mt-4 text-body text-[var(--color-text-secondary)] max-w-xl">
             A structured lifecycle for engineering governed AI systems.
           </p>
         </motion.div>
@@ -214,17 +214,17 @@ function MethodMobile() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={viewportConfig}
                 transition={{ duration: 0.6, delay: i * 0.1, ease: [0.25, 0.1, 0.25, 1] }}
-                className="relative border-l border-[#E8E8E8] p-6 pl-8"
+                className="relative border-l border-[var(--color-border-default)] p-6 pl-8"
               >
                 <div className="absolute -left-[5px] top-8 w-[9px] h-[9px] rounded-full bg-[#0080FF]" />
                 <span className="block text-[11px] font-semibold uppercase tracking-[0.18em] text-[#0080FF] mb-2">
                   Phase {String(i + 1).padStart(2, '0')} — {phase.name}
                 </span>
-                <span className="block text-h2 font-bold text-[#E8E8E8] mb-2 tracking-tight">
+                <span className="block text-h2 font-bold text-[var(--color-border-default)] mb-2 tracking-tight">
                   {phase.letter}
                 </span>
-                <h3 className="text-h3 font-display font-semibold text-[#0A0A0A] mb-3">{phase.name}</h3>
-                <p className="text-body-sm text-[#525252] leading-relaxed">{phase.description}</p>
+                <h3 className="text-h3 font-display font-semibold text-[var(--color-text-primary)] mb-3">{phase.name}</h3>
+                <p className="text-body-sm text-[var(--color-text-secondary)] leading-relaxed">{phase.description}</p>
               </motion.div>
             ))}
           </div>
@@ -235,7 +235,7 @@ function MethodMobile() {
           whileInView={{ scaleX: 1, opacity: 1 }}
           viewport={viewportConfig}
           transition={{ duration: 1, ease: [0.25, 0.1, 0.25, 1], delay: 0.3 }}
-          className="mt-10 origin-left bg-[#E8F3FF] border border-[#99CCFF] px-6 py-4 flex items-center gap-3 rounded-lg"
+          className="mt-10 origin-left bg-[var(--color-bg-accent)] border border-[var(--color-border-accent)] px-6 py-4 flex items-center gap-3 rounded-lg"
         >
           <div className="w-2 h-2 rounded-full bg-[#0080FF] flex-shrink-0" />
           <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#0080FF]">

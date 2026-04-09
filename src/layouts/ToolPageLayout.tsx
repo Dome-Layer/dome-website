@@ -8,7 +8,7 @@ interface ToolPageLayoutProps {
 
 export function ToolPageLayout({ children }: ToolPageLayoutProps) {
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-[var(--color-bg-base)]">
       <Navigation />
       <main className="pt-16">
         {children}

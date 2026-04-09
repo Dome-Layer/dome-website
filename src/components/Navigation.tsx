@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { useLocation } from 'react-router-dom'
 import { useLenis } from 'lenis/react'
 import { DomeLogo } from './DomeLogo'
+import { ThemeToggle } from './ThemeToggle'
 
 const navItems = [
   { label: 'Method', href: '#method' },
@@ -96,9 +97,9 @@ export function Navigation() {
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-50 h-16 bg-white transition-[border-color,box-shadow] duration-300 ${
+        className={`fixed top-0 left-0 right-0 z-50 h-16 bg-[var(--color-bg-base)] transition-[border-color,box-shadow,background-color] duration-300 ${
           scrolled
-            ? 'border-b border-[#F0F0F0] shadow-[0_1px_3px_rgba(0,0,0,0.04)]'
+            ? 'border-b border-[var(--color-border-subtle)] shadow-[0_1px_3px_rgba(0,0,0,0.04)]'
             : 'border-b border-transparent'
         }`}
       >
@@ -108,7 +109,7 @@ export function Navigation() {
           </a>
 
           {/* Desktop nav */}
-          <div className="hidden lg:flex items-center gap-6">
+          <div className="hidden lg:flex items-center gap-4">
             <ul className="flex items-center gap-1" role="list">
               {navItems.map((item, i) => (
                 <li key={item.label}>
@@ -121,7 +122,7 @@ export function Navigation() {
                     className={`relative px-3 py-2 rounded-lg text-[13px] font-medium transition-colors duration-150 ${
                       activeSection === i
                         ? 'text-[#0080FF]'
-                        : 'text-[#525252] hover:text-[#0A0A0A] hover:bg-[#F5F5F5]'
+                        : 'text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] hover:bg-[var(--color-bg-muted)]'
                     }`}
                   >
                     {item.label}
@@ -139,26 +140,30 @@ export function Navigation() {
             >
               Discuss an engagement
             </a>
+            <ThemeToggle />
           </div>
 
-          {/* Mobile hamburger */}
-          <button
-            className="relative z-10 lg:hidden flex flex-col justify-center items-center w-10 h-10 gap-[5px]"
-            onClick={() => setMobileOpen(!mobileOpen)}
-            aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
-            aria-expanded={mobileOpen}
-          >
-            <span
-              className={`block h-[1.5px] w-5 bg-[#0A0A0A] transition-all duration-300 ${
-                mobileOpen ? 'translate-y-[3px] rotate-45' : ''
-              }`}
-            />
-            <span
-              className={`block h-[1.5px] w-5 bg-[#0A0A0A] transition-all duration-300 ${
-                mobileOpen ? '-translate-y-[3px] -rotate-45' : ''
-              }`}
-            />
-          </button>
+          {/* Mobile: theme toggle + hamburger */}
+          <div className="lg:hidden flex items-center gap-1">
+            <ThemeToggle />
+            <button
+              className="relative z-10 flex flex-col justify-center items-center w-10 h-10 gap-[5px]"
+              onClick={() => setMobileOpen(!mobileOpen)}
+              aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
+              aria-expanded={mobileOpen}
+            >
+              <span
+                className={`block h-[1.5px] w-5 bg-[var(--color-text-primary)] transition-all duration-300 ${
+                  mobileOpen ? 'translate-y-[3px] rotate-45' : ''
+                }`}
+              />
+              <span
+                className={`block h-[1.5px] w-5 bg-[var(--color-text-primary)] transition-all duration-300 ${
+                  mobileOpen ? '-translate-y-[3px] -rotate-45' : ''
+                }`}
+              />
+            </button>
+          </div>
         </nav>
       </header>
 
@@ -170,7 +175,7 @@ export function Navigation() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-0 z-40 bg-white flex flex-col justify-center items-center lg:hidden"
+            className="fixed inset-0 z-40 bg-[var(--color-bg-base)] flex flex-col justify-center items-center lg:hidden"
           >
             <nav>
               <ul className="flex flex-col items-center gap-4" role="list">
@@ -188,7 +193,7 @@ export function Navigation() {
                     <a
                       href={item.href}
                       onClick={() => handleMobileNavClick(item.href)}
-                      className="text-2xl font-semibold text-[#0A0A0A] hover:text-[#0080FF] transition-colors tracking-tight"
+                      className="text-2xl font-semibold text-[var(--color-text-primary)] hover:text-[#0080FF] transition-colors tracking-tight"
                     >
                       {item.label}
                     </a>

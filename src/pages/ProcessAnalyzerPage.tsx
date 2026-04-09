@@ -48,20 +48,20 @@ export function ProcessAnalyzerPage() {
             <div className="flex items-center gap-3 mb-6">
               <button
                 onClick={() => navigate('/#tools')}
-                className="text-[13px] text-[#A3A3A3] hover:text-[#525252] transition-colors duration-150"
+                className="text-[13px] text-[var(--color-text-tertiary)] hover:text-[var(--color-text-secondary)] transition-colors duration-150"
               >
                 ← Tools
               </button>
-              <span className="text-[#E8E8E8]">/</span>
+              <span className="text-[var(--color-border-default)]">/</span>
               <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#0080FF]">
                 Discover
               </span>
             </div>
 
-            <h1 className="text-h1 sm:text-display font-display font-semibold text-[#0A0A0A] mb-5">
+            <h1 className="text-h1 sm:text-display font-display font-semibold text-[var(--color-text-primary)] mb-5">
               Process Analyzer
             </h1>
-            <p className="text-body text-[#525252] max-w-lg mb-8">
+            <p className="text-body text-[var(--color-text-secondary)] max-w-lg mb-8">
               Convert a plain-language description of any business process into a structured process map with governance analysis and automation assessment.
             </p>
             <a
@@ -95,7 +95,7 @@ export function ProcessAnalyzerPage() {
               as="p"
               splitBy="word"
               stagger={0.025}
-              className="text-body text-[#525252] leading-relaxed"
+              className="text-body text-[var(--color-text-secondary)] leading-relaxed"
             >
               Process Analyzer takes unstructured business process descriptions and returns structured, visual outputs that operations managers and process owners can act on immediately. It identifies which systems touch each step, estimates processing time, and flags where governance controls are absent or insufficient. The tool also assesses which parts of the process are candidates for AI automation — with a clear indication of what oversight would be needed before any automation is deployed.
             </TextReveal>
@@ -120,7 +120,7 @@ export function ProcessAnalyzerPage() {
               as="h2"
               splitBy="word"
               stagger={0.06}
-              className="text-h2 font-display font-semibold text-[#0A0A0A]"
+              className="text-h2 font-display font-semibold text-[var(--color-text-primary)]"
             >
               Three steps from description to map.
             </TextReveal>
@@ -135,14 +135,14 @@ export function ProcessAnalyzerPage() {
                 whileInView="visible"
                 viewport={viewportConfig}
                 custom={i}
-                className="flex gap-6 p-6 rounded-xl border border-[#E8E8E8] bg-white"
+                className="flex gap-6 p-6 rounded-xl border border-[var(--color-border-default)] bg-[var(--color-bg-base)]"
               >
-                <span className="text-[13px] font-semibold tabular-nums text-[#D4D4D4] flex-shrink-0 mt-0.5">
+                <span className="text-[13px] font-semibold tabular-nums text-[var(--color-border-strong)] flex-shrink-0 mt-0.5">
                   {step.number}
                 </span>
                 <div>
-                  <h3 className="text-[15px] font-semibold text-[#0A0A0A] mb-2">{step.title}</h3>
-                  <p className="text-body-sm text-[#525252] leading-relaxed">{step.body}</p>
+                  <h3 className="text-[15px] font-semibold text-[var(--color-text-primary)] mb-2">{step.title}</h3>
+                  <p className="text-body-sm text-[var(--color-text-secondary)] leading-relaxed">{step.body}</p>
                 </div>
               </motion.div>
             ))}
@@ -166,7 +166,7 @@ export function ProcessAnalyzerPage() {
               as="p"
               splitBy="word"
               stagger={0.025}
-              className="text-body text-[#525252] leading-relaxed"
+              className="text-body text-[var(--color-text-secondary)] leading-relaxed"
             >
               The Discover phase maps what actually exists before any AI architecture is designed. Process Analyzer is the practical implementation of this phase: it builds the process inventory, exposes regulatory and governance gaps, and produces the structured foundation that all subsequent DOME phases require. A deployment cannot be designed until the process landscape is understood.
             </TextReveal>

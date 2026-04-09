@@ -37,7 +37,7 @@ export function Deliver() {
             as="h2"
             splitBy="word"
             stagger={0.06}
-            className="text-h1 sm:text-display font-display font-semibold text-[#0A0A0A]"
+            className="text-h1 sm:text-display font-display font-semibold text-[var(--color-text-primary)]"
           >
             What we deliver
           </TextReveal>
@@ -47,7 +47,7 @@ export function Deliver() {
           initial="hidden"
           whileInView="visible"
           viewport={viewportConfig}
-          className="divide-y divide-[#E8E8E8]"
+          className="divide-y divide-[var(--color-border-default)]"
         >
           {deliverables.map((item, i) => (
             <motion.div
@@ -60,8 +60,8 @@ export function Deliver() {
                 {item.index}
               </span>
               <div>
-                <h3 className="text-h3 font-display font-semibold text-[#0A0A0A] mb-2">{item.title}</h3>
-                <p className="text-body-sm text-[#525252] leading-relaxed">{item.description}</p>
+                <h3 className="text-h3 font-display font-semibold text-[var(--color-text-primary)] mb-2">{item.title}</h3>
+                <p className="text-body-sm text-[var(--color-text-secondary)] leading-relaxed">{item.description}</p>
               </div>
             </motion.div>
           ))}

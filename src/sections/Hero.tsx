@@ -94,7 +94,7 @@ export function Hero() {
   return (
     <section
       ref={sectionRef}
-      className="relative min-h-screen flex items-center overflow-hidden bg-white"
+      className="relative min-h-screen flex items-center overflow-hidden bg-[var(--color-bg-base)]"
     >
       {/* Particles background — settings from reactbits.dev demo */}
       {!prefersReduced && (
@@ -131,7 +131,7 @@ export function Hero() {
                   initial={prefersReduced ? undefined : { opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ duration: 0.5 }}
-                  className="text-[11px] font-semibold tracking-[0.18em] uppercase text-dome-signal-blue mb-6"
+                  className="text-[11px] font-semibold tracking-[0.18em] uppercase text-[#0080FF] mb-6"
                 >
                   {'Governance-Driven Operational AI'.split(' ').map((word, i) => (
                     <motion.span
@@ -154,10 +154,10 @@ export function Hero() {
 
               {/* Main headline */}
               {showContent && (
-                <h1 className="text-[2.25rem] sm:text-h1 md:text-display font-display font-bold text-[#0A0A0A] leading-[1.05] tracking-[-0.03em] text-balance">
+                <h1 className="text-[2.25rem] sm:text-h1 md:text-display font-display font-bold text-[var(--color-text-primary)] leading-[1.05] tracking-[-0.03em] text-balance">
                   <SplitHeadline text="Architected for Production" delay={0.2} />
                   <br />
-                  <span className="text-[#525252]">
+                  <span className="text-[var(--color-text-secondary)]">
                     <SplitHeadline text="from Day One." delay={0.8} />
                   </span>
                 </h1>
@@ -169,7 +169,7 @@ export function Hero() {
                   initial={prefersReduced ? undefined : { opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8, delay: 1.0, ease: [0.25, 0.1, 0.25, 1] }}
-                  className="mt-6 text-body sm:text-body-lg text-[#525252] max-w-xl leading-relaxed tracking-[0.01em]"
+                  className="mt-6 text-body sm:text-body-lg text-[var(--color-text-secondary)] max-w-xl leading-relaxed tracking-[0.01em]"
                 >
                   We treat AI as operational infrastructure, engineered for governance before deployment.
                 </motion.p>
@@ -191,7 +191,7 @@ export function Hero() {
                   </MagneticButton>
                   <MagneticButton
                     href="#method"
-                    className="inline-flex items-center px-7 py-3.5 text-[13px] font-semibold border border-[#E8E8E8] text-[#525252] rounded-lg hover:border-[#0080FF] hover:text-[#0080FF] transition-all duration-150"
+                    className="inline-flex items-center px-7 py-3.5 text-[13px] font-semibold border border-[var(--color-border-default)] text-[var(--color-text-secondary)] rounded-lg hover:border-[#0080FF] hover:text-[#0080FF] transition-all duration-150"
                   >
                     Our method
                   </MagneticButton>

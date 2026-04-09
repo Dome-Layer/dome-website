@@ -42,7 +42,7 @@ function ToolCard({ tool, index }: { tool: ToolItem; index: number }) {
     <motion.article
       variants={dramaticFadeUp}
       custom={index}
-      className="group relative flex flex-col w-full md:w-[calc(50%-0.75rem)] rounded-xl overflow-hidden border border-[#E8E8E8] bg-white transition-colors duration-300 hover:border-[#99CCFF]"
+      className="group relative flex flex-col w-full md:w-[calc(50%-0.75rem)] rounded-xl overflow-hidden border border-[var(--color-border-default)] bg-[var(--color-bg-base)] transition-colors duration-300 hover:border-[var(--color-border-accent)]"
       onMouseMove={(e) => {
         const rect = e.currentTarget.getBoundingClientRect()
         e.currentTarget.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`)
@@ -63,8 +63,8 @@ function ToolCard({ tool, index }: { tool: ToolItem; index: number }) {
         <span className="block text-[11px] font-semibold uppercase tracking-[0.18em] text-[#0080FF] mb-4">
           {tool.label}
         </span>
-        <h3 className="text-h3 font-display font-semibold text-[#0A0A0A] mb-3">{tool.title}</h3>
-        <p className="text-body-sm text-[#525252] leading-relaxed mb-8">{tool.subtitle}</p>
+        <h3 className="text-h3 font-display font-semibold text-[var(--color-text-primary)] mb-3">{tool.title}</h3>
+        <p className="text-body-sm text-[var(--color-text-secondary)] leading-relaxed mb-8">{tool.subtitle}</p>
 
         <div className="flex items-center gap-4">
           <a
@@ -80,7 +80,7 @@ function ToolCard({ tool, index }: { tool: ToolItem; index: number }) {
           </a>
           <button
             onClick={() => navigate(tool.detailPath)}
-            className="text-[13px] font-medium text-[#525252] hover:text-[#0A0A0A] transition-colors duration-150"
+            className="text-[13px] font-medium text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] transition-colors duration-150"
           >
             Details
           </button>
@@ -104,7 +104,7 @@ export function Tools() {
             as="h2"
             splitBy="word"
             stagger={0.06}
-            className="text-h1 sm:text-display font-display font-semibold text-[#0A0A0A]"
+            className="text-h1 sm:text-display font-display font-semibold text-[var(--color-text-primary)]"
           >
             Built and deployed.
           </TextReveal>
@@ -112,7 +112,7 @@ export function Tools() {
             as="p"
             splitBy="word"
             stagger={0.03}
-            className="mt-4 text-body text-[#525252] max-w-xl"
+            className="mt-4 text-body text-[var(--color-text-secondary)] max-w-xl"
           >
             Two tools, live in production. Each one demonstrates a phase of the DOME method.
           </TextReveal>

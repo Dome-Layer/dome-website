@@ -18,7 +18,7 @@ import { DataIntelligencePage } from './pages/DataIntelligencePage'
 function HomeLayout() {
   return (
     <SmoothScroll>
-      <div className="min-h-screen bg-white">
+      <div className="min-h-screen bg-[var(--color-bg-base)]">
         <ScrollProgress />
         <Navigation />
         <main>

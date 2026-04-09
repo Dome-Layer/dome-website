@@ -4,10 +4,14 @@ import { Section } from '../components/Section'
 import { Container } from '../components/Container'
 import { TextReveal } from '../components/TextReveal'
 import { lineReveal, dramaticFadeUp } from '../lib/motion'
+import { useTheme } from '../lib/ThemeContext'
 
 export function Initiative() {
   const emphasisRef = useRef<HTMLParagraphElement>(null)
   const emphasisInView = useInView(emphasisRef, { once: true, amount: 0.5 })
+  const { theme } = useTheme()
+  const colorFrom = theme === 'dark' ? 'rgba(163, 163, 163, 0.3)' : 'rgba(82, 82, 82, 0.3)'
+  const colorTo = theme === 'dark' ? 'rgba(245, 245, 245, 1)' : 'rgba(10, 10, 10, 1)'
 
   return (
     <Section background="elevated">
@@ -21,7 +25,7 @@ export function Initiative() {
             as="h2"
             splitBy="word"
             stagger={0.05}
-            className="text-h1 sm:text-display font-display font-semibold text-[#0A0A0A] text-balance"
+            className="text-h1 sm:text-display font-display font-semibold text-[var(--color-text-primary)] text-balance"
           >
             From AI initiative to operational system
           </TextReveal>
@@ -36,7 +40,7 @@ export function Initiative() {
             splitBy="word"
             stagger={0.03}
             duration={0.4}
-            className="text-body text-[#525252] leading-relaxed max-w-2xl mx-auto"
+            className="text-body text-[var(--color-text-secondary)] leading-relaxed max-w-2xl mx-auto"
           >
             Enterprise AI initiatives often fail to reach production due to architectural gaps, governance risk, or operational misalignment.
           </TextReveal>
@@ -46,7 +50,7 @@ export function Initiative() {
             splitBy="word"
             stagger={0.03}
             duration={0.4}
-            className="mt-6 text-body text-[#525252] leading-relaxed max-w-2xl mx-auto"
+            className="mt-6 text-body text-[var(--color-text-secondary)] leading-relaxed max-w-2xl mx-auto"
           >
             AI must be designed within defined constraints before deployment.
           </TextReveal>
@@ -56,8 +60,8 @@ export function Initiative() {
             {'DOME ensures it is.'.split('').map((char, i) => (
               <motion.span
                 key={i}
-                initial={{ color: 'rgba(82, 82, 82, 0.3)' }}
-                animate={emphasisInView ? { color: 'rgba(10, 10, 10, 1)' } : undefined}
+                initial={{ color: colorFrom }}
+                animate={emphasisInView ? { color: colorTo } : undefined}
                 transition={{
                   duration: 0.3,
                   delay: i * 0.03,
