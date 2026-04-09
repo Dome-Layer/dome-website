@@ -36,6 +36,22 @@ export function DataIntelligencePage() {
     <ToolPageLayout>
       <title>Data Intelligence — DOME</title>
       <meta name="description" content="Upload a spreadsheet and receive a governed analytics dashboard with automatic chart selection and a natural language Q&A panel." />
+      <link rel="canonical" href="https://domelayer.com/tools/data-intelligence" />
+      <meta property="og:type" content="website" />
+      <meta property="og:site_name" content="DOME" />
+      <meta property="og:url" content="https://domelayer.com/tools/data-intelligence" />
+      <meta property="og:title" content="Data Intelligence — DOME" />
+      <meta property="og:description" content="Upload a spreadsheet. Receive a governed analytics dashboard with deterministic chart selection and a natural language Q&A panel — no manual configuration required." />
+      <meta property="og:image" content="https://domelayer.com/og-image.png" />
+      <meta property="og:image:width" content="1200" />
+      <meta property="og:image:height" content="630" />
+      <meta property="og:image:alt" content="DOME Data Intelligence — Governed Analytics Dashboard" />
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:site" content="@domelayer" />
+      <meta name="twitter:title" content="Data Intelligence — DOME" />
+      <meta name="twitter:description" content="Upload a spreadsheet. Get a governed analytics dashboard with automatic chart selection and natural language Q&A — no configuration needed." />
+      <meta name="twitter:image" content="https://domelayer.com/og-image.png" />
+      <meta name="twitter:image:alt" content="DOME Data Intelligence" />
       {/* Hero */}
       <Section id="hero" background="default">
         <Container narrow>
