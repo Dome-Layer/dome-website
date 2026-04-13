@@ -25,13 +25,22 @@ const tools: ToolItem[] = [
     borderColor: '#0080FF',
   },
   {
-    label: 'ORCHESTRATE & MODEL',
+    label: 'MODEL',
     title: 'Data Intelligence',
     subtitle:
       'Upload a spreadsheet. The system classifies columns, selects chart types via a governance rules engine, and generates a governed analytics dashboard.',
     href: 'https://data-intelligence.domelayer.com/',
     detailPath: '/tools/data-intelligence',
     borderColor: '#40A8FF',
+  },
+  {
+    label: 'DELIBERATE',
+    title: 'LLM Council',
+    subtitle:
+      'Pose a strategic question to a panel of three AI advisors. They deliberate independently, cross-examine each other, and produce a governed verdict with full audit trail.',
+    href: 'https://council.domelayer.com/',
+    detailPath: '/tools/llm-council',
+    borderColor: '#7B5EA7',
   },
 ]
 
@@ -114,7 +123,7 @@ export function Tools() {
             stagger={0.03}
             className="mt-4 text-body text-[var(--color-text-secondary)] max-w-xl"
           >
-            Two tools, live in production. Each one demonstrates a phase of the DOME method.
+            Three tools, live in production. Each one demonstrates a phase of the DOME method.
           </TextReveal>
         </motion.div>
 
