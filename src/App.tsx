@@ -14,6 +14,7 @@ import { Engagement } from './sections/Engagement'
 import { Partners } from './sections/Partners'
 import { ProcessAnalyzerPage } from './pages/ProcessAnalyzerPage'
 import { DataIntelligencePage } from './pages/DataIntelligencePage'
+import { LlmCouncilPage } from './pages/LlmCouncilPage'
 
 function HomeLayout() {
   return (
@@ -50,6 +51,7 @@ export default function App() {
       <Route path="/" element={<HomeLayout />} />
       <Route path="/tools/process-analyzer" element={<ProcessAnalyzerPage />} />
       <Route path="/tools/data-intelligence" element={<DataIntelligencePage />} />
+      <Route path="/tools/llm-council" element={<LlmCouncilPage />} />
     </Routes>
   )
 }

@@ -69,7 +69,7 @@ export function DataIntelligencePage() {
                 ← Tools
               </button>
               <span className="text-[var(--color-border-default)]">/</span>
-              <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#0080FF]">
+              <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#10B981]">
                 Orchestrate & Model
               </span>
             </div>
@@ -84,7 +84,7 @@ export function DataIntelligencePage() {
               href="https://data-intelligence.domelayer.com/"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-6 py-3 text-[13px] font-semibold bg-[#0080FF] text-white rounded-lg hover:bg-[#40A8FF] active:bg-[#0066CC] transition-colors duration-150"
+              className="inline-flex items-center gap-2 px-6 py-3 text-[13px] font-semibold bg-[#10B981] text-white rounded-lg hover:bg-[#34D399] active:bg-[#059669] transition-colors duration-150"
             >
               Open Data Intelligence
               <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
@@ -104,7 +104,7 @@ export function DataIntelligencePage() {
             whileInView="visible"
             viewport={viewportConfig}
           >
-            <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#0080FF] mb-4">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#10B981] mb-4">
               What it does
             </p>
             <TextReveal
@@ -129,7 +129,7 @@ export function DataIntelligencePage() {
             viewport={viewportConfig}
             className="mb-10"
           >
-            <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#0080FF] mb-4">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#10B981] mb-4">
               How it works
             </p>
             <TextReveal
@@ -175,7 +175,7 @@ export function DataIntelligencePage() {
             whileInView="visible"
             viewport={viewportConfig}
           >
-            <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#0080FF] mb-4">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#10B981] mb-4">
               DOME method — Orchestrate & Model
             </p>
             <TextReveal

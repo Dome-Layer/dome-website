@@ -12,6 +12,8 @@ interface ToolItem {
   href: string
   detailPath: string
   borderColor: string
+  accentColor: string
+  accentHover: string
 }
 
 const tools: ToolItem[] = [
@@ -22,7 +24,20 @@ const tools: ToolItem[] = [
       'Describe a business process in plain language. Receive a structured process map, system dependencies, governance gaps, and automation opportunities.',
     href: 'https://analyzer.domelayer.com/',
     detailPath: '/tools/process-analyzer',
-    borderColor: '#0080FF',
+    borderColor: '#06B6D4',
+    accentColor: '#06B6D4',
+    accentHover: '#22D3EE',
+  },
+  {
+    label: 'ORCHESTRATE',
+    title: 'LLM Council',
+    subtitle:
+      'Pose a strategic question to a panel of three AI advisors. They deliberate independently, cross-examine each other, and produce a governed verdict with full audit trail.',
+    href: 'https://llm-council.domelayer.com',
+    detailPath: '/tools/llm-council',
+    borderColor: '#7B5EA7',
+    accentColor: '#7B5EA7',
+    accentHover: '#9B7EC7',
   },
   {
     label: 'MODEL',
@@ -31,16 +46,9 @@ const tools: ToolItem[] = [
       'Upload a spreadsheet. The system classifies columns, selects chart types via a governance rules engine, and generates a governed analytics dashboard.',
     href: 'https://data-intelligence.domelayer.com/',
     detailPath: '/tools/data-intelligence',
-    borderColor: '#40A8FF',
-  },
-  {
-    label: 'DELIBERATE',
-    title: 'LLM Council',
-    subtitle:
-      'Pose a strategic question to a panel of three AI advisors. They deliberate independently, cross-examine each other, and produce a governed verdict with full audit trail.',
-    href: 'https://council.domelayer.com/',
-    detailPath: '/tools/llm-council',
-    borderColor: '#7B5EA7',
+    borderColor: '#10B981',
+    accentColor: '#10B981',
+    accentHover: '#34D399',
   },
 ]
 
@@ -69,7 +77,7 @@ function ToolCard({ tool, index }: { tool: ToolItem; index: number }) {
       />
 
       <div className="relative z-10 p-6 sm:p-8 flex-1">
-        <span className="block text-[11px] font-semibold uppercase tracking-[0.18em] text-[#0080FF] mb-4">
+        <span className="block text-[11px] font-semibold uppercase tracking-[0.18em] mb-4" style={{ color: tool.accentColor }}>
           {tool.label}
         </span>
         <h3 className="text-h3 font-display font-semibold text-[var(--color-text-primary)] mb-3">{tool.title}</h3>
@@ -80,7 +88,10 @@ function ToolCard({ tool, index }: { tool: ToolItem; index: number }) {
             href={tool.href}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 px-4 py-2 text-[13px] font-semibold bg-[#0080FF] text-white rounded-lg hover:bg-[#40A8FF] active:bg-[#0066CC] transition-colors duration-150"
+            className="inline-flex items-center gap-1.5 px-4 py-2 text-[13px] font-semibold text-white rounded-lg transition-colors duration-150"
+            style={{ backgroundColor: tool.accentColor }}
+            onMouseEnter={e => (e.currentTarget.style.backgroundColor = tool.accentHover)}
+            onMouseLeave={e => (e.currentTarget.style.backgroundColor = tool.accentColor)}
           >
             Open the tool
             <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">

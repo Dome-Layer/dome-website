@@ -10,22 +10,22 @@ import { fadeUp, dramaticFadeUp, viewportConfig } from '../lib/motion'
 const steps = [
   {
     number: '01',
-    title: 'Describe the process',
-    body: 'Write a plain-language description of any business process — a procurement workflow, an approval chain, an onboarding sequence. No templates or structured input required.',
+    title: 'Pose a strategic question',
+    body: 'Submit any high-stakes question — a market entry decision, a risk assessment, a policy trade-off. No structured format required: plain language is sufficient.',
   },
   {
     number: '02',
-    title: 'Receive a structured map',
-    body: 'The tool generates a visual flowchart (Mermaid.js), identifies the systems involved, estimates time at each stage, and surfaces governance exposure points.',
+    title: 'Three advisors deliberate independently',
+    body: 'A panel of three AI advisors each analyses the question from a distinct perspective. They reason independently first, then cross-examine each other\'s positions — surfacing disagreement rather than suppressing it.',
   },
   {
     number: '03',
-    title: 'Understand automation opportunities',
-    body: 'Each step is assessed for AI automation potential, with a confidence score and a plain explanation of what governance measures would be required before deployment.',
+    title: 'A governed verdict with full audit trail',
+    body: 'The Council produces a synthesised verdict that reflects areas of consensus and documents dissenting views. Every reasoning step is logged: the full deliberation trail is available for review and governance sign-off.',
   },
 ]
 
-export function ProcessAnalyzerPage() {
+export function LlmCouncilPage() {
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -34,24 +34,24 @@ export function ProcessAnalyzerPage() {
 
   return (
     <ToolPageLayout>
-      <title>Process Analyzer — DOME</title>
-      <meta name="description" content="Convert a plain-language description of any business process into a structured process map with governance analysis and automation assessment." />
-      <link rel="canonical" href="https://domelayer.com/tools/process-analyzer" />
+      <title>LLM Council — DOME</title>
+      <meta name="description" content="Pose a strategic question to a panel of three AI advisors. They deliberate independently, cross-examine each other, and produce a governed verdict with full audit trail." />
+      <link rel="canonical" href="https://domelayer.com/tools/llm-council" />
       <meta property="og:type" content="website" />
       <meta property="og:site_name" content="DOME" />
-      <meta property="og:url" content="https://domelayer.com/tools/process-analyzer" />
-      <meta property="og:title" content="Process Analyzer — DOME" />
-      <meta property="og:description" content="Describe any business process in plain language. Get a structured process map, governance gap analysis, and AI automation assessment — instantly." />
+      <meta property="og:url" content="https://domelayer.com/tools/llm-council" />
+      <meta property="og:title" content="LLM Council — DOME" />
+      <meta property="og:description" content="Pose a strategic question to a panel of three AI advisors. They deliberate independently, cross-examine each other, and produce a governed verdict with full audit trail." />
       <meta property="og:image" content="https://domelayer.com/og-image.png" />
       <meta property="og:image:width" content="1200" />
       <meta property="og:image:height" content="630" />
-      <meta property="og:image:alt" content="DOME Process Analyzer — Governance-Driven Process Mapping" />
+      <meta property="og:image:alt" content="DOME LLM Council — Governed AI Deliberation" />
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:site" content="@domelayer" />
-      <meta name="twitter:title" content="Process Analyzer — DOME" />
-      <meta name="twitter:description" content="Describe any business process in plain language. Receive a structured map, governance gaps, and automation opportunities." />
+      <meta name="twitter:title" content="LLM Council — DOME" />
+      <meta name="twitter:description" content="Pose a strategic question to a panel of three AI advisors. They deliberate independently, cross-examine each other, and produce a governed verdict with full audit trail." />
       <meta name="twitter:image" content="https://domelayer.com/og-image.png" />
-      <meta name="twitter:image:alt" content="DOME Process Analyzer" />
+      <meta name="twitter:image:alt" content="DOME LLM Council" />
       {/* Hero */}
       <Section id="hero" background="default">
         <Container narrow>
@@ -69,24 +69,24 @@ export function ProcessAnalyzerPage() {
                 ← Tools
               </button>
               <span className="text-[var(--color-border-default)]">/</span>
-              <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#06B6D4]">
-                Discover
+              <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#7B5EA7]">
+                ORCHESTRATE
               </span>
             </div>
 
             <h1 className="text-h1 sm:text-display font-display font-semibold text-[var(--color-text-primary)] mb-5">
-              Process Analyzer
+              LLM Council
             </h1>
             <p className="text-body text-[var(--color-text-secondary)] max-w-lg mb-8">
-              Convert a plain-language description of any business process into a structured process map with governance analysis and automation assessment.
+              Pose a strategic question to a panel of three AI advisors. They deliberate independently, cross-examine each other, and produce a governed verdict with full audit trail.
             </p>
             <a
-              href="https://analyzer.domelayer.com/"
+              href="https://llm-council.domelayer.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-6 py-3 text-[13px] font-semibold bg-[#06B6D4] text-white rounded-lg hover:bg-[#22D3EE] active:bg-[#0891B2] transition-colors duration-150"
+              className="inline-flex items-center gap-2 px-6 py-3 text-[13px] font-semibold bg-[#7B5EA7] text-white rounded-lg hover:bg-[#9B7EC7] active:bg-[#5A3E87] transition-colors duration-150"
             >
-              Open Process Analyzer
+              Open LLM Council
               <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
                 <path d="M2.5 9.5L9.5 2.5M9.5 2.5H4.5M9.5 2.5V7.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
@@ -104,7 +104,7 @@ export function ProcessAnalyzerPage() {
             whileInView="visible"
             viewport={viewportConfig}
           >
-            <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#06B6D4] mb-4">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#7B5EA7] mb-4">
               What it does
             </p>
             <TextReveal
@@ -113,7 +113,7 @@ export function ProcessAnalyzerPage() {
               stagger={0.025}
               className="text-body text-[var(--color-text-secondary)] leading-relaxed"
             >
-              Process Analyzer takes unstructured business process descriptions and returns structured, visual outputs that operations managers and process owners can act on immediately. It identifies which systems touch each step, estimates processing time, and flags where governance controls are absent or insufficient. The tool also assesses which parts of the process are candidates for AI automation — with a clear indication of what oversight would be needed before any automation is deployed.
+              LLM Council structures AI-assisted deliberation around high-stakes decisions. Rather than producing a single model response, it convenes a panel of three advisors that reason independently, challenge each other's positions, and resolve disagreement through structured cross-examination. The output is not just an answer — it is an auditable deliberation: every reasoning step, every challenge raised, and every point of consensus or dissent is logged and available for governance review. Decision-makers receive a verdict they can interrogate, not just accept.
             </TextReveal>
           </motion.div>
         </Container>
@@ -129,7 +129,7 @@ export function ProcessAnalyzerPage() {
             viewport={viewportConfig}
             className="mb-10"
           >
-            <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#06B6D4] mb-4">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#7B5EA7] mb-4">
               How it works
             </p>
             <TextReveal
@@ -138,7 +138,7 @@ export function ProcessAnalyzerPage() {
               stagger={0.06}
               className="text-h2 font-display font-semibold text-[var(--color-text-primary)]"
             >
-              Three steps from description to map.
+              Ask, deliberate, decide.
             </TextReveal>
           </motion.div>
 
@@ -175,8 +175,8 @@ export function ProcessAnalyzerPage() {
             whileInView="visible"
             viewport={viewportConfig}
           >
-            <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#06B6D4] mb-4">
-              DOME method — Discover
+            <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#7B5EA7] mb-4">
+              DOME method — Orchestrate
             </p>
             <TextReveal
               as="p"
@@ -184,7 +184,7 @@ export function ProcessAnalyzerPage() {
               stagger={0.025}
               className="text-body text-[var(--color-text-secondary)] leading-relaxed"
             >
-              The Discover phase maps what actually exists before any AI architecture is designed. Process Analyzer is the practical implementation of this phase: it builds the process inventory, exposes regulatory and governance gaps, and produces the structured foundation that all subsequent DOME phases require. A deployment cannot be designed until the process landscape is understood.
+              The Deliberate phase ensures that consequential decisions are not delegated to a single model inference. LLM Council is the practical implementation of this principle: it enforces structured disagreement, requires independent reasoning before consensus is sought, and produces an audit trail that satisfies governance requirements. Where other phases of DOME constrain what AI can do, Deliberate constrains how AI reaches conclusions — making the reasoning process itself accountable.
             </TextReveal>
           </motion.div>
         </Container>
