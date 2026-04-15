@@ -4,8 +4,6 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { setToken } from "@/lib/auth";
 
-const AUTH_BACKEND = "https://dome-process-analyzer-production.up.railway.app";
-
 export default function AuthCallbackPage() {
   const navigate = useNavigate();
   const [status, setStatus] = useState<"processing" | "error">("processing");
