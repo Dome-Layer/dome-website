@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useSearchParams } from "react-router-dom";
+import { DomeLogo } from "../components/DomeLogo";
 
 const AUTH_BACKEND = "https://dome-process-analyzer-production.up.railway.app";
 
@@ -14,7 +15,6 @@ export default function LoginPage() {
   const [searchParams] = useSearchParams();
   const redirect = searchParams.get("redirect") ?? "/";
 
-  // Store redirect destination so auth/callback can use it after cookie is set
   if (redirect !== "/") {
     sessionStorage.setItem("dome_auth_redirect", redirect);
   }
@@ -49,42 +49,60 @@ export default function LoginPage() {
 
   return (
     <div
+      className="login-bg"
       style={{
         minHeight: "100vh",
-        background: "var(--color-bg-base)",
         display: "flex",
+        flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
         padding: "24px",
         fontFamily: "var(--font-sans)",
       }}
     >
+      {/* Logo above card */}
+      <div style={{ marginBottom: "32px" }}>
+        <DomeLogo size="md" />
+      </div>
+
+      {/* Card */}
       <div
+        className="login-card"
         style={{
           width: "100%",
           maxWidth: "400px",
-          background: "var(--color-bg-base)",
-          border: "1px solid var(--color-border-default)",
           borderRadius: "12px",
           padding: "40px 32px",
         }}
       >
-        {/* Logo */}
-        <div style={{ marginBottom: "32px", textAlign: "center" }}>
-          <span
-            style={{
-              fontSize: "20px",
-              fontWeight: 700,
-              letterSpacing: "-0.02em",
-              color: "var(--color-text-primary)",
-            }}
-          >
-            DOME
-          </span>
-        </div>
-
         {status === "sent" ? (
           <div style={{ textAlign: "center" }}>
+            <div style={{ marginBottom: "20px" }}>
+              <svg
+                width="44"
+                height="44"
+                viewBox="0 0 24 24"
+                fill="none"
+                style={{ margin: "0 auto", display: "block" }}
+              >
+                <rect
+                  x="2"
+                  y="4"
+                  width="20"
+                  height="16"
+                  rx="3"
+                  stroke="#0080FF"
+                  strokeWidth="1.5"
+                />
+                <path
+                  d="M2 8l10 6 10-6"
+                  stroke="#0080FF"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </div>
             <p
               style={{
                 fontSize: "11px",
@@ -92,7 +110,7 @@ export default function LoginPage() {
                 letterSpacing: "0.18em",
                 textTransform: "uppercase",
                 color: "var(--color-accent)",
-                marginBottom: "8px",
+                marginBottom: "10px",
               }}
             >
               Check your inbox
@@ -101,11 +119,14 @@ export default function LoginPage() {
               style={{
                 fontSize: "14px",
                 color: "var(--color-text-secondary)",
-                lineHeight: 1.6,
+                lineHeight: 1.65,
               }}
             >
-              We sent a sign-in link to <strong>{email}</strong>. Click it to
-              continue — it expires in 60 minutes.
+              We sent a sign-in link to{" "}
+              <strong style={{ color: "var(--color-text-primary)", fontWeight: 500 }}>
+                {email}
+              </strong>
+              . Click it to continue — it expires in 60 minutes.
             </p>
           </div>
         ) : (
@@ -137,7 +158,7 @@ export default function LoginPage() {
                 display: "block",
                 fontSize: "13px",
                 fontWeight: 500,
-                color: "var(--color-text-primary)",
+                color: "var(--color-text-secondary)",
                 marginBottom: "8px",
               }}
             >
@@ -150,18 +171,18 @@ export default function LoginPage() {
               onKeyDown={handleKeyDown}
               placeholder="you@company.com"
               autoFocus
+              className="login-input"
               style={{
                 display: "block",
                 width: "100%",
                 fontSize: "14px",
                 color: "var(--color-text-primary)",
-                background: "var(--color-bg-base)",
-                border: "1px solid var(--color-border-default)",
                 borderRadius: "8px",
                 padding: "10px 14px",
                 marginBottom: errorMsg ? "8px" : "24px",
                 outline: "none",
                 boxSizing: "border-box",
+                transition: "border-color 150ms ease, box-shadow 150ms ease",
               }}
             />
 
@@ -169,7 +190,7 @@ export default function LoginPage() {
               <p
                 style={{
                   fontSize: "12px",
-                  color: "var(--color-error)",
+                  color: "var(--color-dome-status-error)",
                   marginBottom: "16px",
                 }}
               >
@@ -186,15 +207,17 @@ export default function LoginPage() {
                 color: "#FFFFFF",
                 border: "none",
                 borderRadius: "8px",
-                padding: "12px 24px",
+                padding: "11px 24px",
                 fontSize: "13px",
                 fontWeight: 600,
-                cursor: status === "loading" ? "not-allowed" : "pointer",
-                opacity: status === "loading" || !email.trim() ? 0.5 : 1,
+                letterSpacing: "0.01em",
+                cursor: status === "loading" || !email.trim() ? "not-allowed" : "pointer",
+                opacity: status === "loading" || !email.trim() ? 0.45 : 1,
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
                 gap: "8px",
+                transition: "opacity 150ms ease",
               }}
             >
               {status === "loading" ? (
@@ -203,11 +226,12 @@ export default function LoginPage() {
                     style={{
                       width: "14px",
                       height: "14px",
-                      border: "1.5px solid rgba(255,255,255,0.4)",
+                      border: "1.5px solid rgba(255,255,255,0.35)",
                       borderTopColor: "#FFFFFF",
                       borderRadius: "50%",
                       display: "inline-block",
                       animation: "spin 600ms linear infinite",
+                      flexShrink: 0,
                     }}
                   />
                   Sending…
@@ -222,9 +246,42 @@ export default function LoginPage() {
 
       <style>{`
         @keyframes spin { to { transform: rotate(360deg); } }
-        input:focus {
+
+        /* ── Light theme (default) ── */
+        .login-bg {
+          background-color: var(--color-bg-muted); /* #F5F5F5 */
+        }
+        .login-card {
+          background-color: var(--color-bg-base); /* #FFFFFF */
+          border: 1px solid var(--color-border-default);
+          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+        }
+        .login-input {
+          background-color: var(--color-bg-subtle); /* #FAFAFA */
+          border: 1px solid var(--color-border-default);
+        }
+
+        /* ── Dark theme overrides ── */
+        [data-theme="dark"] .login-bg {
+          background-color: var(--color-bg-base); /* #0A0A0A */
+          background-image: radial-gradient(circle, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+          background-size: 24px 24px;
+        }
+        [data-theme="dark"] .login-card {
+          background-color: var(--color-bg-subtle); /* #111111 */
+          border-color: var(--color-border-default); /* #262626 */
+          box-shadow: 0 0 0 1px rgba(0, 128, 255, 0.07), 0 8px 40px rgba(0, 0, 0, 0.5);
+        }
+        [data-theme="dark"] .login-input {
+          background-color: var(--color-bg-base); /* #0A0A0A */
+          border-color: var(--color-border-strong); /* #404040 */
+        }
+
+        /* ── Shared ── */
+        .login-input::placeholder { color: var(--color-text-tertiary); }
+        .login-input:focus {
           border-color: var(--color-accent) !important;
-          box-shadow: 0 0 0 3px var(--color-focus-ring);
+          box-shadow: 0 0 0 3px var(--color-focus-ring) !important;
         }
       `}</style>
     </div>
