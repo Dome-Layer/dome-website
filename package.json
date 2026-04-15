@@ -13,6 +13,7 @@
     "@fontsource-variable/inter": "^5.2.8",
     "@fontsource-variable/jetbrains-mono": "^5.2.8",
     "@react-three/fiber": "^9.5.0",
+    "@supabase/supabase-js": "^2.103.0",
     "@types/three": "^0.182.0",
     "framer-motion": "^12.34.0",
     "gsap": "^3.14.2",

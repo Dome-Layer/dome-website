@@ -15,6 +15,8 @@ import { Partners } from './sections/Partners'
 import { ProcessAnalyzerPage } from './pages/ProcessAnalyzerPage'
 import { DataIntelligencePage } from './pages/DataIntelligencePage'
 import { LlmCouncilPage } from './pages/LlmCouncilPage'
+import LoginPage from '@/pages/LoginPage'
+import AuthCallbackPage from '@/pages/AuthCallbackPage'
 
 function HomeLayout() {
   return (
@@ -52,6 +54,8 @@ export default function App() {
       <Route path="/tools/process-analyzer" element={<ProcessAnalyzerPage />} />
       <Route path="/tools/data-intelligence" element={<DataIntelligencePage />} />
       <Route path="/tools/llm-council" element={<LlmCouncilPage />} />
+      <Route path="/login" element={<LoginPage />} />
+      <Route path="/auth/callback" element={<AuthCallbackPage />} />
     </Routes>
   )
 }
