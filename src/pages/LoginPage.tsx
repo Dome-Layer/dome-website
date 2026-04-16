@@ -244,6 +244,35 @@ export default function LoginPage() {
         )}
       </div>
 
+      {/* CTA below card */}
+      <div
+        style={{
+          marginTop: "32px",
+          textAlign: "center",
+          maxWidth: "400px",
+          width: "100%",
+        }}
+      >
+        <p
+          style={{
+            fontSize: "13px",
+            color: "var(--color-text-tertiary)",
+            marginBottom: "12px",
+            lineHeight: 1.6,
+          }}
+        >
+          Discover how Dome architects governance-driven AI for regulated enterprises.
+        </p>
+        <a
+          href="https://domelayer.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="login-cta-link"
+        >
+          Explore Dome →
+        </a>
+      </div>
+
       <style>{`
         @keyframes spin { to { transform: rotate(360deg); } }
 
@@ -278,6 +307,19 @@ export default function LoginPage() {
         }
 
         /* ── Shared ── */
+        .login-cta-link {
+          display: inline-flex;
+          align-items: center;
+          gap: 4px;
+          font-size: 13px;
+          font-weight: 600;
+          color: var(--color-accent);
+          text-decoration: none;
+          letter-spacing: 0.01em;
+          transition: opacity 150ms ease;
+        }
+        .login-cta-link:hover { opacity: 0.75; }
+
         .login-input::placeholder { color: var(--color-text-tertiary); }
         .login-input:focus {
           border-color: var(--color-accent) !important;
