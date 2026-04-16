@@ -187,7 +187,7 @@ export function Hero() {
                     href="#contact"
                     className="inline-flex items-center px-7 py-3.5 text-[13px] font-semibold bg-[#0080FF] text-white rounded-lg hover:bg-[#40A8FF] active:bg-[#0066CC] transition-colors duration-150"
                   >
-                    Discuss an engagement
+                    Design your AI layer
                   </MagneticButton>
                   <MagneticButton
                     href="#method"

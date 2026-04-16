@@ -138,7 +138,7 @@ export function Navigation() {
               }}
               className="inline-flex items-center px-5 py-2.5 text-[13px] font-semibold bg-[#0080FF] text-white rounded-lg hover:bg-[#40A8FF] active:bg-[#0066CC] transition-colors duration-150"
             >
-              Discuss an engagement
+              Design your AI layer
             </a>
             <ThemeToggle />
           </div>
@@ -214,7 +214,7 @@ export function Navigation() {
                     onClick={() => handleMobileNavClick('#contact')}
                     className="inline-flex px-8 py-3.5 text-[13px] font-semibold bg-[#0080FF] text-white rounded-lg"
                   >
-                    Discuss an engagement
+                    Design your AI layer
                   </a>
                 </motion.li>
               </ul>
