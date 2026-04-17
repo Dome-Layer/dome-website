@@ -183,7 +183,9 @@ export function Infrastructure() {
             </motion.ul>
           </div>
 
-          <AnimatedDiagram />
+          <div className="lg:self-center">
+            <AnimatedDiagram />
+          </div>
         </div>
 
       </Container>
