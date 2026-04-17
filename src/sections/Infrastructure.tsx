@@ -186,25 +186,6 @@ export function Infrastructure() {
           <AnimatedDiagram />
         </div>
 
-        <motion.div variants={dramaticFadeUp} className="mt-12 lg:mt-16 border-t border-[var(--color-border-default)] pt-8">
-          <TextReveal
-            as="p"
-            splitBy="word"
-            stagger={0.05}
-            className="text-body-lg font-display font-semibold text-[var(--color-text-primary)]"
-          >
-            AI is treated as infrastructure.
-          </TextReveal>
-          <TextReveal
-            as="p"
-            splitBy="word"
-            stagger={0.05}
-            duration={0.4}
-            className="text-body text-[var(--color-text-secondary)] mt-1"
-          >
-            Infrastructure demands discipline.
-          </TextReveal>
-        </motion.div>
       </Container>
     </Section>
   )
