@@ -38,11 +38,15 @@ function AnimatedDiagram() {
     bottomBlocks.forEach((el) => gsap.set(el, { scale: 0.8, opacity: 0 }))
     if (workflows) gsap.set(workflows, { y: 20, opacity: 0 })
 
+    const isDesktop = window.matchMedia('(min-width: 1024px)').matches
+    const scrollStart = isDesktop ? 'top 80%' : 'top 60%'
+    const scrollEnd = isDesktop ? 'bottom 25%' : 'bottom 35%'
+
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: diagramRef.current,
-        start: 'top 70%',
-        end: 'bottom 30%',
+        start: scrollStart,
+        end: scrollEnd,
         scrub: 0.5,
       },
     })
