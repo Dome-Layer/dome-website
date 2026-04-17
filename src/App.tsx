@@ -1,6 +1,7 @@
 import { Routes, Route } from 'react-router-dom'
 import { Navigation } from './components/Navigation'
 import { Footer } from './components/Footer'
+import { CookieNotice } from './components/CookieNotice'
 import { SmoothScroll } from './components/SmoothScroll'
 import { ScrollProgress } from './components/ScrollProgress'
 import { SectionDivider } from './components/SectionTransition'
@@ -17,6 +18,8 @@ import { DataIntelligencePage } from './pages/DataIntelligencePage'
 import { LlmCouncilPage } from './pages/LlmCouncilPage'
 import LoginPage from '@/pages/LoginPage'
 import AuthCallbackPage from '@/pages/AuthCallbackPage'
+import PrivacyPage from '@/pages/PrivacyPage'
+import TermsPage from '@/pages/TermsPage'
 
 function HomeLayout() {
   return (
@@ -42,6 +45,7 @@ function HomeLayout() {
           <Partners />
         </main>
         <Footer />
+        <CookieNotice />
       </div>
     </SmoothScroll>
   )
@@ -56,6 +60,8 @@ export default function App() {
       <Route path="/tools/llm-council" element={<LlmCouncilPage />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/auth/callback" element={<AuthCallbackPage />} />
+      <Route path="/privacy" element={<PrivacyPage />} />
+      <Route path="/terms" element={<TermsPage />} />
     </Routes>
   )
 }

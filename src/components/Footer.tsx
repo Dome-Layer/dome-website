@@ -197,6 +197,11 @@ export function Footer() {
 
         <div className="mt-16 pt-8 border-t border-dome-dark-edge flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 text-caption text-dome-nickel/60">
           <span>domelayer.com</span>
+          <div className="flex items-center gap-3">
+            <a href="/privacy" className="hover:text-dome-nickel transition-colors">Privacy policy</a>
+            <span aria-hidden="true">·</span>
+            <a href="/terms" className="hover:text-dome-nickel transition-colors">Terms of service</a>
+          </div>
           <span>&copy; {new Date().getFullYear()} DOME. All rights reserved.</span>
         </div>
       </Container>
