@@ -1,73 +1,41 @@
-# React + TypeScript + Vite
+# dome-website
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+The marketing site and cross-subdomain SSO portal for the Dome AI tool portfolio, served at [domelayer.com](https://domelayer.com).
 
-Currently, two official plugins are available:
+Built with **Vite + React 19 + TypeScript**, deployed on **Vercel**. Authentication uses Supabase magic links; session tokens are shared across `*.domelayer.com` subdomains so the Dome tool portfolio can sign in once.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Repository status
 
-## React Compiler
+Source is published for transparency. All rights reserved — see [LICENSE](LICENSE). You are welcome to read the code; you may not copy, reuse, or redistribute it without written permission.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Running locally
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install
+cp .env.example .env.local
+# fill in the values listed in .env.example, then:
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Dev server: `http://localhost:5173`.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### Environment variables
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+| Variable | Purpose |
+|---|---|
+| `VITE_SUPABASE_URL` | Supabase project URL (public). |
+| `VITE_SUPABASE_ANON_KEY` | Supabase anon key (public; RLS-protected). |
+| `VITE_AUTH_BACKEND` | Base URL of the magic-link auth service. |
+| `RESEND_API_KEY` | Used by `/api/contact` to deliver form submissions. |
+| `CONTACT_EMAIL` | Destination mailbox for contact-form submissions. Defaults to `hello@domelayer.com`. |
+
+## Architecture notes
+
+- **Auth cookie** — [src/lib/auth.ts](src/lib/auth.ts): the Supabase JWT is stored as a `.domelayer.com` cookie so every tool subdomain reads the same session. Cookie is intentionally not `HttpOnly` because each tool's frontend builds its own `Authorization` header.
+- **Redirect sanitisation** — [`sanitizeRedirect`](src/lib/auth.ts) restricts post-login redirects to relative paths or `*.domelayer.com` hostnames.
+- **Rate limiting** on the magic-link endpoint lives in the separate auth-backend service, not in this repo. Supabase-level per-project email limits provide a second line of defence.
+- **Consent / GDPR** — [src/lib/compliance.ts](src/lib/compliance.ts): terms acceptance and marketing consent are captured at login and written to `auth.users.raw_user_meta_data` via the user's own access token.
+
+## Security
+
+Please report vulnerabilities privately — see [SECURITY.md](SECURITY.md).
