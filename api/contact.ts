@@ -4,6 +4,7 @@ import { Resend } from 'resend';
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 const ALLOWED_ORIGIN = 'https://domelayer.com';
+const CONTACT_EMAIL = process.env.CONTACT_EMAIL ?? 'hello@domelayer.com';
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const MAX_MESSAGE_LENGTH = 5000;
 
@@ -50,7 +51,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
   const { error } = await resend.emails.send({
     from: 'DOME Contact Form <contact@domelayer.com>',
-    to: 'francesco.prodomo@gmail.com',
+    to: CONTACT_EMAIL,
     replyTo: email,
     subject: `New enquiry via domelayer.com`,
     html: `<p><strong>From:</strong> ${escapeHtml(email)}</p>

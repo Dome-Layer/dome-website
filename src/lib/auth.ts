@@ -57,3 +57,28 @@ export function authHeaders(): Record<string, string> {
 export function isAuthenticated(): boolean {
   return !!getToken();
 }
+
+// Validates a post-login redirect target to prevent open redirects.
+// Allows same-origin relative paths and absolute URLs on domelayer.com
+// or any *.domelayer.com subdomain. Anything else collapses to "/".
+export function sanitizeRedirect(raw: string | null | undefined): string {
+  if (!raw) return "/";
+
+  // Relative path: must start with a single "/" — reject "//evil.com"
+  // which is protocol-relative and resolves off-site.
+  if (raw.startsWith("/") && !raw.startsWith("//")) {
+    return raw;
+  }
+
+  try {
+    const url = new URL(raw);
+    if (url.protocol !== "https:" && url.protocol !== "http:") return "/";
+    const host = url.hostname;
+    if (host === "domelayer.com" || host.endsWith(".domelayer.com")) {
+      return raw;
+    }
+  } catch {
+    // malformed URL
+  }
+  return "/";
+}

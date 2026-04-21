@@ -3,9 +3,12 @@
 import { useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { DomeLogo } from "../components/DomeLogo";
+import { sanitizeRedirect } from "../lib/auth";
 import { storePendingConsent } from "../lib/compliance";
 
-const AUTH_BACKEND = "https://dome-process-analyzer-production.up.railway.app";
+const AUTH_BACKEND =
+  import.meta.env.VITE_AUTH_BACKEND ??
+  "https://dome-process-analyzer-production.up.railway.app";
 
 type Status = "idle" | "loading" | "sent" | "error";
 
@@ -16,7 +19,7 @@ export default function LoginPage() {
   const [termsAccepted, setTermsAccepted] = useState(false);
   const [marketingConsent, setMarketingConsent] = useState(false);
   const [searchParams] = useSearchParams();
-  const redirect = searchParams.get("redirect") ?? "/";
+  const redirect = sanitizeRedirect(searchParams.get("redirect"));
 
   if (redirect !== "/") {
     sessionStorage.setItem("dome_auth_redirect", redirect);

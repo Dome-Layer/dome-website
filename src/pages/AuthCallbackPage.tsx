@@ -2,7 +2,7 @@
 
 import { useEffect, useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
-import { setToken } from "@/lib/auth";
+import { setToken, sanitizeRedirect } from "@/lib/auth";
 import {
   clearPendingConsent,
   getUserConsentStatus,
@@ -29,7 +29,7 @@ export default function AuthCallbackPage() {
   const completeAuth = useCallback(
     (token: string, expiresAt?: string) => {
       setToken(token, expiresAt);
-      const redirect = sessionStorage.getItem("dome_auth_redirect") ?? "/";
+      const redirect = sanitizeRedirect(sessionStorage.getItem("dome_auth_redirect"));
       sessionStorage.removeItem("dome_auth_redirect");
       if (redirect.startsWith("http")) {
         window.location.href = redirect;
