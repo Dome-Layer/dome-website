@@ -50,6 +50,17 @@ const tools: ToolItem[] = [
     accentColor: '#10B981',
     accentHover: '#34D399',
   },
+  {
+    label: 'EXECUTE',
+    title: 'Document Intelligence',
+    subtitle:
+      'Upload any document — invoice, lab report, utility bill, contract. The system extracts structured fields, applies 16 governance rules, and returns a validated, exportable dataset.',
+    href: 'https://document-intelligence.domelayer.com/',
+    detailPath: '/tools/document-intelligence',
+    borderColor: '#F59E0B',
+    accentColor: '#F59E0B',
+    accentHover: '#FBBF24',
+  },
 ]
 
 function ToolCard({ tool, index }: { tool: ToolItem; index: number }) {
@@ -134,7 +145,7 @@ export function Tools() {
             stagger={0.03}
             className="mt-4 text-body text-[var(--color-text-secondary)] max-w-xl"
           >
-            Three tools, live in production. Each one demonstrates a phase of the DOME method.
+            Four tools, live in production. Each one demonstrates a phase of the DOME method.
           </TextReveal>
         </motion.div>
 

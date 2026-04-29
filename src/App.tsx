@@ -16,6 +16,7 @@ import { Partners } from './sections/Partners'
 import { ProcessAnalyzerPage } from './pages/ProcessAnalyzerPage'
 import { DataIntelligencePage } from './pages/DataIntelligencePage'
 import { LlmCouncilPage } from './pages/LlmCouncilPage'
+import { DocumentIntelligencePage } from './pages/DocumentIntelligencePage'
 import LoginPage from '@/pages/LoginPage'
 import AuthCallbackPage from '@/pages/AuthCallbackPage'
 import PrivacyPage from '@/pages/PrivacyPage'
@@ -58,6 +59,7 @@ export default function App() {
       <Route path="/tools/process-analyzer" element={<ProcessAnalyzerPage />} />
       <Route path="/tools/data-intelligence" element={<DataIntelligencePage />} />
       <Route path="/tools/llm-council" element={<LlmCouncilPage />} />
+      <Route path="/tools/document-intelligence" element={<DocumentIntelligencePage />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/auth/callback" element={<AuthCallbackPage />} />
       <Route path="/privacy" element={<PrivacyPage />} />
