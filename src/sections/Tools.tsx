@@ -51,7 +51,7 @@ const tools: ToolItem[] = [
     accentHover: '#34D399',
   },
   {
-    label: 'EXECUTE',
+    label: 'MODEL',
     title: 'Document Intelligence',
     subtitle:
       'Upload any document — invoice, lab report, utility bill, contract. The system extracts structured fields, applies 16 governance rules, and returns a validated, exportable dataset.',

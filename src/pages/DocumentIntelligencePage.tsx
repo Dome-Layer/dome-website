@@ -71,7 +71,7 @@ export function DocumentIntelligencePage() {
               </button>
               <span className="text-[var(--color-border-default)]">/</span>
               <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#F59E0B]">
-                Execute
+                Model
               </span>
             </div>
 
@@ -177,7 +177,7 @@ export function DocumentIntelligencePage() {
             viewport={viewportConfig}
           >
             <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#F59E0B] mb-4">
-              DOME method — Execute
+              DOME method — Model
             </p>
             <TextReveal
               as="p"
@@ -185,7 +185,7 @@ export function DocumentIntelligencePage() {
               stagger={0.025}
               className="text-body text-[var(--color-text-secondary)] leading-relaxed"
             >
-              The Execute phase is where governed AI decisions produce operational outputs. Document Intelligence is the Execute-phase entry point for organisations that need structured data from unstructured documents at scale. Rather than trusting raw model extraction, every output is validated against a deterministic governance rules engine before it reaches downstream systems — ensuring that what enters your workflows is auditable, consistent, and defensible. This is the final step of the DOME cycle: from process discovery to governed execution.
+              The Model phase is where governed AI decisions produce operational outputs. Document Intelligence is the Model-phase entry point for organisations that need structured data from unstructured documents at scale. Rather than trusting raw model extraction, every output is validated against a deterministic governance rules engine before it reaches downstream systems — ensuring that what enters your workflows is auditable, consistent, and defensible. This is the final step of the DOME cycle: from process discovery to governed execution.
             </TextReveal>
           </motion.div>
         </Container>
