@@ -27,3 +27,27 @@ This repository covers the `domelayer.com` marketing site and the cross-subdomai
 ## Safe harbour
 
 Good-faith security research conducted in accordance with this policy will not be pursued legally. Please do not access or modify data that is not your own, do not degrade service for other users, and do not retain more data than is necessary to demonstrate the issue.
+
+## Secrets handling
+
+This repo follows the Dome portfolio standard:
+
+- Real secrets live in Vercel environment variables, never in the repo.
+- `.env.example` is committed; any `.env*` file with real values is local-only and gitignored.
+- Secrets are rotated when there is any suspicion of exposure, on contractor offboarding, and at least annually.
+
+### Secrets inventory
+
+| Variable | Where used | Sensitivity |
+|---|---|---|
+| `RESEND_API_KEY` | Vercel serverless `api/contact.ts` | Secret — controls outbound transactional email |
+| `CONTACT_EMAIL` | Vercel serverless `api/contact.ts` | Config (not secret) |
+| `VITE_SUPABASE_URL` | Frontend build | Public by Vite convention |
+| `VITE_SUPABASE_ANON_KEY` | Frontend build | Public — RLS-enforced |
+| `VITE_AUTH_BACKEND` | Frontend build | Public |
+
+### Rotation log
+
+| Date | Reason | Notes |
+|------|--------|-------|
+| 2026-04 | Pre-publication audit — repo made public | Maintainer to populate without naming key values |
