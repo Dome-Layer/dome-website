@@ -1,6 +1,7 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { Resend } from 'resend';
-import { checkContactRateLimit, getClientIp } from './_lib/rateLimit';
+import { Ratelimit } from '@upstash/ratelimit';
+import { Redis } from '@upstash/redis';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -8,6 +9,58 @@ const ALLOWED_ORIGIN = 'https://domelayer.com';
 const CONTACT_EMAIL = process.env.CONTACT_EMAIL ?? 'hello@domelayer.com';
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const MAX_MESSAGE_LENGTH = 5000;
+
+// ── Rate limiting ───────────────────────────────────────────────────────────
+// Inlined here (rather than ./_lib/rateLimit) because Vercel's serverless
+// bundler does not consistently resolve relative imports under api/ in ESM
+// mode — see commit history for the failed extraction attempt.
+
+let _ratelimit: Ratelimit | null = null;
+
+function getRatelimiter(): Ratelimit | null {
+  if (_ratelimit) return _ratelimit;
+  const url = process.env.UPSTASH_REDIS_REST_URL;
+  const token = process.env.UPSTASH_REDIS_REST_TOKEN;
+  if (!url || !token) return null;
+  _ratelimit = new Ratelimit({
+    redis: new Redis({ url, token }),
+    limiter: Ratelimit.slidingWindow(3, '1 h'),
+    analytics: true,
+    prefix: 'contact_form',
+  });
+  return _ratelimit;
+}
+
+function getClientIp(req: VercelRequest): string {
+  const realIp = req.headers['x-real-ip'];
+  if (typeof realIp === 'string' && realIp) return realIp;
+  const xff = req.headers['x-forwarded-for'];
+  if (typeof xff === 'string' && xff) return xff.split(',')[0]!.trim();
+  return req.socket?.remoteAddress ?? 'unknown';
+}
+
+type RateLimitResult = { success: boolean; limit: number; remaining: number; reset: number };
+
+async function checkContactRateLimit(ip: string): Promise<RateLimitResult> {
+  const ratelimit = getRatelimiter();
+
+  if (!ratelimit) {
+    if (process.env.NODE_ENV === 'production') {
+      console.error('[rate_limit] Upstash env vars missing in production — failing closed');
+      return { success: false, limit: 3, remaining: 0, reset: 0 };
+    }
+    console.warn('[rate_limit] Upstash env vars missing — fail-open in non-production');
+    return { success: true, limit: 3, remaining: 3, reset: 0 };
+  }
+
+  try {
+    const { success, limit, remaining, reset } = await ratelimit.limit(ip);
+    return { success, limit, remaining, reset };
+  } catch (err) {
+    console.error('[rate_limit] Upstash check failed', err);
+    return { success: true, limit: 3, remaining: 3, reset: 0 };
+  }
+}
 
 function escapeHtml(str: string): string {
   return str
