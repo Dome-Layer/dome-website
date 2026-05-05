@@ -1,5 +1,6 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { Resend } from 'resend';
+import { checkContactRateLimit, getClientIp } from './_lib/rateLimit';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -30,11 +31,30 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  const { email, message, hp } = req.body;
+  const { email, message, hp } = req.body ?? {};
 
-  // Honeypot: bots fill hidden fields, humans don't
+  // Honeypot: bots fill hidden fields, humans don't. Honeypot trips short-
+  // circuit BEFORE the rate-limit check so dumb-bot traffic does not consume
+  // the IP's hourly budget; smart bots that leave it empty still hit the cap.
   if (hp) {
+    console.log(JSON.stringify({ event: 'contact_honeypot_triggered', ip: getClientIp(req) }));
     return res.status(200).json({ success: true });
+  }
+
+  const ip = getClientIp(req);
+  const rl = await checkContactRateLimit(ip);
+
+  res.setHeader('X-RateLimit-Limit', String(rl.limit));
+  res.setHeader('X-RateLimit-Remaining', String(rl.remaining));
+  res.setHeader('X-RateLimit-Reset', String(rl.reset));
+
+  if (!rl.success) {
+    const retryAfter = rl.reset > 0
+      ? Math.max(1, Math.ceil((rl.reset - Date.now()) / 1000))
+      : 3600;
+    res.setHeader('Retry-After', String(retryAfter));
+    console.log(JSON.stringify({ event: 'contact_rate_limited', ip }));
+    return res.status(429).json({ error: 'Too many requests. Please try again in an hour.' });
   }
 
   if (!email || !message) {

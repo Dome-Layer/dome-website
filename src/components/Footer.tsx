@@ -24,7 +24,15 @@ export function Footer() {
         body: JSON.stringify({ email, message, hp: honeypot }),
       })
 
-      if (!res.ok) throw new Error('Failed to send')
+      if (!res.ok) {
+        const body = (await res.json().catch(() => ({}))) as { error?: string }
+        if (res.status === 429) {
+          setError(body.error ?? "You've reached the contact-form limit. Please try again in an hour.")
+        } else {
+          setError(body.error ?? 'Something went wrong. Please try again or email us directly.')
+        }
+        return
+      }
 
       setSubmitted(true)
       setEmail('')

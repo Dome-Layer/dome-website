@@ -42,6 +42,8 @@ This repo follows the Dome portfolio standard:
 |---|---|---|
 | `RESEND_API_KEY` | Vercel serverless `api/contact.ts` | Secret — controls outbound transactional email |
 | `CONTACT_EMAIL` | Vercel serverless `api/contact.ts` | Config (not secret) |
+| `UPSTASH_REDIS_REST_URL` | Vercel serverless `api/contact.ts` | Config — Upstash REST endpoint URL |
+| `UPSTASH_REDIS_REST_TOKEN` | Vercel serverless `api/contact.ts` | Secret — full read/write on the rate-limit Redis store |
 | `VITE_SUPABASE_URL` | Frontend build | Public by Vite convention |
 | `VITE_SUPABASE_ANON_KEY` | Frontend build | Public — RLS-enforced |
 | `VITE_AUTH_BACKEND` | Frontend build | Public |
@@ -50,4 +52,5 @@ This repo follows the Dome portfolio standard:
 
 | Date | Reason | Notes |
 |------|--------|-------|
-| 2026-04 | Pre-publication audit — repo made public | Maintainer to populate without naming key values |
+| 2026-04 | Pre-publication audit — repo made public | Keys rotated as part of pre-publication hardening |
+| 2026-05-06 | P0-7 — added Upstash rate limiting to `/api/contact` | New token issued at provisioning; nothing to rotate from |
