@@ -26,6 +26,7 @@ export function TextReveal({
 
   useEffect(() => {
     if (splitBy === 'char') {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setUnits(children.split(''))
     } else {
       setUnits(children.split(/(\s+)/))

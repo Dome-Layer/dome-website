@@ -22,6 +22,7 @@ function AnimatedDiagram() {
 
   useEffect(() => {
     if (prefersReduced || !diagramRef.current) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setBuilt(true)
       return
     }

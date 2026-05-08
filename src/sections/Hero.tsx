@@ -34,6 +34,7 @@ function SplitHeadline({ text, delay }: { text: string; delay: number }) {
       {words.map((word, wi) => {
         const chars = word.split('')
         const startIndex = charIndex
+        // eslint-disable-next-line react-hooks/immutability
         charIndex += word.length + 1 // +1 for the space
 
         return (
@@ -84,6 +85,7 @@ export function Hero() {
 
   useEffect(() => {
     if (prefersReduced) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setShowContent(true)
       return
     }
