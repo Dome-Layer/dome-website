@@ -22,11 +22,15 @@ function getRatelimiter(): Ratelimit | null {
   const url = process.env.UPSTASH_REDIS_REST_URL;
   const token = process.env.UPSTASH_REDIS_REST_TOKEN;
   if (!url || !token) return null;
+  // RATELIMIT_PREFIX namespaces keys when a single Upstash database is shared
+  // across environments (e.g. `staging:` on the staging Vercel project).
+  // Empty by default — production keys remain `contact_form:*`.
+  const envPrefix = process.env.RATELIMIT_PREFIX ?? '';
   _ratelimit = new Ratelimit({
     redis: new Redis({ url, token }),
     limiter: Ratelimit.slidingWindow(3, '1 h'),
     analytics: true,
-    prefix: 'contact_form',
+    prefix: `${envPrefix}contact_form`,
   });
   return _ratelimit;
 }
