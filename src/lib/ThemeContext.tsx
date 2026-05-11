@@ -12,8 +12,25 @@ const ThemeContext = createContext<ThemeContextValue | null>(null)
 const COOKIE_NAME = 'dome-theme'
 const COOKIE_MAX_AGE = 60 * 60 * 24 * 365 // 1 year
 
-function isProduction(): boolean {
-  return window.location.hostname.endsWith('domelayer.com')
+function isStagingHost(host: string): boolean {
+  return host === 'staging.domelayer.com' || host.endsWith('.staging.domelayer.com')
+}
+
+function isProductionHost(host: string): boolean {
+  if (isStagingHost(host)) return false
+  return host === 'domelayer.com' || host.endsWith('.domelayer.com')
+}
+
+function isHttpsHost(): boolean {
+  const host = window.location.hostname
+  return isStagingHost(host) || isProductionHost(host)
+}
+
+function cookieDomain(): string {
+  const host = window.location.hostname
+  if (isStagingHost(host)) return '.staging.domelayer.com'
+  if (isProductionHost(host)) return '.domelayer.com'
+  return ''
 }
 
 function readThemeCookie(): Theme | null {
@@ -24,9 +41,10 @@ function readThemeCookie(): Theme | null {
 }
 
 function writeThemeCookie(theme: Theme): void {
-  const domain = isProduction() ? '; Domain=.domelayer.com' : ''
-  const secure = isProduction() ? '; Secure' : ''
-  document.cookie = `${COOKIE_NAME}=${theme}; Path=/; SameSite=Lax; Max-Age=${COOKIE_MAX_AGE}${domain}${secure}`
+  const domain = cookieDomain()
+  const domainPart = domain ? `; Domain=${domain}` : ''
+  const secure = isHttpsHost() ? '; Secure' : ''
+  document.cookie = `${COOKIE_NAME}=${theme}; Path=/; SameSite=Lax; Max-Age=${COOKIE_MAX_AGE}${domainPart}${secure}`
 }
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
