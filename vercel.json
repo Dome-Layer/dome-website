@@ -26,6 +26,14 @@
       ]
     }
   ],
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "www.domelayer.com" }],
+      "destination": "https://domelayer.com/:path*",
+      "statusCode": 308
+    }
+  ],
   "rewrites": [
     { "source": "/(.*)", "destination": "/index.html" }
   ]
