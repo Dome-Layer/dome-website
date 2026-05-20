@@ -8,22 +8,22 @@
 
 const COOKIE_NAME = "dome_auth_token";
 
-function isStagingHost(host: string): boolean {
+export function isStagingHost(host: string): boolean {
   return host === "staging.domelayer.com" || host.endsWith(".staging.domelayer.com");
 }
 
-function isProductionHost(host: string): boolean {
+export function isProductionHost(host: string): boolean {
   if (isStagingHost(host)) return false;
   return host === "domelayer.com" || host.endsWith(".domelayer.com");
 }
 
-function isHttpsHost(): boolean {
+export function isHttpsHost(): boolean {
   if (typeof window === "undefined") return false;
   const host = window.location.hostname;
   return isStagingHost(host) || isProductionHost(host);
 }
 
-function cookieDomain(): string {
+export function cookieDomain(): string {
   if (typeof window === "undefined") return "";
   const host = window.location.hostname;
   if (isStagingHost(host)) return ".staging.domelayer.com";
@@ -31,7 +31,7 @@ function cookieDomain(): string {
   return "";
 }
 
-function parseCookieExpiry(expiresAt: string): string {
+export function parseCookieExpiry(expiresAt: string): string {
   const diffSec = Math.max(
     0,
     Math.floor((new Date(expiresAt).getTime() - Date.now()) / 1000)
