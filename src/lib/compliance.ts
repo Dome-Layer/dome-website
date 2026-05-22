@@ -1,6 +1,7 @@
 export const TERMS_VERSION = "2026-04"
 
 const LS_KEY = "dome_pending_consent"
+const LS_ACCEPTED_KEY = "dome_consent_accepted"
 
 export interface PendingConsent {
   terms_accepted_at: string
@@ -22,8 +23,17 @@ export function storePendingConsent(marketingConsent: boolean): void {
   }
   try {
     localStorage.setItem(LS_KEY, JSON.stringify(consent))
+    localStorage.setItem(LS_ACCEPTED_KEY, TERMS_VERSION)
   } catch {
     // localStorage may be unavailable in some contexts
+  }
+}
+
+export function hasLocalConsent(): boolean {
+  try {
+    return localStorage.getItem(LS_ACCEPTED_KEY) === TERMS_VERSION
+  } catch {
+    return false
   }
 }
 
