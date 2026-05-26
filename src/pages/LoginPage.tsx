@@ -4,11 +4,10 @@ import { useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { DomeLogo } from "../components/DomeLogo";
 import { sanitizeRedirect } from "../lib/auth";
-import { storePendingConsent } from "../lib/compliance";
+import { storePendingConsent, hasLocalConsent } from "../lib/compliance";
 
 const AUTH_BACKEND =
-  import.meta.env.VITE_AUTH_BACKEND ??
-  "https://dome-process-analyzer-production.up.railway.app";
+  import.meta.env.VITE_AUTH_BACKEND ?? "https://auth.domelayer.com";
 
 type Status = "idle" | "loading" | "sent" | "error";
 
@@ -16,7 +15,8 @@ export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<Status>("idle");
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
-  const [termsAccepted, setTermsAccepted] = useState(false);
+  const [returningUser] = useState(() => hasLocalConsent());
+  const [termsAccepted, setTermsAccepted] = useState(() => hasLocalConsent());
   const [marketingConsent, setMarketingConsent] = useState(false);
   const [searchParams] = useSearchParams();
   const redirect = sanitizeRedirect(searchParams.get("redirect"));
@@ -205,31 +205,11 @@ export default function LoginPage() {
               </p>
             )}
 
-            {/* Consent checkboxes */}
+            {/* Consent */}
             <div style={{ display: "flex", flexDirection: "column", gap: "12px", marginBottom: "24px" }}>
-              <label
-                style={{
-                  display: "flex",
-                  alignItems: "flex-start",
-                  gap: "10px",
-                  cursor: "pointer",
-                }}
-              >
-                <input
-                  type="checkbox"
-                  checked={termsAccepted}
-                  onChange={(e) => setTermsAccepted(e.target.checked)}
-                  style={{
-                    marginTop: "2px",
-                    width: "15px",
-                    height: "15px",
-                    accentColor: "var(--color-accent)",
-                    flexShrink: 0,
-                    cursor: "pointer",
-                  }}
-                />
-                <span style={{ fontSize: "12px", color: "var(--color-text-secondary)", lineHeight: 1.55 }}>
-                  I have read and agree to the{" "}
+              {returningUser ? (
+                <p style={{ fontSize: "12px", color: "var(--color-text-tertiary)", lineHeight: 1.55 }}>
+                  By signing in, you agree to our{" "}
                   <a
                     href="/terms"
                     target="_blank"
@@ -248,34 +228,80 @@ export default function LoginPage() {
                     Privacy Policy
                   </a>
                   .
-                </span>
-              </label>
+                </p>
+              ) : (
+                <>
+                  <label
+                    style={{
+                      display: "flex",
+                      alignItems: "flex-start",
+                      gap: "10px",
+                      cursor: "pointer",
+                    }}
+                  >
+                    <input
+                      type="checkbox"
+                      checked={termsAccepted}
+                      onChange={(e) => setTermsAccepted(e.target.checked)}
+                      style={{
+                        marginTop: "2px",
+                        width: "15px",
+                        height: "15px",
+                        accentColor: "var(--color-accent)",
+                        flexShrink: 0,
+                        cursor: "pointer",
+                      }}
+                    />
+                    <span style={{ fontSize: "12px", color: "var(--color-text-secondary)", lineHeight: 1.55 }}>
+                      I have read and agree to the{" "}
+                      <a
+                        href="/terms"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style={{ color: "var(--color-accent)", textDecoration: "none" }}
+                      >
+                        Terms of Service
+                      </a>{" "}
+                      and{" "}
+                      <a
+                        href="/privacy"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style={{ color: "var(--color-accent)", textDecoration: "none" }}
+                      >
+                        Privacy Policy
+                      </a>
+                      .
+                    </span>
+                  </label>
 
-              <label
-                style={{
-                  display: "flex",
-                  alignItems: "flex-start",
-                  gap: "10px",
-                  cursor: "pointer",
-                }}
-              >
-                <input
-                  type="checkbox"
-                  checked={marketingConsent}
-                  onChange={(e) => setMarketingConsent(e.target.checked)}
-                  style={{
-                    marginTop: "2px",
-                    width: "15px",
-                    height: "15px",
-                    accentColor: "var(--color-accent)",
-                    flexShrink: 0,
-                    cursor: "pointer",
-                  }}
-                />
-                <span style={{ fontSize: "12px", color: "var(--color-text-secondary)", lineHeight: 1.55 }}>
-                  Keep me updated on Dome products and AI governance insights. Unsubscribe any time.
-                </span>
-              </label>
+                  <label
+                    style={{
+                      display: "flex",
+                      alignItems: "flex-start",
+                      gap: "10px",
+                      cursor: "pointer",
+                    }}
+                  >
+                    <input
+                      type="checkbox"
+                      checked={marketingConsent}
+                      onChange={(e) => setMarketingConsent(e.target.checked)}
+                      style={{
+                        marginTop: "2px",
+                        width: "15px",
+                        height: "15px",
+                        accentColor: "var(--color-accent)",
+                        flexShrink: 0,
+                        cursor: "pointer",
+                      }}
+                    />
+                    <span style={{ fontSize: "12px", color: "var(--color-text-secondary)", lineHeight: 1.55 }}>
+                      Keep me updated on Dome products and AI governance insights. Unsubscribe any time.
+                    </span>
+                  </label>
+                </>
+              )}
             </div>
 
             <button
