@@ -16,6 +16,12 @@ if (import.meta.env.VITE_SENTRY_DSN) {
   })
 }
 
+// Staging banner (rendered in App.tsx) is a fixed 32px strip; reserve space for it
+// so the fixed nav / scroll-progress sit below it. No-op in production.
+if (import.meta.env.VITE_SENTRY_ENVIRONMENT === 'staging') {
+  document.documentElement.style.setProperty('--dome-banner-h', '2rem')
+}
+
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <ErrorBoundary>
