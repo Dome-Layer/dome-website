@@ -1,4 +1,5 @@
 import { Routes, Route } from 'react-router-dom'
+import { StagingBanner } from '@dome-layer/dome-ui'
 import { Navigation } from './components/Navigation'
 import { Footer } from './components/Footer'
 import { CookieNotice } from './components/CookieNotice'
@@ -54,7 +55,9 @@ function HomeLayout() {
 
 export default function App() {
   return (
-    <Routes>
+    <>
+      <StagingBanner environment={import.meta.env.VITE_SENTRY_ENVIRONMENT} />
+      <Routes>
       <Route path="/" element={<HomeLayout />} />
       <Route path="/tools/process-analyzer" element={<ProcessAnalyzerPage />} />
       <Route path="/tools/data-intelligence" element={<DataIntelligencePage />} />
@@ -64,6 +67,7 @@ export default function App() {
       <Route path="/auth/callback" element={<AuthCallbackPage />} />
       <Route path="/privacy" element={<PrivacyPage />} />
       <Route path="/terms" element={<TermsPage />} />
-    </Routes>
+      </Routes>
+    </>
   )
 }
