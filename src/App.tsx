@@ -56,7 +56,7 @@ function HomeLayout() {
 export default function App() {
   return (
     <>
-      <StagingBanner environment={import.meta.env.VITE_SENTRY_ENVIRONMENT} />
+      <StagingBanner environment={import.meta.env.VITE_SENTRY_ENVIRONMENT} className="fixed top-0 left-0 right-0 z-[60]" />
       <Routes>
       <Route path="/" element={<HomeLayout />} />
       <Route path="/tools/process-analyzer" element={<ProcessAnalyzerPage />} />
