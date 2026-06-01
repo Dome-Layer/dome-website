@@ -4,6 +4,7 @@ import { Section } from '../components/Section'
 import { Container } from '../components/Container'
 import { TextReveal } from '../components/TextReveal'
 import { dramaticFadeUp, viewportConfig } from '../lib/motion'
+import { useTheme } from '../lib/ThemeContext'
 
 interface ToolItem {
   label: string
@@ -124,9 +125,31 @@ function ToolCard({ tool, index }: { tool: ToolItem; index: number }) {
 }
 
 export function Tools() {
+  const { theme } = useTheme()
+  const isDark = theme === 'dark'
+
   return (
     <Section id="tools" background="default">
-      <Container>
+      {/* it-eye glow — blooms in dark mode, fades out in light so there is never a black box */}
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden">
+        <img
+          src="/it-eye.jpg"
+          alt=""
+          aria-hidden="true"
+          loading="lazy"
+          decoding="async"
+          className="absolute top-1/2 right-0 -translate-y-1/2 w-[85%] max-w-[860px] select-none transition-opacity duration-700"
+          style={{
+            opacity: isDark ? 0.4 : 0,
+            mixBlendMode: 'screen',
+            maskImage:
+              'radial-gradient(ellipse 62% 62% at 62% 50%, #000 28%, transparent 72%)',
+            WebkitMaskImage:
+              'radial-gradient(ellipse 62% 62% at 62% 50%, #000 28%, transparent 72%)',
+          }}
+        />
+      </div>
+      <Container className="relative z-10">
         <motion.div variants={dramaticFadeUp} initial="hidden" whileInView="visible" viewport={viewportConfig} className="mb-12 lg:mb-16">
           <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#0080FF] mb-4">
             AI tools
