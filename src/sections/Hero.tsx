@@ -105,13 +105,13 @@ export function Hero() {
           aria-hidden="true"
         >
           <Particles
-            particleCount={200}
+            particleCount={150}
             particleColors={['#0080FF']}
-            speed={0.2}
+            speed={0.05}
             alphaParticles={true}
-            particleBaseSize={400}
+            particleBaseSize={150}
             particleSpread={10}
-            sizeRandomness={1}
+            sizeRandomness={1.5}
             cameraDistance={20}
             moveParticlesOnHover={true}
             particleHoverFactor={1}

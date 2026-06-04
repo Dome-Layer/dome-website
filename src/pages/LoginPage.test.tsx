@@ -149,3 +149,44 @@ describe("LoginPage — magic link", () => {
     vi.unstubAllGlobals();
   });
 });
+
+// ---------------------------------------------------------------------------
+// Stored redirect — preserve genuine tool returns, clear stale ones
+// (the "landed on Process Analyzer after a direct sign-in" bug)
+// ---------------------------------------------------------------------------
+
+describe("LoginPage — stored redirect handling", () => {
+  function renderAt(entry: string) {
+    return render(
+      <MemoryRouter initialEntries={[entry]}>
+        <LoginPage />
+      </MemoryRouter>
+    );
+  }
+
+  it("stores a genuine tool redirect from ?redirect for the callback to honor", () => {
+    renderAt("/login?redirect=/tools/process-analyzer");
+    expect(sessionStorage.getItem("dome_auth_redirect")).toBe(
+      "/tools/process-analyzer"
+    );
+  });
+
+  it("clears a stale redirect on a direct sign-in (no ?redirect)", () => {
+    // Left behind by a prior, abandoned tool-initiated login in the same tab.
+    sessionStorage.setItem(
+      "dome_auth_redirect",
+      "https://analyzer.domelayer.com/r/42"
+    );
+    renderAt("/login");
+    expect(sessionStorage.getItem("dome_auth_redirect")).toBeNull();
+  });
+
+  it("clears a stale redirect when ?redirect is just '/'", () => {
+    sessionStorage.setItem(
+      "dome_auth_redirect",
+      "https://analyzer.domelayer.com/r/42"
+    );
+    renderAt("/login?redirect=%2F");
+    expect(sessionStorage.getItem("dome_auth_redirect")).toBeNull();
+  });
+});

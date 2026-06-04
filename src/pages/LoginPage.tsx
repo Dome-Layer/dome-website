@@ -38,8 +38,14 @@ export default function LoginPage() {
   const [searchParams] = useSearchParams();
   const redirect = sanitizeRedirect(searchParams.get("redirect"));
 
+  // Persist a genuine tool redirect (dome-ui AuthGuard → /login?redirect=<tool>) so the
+  // callback can return the user there. When there's no valid tool redirect this visit,
+  // drop any value left from a prior, abandoned tool-initiated login — otherwise that
+  // stale entry would silently bounce a fresh, direct sign-in to the old tool.
   if (redirect !== "/") {
     sessionStorage.setItem("dome_auth_redirect", redirect);
+  } else {
+    sessionStorage.removeItem("dome_auth_redirect");
   }
 
   // True while any sign-in action is in flight; gates every button so a user

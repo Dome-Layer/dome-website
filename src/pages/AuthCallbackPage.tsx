@@ -3,6 +3,7 @@
 import { useEffect, useState, useCallback, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { setToken, sanitizeRedirect } from "@/lib/auth";
+import { HUB_PATH } from "@/lib/routes";
 import {
   clearPendingConsent,
   getUserConsentStatus,
@@ -30,12 +31,18 @@ export default function AuthCallbackPage() {
   const completeAuth = useCallback(
     (token: string, expiresAt?: string) => {
       setToken(token, expiresAt);
-      const redirect = sanitizeRedirect(sessionStorage.getItem("dome_auth_redirect"));
+      // A valid stored redirect means the user genuinely came from a tool: the dome-ui
+      // AuthGuard sent them to /login?redirect=<tool> and LoginPage stashed it. We honor
+      // that. sanitizeRedirect collapses a missing/invalid value to "/", and in that
+      // "no tool context" case we land them on the tools hub rather than the marketing
+      // home. The key is removed either way so it can't leak into a later sign-in.
+      const stored = sanitizeRedirect(sessionStorage.getItem("dome_auth_redirect"));
       sessionStorage.removeItem("dome_auth_redirect");
-      if (redirect.startsWith("http")) {
-        window.location.href = redirect;
+      const dest = stored === "/" ? HUB_PATH : stored;
+      if (dest.startsWith("http")) {
+        window.location.href = dest;
       } else {
-        navigate(redirect, { replace: true });
+        navigate(dest, { replace: true });
       }
     },
     [navigate]

@@ -5,6 +5,7 @@ import { useLenis } from 'lenis/react'
 import { DomeLogo } from './DomeLogo'
 import { ThemeToggle } from './ThemeToggle'
 import { isAuthenticated, clearToken } from '../lib/auth'
+import { HUB_PATH } from '../lib/routes'
 
 const navItems = [
   { label: 'Method', href: '#method' },
@@ -161,13 +162,22 @@ export function Navigation() {
               ))}
             </ul>
             {authed ? (
-              <button
-                onClick={handleSignOut}
-                className="inline-flex items-center gap-2 px-5 py-2.5 text-[13px] font-semibold bg-[#0080FF] text-white rounded-lg hover:bg-[#40A8FF] active:bg-[#0066CC] transition-colors duration-150"
-              >
-                {SignOutIcon}
-                Sign out
-              </button>
+              <>
+                <a
+                  href={HUB_PATH}
+                  className="inline-flex items-center gap-2 px-5 py-2.5 text-[13px] font-semibold bg-[#0080FF] text-white rounded-lg hover:bg-[#40A8FF] active:bg-[#0066CC] transition-colors duration-150"
+                >
+                  {UserIcon}
+                  Your tools
+                </a>
+                <button
+                  onClick={handleSignOut}
+                  className="inline-flex items-center gap-2 px-4 py-2.5 text-[13px] font-semibold text-[var(--color-text-secondary)] border border-[var(--color-border-default)] rounded-lg hover:text-[var(--color-text-primary)] hover:border-[var(--color-border-strong)] hover:bg-[var(--color-bg-muted)] transition-colors duration-150"
+                >
+                  {SignOutIcon}
+                  Sign out
+                </button>
+              </>
             ) : (
               <a
                 href={loginHref}
@@ -247,16 +257,26 @@ export function Navigation() {
                   }}
                 >
                   {authed ? (
-                    <button
-                      onClick={() => {
-                        setMobileOpen(false)
-                        handleSignOut()
-                      }}
-                      className="inline-flex items-center gap-2 px-8 py-3.5 text-[13px] font-semibold bg-[#0080FF] text-white rounded-lg"
-                    >
-                      {SignOutIcon}
-                      Sign out
-                    </button>
+                    <div className="flex flex-col items-center gap-3">
+                      <a
+                        href={HUB_PATH}
+                        onClick={() => setMobileOpen(false)}
+                        className="inline-flex items-center gap-2 px-8 py-3.5 text-[13px] font-semibold bg-[#0080FF] text-white rounded-lg"
+                      >
+                        {UserIcon}
+                        Your tools
+                      </a>
+                      <button
+                        onClick={() => {
+                          setMobileOpen(false)
+                          handleSignOut()
+                        }}
+                        className="inline-flex items-center gap-2 px-8 py-3 text-[13px] font-semibold text-[var(--color-text-secondary)] border border-[var(--color-border-default)] rounded-lg hover:text-[var(--color-text-primary)] hover:border-[var(--color-border-strong)] transition-colors duration-150"
+                      >
+                        {SignOutIcon}
+                        Sign out
+                      </button>
+                    </div>
                   ) : (
                     <a
                       href={loginHref}
