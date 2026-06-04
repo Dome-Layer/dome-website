@@ -151,7 +151,13 @@ export default function LoginPage() {
 
         {/* ── Right: sign-in form ── */}
         <div className="login-form-pane">
-          <div className="login-form-stack">
+          <div
+            className={
+              status === "sent"
+                ? "login-form-stack login-form-stack--center"
+                : "login-form-stack"
+            }
+          >
             <div style={{ marginBottom: "32px" }}>
               <DomeLogo size="md" />
             </div>
@@ -620,6 +626,11 @@ export default function LoginPage() {
             margin: auto 0;
             max-width: 360px;
             align-items: flex-start; /* left-align the logo with the form below (desktop) */
+          }
+          /* The post-send "check your inbox" card is centered — center the logo to
+             match it (overrides the left-align above; only on this state). */
+          .login-form-stack--center {
+            align-items: center;
           }
 
           /* Inside the split card, the container IS the card — strip inner chrome */
