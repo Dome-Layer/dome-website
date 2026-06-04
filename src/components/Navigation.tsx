@@ -17,6 +17,21 @@ const navItems = [
 
 const sectionIds = ['method', 'architecture', 'tools', 'engagement', 'about', 'contact']
 
+// Stroke icons for the top-bar auth control (render white on the accent button).
+const UserIcon = (
+  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+    <circle cx="12" cy="7" r="4" />
+  </svg>
+)
+const SignOutIcon = (
+  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+    <polyline points="16 17 21 12 16 7" />
+    <line x1="21" y1="12" x2="9" y2="12" />
+  </svg>
+)
+
 export function Navigation() {
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
@@ -148,15 +163,17 @@ export function Navigation() {
             {authed ? (
               <button
                 onClick={handleSignOut}
-                className="inline-flex items-center px-5 py-2.5 text-[13px] font-semibold bg-[#0080FF] text-white rounded-lg hover:bg-[#40A8FF] active:bg-[#0066CC] transition-colors duration-150"
+                className="inline-flex items-center gap-2 px-5 py-2.5 text-[13px] font-semibold bg-[#0080FF] text-white rounded-lg hover:bg-[#40A8FF] active:bg-[#0066CC] transition-colors duration-150"
               >
+                {SignOutIcon}
                 Sign out
               </button>
             ) : (
               <a
                 href={loginHref}
-                className="inline-flex items-center px-5 py-2.5 text-[13px] font-semibold bg-[#0080FF] text-white rounded-lg hover:bg-[#40A8FF] active:bg-[#0066CC] transition-colors duration-150"
+                className="inline-flex items-center gap-2 px-5 py-2.5 text-[13px] font-semibold bg-[#0080FF] text-white rounded-lg hover:bg-[#40A8FF] active:bg-[#0066CC] transition-colors duration-150"
               >
+                {UserIcon}
                 Sign in
               </a>
             )}
@@ -235,16 +252,18 @@ export function Navigation() {
                         setMobileOpen(false)
                         handleSignOut()
                       }}
-                      className="inline-flex px-8 py-3.5 text-[13px] font-semibold bg-[#0080FF] text-white rounded-lg"
+                      className="inline-flex items-center gap-2 px-8 py-3.5 text-[13px] font-semibold bg-[#0080FF] text-white rounded-lg"
                     >
+                      {SignOutIcon}
                       Sign out
                     </button>
                   ) : (
                     <a
                       href={loginHref}
                       onClick={() => setMobileOpen(false)}
-                      className="inline-flex px-8 py-3.5 text-[13px] font-semibold bg-[#0080FF] text-white rounded-lg"
+                      className="inline-flex items-center gap-2 px-8 py-3.5 text-[13px] font-semibold bg-[#0080FF] text-white rounded-lg"
                     >
+                      {UserIcon}
                       Sign in
                     </a>
                   )}
