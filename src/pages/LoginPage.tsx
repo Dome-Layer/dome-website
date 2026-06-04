@@ -133,361 +133,394 @@ export default function LoginPage() {
   );
 
   return (
-    <div className="login-split">
-      {/* ── Left: sign-in form ── */}
-      <div className="login-form-pane login-bg">
-        <div className="login-form-stack">
-          <div style={{ marginBottom: "32px" }}>
-            <DomeLogo size="md" />
-          </div>
-
-          <div
-            className="login-card"
-            style={{
-              width: "100%",
-              borderRadius: "12px",
-              padding: "40px 32px",
-            }}
-          >
-            {status === "sent" ? (
-              <div style={{ textAlign: "center" }}>
-                <div style={{ marginBottom: "20px" }}>
-                  <svg
-                    width="44"
-                    height="44"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    style={{ margin: "0 auto", display: "block" }}
-                  >
-                    <rect
-                      x="2"
-                      y="4"
-                      width="20"
-                      height="16"
-                      rx="3"
-                      stroke="#0080FF"
-                      strokeWidth="1.5"
-                    />
-                    <path
-                      d="M2 8l10 6 10-6"
-                      stroke="#0080FF"
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                </div>
-                <p
-                  style={{
-                    fontSize: "11px",
-                    fontWeight: 600,
-                    letterSpacing: "0.18em",
-                    textTransform: "uppercase",
-                    color: "var(--color-accent)",
-                    marginBottom: "10px",
-                  }}
-                >
-                  Check your inbox
-                </p>
-                <p
-                  style={{
-                    fontSize: "14px",
-                    color: "var(--color-text-secondary)",
-                    lineHeight: 1.65,
-                  }}
-                >
-                  We sent a sign-in link to{" "}
-                  <strong style={{ color: "var(--color-text-primary)", fontWeight: 500 }}>
-                    {email}
-                  </strong>
-                  . Click it to continue — it expires in 60 minutes.
-                </p>
-              </div>
-            ) : (
-              <>
-                <h1
-                  style={{
-                    fontSize: "20px",
-                    fontWeight: 700,
-                    letterSpacing: "-0.02em",
-                    color: "var(--color-text-primary)",
-                    marginBottom: "8px",
-                  }}
-                >
-                  Sign in
-                </h1>
-                <p
-                  style={{
-                    fontSize: "14px",
-                    color: "var(--color-text-secondary)",
-                    marginBottom: "32px",
-                    lineHeight: 1.6,
-                  }}
-                >
-                  Continue with your email or a provider to access the Dome AI tools.
-                </p>
-
-                <label
-                  style={{
-                    display: "block",
-                    fontSize: "13px",
-                    fontWeight: 500,
-                    color: "var(--color-text-secondary)",
-                    marginBottom: "8px",
-                  }}
-                >
-                  Email address
-                </label>
-                <input
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  onKeyDown={handleKeyDown}
-                  placeholder="you@company.com"
-                  autoFocus
-                  className="login-input"
-                  style={{
-                    display: "block",
-                    width: "100%",
-                    fontSize: "14px",
-                    color: "var(--color-text-primary)",
-                    borderRadius: "8px",
-                    padding: "10px 14px",
-                    marginBottom: errorMsg ? "8px" : "24px",
-                    outline: "none",
-                    boxSizing: "border-box",
-                    transition: "border-color 150ms ease, box-shadow 150ms ease",
-                  }}
-                />
-
-                {errorMsg && (
-                  <p
-                    style={{
-                      fontSize: "12px",
-                      color: "var(--color-dome-status-error)",
-                      marginBottom: "16px",
-                    }}
-                  >
-                    {errorMsg}
-                  </p>
-                )}
-
-                {/* Consent */}
-                <div style={{ display: "flex", flexDirection: "column", gap: "12px", marginBottom: "24px" }}>
-                  {returningUser ? (
-                    <p style={{ fontSize: "12px", color: "var(--color-text-tertiary)", lineHeight: 1.55 }}>
-                      By signing in, you agree to our{" "}
-                      <a
-                        href="/terms"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        style={{ color: "var(--color-accent)", textDecoration: "none" }}
-                      >
-                        Terms of Service
-                      </a>{" "}
-                      and{" "}
-                      <a
-                        href="/privacy"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        style={{ color: "var(--color-accent)", textDecoration: "none" }}
-                      >
-                        Privacy Policy
-                      </a>
-                      .
-                    </p>
-                  ) : (
-                    <>
-                      <label
-                        style={{
-                          display: "flex",
-                          alignItems: "flex-start",
-                          gap: "10px",
-                          cursor: "pointer",
-                        }}
-                      >
-                        <input
-                          type="checkbox"
-                          checked={termsAccepted}
-                          onChange={(e) => setTermsAccepted(e.target.checked)}
-                          style={{
-                            marginTop: "2px",
-                            width: "15px",
-                            height: "15px",
-                            accentColor: "var(--color-accent)",
-                            flexShrink: 0,
-                            cursor: "pointer",
-                          }}
-                        />
-                        <span style={{ fontSize: "12px", color: "var(--color-text-secondary)", lineHeight: 1.55 }}>
-                          I have read and agree to the{" "}
-                          <a
-                            href="/terms"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            style={{ color: "var(--color-accent)", textDecoration: "none" }}
-                          >
-                            Terms of Service
-                          </a>{" "}
-                          and{" "}
-                          <a
-                            href="/privacy"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            style={{ color: "var(--color-accent)", textDecoration: "none" }}
-                          >
-                            Privacy Policy
-                          </a>
-                          .
-                        </span>
-                      </label>
-
-                      <label
-                        style={{
-                          display: "flex",
-                          alignItems: "flex-start",
-                          gap: "10px",
-                          cursor: "pointer",
-                        }}
-                      >
-                        <input
-                          type="checkbox"
-                          checked={marketingConsent}
-                          onChange={(e) => setMarketingConsent(e.target.checked)}
-                          style={{
-                            marginTop: "2px",
-                            width: "15px",
-                            height: "15px",
-                            accentColor: "var(--color-accent)",
-                            flexShrink: 0,
-                            cursor: "pointer",
-                          }}
-                        />
-                        <span style={{ fontSize: "12px", color: "var(--color-text-secondary)", lineHeight: 1.55 }}>
-                          Keep me updated on Dome products and AI governance insights. Unsubscribe any time.
-                        </span>
-                      </label>
-                    </>
-                  )}
-                </div>
-
-                <button
-                  onClick={handleSubmit}
-                  disabled={busy || !email.trim() || consentBlocked}
-                  style={{
-                    width: "100%",
-                    background: "var(--color-accent)",
-                    color: "#FFFFFF",
-                    border: "none",
-                    borderRadius: "8px",
-                    padding: "11px 24px",
-                    fontSize: "13px",
-                    fontWeight: 600,
-                    letterSpacing: "0.01em",
-                    cursor: busy || !email.trim() || consentBlocked ? "not-allowed" : "pointer",
-                    opacity: busy || !email.trim() || consentBlocked ? 0.45 : 1,
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    gap: "8px",
-                    transition: "opacity 150ms ease",
-                  }}
-                >
-                  {status === "loading" ? (
-                    <>
-                      <span
-                        style={{
-                          width: "14px",
-                          height: "14px",
-                          border: "1.5px solid rgba(255,255,255,0.35)",
-                          borderTopColor: "#FFFFFF",
-                          borderRadius: "50%",
-                          display: "inline-block",
-                          animation: "spin 600ms linear infinite",
-                          flexShrink: 0,
-                        }}
-                      />
-                      Sending…
-                    </>
-                  ) : (
-                    "Send sign-in link"
-                  )}
-                </button>
-
-                {/* Divider */}
-                <div className="login-divider">
-                  <span>or continue with</span>
-                </div>
-
-                {/* Provider sign-in */}
-                <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
-                  {providerButton("github", "GitHub", GitHubIcon)}
-                  {providerButton("google", "Google", GoogleIcon)}
-                </div>
-              </>
-            )}
-          </div>
-
-          {/* CTA below card */}
-          <div
-            style={{
-              marginTop: "32px",
-              textAlign: "center",
-              width: "100%",
-            }}
-          >
-            <p
-              style={{
-                fontSize: "13px",
-                color: "var(--color-text-tertiary)",
-                marginBottom: "12px",
-                lineHeight: 1.6,
-              }}
-            >
-              Discover how Dome architects governance-driven AI for regulated enterprises.
+    <div className="login-page">
+      <div className="login-container">
+        {/* ── Left: branded panel (hidden on mobile) ── */}
+        <div className="login-brand-pane" aria-hidden="true">
+          <div className="login-brand-content">
+            <p className="login-brand-eyebrow">Dome</p>
+            <h2 className="login-brand-title">
+              Governance-driven AI for regulated enterprises.
+            </h2>
+            <p className="login-brand-text">
+              Auditable analysis, documents, and decisioning — one secure sign-in
+              across every Dome tool.
             </p>
-            <a
-              href="https://domelayer.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="login-cta-link"
-            >
-              Explore Dome →
-            </a>
           </div>
         </div>
-      </div>
 
-      {/* ── Right: branded panel (hidden on mobile) ── */}
-      <div className="login-brand-pane" aria-hidden="true">
-        <div className="login-brand-content">
-          <p className="login-brand-eyebrow">Dome</p>
-          <h2 className="login-brand-title">
-            Governance-driven AI for regulated enterprises.
-          </h2>
-          <p className="login-brand-text">
-            Auditable analysis, documents, and decisioning — one secure sign-in across
-            every Dome tool.
-          </p>
+        {/* ── Right: sign-in form ── */}
+        <div className="login-form-pane">
+          <div className="login-form-stack">
+            <div style={{ marginBottom: "32px" }}>
+              <DomeLogo size="md" />
+            </div>
+
+            <div className="login-card">
+              {status === "sent" ? (
+                <div style={{ textAlign: "center" }}>
+                  <div style={{ marginBottom: "20px" }}>
+                    <svg
+                      width="44"
+                      height="44"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      style={{ margin: "0 auto", display: "block" }}
+                    >
+                      <rect
+                        x="2"
+                        y="4"
+                        width="20"
+                        height="16"
+                        rx="3"
+                        stroke="#0080FF"
+                        strokeWidth="1.5"
+                      />
+                      <path
+                        d="M2 8l10 6 10-6"
+                        stroke="#0080FF"
+                        strokeWidth="1.5"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                  </div>
+                  <p
+                    style={{
+                      fontSize: "11px",
+                      fontWeight: 600,
+                      letterSpacing: "0.18em",
+                      textTransform: "uppercase",
+                      color: "var(--color-accent)",
+                      marginBottom: "10px",
+                    }}
+                  >
+                    Check your inbox
+                  </p>
+                  <p
+                    style={{
+                      fontSize: "14px",
+                      color: "var(--color-text-secondary)",
+                      lineHeight: 1.65,
+                    }}
+                  >
+                    We sent a sign-in link to{" "}
+                    <strong style={{ color: "var(--color-text-primary)", fontWeight: 500 }}>
+                      {email}
+                    </strong>
+                    . Click it to continue — it expires in 60 minutes.
+                  </p>
+                </div>
+              ) : (
+                <>
+                  <h1
+                    style={{
+                      fontSize: "20px",
+                      fontWeight: 700,
+                      letterSpacing: "-0.02em",
+                      color: "var(--color-text-primary)",
+                      marginBottom: "8px",
+                    }}
+                  >
+                    Sign in
+                  </h1>
+                  <p
+                    style={{
+                      fontSize: "14px",
+                      color: "var(--color-text-secondary)",
+                      marginBottom: "32px",
+                      lineHeight: 1.6,
+                    }}
+                  >
+                    Continue with your email or a provider to access the Dome AI tools.
+                  </p>
+
+                  <label
+                    style={{
+                      display: "block",
+                      fontSize: "13px",
+                      fontWeight: 500,
+                      color: "var(--color-text-secondary)",
+                      marginBottom: "8px",
+                    }}
+                  >
+                    Email address
+                  </label>
+                  <input
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    onKeyDown={handleKeyDown}
+                    placeholder="you@company.com"
+                    autoFocus
+                    className="login-input"
+                    style={{
+                      display: "block",
+                      width: "100%",
+                      fontSize: "14px",
+                      color: "var(--color-text-primary)",
+                      borderRadius: "8px",
+                      padding: "10px 14px",
+                      marginBottom: errorMsg ? "8px" : "24px",
+                      outline: "none",
+                      boxSizing: "border-box",
+                      transition: "border-color 150ms ease, box-shadow 150ms ease",
+                    }}
+                  />
+
+                  {errorMsg && (
+                    <p
+                      style={{
+                        fontSize: "12px",
+                        color: "var(--color-dome-status-error)",
+                        marginBottom: "16px",
+                      }}
+                    >
+                      {errorMsg}
+                    </p>
+                  )}
+
+                  {/* Consent */}
+                  <div style={{ display: "flex", flexDirection: "column", gap: "12px", marginBottom: "24px" }}>
+                    {returningUser ? (
+                      <p style={{ fontSize: "12px", color: "var(--color-text-tertiary)", lineHeight: 1.55 }}>
+                        By signing in, you agree to our{" "}
+                        <a
+                          href="/terms"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          style={{ color: "var(--color-accent)", textDecoration: "none" }}
+                        >
+                          Terms of Service
+                        </a>{" "}
+                        and{" "}
+                        <a
+                          href="/privacy"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          style={{ color: "var(--color-accent)", textDecoration: "none" }}
+                        >
+                          Privacy Policy
+                        </a>
+                        .
+                      </p>
+                    ) : (
+                      <>
+                        <label
+                          style={{
+                            display: "flex",
+                            alignItems: "flex-start",
+                            gap: "10px",
+                            cursor: "pointer",
+                          }}
+                        >
+                          <input
+                            type="checkbox"
+                            checked={termsAccepted}
+                            onChange={(e) => setTermsAccepted(e.target.checked)}
+                            style={{
+                              marginTop: "2px",
+                              width: "15px",
+                              height: "15px",
+                              accentColor: "var(--color-accent)",
+                              flexShrink: 0,
+                              cursor: "pointer",
+                            }}
+                          />
+                          <span style={{ fontSize: "12px", color: "var(--color-text-secondary)", lineHeight: 1.55 }}>
+                            I have read and agree to the{" "}
+                            <a
+                              href="/terms"
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              style={{ color: "var(--color-accent)", textDecoration: "none" }}
+                            >
+                              Terms of Service
+                            </a>{" "}
+                            and{" "}
+                            <a
+                              href="/privacy"
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              style={{ color: "var(--color-accent)", textDecoration: "none" }}
+                            >
+                              Privacy Policy
+                            </a>
+                            .
+                          </span>
+                        </label>
+
+                        <label
+                          style={{
+                            display: "flex",
+                            alignItems: "flex-start",
+                            gap: "10px",
+                            cursor: "pointer",
+                          }}
+                        >
+                          <input
+                            type="checkbox"
+                            checked={marketingConsent}
+                            onChange={(e) => setMarketingConsent(e.target.checked)}
+                            style={{
+                              marginTop: "2px",
+                              width: "15px",
+                              height: "15px",
+                              accentColor: "var(--color-accent)",
+                              flexShrink: 0,
+                              cursor: "pointer",
+                            }}
+                          />
+                          <span style={{ fontSize: "12px", color: "var(--color-text-secondary)", lineHeight: 1.55 }}>
+                            Keep me updated on Dome products and AI governance insights. Unsubscribe any time.
+                          </span>
+                        </label>
+                      </>
+                    )}
+                  </div>
+
+                  <button
+                    onClick={handleSubmit}
+                    disabled={busy || !email.trim() || consentBlocked}
+                    style={{
+                      width: "100%",
+                      background: "var(--color-accent)",
+                      color: "#FFFFFF",
+                      border: "none",
+                      borderRadius: "8px",
+                      padding: "11px 24px",
+                      fontSize: "13px",
+                      fontWeight: 600,
+                      letterSpacing: "0.01em",
+                      cursor: busy || !email.trim() || consentBlocked ? "not-allowed" : "pointer",
+                      opacity: busy || !email.trim() || consentBlocked ? 0.45 : 1,
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      gap: "8px",
+                      transition: "opacity 150ms ease",
+                    }}
+                  >
+                    {status === "loading" ? (
+                      <>
+                        <span
+                          style={{
+                            width: "14px",
+                            height: "14px",
+                            border: "1.5px solid rgba(255,255,255,0.35)",
+                            borderTopColor: "#FFFFFF",
+                            borderRadius: "50%",
+                            display: "inline-block",
+                            animation: "spin 600ms linear infinite",
+                            flexShrink: 0,
+                          }}
+                        />
+                        Sending…
+                      </>
+                    ) : (
+                      "Send sign-in link"
+                    )}
+                  </button>
+
+                  {/* Divider */}
+                  <div className="login-divider">
+                    <span>or continue with</span>
+                  </div>
+
+                  {/* Provider sign-in */}
+                  <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+                    {providerButton("github", "GitHub", GitHubIcon)}
+                    {providerButton("google", "Google", GoogleIcon)}
+                  </div>
+                </>
+              )}
+            </div>
+
+            {/* CTA below card */}
+            <div
+              style={{
+                marginTop: "32px",
+                textAlign: "center",
+                width: "100%",
+              }}
+            >
+              <p
+                style={{
+                  fontSize: "13px",
+                  color: "var(--color-text-tertiary)",
+                  marginBottom: "12px",
+                  lineHeight: 1.6,
+                }}
+              >
+                Discover how Dome architects governance-driven AI for regulated enterprises.
+              </p>
+              <a
+                href="https://domelayer.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="login-cta-link"
+              >
+                Explore Dome →
+              </a>
+            </div>
+          </div>
         </div>
       </div>
 
       <style>{`
         @keyframes spin { to { transform: rotate(360deg); } }
 
-        /* ── Split layout ── */
-        .login-split {
+        /* ════════════════════════════════════════════════════════════════
+           Mobile-first (< 768px): single-column form, unchanged from before.
+           The container is full-bleed; the form sits in a bordered card on the
+           page backdrop. The split-card layout is applied only at >= 768px.
+           ════════════════════════════════════════════════════════════════ */
+        .login-page {
           min-height: 100vh;
           display: flex;
-          font-family: var(--font-sans);
-        }
-        .login-form-pane {
-          flex: 1 1 50%;
-          display: flex;
-          flex-direction: column;
           align-items: center;
           justify-content: center;
           padding: 24px;
+          font-family: var(--font-sans);
+          background-color: var(--color-bg-muted); /* light: #F5F5F5 */
+        }
+        [data-theme="dark"] .login-page {
+          background-color: var(--color-bg-base); /* #0A0A0A */
+          background-image: radial-gradient(circle, rgba(255, 255, 255, 0.07) 1px, transparent 1px);
+          background-size: 24px 24px;
+        }
+
+        .login-container {
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+        }
+
+        /* Branded panel hidden on mobile */
+        .login-brand-pane { display: none; }
+        .login-brand-content {
+          position: relative;
+          z-index: 1;
+          max-width: 440px;
+          color: #FFFFFF;
+          text-shadow: 0 1px 16px rgba(0, 0, 0, 0.45);
+        }
+        .login-brand-eyebrow {
+          font-size: 11px; font-weight: 600; letter-spacing: 0.18em;
+          text-transform: uppercase; color: rgba(255, 255, 255, 0.7); margin-bottom: 16px;
+        }
+        .login-brand-title {
+          color: #FFFFFF; /* override the global h1-h6 color rule (index.css) */
+          font-size: 30px; font-weight: 700; letter-spacing: -0.02em;
+          line-height: 1.2; margin-bottom: 16px;
+        }
+        .login-brand-text { font-size: 15px; line-height: 1.6; color: rgba(255, 255, 255, 0.85); }
+
+        .login-form-pane {
+          flex: 1 1 auto;
+          display: flex;
+          align-items: center;
+          justify-content: center;
         }
         .login-form-stack {
           width: 100%;
@@ -497,64 +530,105 @@ export default function LoginPage() {
           align-items: center;
         }
 
-        /* ── Branded panel (right). Maintainer: drop the final image by adding a
-           url(...) layer to background-image below, e.g.
-           background-image: linear-gradient(135deg, rgba(0,128,255,0.22), rgba(10,10,10,0.92)), url("/login-panel.jpg"); ── */
-        .login-brand-pane {
-          flex: 1 1 50%;
-          position: relative;
-          display: flex;
-          align-items: flex-end;
-          padding: 48px;
-          overflow: hidden;
-          background-color: var(--color-bg-base);
-          background-image: linear-gradient(135deg, rgba(0, 128, 255, 0.22), rgba(10, 10, 10, 0.92));
-          background-size: cover;
-          background-position: center;
-        }
-        .login-brand-content { position: relative; z-index: 1; max-width: 440px; color: #FFFFFF; }
-        .login-brand-eyebrow {
-          font-size: 11px; font-weight: 600; letter-spacing: 0.18em;
-          text-transform: uppercase; color: rgba(255, 255, 255, 0.7); margin-bottom: 16px;
-        }
-        .login-brand-title {
-          font-size: 30px; font-weight: 700; letter-spacing: -0.02em;
-          line-height: 1.2; margin-bottom: 16px;
-        }
-        .login-brand-text { font-size: 15px; line-height: 1.6; color: rgba(255, 255, 255, 0.85); }
-
-        @media (max-width: 768px) {
-          .login-brand-pane { display: none; }
-        }
-
-        /* ── Light theme (default) ── */
-        .login-bg {
-          background-color: var(--color-bg-muted); /* #F5F5F5 */
-        }
+        /* Card (mobile = bordered card on the backdrop) */
         .login-card {
+          width: 100%;
+          border-radius: var(--radius-lg);
+          padding: 40px 32px;
           background-color: var(--color-bg-base); /* #FFFFFF */
           border: 1px solid var(--color-border-default);
           box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
-        }
-        .login-input {
-          background-color: var(--color-bg-subtle); /* #FAFAFA */
-          border: 1px solid var(--color-border-default);
-        }
-
-        /* ── Dark theme overrides ── */
-        [data-theme="dark"] .login-bg {
-          background-color: var(--color-bg-base); /* #0A0A0A */
-          background-image: radial-gradient(circle, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
-          background-size: 24px 24px;
         }
         [data-theme="dark"] .login-card {
           background-color: var(--color-bg-subtle); /* #111111 */
           border-color: var(--color-border-default); /* #262626 */
           box-shadow: 0 0 0 1px rgba(0, 128, 255, 0.07), 0 8px 40px rgba(0, 0, 0, 0.5);
         }
+
+        .login-input {
+          background-color: var(--color-bg-subtle); /* #FAFAFA */
+          border: 1px solid var(--color-border-default);
+        }
         [data-theme="dark"] .login-input {
           background-color: var(--color-bg-base); /* #0A0A0A */
           border-color: var(--color-border-strong); /* #404040 */
+        }
+
+        /* ════════════════════════════════════════════════════════════════
+           Tablet and up (>= 768px): 70%-width split card — image LEFT (60%),
+           form RIGHT (40%) — rounded + elevated, on a dotted-grid backdrop.
+           ════════════════════════════════════════════════════════════════ */
+        @media (min-width: 768px) {
+          /* Dotted grid behind the container in BOTH themes */
+          .login-page {
+            background-image: radial-gradient(circle, rgba(0, 0, 0, 0.06) 1px, transparent 1px);
+            background-size: 24px 24px;
+          }
+          [data-theme="dark"] .login-page {
+            background-image: radial-gradient(circle, rgba(255, 255, 255, 0.07) 1px, transparent 1px);
+            background-size: 24px 24px;
+          }
+
+          .login-container {
+            flex-direction: row;
+            width: min(70vw, 1120px);
+            min-height: min(70vh, 720px);
+            max-height: 92vh;
+            border-radius: var(--radius-xl); /* 16px */
+            overflow: hidden;
+            background-color: var(--color-bg-base);
+            border: 1px solid var(--color-border-default);
+            box-shadow: 0 12px 48px rgba(0, 0, 0, 0.12);
+          }
+          [data-theme="dark"] .login-container {
+            background-color: var(--color-bg-subtle);
+            border-color: var(--color-border-default);
+            box-shadow: 0 0 0 1px rgba(0, 128, 255, 0.08), 0 24px 64px rgba(0, 0, 0, 0.6);
+          }
+
+          /* Image LEFT, 60%. The photo lives in public/dome-login.png; the bottom-
+             weighted gradient over it keeps the white brand text legible. To swap the
+             image, replace the url(...) below (keep the gradient layer first). */
+          .login-brand-pane {
+            display: flex;
+            flex: 0 0 60%;
+            position: relative;
+            align-items: flex-end;
+            padding: 48px;
+            overflow: hidden;
+            background-color: #0A0F1E; /* fallback while the image loads */
+            background-image:
+              linear-gradient(to top, rgba(8, 12, 24, 0.95) 0%, rgba(8, 12, 24, 0.78) 30%, rgba(8, 12, 24, 0.32) 62%, rgba(8, 12, 24, 0.12) 100%),
+              url("/dome-login.png");
+            background-size: cover;
+            background-position: center;
+          }
+
+          /* Form RIGHT, 40% — centers when short, scrolls when tall */
+          .login-form-pane {
+            flex: 0 0 40%;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 48px 40px;
+            overflow-y: auto;
+            background-color: transparent;
+          }
+          .login-form-stack {
+            margin: auto 0;
+            max-width: 360px;
+            align-items: flex-start; /* left-align the logo with the form below (desktop) */
+          }
+
+          /* Inside the split card, the container IS the card — strip inner chrome */
+          .login-card,
+          [data-theme="dark"] .login-card {
+            background: transparent;
+            border: none;
+            box-shadow: none;
+            border-radius: 0;
+            padding: 0;
+          }
         }
 
         /* ── Divider ── */
