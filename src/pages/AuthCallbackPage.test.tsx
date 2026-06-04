@@ -155,7 +155,7 @@ describe("AuthCallbackPage — Supabase not configured", () => {
     await waitFor(() => {
       expect(setToken).toHaveBeenCalledWith("test-token-123", expect.any(String));
     });
-    expect(mockNavigate).toHaveBeenCalledWith("/", { replace: true });
+    expect(mockNavigate).toHaveBeenCalledWith("/app", { replace: true });
   });
 });
 
@@ -172,7 +172,7 @@ describe("AuthCallbackPage — returning user", () => {
       expect(setToken).toHaveBeenCalledWith("test-token-123", expect.any(String));
     });
     expect(clearPendingConsent).toHaveBeenCalled();
-    expect(mockNavigate).toHaveBeenCalledWith("/", { replace: true });
+    expect(mockNavigate).toHaveBeenCalledWith("/app", { replace: true });
   });
 });
 
@@ -328,7 +328,7 @@ describe("AuthCallbackPage — consent interstitial", () => {
 // ---------------------------------------------------------------------------
 
 describe("AuthCallbackPage — redirect after auth", () => {
-  it("navigates to stored redirect from sessionStorage", async () => {
+  it("returns the user to a genuine stored tool redirect (preserved)", async () => {
     vi.mocked(isSupabaseConfigured).mockReturnValue(false);
     sessionStorage.setItem("dome_auth_redirect", "/tools?tab=analyzer");
     renderCallback();
@@ -339,11 +339,23 @@ describe("AuthCallbackPage — redirect after auth", () => {
     });
   });
 
-  it("falls back to / when no redirect is stored", async () => {
+  it("falls back to the tools hub (/app) when no redirect is stored", async () => {
     vi.mocked(isSupabaseConfigured).mockReturnValue(false);
     renderCallback();
     await waitFor(() => {
-      expect(mockNavigate).toHaveBeenCalledWith("/", { replace: true });
+      expect(mockNavigate).toHaveBeenCalledWith("/app", { replace: true });
+    });
+    // The key is always cleared so it can't leak into a later sign-in.
+    expect(sessionStorage.getItem("dome_auth_redirect")).toBeNull();
+  });
+
+  it("lands on the hub when the stored redirect is not a valid same-band target", async () => {
+    vi.mocked(isSupabaseConfigured).mockReturnValue(false);
+    // sanitizeRedirect collapses an off-band/external value to "/", which now maps to /app.
+    sessionStorage.setItem("dome_auth_redirect", "https://evil.example.com/phish");
+    renderCallback();
+    await waitFor(() => {
+      expect(mockNavigate).toHaveBeenCalledWith("/app", { replace: true });
     });
   });
 
@@ -383,7 +395,7 @@ describe("AuthCallbackPage — OAuth code path", () => {
         "2099-01-01T00:00:00.000Z"
       );
     });
-    expect(mockNavigate).toHaveBeenCalledWith("/", { replace: true });
+    expect(mockNavigate).toHaveBeenCalledWith("/app", { replace: true });
   });
 
   it("runs consent gating for OAuth users (returning user passes through)", async () => {
