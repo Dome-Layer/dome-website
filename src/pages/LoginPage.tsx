@@ -555,10 +555,12 @@ export default function LoginPage() {
         }
 
         /* ════════════════════════════════════════════════════════════════
-           Tablet and up (>= 768px): 70%-width split card — image LEFT (60%),
-           form RIGHT (40%) — rounded + elevated, on a dotted-grid backdrop.
+           Large screens (>= 1024px / lg, matching the nav's desktop switch):
+           70%-width split card — image LEFT (60%), form RIGHT (40%) — rounded +
+           elevated, on a dotted-grid backdrop. Tablet + mobile stay single-column
+           (the split felt cramped on tablets).
            ════════════════════════════════════════════════════════════════ */
-        @media (min-width: 768px) {
+        @media (min-width: 1024px) {
           /* Dotted grid behind the container in BOTH themes */
           .login-page {
             background-image: radial-gradient(circle, rgba(0, 0, 0, 0.06) 1px, transparent 1px);
