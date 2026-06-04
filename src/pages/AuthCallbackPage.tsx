@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { setToken, sanitizeRedirect } from "@/lib/auth";
 import {
@@ -11,6 +11,7 @@ import {
   storePendingConsent,
   writeConsentToSupabase,
 } from "@/lib/compliance";
+import { exchangeOAuthCode } from "@/lib/supabase";
 
 type Status = "processing" | "consent-required" | "error";
 
@@ -40,10 +41,53 @@ export default function AuthCallbackPage() {
     [navigate]
   );
 
+  // Consent gating shared by both the magic-link (hash) and OAuth (code) paths.
+  // Returning consented users pass straight through; first-time same-device users
+  // have their stored consent written; cross-device first-timers see the interstitial.
+  const gateConsentAndComplete = useCallback(
+    async (accessToken: string, expiresAt?: string) => {
+      // If Supabase isn't configured (local dev without env vars), skip consent flow
+      if (!isSupabaseConfigured()) {
+        completeAuth(accessToken, expiresAt);
+        return;
+      }
+
+      // Check whether this user has already consented (returning user)
+      const { hasConsented } = await getUserConsentStatus(accessToken);
+      if (hasConsented) {
+        clearPendingConsent();
+        completeAuth(accessToken, expiresAt);
+        return;
+      }
+
+      // First-time user — look for consent recorded on this device
+      const pendingConsent = readPendingConsent();
+      if (pendingConsent) {
+        await writeConsentToSupabase(accessToken, pendingConsent);
+        clearPendingConsent();
+        completeAuth(accessToken, expiresAt);
+        return;
+      }
+
+      // Cross-device: user clicked the link on a different device, no localStorage data.
+      // Show the consent interstitial before granting access.
+      setStoredToken({ token: accessToken, expiresAt });
+      setStatus("consent-required");
+    },
+    [completeAuth]
+  );
+
+  // Runs once — guarded against the StrictMode double-invoke so the single-use
+  // OAuth authorization code is never exchanged twice.
+  const handledRef = useRef(false);
   useEffect(() => {
+    if (handledRef.current) return;
+    handledRef.current = true;
+
     async function handleCallback() {
-      // Check for errors in query params
       const queryParams = new URLSearchParams(window.location.search);
+
+      // Provider errors (OAuth denial, expired link, etc.) come back as query params.
       const queryError =
         queryParams.get("error_description") ?? queryParams.get("error");
       if (queryError) {
@@ -52,7 +96,19 @@ export default function AuthCallbackPage() {
         return;
       }
 
-      // Extract token from hash
+      // ── OAuth (PKCE) path: Supabase redirects back with ?code= ──
+      if (queryParams.get("code")) {
+        const result = await exchangeOAuthCode();
+        if (result.error !== null) {
+          setStatus("error");
+          setErrorMsg(result.error);
+          return;
+        }
+        await gateConsentAndComplete(result.accessToken, result.expiresAt);
+        return;
+      }
+
+      // ── Magic-link path: token arrives in the URL hash (implicit flow) ──
       const hash = window.location.hash.substring(1);
       const params = new URLSearchParams(hash);
       const accessToken = params.get("access_token");
@@ -78,38 +134,11 @@ export default function AuthCallbackPage() {
         ? new Date(parseInt(expiresAtRaw, 10) * 1000).toISOString()
         : undefined;
 
-      // If Supabase isn't configured (local dev without env vars), skip consent flow
-      if (!isSupabaseConfigured()) {
-        completeAuth(accessToken, expiresAt);
-        return;
-      }
-
-      // Check whether this user has already consented (returning user)
-      const { hasConsented } = await getUserConsentStatus(accessToken);
-
-      if (hasConsented) {
-        clearPendingConsent();
-        completeAuth(accessToken, expiresAt);
-        return;
-      }
-
-      // First-time user — look for consent recorded on this device
-      const pendingConsent = readPendingConsent();
-      if (pendingConsent) {
-        await writeConsentToSupabase(accessToken, pendingConsent);
-        clearPendingConsent();
-        completeAuth(accessToken, expiresAt);
-        return;
-      }
-
-      // Cross-device: user clicked the link on a different device, no localStorage data.
-      // Show the consent interstitial before granting access.
-      setStoredToken({ token: accessToken, expiresAt });
-      setStatus("consent-required");
+      await gateConsentAndComplete(accessToken, expiresAt);
     }
 
     handleCallback();
-  }, [completeAuth]);
+  }, [gateConsentAndComplete]);
 
   const handleConsentAccept = async () => {
     if (!storedToken || !termsAccepted) return;

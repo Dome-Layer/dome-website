@@ -35,6 +35,10 @@ vi.mock("@/lib/compliance", () => ({
   clearPendingConsent: vi.fn(),
 }));
 
+vi.mock("@/lib/supabase", () => ({
+  exchangeOAuthCode: vi.fn(),
+}));
+
 import { setToken } from "@/lib/auth";
 import {
   isSupabaseConfigured,
@@ -44,6 +48,7 @@ import {
   storePendingConsent,
   clearPendingConsent,
 } from "@/lib/compliance";
+import { exchangeOAuthCode } from "@/lib/supabase";
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -352,5 +357,104 @@ describe("AuthCallbackPage — redirect after auth", () => {
       "href",
       "/login"
     );
+  });
+});
+
+// ---------------------------------------------------------------------------
+// OAuth (PKCE / ?code=) path
+// ---------------------------------------------------------------------------
+
+describe("AuthCallbackPage — OAuth code path", () => {
+  it("exchanges the code and completes auth (Supabase not configured)", async () => {
+    setLocation({ search: "?code=oauth-code-123" });
+    vi.mocked(isSupabaseConfigured).mockReturnValue(false);
+    vi.mocked(exchangeOAuthCode).mockResolvedValue({
+      accessToken: "oauth-token-xyz",
+      expiresAt: "2099-01-01T00:00:00.000Z",
+      error: null,
+    });
+
+    renderCallback();
+
+    await waitFor(() => {
+      expect(exchangeOAuthCode).toHaveBeenCalled();
+      expect(setToken).toHaveBeenCalledWith(
+        "oauth-token-xyz",
+        "2099-01-01T00:00:00.000Z"
+      );
+    });
+    expect(mockNavigate).toHaveBeenCalledWith("/", { replace: true });
+  });
+
+  it("runs consent gating for OAuth users (returning user passes through)", async () => {
+    setLocation({ search: "?code=oauth-code-123" });
+    vi.mocked(isSupabaseConfigured).mockReturnValue(true);
+    vi.mocked(getUserConsentStatus).mockResolvedValue({ hasConsented: true });
+    vi.mocked(exchangeOAuthCode).mockResolvedValue({
+      accessToken: "oauth-token-xyz",
+      error: null,
+    });
+
+    renderCallback();
+
+    await waitFor(() => {
+      expect(getUserConsentStatus).toHaveBeenCalledWith("oauth-token-xyz");
+      expect(setToken).toHaveBeenCalledWith("oauth-token-xyz", undefined);
+    });
+  });
+
+  it("writes pending consent for a first-time OAuth user", async () => {
+    setLocation({ search: "?code=oauth-code-123" });
+    vi.mocked(isSupabaseConfigured).mockReturnValue(true);
+    vi.mocked(getUserConsentStatus).mockResolvedValue({ hasConsented: false });
+    vi.mocked(readPendingConsent).mockReturnValue({
+      terms_accepted_at: new Date().toISOString(),
+      terms_version: "2026-04",
+      marketing_consent: false,
+    });
+    vi.mocked(exchangeOAuthCode).mockResolvedValue({
+      accessToken: "oauth-token-xyz",
+      error: null,
+    });
+
+    renderCallback();
+
+    await waitFor(() => {
+      expect(writeConsentToSupabase).toHaveBeenCalledWith(
+        "oauth-token-xyz",
+        expect.objectContaining({ terms_version: "2026-04" })
+      );
+      expect(setToken).toHaveBeenCalled();
+    });
+  });
+
+  it("shows an error when the code exchange fails", async () => {
+    setLocation({ search: "?code=bad-code" });
+    vi.mocked(exchangeOAuthCode).mockResolvedValue({
+      accessToken: null,
+      error: "Could not complete sign-in.",
+    });
+
+    renderCallback();
+
+    await waitFor(() => {
+      expect(screen.getByText("Sign-in failed")).toBeInTheDocument();
+    });
+    expect(screen.getByText("Could not complete sign-in.")).toBeInTheDocument();
+    expect(setToken).not.toHaveBeenCalled();
+  });
+
+  it("does NOT take the OAuth path for a magic-link hash callback", async () => {
+    // beforeEach sets a valid hash token and no ?code=
+    vi.mocked(isSupabaseConfigured).mockReturnValue(false);
+    renderCallback();
+
+    await waitFor(() => {
+      expect(setToken).toHaveBeenCalledWith(
+        "test-token-123",
+        expect.any(String)
+      );
+    });
+    expect(exchangeOAuthCode).not.toHaveBeenCalled();
   });
 });
