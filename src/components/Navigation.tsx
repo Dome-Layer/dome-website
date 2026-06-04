@@ -4,6 +4,7 @@ import { useLocation } from 'react-router-dom'
 import { useLenis } from 'lenis/react'
 import { DomeLogo } from './DomeLogo'
 import { ThemeToggle } from './ThemeToggle'
+import { isAuthenticated, clearToken } from '../lib/auth'
 
 const navItems = [
   { label: 'Method', href: '#method' },
@@ -23,6 +24,20 @@ export function Navigation() {
   const location = useLocation()
   const isHomePage = location.pathname === '/'
   const lenis = useLenis()
+
+  // Auth state for the top-bar Sign in / Sign out control. Read once at mount from
+  // the cross-subdomain cookie (CSR-only app, so document is available). The page
+  // reloads on sign-in (via /login) and on sign-out, so this stays fresh.
+  const [authed] = useState(() => isAuthenticated())
+
+  const loginHref = `/login?redirect=${encodeURIComponent(
+    location.pathname + location.search
+  )}`
+
+  const handleSignOut = useCallback(() => {
+    clearToken()
+    window.location.href = '/'
+  }, [])
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40)
@@ -130,16 +145,21 @@ export function Navigation() {
                 </li>
               ))}
             </ul>
-            <a
-              href={isHomePage ? '#contact' : '/#contact'}
-              onClick={(e) => {
-                e.preventDefault()
-                handleNavClick(-1, '#contact')
-              }}
-              className="inline-flex items-center px-5 py-2.5 text-[13px] font-semibold bg-[#0080FF] text-white rounded-lg hover:bg-[#40A8FF] active:bg-[#0066CC] transition-colors duration-150"
-            >
-              Design your AI layer
-            </a>
+            {authed ? (
+              <button
+                onClick={handleSignOut}
+                className="inline-flex items-center px-5 py-2.5 text-[13px] font-semibold bg-[#0080FF] text-white rounded-lg hover:bg-[#40A8FF] active:bg-[#0066CC] transition-colors duration-150"
+              >
+                Sign out
+              </button>
+            ) : (
+              <a
+                href={loginHref}
+                className="inline-flex items-center px-5 py-2.5 text-[13px] font-semibold bg-[#0080FF] text-white rounded-lg hover:bg-[#40A8FF] active:bg-[#0066CC] transition-colors duration-150"
+              >
+                Sign in
+              </a>
+            )}
             <ThemeToggle />
           </div>
 
@@ -209,13 +229,25 @@ export function Navigation() {
                     ease: [0.16, 1, 0.3, 1],
                   }}
                 >
-                  <a
-                    href={isHomePage ? '#contact' : '/#contact'}
-                    onClick={() => handleMobileNavClick('#contact')}
-                    className="inline-flex px-8 py-3.5 text-[13px] font-semibold bg-[#0080FF] text-white rounded-lg"
-                  >
-                    Design your AI layer
-                  </a>
+                  {authed ? (
+                    <button
+                      onClick={() => {
+                        setMobileOpen(false)
+                        handleSignOut()
+                      }}
+                      className="inline-flex px-8 py-3.5 text-[13px] font-semibold bg-[#0080FF] text-white rounded-lg"
+                    >
+                      Sign out
+                    </button>
+                  ) : (
+                    <a
+                      href={loginHref}
+                      onClick={() => setMobileOpen(false)}
+                      className="inline-flex px-8 py-3.5 text-[13px] font-semibold bg-[#0080FF] text-white rounded-lg"
+                    >
+                      Sign in
+                    </a>
+                  )}
                 </motion.li>
               </ul>
             </nav>
