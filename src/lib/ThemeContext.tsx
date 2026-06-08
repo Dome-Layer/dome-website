@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useState, type ReactNode } from 'react'
+import { cookieDomain, isHttpsHost } from '@dome-layer/dome-ui/utils'
 
 type Theme = 'light' | 'dark'
 
@@ -12,26 +13,7 @@ const ThemeContext = createContext<ThemeContextValue | null>(null)
 const COOKIE_NAME = 'dome-theme'
 const COOKIE_MAX_AGE = 60 * 60 * 24 * 365 // 1 year
 
-function isStagingHost(host: string): boolean {
-  return host === 'staging.domelayer.com' || host.endsWith('.staging.domelayer.com')
-}
-
-function isProductionHost(host: string): boolean {
-  if (isStagingHost(host)) return false
-  return host === 'domelayer.com' || host.endsWith('.domelayer.com')
-}
-
-function isHttpsHost(): boolean {
-  const host = window.location.hostname
-  return isStagingHost(host) || isProductionHost(host)
-}
-
-function cookieDomain(): string {
-  const host = window.location.hostname
-  if (isStagingHost(host)) return '.staging.domelayer.com'
-  if (isProductionHost(host)) return '.domelayer.com'
-  return ''
-}
+// Host/cookie-domain helpers come from dome-ui (cookieDomain, isHttpsHost) — see imports.
 
 function readThemeCookie(): Theme | null {
   const match = document.cookie.split('; ').find(r => r.startsWith(`${COOKIE_NAME}=`))
