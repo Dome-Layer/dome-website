@@ -172,7 +172,7 @@ function ToolsHub() {
       <style>{`
         .hub-page {
           min-height: 100vh;
-          padding: 32px 0 56px;
+          padding: calc(32px + min(24px, var(--dome-banner-h, 0px))) 0 56px;
           font-family: var(--font-sans);
           background-color: var(--color-bg-muted); /* light: #F5F5F5 */
         }
