@@ -172,7 +172,7 @@ function ToolsHub() {
       <style>{`
         .hub-page {
           min-height: 100vh;
-          padding: 32px 24px 56px;
+          padding: calc(32px + min(24px, var(--dome-banner-h, 0px))) 0 56px;
           font-family: var(--font-sans);
           background-color: var(--color-bg-muted); /* light: #F5F5F5 */
         }
@@ -184,8 +184,12 @@ function ToolsHub() {
 
         .hub-shell {
           width: 100%;
-          max-width: 960px;
+          max-width: 1152px;
           margin: 0 auto;
+          padding: 0 24px;
+        }
+        @media (min-width: 768px) {
+          .hub-shell { padding: 0 32px; }
         }
 
         .hub-header {
