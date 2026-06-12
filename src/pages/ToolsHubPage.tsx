@@ -64,6 +64,14 @@ const TOOLS: Tool[] = [
   },
 ];
 
+const GOV_TOOL = {
+  name: "Governance Dashboard",
+  description:
+    "Audit trail, compliance reporting, and PDF export across all four DOME AI tools — the observation and compliance layer that spans every tool.",
+  prodHost: "governance.domelayer.com",
+  accent: "#6366F1",
+};
+
 /**
  * Host-aware tool URL. On a staging host the tool lives at `<sub>.staging.domelayer.com`
  * (per the staging runbook); on production (and anywhere else, e.g. localhost preview)
@@ -166,6 +174,25 @@ function ToolsHub() {
               <span className="hub-card-stripe" aria-hidden="true" />
             </a>
           ))}
+        </div>
+
+        {/* Governance layer — separate section, visually distinct from P1–P4 */}
+        <div className="hub-govern">
+          <p className="hub-govern-label">Governance &amp; compliance layer</p>
+          <a
+            href={toolHref(GOV_TOOL.prodHost)}
+            className="hub-card hub-card--govern"
+            style={{ ["--card-accent" as string]: GOV_TOOL.accent }}
+          >
+            <span className="hub-card-eyebrow">OBSERVE</span>
+            <h2 className="hub-card-title">{GOV_TOOL.name}</h2>
+            <p className="hub-card-desc">{GOV_TOOL.description}</p>
+            <span className="hub-card-cta">
+              Open {GOV_TOOL.name}
+              {ArrowIcon}
+            </span>
+            <span className="hub-card-stripe" aria-hidden="true" />
+          </a>
         </div>
       </div>
 
@@ -339,6 +366,23 @@ function ToolsHub() {
         .hub-card:hover .hub-card-stripe,
         .hub-card:focus-visible .hub-card-stripe {
           opacity: 1;
+        }
+
+        .hub-govern {
+          margin-top: 40px;
+          padding-top: 32px;
+          border-top: 1px solid var(--color-border-default);
+        }
+        .hub-govern-label {
+          font-size: 11px;
+          font-weight: 600;
+          letter-spacing: 0.16em;
+          text-transform: uppercase;
+          color: var(--color-text-tertiary);
+          margin-bottom: 16px;
+        }
+        .hub-card--govern {
+          max-width: 480px;
         }
       `}</style>
     </div>

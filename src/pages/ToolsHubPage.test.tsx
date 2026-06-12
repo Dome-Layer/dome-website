@@ -37,7 +37,7 @@ function renderHub() {
   );
 }
 
-/** Hrefs of the four tool shortcut cards (excludes the wordmark "/" link). */
+/** Hrefs of all tool shortcut cards — P1–P4 + governance (excludes wordmark "/" link). */
 function toolHrefs(): string[] {
   return screen
     .getAllByRole("link")
@@ -82,7 +82,8 @@ describe("ToolsHubPage — tool cards", () => {
     expect(screen.getByText("LLM Council")).toBeInTheDocument();
     expect(screen.getByText("Data Intelligence")).toBeInTheDocument();
     expect(screen.getByText("Document Intelligence")).toBeInTheDocument();
-    expect(toolHrefs()).toHaveLength(4);
+    expect(screen.getByText("Governance Dashboard")).toBeInTheDocument();
+    expect(toolHrefs()).toHaveLength(5);
   });
 });
 
@@ -99,6 +100,7 @@ describe("ToolsHubPage — host-aware tool links", () => {
     expect(hrefs).toContain("https://llm-council.domelayer.com/");
     expect(hrefs).toContain("https://data-intelligence.domelayer.com/");
     expect(hrefs).toContain("https://document-intelligence.domelayer.com/");
+    expect(hrefs).toContain("https://governance.domelayer.com/");
     expect(hrefs.some((h) => h.includes("staging"))).toBe(false);
   });
 
@@ -114,6 +116,7 @@ describe("ToolsHubPage — host-aware tool links", () => {
     const hrefs = toolHrefs();
     expect(hrefs).toContain("https://analyzer.staging.domelayer.com/");
     expect(hrefs).toContain("https://document-intelligence.staging.domelayer.com/");
+    expect(hrefs).toContain("https://governance.staging.domelayer.com/");
     expect(hrefs.every((h) => h.endsWith(".staging.domelayer.com/"))).toBe(true);
   });
 });
