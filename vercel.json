@@ -29,10 +29,10 @@
   ],
   "redirects": [
     {
-      "source": "/:path*",
+      "source": "/(.*)",
       "has": [{ "type": "host", "value": "www.domelayer.com" }],
-      "destination": "https://domelayer.com/:path*",
-      "statusCode": 308
+      "destination": "https://domelayer.com/$1",
+      "permanent": true
     }
   ],
   "rewrites": [
