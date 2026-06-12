@@ -64,6 +64,18 @@ const tools: ToolItem[] = [
   },
 ]
 
+const governanceTool: ToolItem = {
+  label: "GOVERN",
+  title: "Governance Dashboard",
+  subtitle:
+    "Real-time audit trail, compliance reporting, and PDF export spanning all four DOME AI tools. Every governance event, confidence score, and human-in-loop decision in one place.",
+  href: "https://governance.domelayer.com/",
+  detailPath: "/tools/governance-dashboard",
+  borderColor: "#6366F1",
+  accentColor: "#6366F1",
+  accentHover: "#818CF8",
+};
+
 function ToolCard({ tool, index }: { tool: ToolItem; index: number }) {
   const navigate = useNavigate()
 
@@ -168,7 +180,7 @@ export function Tools() {
             stagger={0.03}
             className="mt-4 text-body text-[var(--color-text-secondary)] max-w-xl"
           >
-            Four tools, live in production. Each one demonstrates a phase of the DOME method.
+            Four AI tools plus a governance layer, live in production. Each one demonstrates a phase of the DOME method.
           </TextReveal>
         </motion.div>
 
@@ -182,6 +194,39 @@ export function Tools() {
             <ToolCard key={tool.title} tool={tool} index={i} />
           ))}
         </motion.div>
+
+        {/* Governance layer */}
+        <div className="w-full mt-10 relative rounded-xl overflow-hidden">
+          <img
+            src="/network.jpg"
+            alt=""
+            aria-hidden="true"
+            loading="lazy"
+            className="absolute inset-0 w-full h-full object-cover pointer-events-none select-none"
+            style={{ opacity: isDark ? 0.07 : 0.04, mixBlendMode: "luminosity" }}
+          />
+          <div className="relative z-10 pt-8 pb-2 px-2">
+            <div className="flex items-center gap-4 mb-6">
+              <div className="h-px flex-1" style={{ background: "var(--color-border-default)" }} />
+              <span
+                className="text-[11px] font-semibold uppercase tracking-[0.18em]"
+                style={{ color: "var(--color-text-tertiary)" }}
+              >
+                Governance &amp; compliance layer
+              </span>
+              <div className="h-px flex-1" style={{ background: "var(--color-border-default)" }} />
+            </div>
+            <motion.div
+              variants={dramaticFadeUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={viewportConfig}
+              className="flex flex-wrap gap-6"
+            >
+              <ToolCard tool={governanceTool} index={0} />
+            </motion.div>
+          </div>
+        </div>
       </Container>
     </Section>
   )
