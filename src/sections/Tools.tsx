@@ -62,6 +62,17 @@ const tools: ToolItem[] = [
     accentColor: '#F59E0B',
     accentHover: '#FBBF24',
   },
+  {
+    label: 'EXECUTE',
+    title: 'Agent Flow',
+    subtitle:
+      'A self-hosted workflow runs an invoice from arrival to approval — Document Intelligence extraction, a policy rules engine, a multi-model council, and a human approval gate, every step audited.',
+    href: 'https://agent-flow.domelayer.com/',
+    detailPath: '/tools/agent-flow',
+    borderColor: '#EC4899',
+    accentColor: '#EC4899',
+    accentHover: '#F472B6',
+  },
 ]
 
 const governanceTool: ToolItem = {
@@ -180,7 +191,7 @@ export function Tools() {
             stagger={0.03}
             className="mt-4 text-body text-[var(--color-text-secondary)] max-w-xl"
           >
-            Four AI tools plus a governance layer, live in production. Each one demonstrates a phase of the DOME method.
+            Five AI tools plus a governance layer, live in production. Each one demonstrates a phase of the DOME method.
           </TextReveal>
         </motion.div>
 
