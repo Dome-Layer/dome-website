@@ -83,7 +83,8 @@ describe("ToolsHubPage — tool cards", () => {
     expect(screen.getByText("Data Intelligence")).toBeInTheDocument();
     expect(screen.getByText("Document Intelligence")).toBeInTheDocument();
     expect(screen.getByText("Governance Dashboard")).toBeInTheDocument();
-    expect(toolHrefs()).toHaveLength(5);
+    expect(screen.getByText("Agent Flow")).toBeInTheDocument();
+    expect(toolHrefs()).toHaveLength(6);
   });
 });
 
