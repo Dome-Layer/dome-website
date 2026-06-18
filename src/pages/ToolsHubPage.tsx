@@ -62,6 +62,14 @@ const TOOLS: Tool[] = [
     prodHost: "document-intelligence.domelayer.com",
     accent: "#F59E0B",
   },
+  {
+    phase: "EXECUTE",
+    name: "Agent Flow",
+    description:
+      "Run a governed invoice-to-approval workflow across the tools — extraction, a policy rules engine, a multi-model council, and a human approval gate, every step audited.",
+    prodHost: "agent-flow.domelayer.com",
+    accent: "#EC4899",
+  },
 ];
 
 const GOV_TOOL = {

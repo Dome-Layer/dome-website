@@ -19,6 +19,7 @@ import { DataIntelligencePage } from './pages/DataIntelligencePage'
 import { LlmCouncilPage } from './pages/LlmCouncilPage'
 import { DocumentIntelligencePage } from './pages/DocumentIntelligencePage'
 import { GovernanceDashboardPage } from './pages/GovernanceDashboardPage'
+import { AgentFlowPage } from './pages/AgentFlowPage'
 import LoginPage from '@/pages/LoginPage'
 import AuthCallbackPage from '@/pages/AuthCallbackPage'
 import ToolsHubPage from '@/pages/ToolsHubPage'
@@ -67,6 +68,7 @@ export default function App() {
       <Route path="/tools/llm-council" element={<LlmCouncilPage />} />
       <Route path="/tools/document-intelligence" element={<DocumentIntelligencePage />} />
       <Route path="/tools/governance-dashboard" element={<GovernanceDashboardPage />} />
+      <Route path="/tools/agent-flow" element={<AgentFlowPage />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/auth/callback" element={<AuthCallbackPage />} />
       <Route path={HUB_PATH} element={<ToolsHubPage />} />
