@@ -5,6 +5,7 @@ import { Container } from '../components/Container'
 import { TextReveal } from '../components/TextReveal'
 import { dramaticFadeUp, viewportConfig } from '../lib/motion'
 import { useTheme } from '../lib/ThemeContext'
+import { AGENT_FLOW_LIVE } from '../lib/tools'
 
 interface ToolItem {
   label: string
@@ -15,6 +16,8 @@ interface ToolItem {
   borderColor: string
   accentColor: string
   accentHover: string
+  /** Not reachable yet: show "Coming soon" instead of a launch link. */
+  comingSoon?: boolean
 }
 
 const tools: ToolItem[] = [
@@ -69,6 +72,7 @@ const tools: ToolItem[] = [
       'A self-hosted workflow runs an invoice from arrival to approval — Document Intelligence extraction, a policy rules engine, a multi-model council, and a human approval gate, every step audited.',
     href: 'https://agent-flow.domelayer.com/',
     detailPath: '/tools/agent-flow',
+    comingSoon: !AGENT_FLOW_LIVE,
     borderColor: '#EC4899',
     accentColor: '#EC4899',
     accentHover: '#F472B6',
@@ -119,20 +123,29 @@ function ToolCard({ tool, index }: { tool: ToolItem; index: number }) {
         <p className="text-body-sm text-[var(--color-text-secondary)] leading-relaxed mb-8">{tool.subtitle}</p>
 
         <div className="flex items-center gap-4">
-          <a
-            href={tool.href}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 px-4 py-2 text-[13px] font-semibold text-white rounded-lg transition-colors duration-150"
-            style={{ backgroundColor: tool.accentColor }}
-            onMouseEnter={e => (e.currentTarget.style.backgroundColor = tool.accentHover)}
-            onMouseLeave={e => (e.currentTarget.style.backgroundColor = tool.accentColor)}
-          >
-            Open the tool
-            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
-              <path d="M2.5 9.5L9.5 2.5M9.5 2.5H4.5M9.5 2.5V7.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-          </a>
+          {tool.comingSoon ? (
+            <span
+              aria-disabled="true"
+              className="inline-flex items-center px-4 py-2 text-[13px] font-semibold rounded-lg border border-[var(--color-border-default)] text-[var(--color-text-secondary)] cursor-default select-none"
+            >
+              Coming soon
+            </span>
+          ) : (
+            <a
+              href={tool.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 px-4 py-2 text-[13px] font-semibold text-white rounded-lg transition-colors duration-150"
+              style={{ backgroundColor: tool.accentColor }}
+              onMouseEnter={e => (e.currentTarget.style.backgroundColor = tool.accentHover)}
+              onMouseLeave={e => (e.currentTarget.style.backgroundColor = tool.accentColor)}
+            >
+              Open the tool
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                <path d="M2.5 9.5L9.5 2.5M9.5 2.5H4.5M9.5 2.5V7.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </a>
+          )}
           <button
             onClick={() => navigate(tool.detailPath)}
             className="text-[13px] font-medium text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] transition-colors duration-150"

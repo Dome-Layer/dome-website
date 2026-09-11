@@ -5,6 +5,7 @@ import { Section } from '../components/Section'
 import { Container } from '../components/Container'
 import { TextReveal } from '../components/TextReveal'
 import { fadeUp, dramaticFadeUp, viewportConfig } from '../lib/motion'
+import { AGENT_FLOW_LIVE } from '../lib/tools'
 
 const ACCENT = '#EC4899'
 const ACCENT_HOVER = '#F472B6'
@@ -74,20 +75,40 @@ export function AgentFlowPage() {
               gate — emitting a full audit trail the Governance Dashboard reconstructs.
             </p>
             <div className="mt-8 flex items-center gap-4">
-              <a
-                href="https://agent-flow.domelayer.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 px-5 py-2.5 text-[13px] font-semibold text-white rounded-lg transition-colors duration-150"
-                style={{ backgroundColor: ACCENT }}
-                onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = ACCENT_HOVER)}
-                onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = ACCENT)}
-              >
-                Open the approval queue
-                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
-                  <path d="M2.5 9.5L9.5 2.5M9.5 2.5H4.5M9.5 2.5V7.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              </a>
+              {AGENT_FLOW_LIVE ? (
+                <a
+                  href="https://agent-flow.domelayer.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 px-5 py-2.5 text-[13px] font-semibold text-white rounded-lg transition-colors duration-150"
+                  style={{ backgroundColor: ACCENT }}
+                  onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = ACCENT_HOVER)}
+                  onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = ACCENT)}
+                >
+                  Open the approval queue
+                  <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                    <path d="M2.5 9.5L9.5 2.5M9.5 2.5H4.5M9.5 2.5V7.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </a>
+              ) : (
+                <>
+                  <span
+                    aria-disabled="true"
+                    className="inline-flex items-center px-5 py-2.5 text-[13px] font-semibold rounded-lg border border-[var(--color-border-default)] text-[var(--color-text-secondary)] cursor-default select-none"
+                  >
+                    Coming soon
+                  </span>
+                  <a
+                    href="/#contact"
+                    className="inline-flex items-center gap-1.5 px-5 py-2.5 text-[13px] font-semibold text-white rounded-lg transition-colors duration-150"
+                    style={{ backgroundColor: ACCENT }}
+                    onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = ACCENT_HOVER)}
+                    onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = ACCENT)}
+                  >
+                    Request a demo
+                  </a>
+                </>
+              )}
             </div>
           </motion.div>
         </Container>
