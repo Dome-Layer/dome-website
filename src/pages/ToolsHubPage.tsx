@@ -3,9 +3,9 @@
 import { useCallback } from "react";
 import { Navigate } from "react-router-dom";
 import { DomeLogo } from "../components/DomeLogo";
-import { clearToken, isAuthenticated, isStagingHost } from "../lib/auth";
+import { clearToken, isAuthenticated } from "../lib/auth";
 import { HUB_PATH } from "../lib/routes";
-import { AGENT_FLOW_LIVE } from "../lib/tools";
+import { AGENT_FLOW_LIVE, toolHref } from "../lib/tools";
 
 /**
  * Logged-in landing page ("tools hub") — the default post-login destination for a
@@ -86,19 +86,6 @@ const GOV_TOOL = {
   prodHost: "governance.domelayer.com",
   accent: "#6366F1",
 };
-
-/**
- * Host-aware tool URL. On a staging host the tool lives at `<sub>.staging.domelayer.com`
- * (per the staging runbook); on production (and anywhere else, e.g. localhost preview)
- * we point at the production `<sub>.domelayer.com`, the only reachable real target.
- */
-function toolHref(prodHost: string): string {
-  const host = typeof window !== "undefined" ? window.location.hostname : "";
-  const sub = isStagingHost(host)
-    ? prodHost.replace(/\.domelayer\.com$/, ".staging.domelayer.com")
-    : prodHost;
-  return `https://${sub}/`;
-}
 
 const ArrowIcon = (
   <svg width="13" height="13" viewBox="0 0 12 12" fill="none" aria-hidden="true">

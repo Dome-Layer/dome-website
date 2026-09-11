@@ -6,6 +6,7 @@ import { Section } from '../components/Section'
 import { Container } from '../components/Container'
 import { TextReveal } from '../components/TextReveal'
 import { fadeUp, dramaticFadeUp, viewportConfig } from '../lib/motion'
+import { toolHref } from '../lib/tools'
 
 const steps = [
   {
@@ -82,7 +83,7 @@ export function DocumentIntelligencePage() {
               Extract structured data from any document — invoices, lab reports, utility bills, contracts. Governance validation and full audit trail included.
             </p>
             <a
-              href="https://document-intelligence.domelayer.com/"
+              href={toolHref('document-intelligence.domelayer.com')}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-6 py-3 text-[13px] font-semibold bg-[#F59E0B] text-white rounded-lg hover:bg-[#FBBF24] active:bg-[#D97706] transition-colors duration-150"

@@ -6,6 +6,7 @@ import { Section } from '../components/Section'
 import { Container } from '../components/Container'
 import { TextReveal } from '../components/TextReveal'
 import { fadeUp, dramaticFadeUp, viewportConfig } from '../lib/motion'
+import { toolHref } from '../lib/tools'
 
 const ACCENT = '#6366F1'
 const ACCENT_HOVER = '#818CF8'
@@ -96,7 +97,7 @@ export function GovernanceDashboardPage() {
                 export for audit and regulatory submissions.
               </p>
               <a
-                href="https://governance.domelayer.com/"
+                href={toolHref('governance.domelayer.com')}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-6 py-3 text-[13px] font-semibold text-white rounded-lg transition-colors duration-150"

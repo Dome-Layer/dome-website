@@ -5,7 +5,7 @@ import { Section } from '../components/Section'
 import { Container } from '../components/Container'
 import { TextReveal } from '../components/TextReveal'
 import { fadeUp, dramaticFadeUp, viewportConfig } from '../lib/motion'
-import { AGENT_FLOW_LIVE } from '../lib/tools'
+import { AGENT_FLOW_LIVE, toolHref } from '../lib/tools'
 
 const ACCENT = '#EC4899'
 const ACCENT_HOVER = '#F472B6'
@@ -77,7 +77,7 @@ export function AgentFlowPage() {
             <div className="mt-8 flex items-center gap-4">
               {AGENT_FLOW_LIVE ? (
                 <a
-                  href="https://agent-flow.domelayer.com/"
+                  href={toolHref('agent-flow.domelayer.com')}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-1.5 px-5 py-2.5 text-[13px] font-semibold text-white rounded-lg transition-colors duration-150"

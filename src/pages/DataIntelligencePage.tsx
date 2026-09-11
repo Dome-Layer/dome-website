@@ -6,6 +6,7 @@ import { Section } from '../components/Section'
 import { Container } from '../components/Container'
 import { TextReveal } from '../components/TextReveal'
 import { fadeUp, dramaticFadeUp, viewportConfig } from '../lib/motion'
+import { toolHref } from '../lib/tools'
 
 const steps = [
   {
@@ -81,7 +82,7 @@ export function DataIntelligencePage() {
               Upload a spreadsheet and receive a governed analytics dashboard with automatic chart selection and a natural language Q&A panel.
             </p>
             <a
-              href="https://data-intelligence.domelayer.com/"
+              href={toolHref('data-intelligence.domelayer.com')}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-6 py-3 text-[13px] font-semibold bg-[#10B981] text-white rounded-lg hover:bg-[#34D399] active:bg-[#059669] transition-colors duration-150"
