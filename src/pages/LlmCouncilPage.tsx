@@ -6,6 +6,7 @@ import { Section } from '../components/Section'
 import { Container } from '../components/Container'
 import { TextReveal } from '../components/TextReveal'
 import { fadeUp, dramaticFadeUp, viewportConfig } from '../lib/motion'
+import { toolHref } from '../lib/tools'
 
 const steps = [
   {
@@ -81,7 +82,7 @@ export function LlmCouncilPage() {
               Pose a strategic question to a panel of three AI advisors. They deliberate independently, cross-examine each other, and produce a governed verdict with full audit trail.
             </p>
             <a
-              href="https://llm-council.domelayer.com"
+              href={toolHref('llm-council.domelayer.com')}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-6 py-3 text-[13px] font-semibold bg-[#7B5EA7] text-white rounded-lg hover:bg-[#9B7EC7] active:bg-[#5A3E87] transition-colors duration-150"

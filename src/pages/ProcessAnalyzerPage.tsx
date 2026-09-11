@@ -6,6 +6,7 @@ import { Section } from '../components/Section'
 import { Container } from '../components/Container'
 import { TextReveal } from '../components/TextReveal'
 import { fadeUp, dramaticFadeUp, viewportConfig } from '../lib/motion'
+import { toolHref } from '../lib/tools'
 
 const steps = [
   {
@@ -81,7 +82,7 @@ export function ProcessAnalyzerPage() {
               Convert a plain-language description of any business process into a structured process map with governance analysis and automation assessment.
             </p>
             <a
-              href="https://analyzer.domelayer.com/"
+              href={toolHref('analyzer.domelayer.com')}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-6 py-3 text-[13px] font-semibold bg-[#06B6D4] text-white rounded-lg hover:bg-[#22D3EE] active:bg-[#0891B2] transition-colors duration-150"

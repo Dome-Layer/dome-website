@@ -2,6 +2,7 @@ import { describe, it, expect, vi, beforeEach } from "vitest";
 import { render, screen } from "@testing-library/react";
 import { MemoryRouter, Routes, Route } from "react-router-dom";
 import ToolsHubPage from "./ToolsHubPage";
+import { AGENT_FLOW_LIVE } from "../lib/tools";
 
 // Mock only the auth gate + sign-out; keep the REAL host helpers so the host-aware
 // link logic runs against the stubbed window.location.hostname.
@@ -84,7 +85,8 @@ describe("ToolsHubPage — tool cards", () => {
     expect(screen.getByText("Document Intelligence")).toBeInTheDocument();
     expect(screen.getByText("Governance Dashboard")).toBeInTheDocument();
     expect(screen.getByText("Agent Flow")).toBeInTheDocument();
-    expect(toolHrefs()).toHaveLength(6);
+    // While Agent Flow is not live its card links internally to its details page.
+    expect(toolHrefs()).toHaveLength(AGENT_FLOW_LIVE ? 6 : 5);
   });
 });
 
@@ -119,5 +121,28 @@ describe("ToolsHubPage — host-aware tool links", () => {
     expect(hrefs).toContain("https://document-intelligence.staging.domelayer.com/");
     expect(hrefs).toContain("https://governance.staging.domelayer.com/");
     expect(hrefs.every((h) => h.endsWith(".staging.domelayer.com/"))).toBe(true);
+  });
+});
+
+// ---------------------------------------------------------------------------
+// Agent Flow while not live (AGENT_FLOW_LIVE === false)
+// ---------------------------------------------------------------------------
+
+describe.skipIf(AGENT_FLOW_LIVE)("ToolsHubPage: Agent Flow while not live", () => {
+  it("links the Agent Flow card to its details page, not the unreachable app", () => {
+    renderHub();
+    const card = screen.getByText("Agent Flow").closest("a");
+    expect(card).toHaveAttribute("href", "/tools/agent-flow");
+    expect(card).toHaveTextContent("Coming soon");
+  });
+
+  it("never links to an agent-flow host, on production or staging", () => {
+    for (const host of ["domelayer.com", "staging.domelayer.com"]) {
+      setHostname(host);
+      const { unmount } = renderHub();
+      const all = screen.getAllByRole("link").map((a) => a.getAttribute("href") ?? "");
+      expect(all.some((h) => h.includes("agent-flow."))).toBe(false);
+      unmount();
+    }
   });
 });

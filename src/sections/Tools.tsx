@@ -5,16 +5,20 @@ import { Container } from '../components/Container'
 import { TextReveal } from '../components/TextReveal'
 import { dramaticFadeUp, viewportConfig } from '../lib/motion'
 import { useTheme } from '../lib/ThemeContext'
+import { AGENT_FLOW_LIVE, toolHref } from '../lib/tools'
 
 interface ToolItem {
   label: string
   title: string
   subtitle: string
-  href: string
+  /** Production host; made host-aware with toolHref at render. */
+  prodHost: string
   detailPath: string
   borderColor: string
   accentColor: string
   accentHover: string
+  /** Not reachable yet: show "Coming soon" instead of a launch link. */
+  comingSoon?: boolean
 }
 
 const tools: ToolItem[] = [
@@ -23,7 +27,7 @@ const tools: ToolItem[] = [
     title: 'Process Analyzer',
     subtitle:
       'Describe a business process in plain language. Receive a structured process map, system dependencies, governance gaps, and automation opportunities.',
-    href: 'https://analyzer.domelayer.com/',
+    prodHost: 'analyzer.domelayer.com',
     detailPath: '/tools/process-analyzer',
     borderColor: '#06B6D4',
     accentColor: '#06B6D4',
@@ -34,7 +38,7 @@ const tools: ToolItem[] = [
     title: 'LLM Council',
     subtitle:
       'Pose a strategic question to a panel of three AI advisors. They deliberate independently, cross-examine each other, and produce a governed verdict with full audit trail.',
-    href: 'https://llm-council.domelayer.com',
+    prodHost: 'llm-council.domelayer.com',
     detailPath: '/tools/llm-council',
     borderColor: '#7B5EA7',
     accentColor: '#7B5EA7',
@@ -45,7 +49,7 @@ const tools: ToolItem[] = [
     title: 'Data Intelligence',
     subtitle:
       'Upload a spreadsheet. The system classifies columns, selects chart types via a governance rules engine, and generates a governed analytics dashboard.',
-    href: 'https://data-intelligence.domelayer.com/',
+    prodHost: 'data-intelligence.domelayer.com',
     detailPath: '/tools/data-intelligence',
     borderColor: '#10B981',
     accentColor: '#10B981',
@@ -56,7 +60,7 @@ const tools: ToolItem[] = [
     title: 'Document Intelligence',
     subtitle:
       'Upload any document — invoice, lab report, utility bill, contract. The system extracts structured fields, applies 16 governance rules, and returns a validated, exportable dataset.',
-    href: 'https://document-intelligence.domelayer.com/',
+    prodHost: 'document-intelligence.domelayer.com',
     detailPath: '/tools/document-intelligence',
     borderColor: '#F59E0B',
     accentColor: '#F59E0B',
@@ -67,8 +71,9 @@ const tools: ToolItem[] = [
     title: 'Agent Flow',
     subtitle:
       'A self-hosted workflow runs an invoice from arrival to approval — Document Intelligence extraction, a policy rules engine, a multi-model council, and a human approval gate, every step audited.',
-    href: 'https://agent-flow.domelayer.com/',
+    prodHost: 'agent-flow.domelayer.com',
     detailPath: '/tools/agent-flow',
+    comingSoon: !AGENT_FLOW_LIVE,
     borderColor: '#EC4899',
     accentColor: '#EC4899',
     accentHover: '#F472B6',
@@ -80,7 +85,7 @@ const governanceTool: ToolItem = {
   title: "Governance Dashboard",
   subtitle:
     "Real-time audit trail, compliance reporting, and PDF export spanning all four DOME AI tools. Every governance event, confidence score, and human-in-loop decision in one place.",
-  href: "https://governance.domelayer.com/",
+  prodHost: "governance.domelayer.com",
   detailPath: "/tools/governance-dashboard",
   borderColor: "#6366F1",
   accentColor: "#6366F1",
@@ -119,20 +124,29 @@ function ToolCard({ tool, index }: { tool: ToolItem; index: number }) {
         <p className="text-body-sm text-[var(--color-text-secondary)] leading-relaxed mb-8">{tool.subtitle}</p>
 
         <div className="flex items-center gap-4">
-          <a
-            href={tool.href}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 px-4 py-2 text-[13px] font-semibold text-white rounded-lg transition-colors duration-150"
-            style={{ backgroundColor: tool.accentColor }}
-            onMouseEnter={e => (e.currentTarget.style.backgroundColor = tool.accentHover)}
-            onMouseLeave={e => (e.currentTarget.style.backgroundColor = tool.accentColor)}
-          >
-            Open the tool
-            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
-              <path d="M2.5 9.5L9.5 2.5M9.5 2.5H4.5M9.5 2.5V7.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-          </a>
+          {tool.comingSoon ? (
+            <span
+              aria-disabled="true"
+              className="inline-flex items-center px-4 py-2 text-[13px] font-semibold rounded-lg border border-[var(--color-border-default)] text-[var(--color-text-secondary)] cursor-default select-none"
+            >
+              Coming soon
+            </span>
+          ) : (
+            <a
+              href={toolHref(tool.prodHost)}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 px-4 py-2 text-[13px] font-semibold text-white rounded-lg transition-colors duration-150"
+              style={{ backgroundColor: tool.accentColor }}
+              onMouseEnter={e => (e.currentTarget.style.backgroundColor = tool.accentHover)}
+              onMouseLeave={e => (e.currentTarget.style.backgroundColor = tool.accentColor)}
+            >
+              Open the tool
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                <path d="M2.5 9.5L9.5 2.5M9.5 2.5H4.5M9.5 2.5V7.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </a>
+          )}
           <button
             onClick={() => navigate(tool.detailPath)}
             className="text-[13px] font-medium text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] transition-colors duration-150"

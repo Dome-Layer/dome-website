@@ -3,8 +3,9 @@
 import { useCallback } from "react";
 import { Navigate } from "react-router-dom";
 import { DomeLogo } from "../components/DomeLogo";
-import { clearToken, isAuthenticated, isStagingHost } from "../lib/auth";
+import { clearToken, isAuthenticated } from "../lib/auth";
 import { HUB_PATH } from "../lib/routes";
+import { AGENT_FLOW_LIVE, toolHref } from "../lib/tools";
 
 /**
  * Logged-in landing page ("tools hub") — the default post-login destination for a
@@ -27,6 +28,10 @@ interface Tool {
   prodHost: string;
   /** Per-tool accent (matches the marketing Tools section). */
   accent: string;
+  /** Details page on the marketing site, used while the tool is not reachable. */
+  detailPath?: string;
+  /** Not reachable yet: the card links to its details page with a "coming soon" label. */
+  comingSoon?: boolean;
 }
 
 const TOOLS: Tool[] = [
@@ -69,6 +74,8 @@ const TOOLS: Tool[] = [
       "Run a governed invoice-to-approval workflow across the tools — extraction, a policy rules engine, a multi-model council, and a human approval gate, every step audited.",
     prodHost: "agent-flow.domelayer.com",
     accent: "#EC4899",
+    detailPath: "/tools/agent-flow",
+    comingSoon: !AGENT_FLOW_LIVE,
   },
 ];
 
@@ -79,19 +86,6 @@ const GOV_TOOL = {
   prodHost: "governance.domelayer.com",
   accent: "#6366F1",
 };
-
-/**
- * Host-aware tool URL. On a staging host the tool lives at `<sub>.staging.domelayer.com`
- * (per the staging runbook); on production (and anywhere else, e.g. localhost preview)
- * we point at the production `<sub>.domelayer.com`, the only reachable real target.
- */
-function toolHref(prodHost: string): string {
-  const host = typeof window !== "undefined" ? window.location.hostname : "";
-  const sub = isStagingHost(host)
-    ? prodHost.replace(/\.domelayer\.com$/, ".staging.domelayer.com")
-    : prodHost;
-  return `https://${sub}/`;
-}
 
 const ArrowIcon = (
   <svg width="13" height="13" viewBox="0 0 12 12" fill="none" aria-hidden="true">
@@ -168,7 +162,7 @@ function ToolsHub() {
           {TOOLS.map((tool) => (
             <a
               key={tool.name}
-              href={toolHref(tool.prodHost)}
+              href={tool.comingSoon && tool.detailPath ? tool.detailPath : toolHref(tool.prodHost)}
               className="hub-card"
               style={{ ["--card-accent" as string]: tool.accent }}
             >
@@ -176,8 +170,14 @@ function ToolsHub() {
               <h2 className="hub-card-title">{tool.name}</h2>
               <p className="hub-card-desc">{tool.description}</p>
               <span className="hub-card-cta">
-                Open {tool.name}
-                {ArrowIcon}
+                {tool.comingSoon ? (
+                  "Coming soon · Learn more"
+                ) : (
+                  <>
+                    Open {tool.name}
+                    {ArrowIcon}
+                  </>
+                )}
               </span>
               <span className="hub-card-stripe" aria-hidden="true" />
             </a>
