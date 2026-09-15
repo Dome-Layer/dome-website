@@ -1,12 +1,27 @@
 import { useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, type MetaFunction } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { ToolPageLayout } from '../layouts/ToolPageLayout'
 import { Section } from '../components/Section'
 import { Container } from '../components/Container'
 import { TextReveal } from '../components/TextReveal'
 import { fadeUp, dramaticFadeUp, viewportConfig } from '../lib/motion'
-import { toolHref } from '../lib/tools'
+import { useToolHref } from '../lib/tools'
+import { buildMeta } from '../lib/seo'
+
+export const meta: MetaFunction = () =>
+  buildMeta({
+    title: 'Document Intelligence | DOME',
+    description:
+      'Extract structured data from any document: invoices, lab reports, utility bills, contracts. Governance validation and full audit trail included.',
+    path: '/tools/document-intelligence',
+    ogDescription:
+      'Upload any document and receive structured, governed extraction: field values, confidence scores, and a 16-rule governance report, in seconds.',
+    twitterDescription:
+      'Extract structured data from any document. Governance validation, confidence scoring, and full audit trail, with no templates required.',
+    imageAlt: 'DOME Document Intelligence: governed document extraction',
+    twitterImageAlt: 'DOME Document Intelligence',
+  })
 
 const steps = [
   {
@@ -26,8 +41,9 @@ const steps = [
   },
 ]
 
-export function DocumentIntelligencePage() {
+export default function DocumentIntelligencePage() {
   const navigate = useNavigate()
+  const launchHref = useToolHref('document-intelligence.domelayer.com')
 
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -35,25 +51,6 @@ export function DocumentIntelligencePage() {
 
   return (
     <ToolPageLayout>
-      <title>Document Intelligence — DOME</title>
-      <meta name="description" content="Extract structured data from any document — invoices, lab reports, utility bills, contracts. Governance validation and full audit trail included." />
-      <link rel="canonical" href="https://domelayer.com/tools/document-intelligence" />
-      <meta property="og:type" content="website" />
-      <meta property="og:site_name" content="DOME" />
-      <meta property="og:url" content="https://domelayer.com/tools/document-intelligence" />
-      <meta property="og:title" content="Document Intelligence — DOME" />
-      <meta property="og:description" content="Upload any document and receive structured, governed extraction — field values, confidence scores, and a 16-rule governance report — in seconds." />
-      <meta property="og:image" content="https://domelayer.com/og-image.png" />
-      <meta property="og:image:width" content="1200" />
-      <meta property="og:image:height" content="630" />
-      <meta property="og:image:alt" content="DOME Document Intelligence — Governed Document Extraction" />
-      <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:site" content="@domelayer" />
-      <meta name="twitter:title" content="Document Intelligence — DOME" />
-      <meta name="twitter:description" content="Extract structured data from any document. Governance validation, confidence scoring, and full audit trail — no templates required." />
-      <meta name="twitter:image" content="https://domelayer.com/og-image.png" />
-      <meta name="twitter:image:alt" content="DOME Document Intelligence" />
-
       {/* Hero */}
       <Section id="hero" background="default">
         <Container narrow>
@@ -83,7 +80,7 @@ export function DocumentIntelligencePage() {
               Extract structured data from any document — invoices, lab reports, utility bills, contracts. Governance validation and full audit trail included.
             </p>
             <a
-              href={toolHref('document-intelligence.domelayer.com')}
+              href={launchHref}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-6 py-3 text-[13px] font-semibold bg-[#F59E0B] text-white rounded-lg hover:bg-[#FBBF24] active:bg-[#D97706] transition-colors duration-150"

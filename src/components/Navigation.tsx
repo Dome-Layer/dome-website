@@ -41,10 +41,16 @@ export function Navigation() {
   const isHomePage = location.pathname === '/'
   const lenis = useLenis()
 
-  // Auth state for the top-bar Sign in / Sign out control. Read once at mount from
-  // the cross-subdomain cookie (CSR-only app, so document is available). The page
-  // reloads on sign-in (via /login) and on sign-out, so this stays fresh.
-  const [authed] = useState(() => isAuthenticated())
+  // Auth state for the top-bar Sign in / Sign out control. Read after mount from the
+  // cross-subdomain cookie: pages are prerendered signed-out, so reading it during render
+  // would mismatch on hydration. The page reloads on sign-in (via /login) and on sign-out,
+  // so this stays fresh.
+  const [authed, setAuthed] = useState(false)
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setAuthed(isAuthenticated())
+  }, [])
 
   const loginHref = `/login?redirect=${encodeURIComponent(
     location.pathname + location.search

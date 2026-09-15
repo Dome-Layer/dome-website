@@ -1,11 +1,26 @@
 import { useEffect } from 'react'
+import type { MetaFunction } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { ToolPageLayout } from '../layouts/ToolPageLayout'
 import { Section } from '../components/Section'
 import { Container } from '../components/Container'
 import { TextReveal } from '../components/TextReveal'
 import { fadeUp, dramaticFadeUp, viewportConfig } from '../lib/motion'
-import { AGENT_FLOW_LIVE, toolHref } from '../lib/tools'
+import { AGENT_FLOW_LIVE, useToolHref } from '../lib/tools'
+import { buildMeta } from '../lib/seo'
+
+export const meta: MetaFunction = () =>
+  buildMeta({
+    title: 'Agent Flow | DOME',
+    description:
+      'A governed invoice-to-approval workflow: Document Intelligence extraction, a policy rules engine, a multi-model LLM Council, and a human approval gate, with every step audited.',
+    path: '/tools/agent-flow',
+    ogDescription:
+      'A governed invoice-to-approval workflow across the DOME tools, with a human-in-the-loop gate and a full audit trail.',
+    twitterDescription: 'Governed invoice-to-approval workflow with a human-in-the-loop gate and full audit trail.',
+    imageAlt: 'DOME Agent Flow: governed invoice-to-approval workflow',
+    twitterImageAlt: 'DOME Agent Flow',
+  })
 
 const ACCENT = '#EC4899'
 const ACCENT_HOVER = '#F472B6'
@@ -28,32 +43,15 @@ const steps = [
   },
 ]
 
-export function AgentFlowPage() {
+export default function AgentFlowPage() {
+  const launchHref = useToolHref('agent-flow.domelayer.com')
+
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [])
 
   return (
     <ToolPageLayout>
-      <title>Agent Flow — DOME</title>
-      <meta name="description" content="A governed invoice-to-approval workflow: Document Intelligence extraction, a policy rules engine, a multi-model LLM Council, and a human approval gate — every step audited." />
-      <link rel="canonical" href="https://domelayer.com/tools/agent-flow" />
-      <meta property="og:type" content="website" />
-      <meta property="og:site_name" content="DOME" />
-      <meta property="og:url" content="https://domelayer.com/tools/agent-flow" />
-      <meta property="og:title" content="Agent Flow — DOME" />
-      <meta property="og:description" content="A governed invoice-to-approval workflow across the DOME tools, with a human-in-the-loop gate and a full audit trail." />
-      <meta property="og:image" content="https://domelayer.com/og-image.png" />
-      <meta property="og:image:width" content="1200" />
-      <meta property="og:image:height" content="630" />
-      <meta property="og:image:alt" content="DOME Agent Flow — Governed invoice-to-approval workflow" />
-      <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:site" content="@domelayer" />
-      <meta name="twitter:title" content="Agent Flow — DOME" />
-      <meta name="twitter:description" content="Governed invoice-to-approval workflow with a human-in-the-loop gate and full audit trail." />
-      <meta name="twitter:image" content="https://domelayer.com/og-image.png" />
-      <meta name="twitter:image:alt" content="DOME Agent Flow" />
-
       {/* Hero */}
       <Section id="hero" background="default">
         <Container narrow>
@@ -77,7 +75,7 @@ export function AgentFlowPage() {
             <div className="mt-8 flex items-center gap-4">
               {AGENT_FLOW_LIVE ? (
                 <a
-                  href={toolHref('agent-flow.domelayer.com')}
+                  href={launchHref}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-1.5 px-5 py-2.5 text-[13px] font-semibold text-white rounded-lg transition-colors duration-150"

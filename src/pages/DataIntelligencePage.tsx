@@ -1,12 +1,27 @@
 import { useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, type MetaFunction } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { ToolPageLayout } from '../layouts/ToolPageLayout'
 import { Section } from '../components/Section'
 import { Container } from '../components/Container'
 import { TextReveal } from '../components/TextReveal'
 import { fadeUp, dramaticFadeUp, viewportConfig } from '../lib/motion'
-import { toolHref } from '../lib/tools'
+import { useToolHref } from '../lib/tools'
+import { buildMeta } from '../lib/seo'
+
+export const meta: MetaFunction = () =>
+  buildMeta({
+    title: 'Data Intelligence | DOME',
+    description:
+      'Upload a spreadsheet and receive a governed analytics dashboard with automatic chart selection and a natural language Q&A panel.',
+    path: '/tools/data-intelligence',
+    ogDescription:
+      'Upload a spreadsheet. Receive a governed analytics dashboard with deterministic chart selection and a natural language Q&A panel, with no manual configuration required.',
+    twitterDescription:
+      'Upload a spreadsheet. Get a governed analytics dashboard with automatic chart selection and natural language Q&A, with no configuration needed.',
+    imageAlt: 'DOME Data Intelligence: governed analytics dashboard',
+    twitterImageAlt: 'DOME Data Intelligence',
+  })
 
 const steps = [
   {
@@ -26,8 +41,9 @@ const steps = [
   },
 ]
 
-export function DataIntelligencePage() {
+export default function DataIntelligencePage() {
   const navigate = useNavigate()
+  const launchHref = useToolHref('data-intelligence.domelayer.com')
 
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -35,24 +51,6 @@ export function DataIntelligencePage() {
 
   return (
     <ToolPageLayout>
-      <title>Data Intelligence — DOME</title>
-      <meta name="description" content="Upload a spreadsheet and receive a governed analytics dashboard with automatic chart selection and a natural language Q&A panel." />
-      <link rel="canonical" href="https://domelayer.com/tools/data-intelligence" />
-      <meta property="og:type" content="website" />
-      <meta property="og:site_name" content="DOME" />
-      <meta property="og:url" content="https://domelayer.com/tools/data-intelligence" />
-      <meta property="og:title" content="Data Intelligence — DOME" />
-      <meta property="og:description" content="Upload a spreadsheet. Receive a governed analytics dashboard with deterministic chart selection and a natural language Q&A panel — no manual configuration required." />
-      <meta property="og:image" content="https://domelayer.com/og-image.png" />
-      <meta property="og:image:width" content="1200" />
-      <meta property="og:image:height" content="630" />
-      <meta property="og:image:alt" content="DOME Data Intelligence — Governed Analytics Dashboard" />
-      <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:site" content="@domelayer" />
-      <meta name="twitter:title" content="Data Intelligence — DOME" />
-      <meta name="twitter:description" content="Upload a spreadsheet. Get a governed analytics dashboard with automatic chart selection and natural language Q&A — no configuration needed." />
-      <meta name="twitter:image" content="https://domelayer.com/og-image.png" />
-      <meta name="twitter:image:alt" content="DOME Data Intelligence" />
       {/* Hero */}
       <Section id="hero" background="default">
         <Container narrow>
@@ -82,7 +80,7 @@ export function DataIntelligencePage() {
               Upload a spreadsheet and receive a governed analytics dashboard with automatic chart selection and a natural language Q&A panel.
             </p>
             <a
-              href={toolHref('data-intelligence.domelayer.com')}
+              href={launchHref}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-6 py-3 text-[13px] font-semibold bg-[#10B981] text-white rounded-lg hover:bg-[#34D399] active:bg-[#059669] transition-colors duration-150"

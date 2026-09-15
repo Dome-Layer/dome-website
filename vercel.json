@@ -1,5 +1,7 @@
 {
   "installCommand": "rm -rf node_modules/@dome-layer/dome-ui && npm install",
+  "buildCommand": "npm run build",
+  "outputDirectory": "build/client",
   "headers": [
     {
       "source": "/favicon(.*)",
@@ -36,6 +38,8 @@
     }
   ],
   "rewrites": [
-    { "source": "/(.*)", "destination": "/index.html" }
+    { "source": "/login", "destination": "/__spa-fallback.html" },
+    { "source": "/auth/callback", "destination": "/__spa-fallback.html" },
+    { "source": "/app", "destination": "/__spa-fallback.html" }
   ]
 }
