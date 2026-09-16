@@ -1,15 +1,19 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 const LS_KEY = "dome-cookie-notice-dismissed"
 
 export function CookieNotice() {
-  const [dismissed, setDismissed] = useState(() => {
+  // Hidden in the prerendered HTML; shown after mount only if not dismissed before.
+  const [dismissed, setDismissed] = useState(true)
+
+  useEffect(() => {
     try {
-      return localStorage.getItem(LS_KEY) === "true"
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setDismissed(localStorage.getItem(LS_KEY) === "true")
     } catch {
-      return false
+      setDismissed(false)
     }
-  })
+  }, [])
 
   if (dismissed) return null
 

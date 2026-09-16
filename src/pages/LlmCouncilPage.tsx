@@ -1,12 +1,23 @@
 import { useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, type MetaFunction } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { ToolPageLayout } from '../layouts/ToolPageLayout'
 import { Section } from '../components/Section'
 import { Container } from '../components/Container'
 import { TextReveal } from '../components/TextReveal'
 import { fadeUp, dramaticFadeUp, viewportConfig } from '../lib/motion'
-import { toolHref } from '../lib/tools'
+import { useToolHref } from '../lib/tools'
+import { buildMeta } from '../lib/seo'
+
+export const meta: MetaFunction = () =>
+  buildMeta({
+    title: 'LLM Council | DOME',
+    description:
+      'Pose a strategic question to a panel of three AI advisors. They deliberate independently, cross-examine each other, and produce a governed verdict with full audit trail.',
+    path: '/tools/llm-council',
+    imageAlt: 'DOME LLM Council: governed AI deliberation',
+    twitterImageAlt: 'DOME LLM Council',
+  })
 
 const steps = [
   {
@@ -26,8 +37,9 @@ const steps = [
   },
 ]
 
-export function LlmCouncilPage() {
+export default function LlmCouncilPage() {
   const navigate = useNavigate()
+  const launchHref = useToolHref('llm-council.domelayer.com')
 
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -35,24 +47,6 @@ export function LlmCouncilPage() {
 
   return (
     <ToolPageLayout>
-      <title>LLM Council — DOME</title>
-      <meta name="description" content="Pose a strategic question to a panel of three AI advisors. They deliberate independently, cross-examine each other, and produce a governed verdict with full audit trail." />
-      <link rel="canonical" href="https://domelayer.com/tools/llm-council" />
-      <meta property="og:type" content="website" />
-      <meta property="og:site_name" content="DOME" />
-      <meta property="og:url" content="https://domelayer.com/tools/llm-council" />
-      <meta property="og:title" content="LLM Council — DOME" />
-      <meta property="og:description" content="Pose a strategic question to a panel of three AI advisors. They deliberate independently, cross-examine each other, and produce a governed verdict with full audit trail." />
-      <meta property="og:image" content="https://domelayer.com/og-image.png" />
-      <meta property="og:image:width" content="1200" />
-      <meta property="og:image:height" content="630" />
-      <meta property="og:image:alt" content="DOME LLM Council — Governed AI Deliberation" />
-      <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:site" content="@domelayer" />
-      <meta name="twitter:title" content="LLM Council — DOME" />
-      <meta name="twitter:description" content="Pose a strategic question to a panel of three AI advisors. They deliberate independently, cross-examine each other, and produce a governed verdict with full audit trail." />
-      <meta name="twitter:image" content="https://domelayer.com/og-image.png" />
-      <meta name="twitter:image:alt" content="DOME LLM Council" />
       {/* Hero */}
       <Section id="hero" background="default">
         <Container narrow>
@@ -82,7 +76,7 @@ export function LlmCouncilPage() {
               Pose a strategic question to a panel of three AI advisors. They deliberate independently, cross-examine each other, and produce a governed verdict with full audit trail.
             </p>
             <a
-              href={toolHref('llm-council.domelayer.com')}
+              href={launchHref}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-6 py-3 text-[13px] font-semibold bg-[#7B5EA7] text-white rounded-lg hover:bg-[#9B7EC7] active:bg-[#5A3E87] transition-colors duration-150"

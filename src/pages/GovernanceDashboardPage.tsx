@@ -1,12 +1,26 @@
 import { useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, type MetaFunction } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { ToolPageLayout } from '../layouts/ToolPageLayout'
 import { Section } from '../components/Section'
 import { Container } from '../components/Container'
 import { TextReveal } from '../components/TextReveal'
 import { fadeUp, dramaticFadeUp, viewportConfig } from '../lib/motion'
-import { toolHref } from '../lib/tools'
+import { useToolHref } from '../lib/tools'
+import { buildMeta } from '../lib/seo'
+
+export const meta: MetaFunction = () =>
+  buildMeta({
+    title: 'Governance Dashboard | DOME',
+    description:
+      'Real-time audit trail, compliance reporting, and PDF export spanning all four DOME AI tools. Every governance event, confidence score, and human-in-loop decision in one place.',
+    path: '/tools/governance-dashboard',
+    ogDescription:
+      'Audit trail, compliance reporting, and PDF export across all four DOME AI tools. See every governance event, confidence score, and human-in-loop decision in one place.',
+    twitterDescription: 'Real-time audit trail and compliance reporting across all four DOME AI tools.',
+    imageAlt: 'DOME Governance Dashboard: cross-tool audit trail and compliance reporting',
+    twitterImageAlt: 'DOME Governance Dashboard',
+  })
 
 const ACCENT = '#6366F1'
 const ACCENT_HOVER = '#818CF8'
@@ -29,8 +43,9 @@ const steps = [
   },
 ]
 
-export function GovernanceDashboardPage() {
+export default function GovernanceDashboardPage() {
   const navigate = useNavigate()
+  const launchHref = useToolHref('governance.domelayer.com')
 
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -38,25 +53,6 @@ export function GovernanceDashboardPage() {
 
   return (
     <ToolPageLayout>
-      <title>Governance Dashboard — DOME</title>
-      <meta name="description" content="Real-time audit trail, compliance reporting, and PDF export spanning all four DOME AI tools. Every governance event, confidence score, and human-in-loop decision in one place." />
-      <link rel="canonical" href="https://domelayer.com/tools/governance-dashboard" />
-      <meta property="og:type" content="website" />
-      <meta property="og:site_name" content="DOME" />
-      <meta property="og:url" content="https://domelayer.com/tools/governance-dashboard" />
-      <meta property="og:title" content="Governance Dashboard — DOME" />
-      <meta property="og:description" content="Audit trail, compliance reporting, and PDF export across all four DOME AI tools. See every governance event, confidence score, and human-in-loop decision in one place." />
-      <meta property="og:image" content="https://domelayer.com/og-image.png" />
-      <meta property="og:image:width" content="1200" />
-      <meta property="og:image:height" content="630" />
-      <meta property="og:image:alt" content="DOME Governance Dashboard — Cross-tool audit trail and compliance reporting" />
-      <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:site" content="@domelayer" />
-      <meta name="twitter:title" content="Governance Dashboard — DOME" />
-      <meta name="twitter:description" content="Real-time audit trail and compliance reporting across all four DOME AI tools." />
-      <meta name="twitter:image" content="https://domelayer.com/og-image.png" />
-      <meta name="twitter:image:alt" content="DOME Governance Dashboard" />
-
       {/* Hero */}
       <Section id="hero" background="default">
         <Container narrow>
@@ -97,7 +93,7 @@ export function GovernanceDashboardPage() {
                 export for audit and regulatory submissions.
               </p>
               <a
-                href={toolHref('governance.domelayer.com')}
+                href={launchHref}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-6 py-3 text-[13px] font-semibold text-white rounded-lg transition-colors duration-150"

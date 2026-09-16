@@ -1,9 +1,9 @@
 # Source of truth: dome-docs/templates/ci-website.yml — keep in sync.
 # When changing this template, update: dome-website.
 #
-# Splitting `tsc -b --noEmit` and `vite build` (rather than running
+# Splitting `tsc -b --noEmit` and `react-router build` (rather than running
 # `npm run build`, which chains both) gives clearer failure attribution
-# in the Actions log.
+# in the Actions log. The build also prerenders every public page.
 
 name: ci
 
@@ -31,8 +31,8 @@ jobs:
         run: npm test
       - name: Type check (tsc)
         run: npx tsc -b --noEmit
-      - name: Build (vite)
-        run: npx vite build
+      - name: Build and prerender (react-router)
+        run: npx react-router build
       - name: Security audit (npm audit)
         # DA-007: gate on production deps only. Dev-tool advisories (vite/vitest/
         # esbuild and the Vercel CLI chain -> path-to-regexp/undici) don't ship to

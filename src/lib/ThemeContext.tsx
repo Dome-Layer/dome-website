@@ -29,17 +29,32 @@ function writeThemeCookie(theme: Theme): void {
   document.cookie = `${COOKIE_NAME}=${theme}; Path=/; SameSite=Lax; Max-Age=${COOKIE_MAX_AGE}${domainPart}${secure}`
 }
 
-export function ThemeProvider({ children }: { children: ReactNode }) {
-  const [theme, setTheme] = useState<Theme>(() => {
-    // Cookie takes priority — shared across all *.domelayer.com subdomains
-    const cookie = readThemeCookie()
-    if (cookie) return cookie
+function readInitialTheme(): Theme {
+  // Cookie takes priority: shared across all *.domelayer.com subdomains
+  const cookie = readThemeCookie()
+  if (cookie) return cookie
+  try {
     const stored = localStorage.getItem(COOKIE_NAME)
     if (stored === 'light' || stored === 'dark') return stored
-    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
-  })
+  } catch {
+    // localStorage may be unavailable
+  }
+  return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+}
+
+export function ThemeProvider({ children }: { children: ReactNode }) {
+  // Pages are prerendered without a theme, so state starts unknown (identical on the server
+  // and during hydration) and syncs from the browser after mount. public/theme-init.js has
+  // already set data-theme before first paint, so there is no flash in the meantime.
+  const [theme, setTheme] = useState<Theme | null>(null)
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setTheme(readInitialTheme())
+  }, [])
+
+  useEffect(() => {
+    if (theme === null) return
     if (theme === 'dark') {
       document.documentElement.setAttribute('data-theme', 'dark')
     } else {
@@ -50,11 +65,11 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
   }, [theme])
 
   function toggleTheme() {
-    setTheme(prev => (prev === 'light' ? 'dark' : 'light'))
+    setTheme(prev => (prev === 'dark' ? 'light' : 'dark'))
   }
 
   return (
-    <ThemeContext.Provider value={{ theme, toggleTheme }}>
+    <ThemeContext.Provider value={{ theme: theme ?? 'light', toggleTheme }}>
       {children}
     </ThemeContext.Provider>
   )

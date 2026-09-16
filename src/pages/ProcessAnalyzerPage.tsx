@@ -1,12 +1,27 @@
 import { useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, type MetaFunction } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { ToolPageLayout } from '../layouts/ToolPageLayout'
 import { Section } from '../components/Section'
 import { Container } from '../components/Container'
 import { TextReveal } from '../components/TextReveal'
 import { fadeUp, dramaticFadeUp, viewportConfig } from '../lib/motion'
-import { toolHref } from '../lib/tools'
+import { useToolHref } from '../lib/tools'
+import { buildMeta } from '../lib/seo'
+
+export const meta: MetaFunction = () =>
+  buildMeta({
+    title: 'Process Analyzer | DOME',
+    description:
+      'Convert a plain-language description of any business process into a structured process map with governance analysis and automation assessment.',
+    path: '/tools/process-analyzer',
+    ogDescription:
+      'Describe any business process in plain language. Get a structured process map, governance gap analysis, and AI automation assessment.',
+    twitterDescription:
+      'Describe any business process in plain language. Receive a structured map, governance gaps, and automation opportunities.',
+    imageAlt: 'DOME Process Analyzer: governance-driven process mapping',
+    twitterImageAlt: 'DOME Process Analyzer',
+  })
 
 const steps = [
   {
@@ -26,8 +41,9 @@ const steps = [
   },
 ]
 
-export function ProcessAnalyzerPage() {
+export default function ProcessAnalyzerPage() {
   const navigate = useNavigate()
+  const launchHref = useToolHref('analyzer.domelayer.com')
 
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -35,24 +51,6 @@ export function ProcessAnalyzerPage() {
 
   return (
     <ToolPageLayout>
-      <title>Process Analyzer — DOME</title>
-      <meta name="description" content="Convert a plain-language description of any business process into a structured process map with governance analysis and automation assessment." />
-      <link rel="canonical" href="https://domelayer.com/tools/process-analyzer" />
-      <meta property="og:type" content="website" />
-      <meta property="og:site_name" content="DOME" />
-      <meta property="og:url" content="https://domelayer.com/tools/process-analyzer" />
-      <meta property="og:title" content="Process Analyzer — DOME" />
-      <meta property="og:description" content="Describe any business process in plain language. Get a structured process map, governance gap analysis, and AI automation assessment — instantly." />
-      <meta property="og:image" content="https://domelayer.com/og-image.png" />
-      <meta property="og:image:width" content="1200" />
-      <meta property="og:image:height" content="630" />
-      <meta property="og:image:alt" content="DOME Process Analyzer — Governance-Driven Process Mapping" />
-      <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:site" content="@domelayer" />
-      <meta name="twitter:title" content="Process Analyzer — DOME" />
-      <meta name="twitter:description" content="Describe any business process in plain language. Receive a structured map, governance gaps, and automation opportunities." />
-      <meta name="twitter:image" content="https://domelayer.com/og-image.png" />
-      <meta name="twitter:image:alt" content="DOME Process Analyzer" />
       {/* Hero */}
       <Section id="hero" background="default">
         <Container narrow>
@@ -82,7 +80,7 @@ export function ProcessAnalyzerPage() {
               Convert a plain-language description of any business process into a structured process map with governance analysis and automation assessment.
             </p>
             <a
-              href={toolHref('analyzer.domelayer.com')}
+              href={launchHref}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-6 py-3 text-[13px] font-semibold bg-[#06B6D4] text-white rounded-lg hover:bg-[#22D3EE] active:bg-[#0891B2] transition-colors duration-150"

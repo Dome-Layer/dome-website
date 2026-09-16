@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { isStagingHost } from "./auth";
 
 /**
@@ -26,7 +27,8 @@ export const AGENT_FLOW_LIVE = false as boolean;
  * send staging visitors to production, which is how the 2026-09-11 staging smoke test
  * ended up opening production tools from the staging home page.
  *
- * Reads window.location, so call it at render time, never at module load.
+ * Reads window.location, so call it at render time, never at module load. In prerendered
+ * pages use useToolHref instead.
  */
 export function toolHref(prodHost: string): string {
   const host = typeof window !== "undefined" ? window.location.hostname : "";
@@ -34,4 +36,21 @@ export function toolHref(prodHost: string): string {
     ? prodHost.replace(/\.domelayer\.com$/, ".staging.domelayer.com")
     : prodHost;
   return `https://${sub}/`;
+}
+
+/**
+ * toolHref for prerendered pages. The build has no hostname, so the static HTML carries the
+ * production URL; after mount this resolves the real host. Calling toolHref during render
+ * instead would leave production links on staging, because React does not patch attribute
+ * mismatches on hydration.
+ */
+export function useToolHref(prodHost: string): string {
+  const [href, setHref] = useState(() => `https://${prodHost}/`);
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setHref(toolHref(prodHost));
+  }, [prodHost]);
+
+  return href;
 }

@@ -5,7 +5,7 @@ import { Container } from '../components/Container'
 import { TextReveal } from '../components/TextReveal'
 import { dramaticFadeUp, viewportConfig } from '../lib/motion'
 import { useTheme } from '../lib/ThemeContext'
-import { AGENT_FLOW_LIVE, toolHref } from '../lib/tools'
+import { AGENT_FLOW_LIVE, useToolHref } from '../lib/tools'
 
 interface ToolItem {
   label: string
@@ -94,6 +94,7 @@ const governanceTool: ToolItem = {
 
 function ToolCard({ tool, index }: { tool: ToolItem; index: number }) {
   const navigate = useNavigate()
+  const launchHref = useToolHref(tool.prodHost)
 
   return (
     <motion.article
@@ -133,7 +134,7 @@ function ToolCard({ tool, index }: { tool: ToolItem; index: number }) {
             </span>
           ) : (
             <a
-              href={toolHref(tool.prodHost)}
+              href={launchHref}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-1.5 px-4 py-2 text-[13px] font-semibold text-white rounded-lg transition-colors duration-150"
