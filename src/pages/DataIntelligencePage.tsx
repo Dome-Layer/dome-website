@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { useNavigate, type MetaFunction } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { ToolPageLayout } from '../layouts/ToolPageLayout'
 import { Section } from '../components/Section'
@@ -7,21 +7,9 @@ import { Container } from '../components/Container'
 import { TextReveal } from '../components/TextReveal'
 import { fadeUp, dramaticFadeUp, viewportConfig } from '../lib/motion'
 import { useToolHref } from '../lib/tools'
-import { buildMeta } from '../lib/seo'
+import { routeMeta } from '../lib/seo'
 
-export const meta: MetaFunction = () =>
-  buildMeta({
-    title: 'Data Intelligence | DOME',
-    description:
-      'Upload a spreadsheet and receive a governed analytics dashboard with automatic chart selection and a natural language Q&A panel.',
-    path: '/tools/data-intelligence',
-    ogDescription:
-      'Upload a spreadsheet. Receive a governed analytics dashboard with deterministic chart selection and a natural language Q&A panel, with no manual configuration required.',
-    twitterDescription:
-      'Upload a spreadsheet. Get a governed analytics dashboard with automatic chart selection and natural language Q&A, with no configuration needed.',
-    imageAlt: 'DOME Data Intelligence: governed analytics dashboard',
-    twitterImageAlt: 'DOME Data Intelligence',
-  })
+export const meta = routeMeta('dataIntelligence')
 
 const steps = [
   {

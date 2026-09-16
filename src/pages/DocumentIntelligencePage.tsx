@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { useNavigate, type MetaFunction } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { ToolPageLayout } from '../layouts/ToolPageLayout'
 import { Section } from '../components/Section'
@@ -7,21 +7,9 @@ import { Container } from '../components/Container'
 import { TextReveal } from '../components/TextReveal'
 import { fadeUp, dramaticFadeUp, viewportConfig } from '../lib/motion'
 import { useToolHref } from '../lib/tools'
-import { buildMeta } from '../lib/seo'
+import { routeMeta } from '../lib/seo'
 
-export const meta: MetaFunction = () =>
-  buildMeta({
-    title: 'Document Intelligence | DOME',
-    description:
-      'Extract structured data from any document: invoices, lab reports, utility bills, contracts. Governance validation and full audit trail included.',
-    path: '/tools/document-intelligence',
-    ogDescription:
-      'Upload any document and receive structured, governed extraction: field values, confidence scores, and a 16-rule governance report, in seconds.',
-    twitterDescription:
-      'Extract structured data from any document. Governance validation, confidence scoring, and full audit trail, with no templates required.',
-    imageAlt: 'DOME Document Intelligence: governed document extraction',
-    twitterImageAlt: 'DOME Document Intelligence',
-  })
+export const meta = routeMeta('documentIntelligence')
 
 const steps = [
   {

@@ -27,6 +27,20 @@
           "value": "default-src 'self'; script-src 'self' https://domelayer.com 'wasm-unsafe-eval'; style-src 'self' https://domelayer.com 'unsafe-inline'; font-src 'self' https://domelayer.com data:; img-src 'self' https://domelayer.com data: blob:; connect-src 'self' https://domelayer.com https://kuurkyfenexakxahxczn.supabase.co https://kzzljogzlpzzrdyjaqtw.supabase.co https://*.up.railway.app https://auth.domelayer.com https://auth.staging.domelayer.com https://*.ingest.de.sentry.io; worker-src 'self' blob:; frame-ancestors 'none';"
         }
       ]
+    },
+    {
+      "source": "/llms.txt",
+      "headers": [{ "key": "Content-Type", "value": "text/plain; charset=utf-8" }]
+    },
+    {
+      "source": "/(.*)",
+      "has": [{ "type": "host", "value": "staging.domelayer.com" }],
+      "headers": [{ "key": "X-Robots-Tag", "value": "noindex" }]
+    },
+    {
+      "source": "/(.*)",
+      "has": [{ "type": "host", "value": { "suf": ".vercel.app" } }],
+      "headers": [{ "key": "X-Robots-Tag", "value": "noindex" }]
     }
   ],
   "redirects": [
