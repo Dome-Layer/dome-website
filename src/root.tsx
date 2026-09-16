@@ -4,6 +4,8 @@ import * as Sentry from '@sentry/react'
 import { StagingBanner } from '@dome-layer/dome-ui'
 import { ErrorBoundary as RenderErrorBoundary } from './components/ErrorBoundary'
 import { ThemeProvider } from './lib/ThemeContext'
+import { localizedHref } from './i18n/routes'
+import { useLocale, useMessages } from './i18n/useLocale'
 import './index.css'
 
 /**
@@ -16,10 +18,11 @@ export const meta: MetaFunction = () => [
 ]
 
 export function Layout({ children }: { children: ReactNode }) {
+  const locale = useLocale()
   return (
     // public/theme-init.js sets data-theme on <html> before hydration, so the attribute
     // legitimately differs from the prerendered markup.
-    <html lang="en" suppressHydrationWarning>
+    <html lang={locale} suppressHydrationWarning>
       <head>
         <meta charSet="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -63,18 +66,19 @@ export function HydrateFallback() {
 export function ErrorBoundary({ error }: { error: unknown }) {
   const notFound = isRouteErrorResponse(error) && error.status === 404
   if (!notFound) Sentry.captureException(error)
+  const t = useMessages().errors
 
   return (
     <main className="min-h-screen flex items-center justify-center bg-[var(--color-bg-base)] px-6">
       <div className="text-center">
         <h1 className="text-h2 font-display font-semibold text-[var(--color-text-primary)] mb-3">
-          {notFound ? 'Page not found' : 'Something went wrong'}
+          {notFound ? t.notFoundTitle : t.errorTitle}
         </h1>
         <p className="text-body-sm text-[var(--color-text-secondary)] mb-6">
-          {notFound ? 'The page you are looking for does not exist.' : 'Please refresh the page.'}
+          {notFound ? t.notFoundBody : t.errorBody}
         </p>
-        <a href="/" className="text-[13px] font-semibold text-[var(--color-text-accent)]">
-          Go to the home page
+        <a href={localizedHref('home', useLocale())} className="text-[13px] font-semibold text-[var(--color-text-accent)]">
+          {t.homeLink}
         </a>
       </div>
     </main>

@@ -3,8 +3,14 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { DomeLogo } from './DomeLogo'
 import { Container } from './Container'
 import { fadeUp, viewportConfig } from '../lib/motion'
+import { localizedHref } from '../i18n/routes'
+import { useLocale, useMessages } from '../i18n/useLocale'
 
 export function Footer() {
+  const locale = useLocale()
+  const messages = useMessages()
+  const t = messages.footer
+  const homeHref = localizedHref('home', locale)
   const [email, setEmail] = useState('')
   const [message, setMessage] = useState('')
   const [honeypot, setHoneypot] = useState('')
@@ -27,9 +33,9 @@ export function Footer() {
       if (!res.ok) {
         const body = (await res.json().catch(() => ({}))) as { error?: string }
         if (res.status === 429) {
-          setError(body.error ?? "You've reached the contact-form limit. Please try again in an hour.")
+          setError(body.error ?? t.rateLimited)
         } else {
-          setError(body.error ?? 'Something went wrong. Please try again or email us directly.')
+          setError(body.error ?? t.genericError)
         }
         return
       }
@@ -38,7 +44,7 @@ export function Footer() {
       setEmail('')
       setMessage('')
     } catch {
-      setError('Something went wrong. Please try again or email us directly.')
+      setError(t.genericError)
     } finally {
       setSending(false)
     }
@@ -56,13 +62,13 @@ export function Footer() {
           className="mb-16 lg:mb-20"
         >
           <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-dome-signal-blue mb-3">
-            Get in touch
+            {t.eyebrow}
           </p>
           <h2 className="text-h2 lg:text-display font-display font-bold text-dome-off-white mb-4 tracking-tight">
-            Start a conversation
+            {t.heading}
           </h2>
           <p className="text-dome-nickel text-body-sm max-w-lg mb-10">
-            Tell us about your project or challenge. We'll get back to you within 24 hours.
+            {t.intro}
           </p>
 
           <AnimatePresence mode="wait">
@@ -83,16 +89,16 @@ export function Footer() {
                   </span>
                   <div>
                     <p className="text-dome-off-white font-semibold text-body-lg">
-                      Message received
+                      {t.successTitle}
                     </p>
                     <p className="text-dome-nickel text-body-sm mt-1">
-                      Thank you for reaching out. We'll be in touch shortly.
+                      {t.successBody}
                     </p>
                     <button
                       onClick={() => setSubmitted(false)}
                       className="mt-4 text-[11px] font-semibold uppercase tracking-[0.15em] text-dome-signal-blue hover:text-dome-ice-blue transition-colors"
                     >
-                      Send another message
+                      {t.sendAnother}
                     </button>
                   </div>
                 </div>
@@ -113,7 +119,7 @@ export function Footer() {
                     htmlFor="contact-email"
                     className="block text-[11px] font-semibold uppercase tracking-[0.15em] text-dome-nickel mb-2"
                   >
-                    Email
+                    {t.emailLabel}
                   </label>
                   <input
                     id="contact-email"
@@ -121,7 +127,7 @@ export function Footer() {
                     required
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    placeholder="you@company.com"
+                    placeholder={t.emailPlaceholder}
                     className="w-full bg-dome-onyx border border-dome-dark-edge rounded-lg px-4 py-3 text-body-sm text-dome-warm-white placeholder:text-dome-nickel/40 outline-none transition-colors duration-150 focus:border-dome-signal-blue focus:ring-1 focus:ring-dome-signal-blue/20"
                   />
                 </div>
@@ -132,7 +138,7 @@ export function Footer() {
                     htmlFor="contact-message"
                     className="block text-[11px] font-semibold uppercase tracking-[0.15em] text-dome-nickel mb-2"
                   >
-                    Message
+                    {t.messageLabel}
                   </label>
                   <textarea
                     id="contact-message"
@@ -140,7 +146,7 @@ export function Footer() {
                     rows={5}
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
-                    placeholder="Tell us about your project…"
+                    placeholder={t.messagePlaceholder}
                     className="w-full bg-dome-onyx border border-dome-dark-edge rounded-lg px-4 py-3 text-body-sm text-dome-warm-white placeholder:text-dome-nickel/40 outline-none transition-colors duration-150 resize-none focus:border-dome-signal-blue focus:ring-1 focus:ring-dome-signal-blue/20"
                   />
                 </div>
@@ -154,11 +160,11 @@ export function Footer() {
                   {sending ? (
                     <>
                       <span className="h-3.5 w-3.5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                      Sending
+                      {t.sending}
                     </>
                   ) : (
                     <>
-                      Send message
+                      {t.send}
                       <svg width="14" height="14" viewBox="0 0 14 14" fill="none" className="ml-0.5">
                         <path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                       </svg>
@@ -191,26 +197,26 @@ export function Footer() {
           <div className="lg:col-span-2">
             <DomeLogo size="md" color="#FFFFFF" />
             <p className="mt-4 text-dome-nickel text-body-sm max-w-md">
-              Governance-Driven Operational AI
+              {t.tagline}
             </p>
           </div>
 
           <div className="flex flex-col gap-3 text-body-sm text-dome-nickel">
-            <a href="#method" className="hover:text-dome-signal-blue transition-colors">Method</a>
-            <a href="#architecture" className="hover:text-dome-signal-blue transition-colors">Architecture</a>
-            <a href="#engagement" className="hover:text-dome-signal-blue transition-colors">Engagement</a>
-            <a href="#about" className="hover:text-dome-signal-blue transition-colors">About</a>
+            <a href={`${homeHref}#method`} className="hover:text-dome-signal-blue transition-colors">{messages.nav.method}</a>
+            <a href={`${homeHref}#architecture`} className="hover:text-dome-signal-blue transition-colors">{messages.nav.architecture}</a>
+            <a href={`${homeHref}#engagement`} className="hover:text-dome-signal-blue transition-colors">{messages.nav.engagement}</a>
+            <a href={`${homeHref}#about`} className="hover:text-dome-signal-blue transition-colors">{messages.nav.about}</a>
           </div>
         </div>
 
         <div className="mt-16 pt-8 border-t border-dome-dark-edge flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 text-caption text-dome-nickel/60">
           <span>domelayer.com</span>
           <div className="flex items-center gap-3">
-            <a href="/privacy" className="hover:text-dome-nickel transition-colors">Privacy policy</a>
+            <a href={localizedHref('privacy', locale)} className="hover:text-dome-nickel transition-colors">{t.privacy}</a>
             <span aria-hidden="true">·</span>
-            <a href="/terms" className="hover:text-dome-nickel transition-colors">Terms of service</a>
+            <a href={localizedHref('terms', locale)} className="hover:text-dome-nickel transition-colors">{t.terms}</a>
           </div>
-          <span>&copy; {new Date().getFullYear()} DOME. All rights reserved.</span>
+          <span>&copy; {new Date().getFullYear()} DOME. {t.rights}</span>
         </div>
       </Container>
     </footer>

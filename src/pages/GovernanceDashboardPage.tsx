@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { useNavigate, type MetaFunction } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { ToolPageLayout } from '../layouts/ToolPageLayout'
 import { Section } from '../components/Section'
@@ -7,20 +7,9 @@ import { Container } from '../components/Container'
 import { TextReveal } from '../components/TextReveal'
 import { fadeUp, dramaticFadeUp, viewportConfig } from '../lib/motion'
 import { useToolHref } from '../lib/tools'
-import { buildMeta } from '../lib/seo'
+import { routeMeta } from '../lib/seo'
 
-export const meta: MetaFunction = () =>
-  buildMeta({
-    title: 'Governance Dashboard | DOME',
-    description:
-      'Real-time audit trail, compliance reporting, and PDF export spanning all four DOME AI tools. Every governance event, confidence score, and human-in-loop decision in one place.',
-    path: '/tools/governance-dashboard',
-    ogDescription:
-      'Audit trail, compliance reporting, and PDF export across all four DOME AI tools. See every governance event, confidence score, and human-in-loop decision in one place.',
-    twitterDescription: 'Real-time audit trail and compliance reporting across all four DOME AI tools.',
-    imageAlt: 'DOME Governance Dashboard: cross-tool audit trail and compliance reporting',
-    twitterImageAlt: 'DOME Governance Dashboard',
-  })
+export const meta = routeMeta('governanceDashboard')
 
 const ACCENT = '#6366F1'
 const ACCENT_HOVER = '#818CF8'
