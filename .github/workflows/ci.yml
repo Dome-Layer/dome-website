@@ -33,6 +33,8 @@ jobs:
         run: npx tsc -b --noEmit
       - name: Build and prerender (react-router)
         run: npx react-router build
+      - name: Externalise inline scripts (CSP has no 'unsafe-inline')
+        run: node scripts/externalize-inline-scripts.mjs && node scripts/externalize-inline-scripts.mjs --check
       - name: Security audit (npm audit)
         # DA-007: gate on production deps only. Dev-tool advisories (vite/vitest/
         # esbuild and the Vercel CLI chain -> path-to-regexp/undici) don't ship to

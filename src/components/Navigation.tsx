@@ -46,14 +46,18 @@ export function Navigation() {
   // would mismatch on hydration. The page reloads on sign-in (via /login) and on sign-out,
   // so this stays fresh.
   const [authed, setAuthed] = useState(false)
+  // Prerendered HTML has no query string, so the redirect only includes it after mount (a
+  // UTM-tagged landing URL would otherwise mismatch on hydration and keep the query-less href).
+  const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setAuthed(isAuthenticated())
+    setMounted(true)
   }, [])
 
   const loginHref = `/login?redirect=${encodeURIComponent(
-    location.pathname + location.search
+    location.pathname + (mounted ? location.search : '')
   )}`
 
   const handleSignOut = useCallback(() => {
