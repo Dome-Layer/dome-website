@@ -1,6 +1,7 @@
 import { Picture } from '../media/Picture'
 import { ButtonLink } from '../ui/Button'
-import { SITE } from '../../lib/siteRoutes'
+import { localizedHref } from '../../i18n/routes'
+import { useLocale } from '../../i18n/useLocale'
 
 /** The call to action every page ends on: a texture panel, a question and two ways to answer it. */
 export function ClosingCta({
@@ -12,6 +13,7 @@ export function ClosingCta({
   body: string
   primaryLabel: string
 }) {
+  const locale = useLocale()
   return (
     <section className="bg-[var(--color-bg-base)] pb-20 md:pb-24">
       <div className="mx-auto max-w-[1280px] px-6 md:px-12">
@@ -25,10 +27,10 @@ export function ClosingCta({
               <p className="text-[17px] leading-[1.7] text-[var(--color-text-secondary)]">{body}</p>
             </div>
             <div className="flex shrink-0 flex-wrap gap-3">
-              <ButtonLink to={SITE.contact} arrow={false}>
+              <ButtonLink to={localizedHref('contact', locale)} arrow={false}>
                 {primaryLabel}
               </ButtonLink>
-              <ButtonLink to={SITE.contact} variant="secondary" arrow={false}>
+              <ButtonLink to={localizedHref('contact', locale)} variant="secondary" arrow={false}>
                 Send a message
               </ButtonLink>
             </div>

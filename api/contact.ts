@@ -8,6 +8,7 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 const ALLOWED_ORIGIN = 'https://domelayer.com';
 const CONTACT_EMAIL = process.env.CONTACT_EMAIL ?? 'hello@domelayer.com';
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const MAX_FIELD_LENGTH = 200;
 const MAX_MESSAGE_LENGTH = 5000;
 
 // ── Rate limiting ───────────────────────────────────────────────────────────
@@ -88,7 +89,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  const { email, message, hp } = req.body ?? {};
+  const { name, email, company, topic, message, hp } = req.body ?? {};
 
   // Honeypot: bots fill hidden fields, humans don't. Honeypot trips short-
   // circuit BEFORE the rate-limit check so dumb-bot traffic does not consume
@@ -126,12 +127,24 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return res.status(400).json({ error: 'Message too long' });
   }
 
+  // Name, company and topic arrived with the contact page (plan phase 1c). They stay optional so a
+  // cached copy of the old footer form, which posted only email and message, keeps working.
+  const optional = (value: unknown): string =>
+    typeof value === 'string' ? value.slice(0, MAX_FIELD_LENGTH).trim() : '';
+  const senderName = optional(name);
+  const senderCompany = optional(company);
+  const enquiryTopic = optional(topic);
+
   const { error } = await resend.emails.send({
     from: 'DOME Contact Form <contact@domelayer.com>',
     to: CONTACT_EMAIL,
     replyTo: email,
-    subject: `New enquiry via domelayer.com`,
-    html: `<p><strong>From:</strong> ${escapeHtml(email)}</p>
+    subject: enquiryTopic
+      ? `New enquiry via domelayer.com: ${enquiryTopic}`
+      : `New enquiry via domelayer.com`,
+    html: `<p><strong>From:</strong> ${escapeHtml(senderName || email)} &lt;${escapeHtml(email)}&gt;</p>
+           ${senderCompany ? `<p><strong>Company:</strong> ${escapeHtml(senderCompany)}</p>` : ''}
+           ${enquiryTopic ? `<p><strong>Topic:</strong> ${escapeHtml(enquiryTopic)}</p>` : ''}
            <p><strong>Message:</strong></p>
            <p>${escapeHtml(message).replace(/\n/g, '<br>')}</p>`,
   });

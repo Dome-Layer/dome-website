@@ -5,7 +5,6 @@ import { DomeLogo } from './DomeLogo'
 import { ThemeToggle } from './ThemeToggle'
 import { isAuthenticated, clearToken } from '../lib/auth'
 import { HUB_PATH } from '../lib/routes'
-import { SITE } from '../lib/siteRoutes'
 import { LanguageSwitcher } from './LanguageSwitcher'
 import { localizedHref, type RouteId } from '../i18n/routes'
 import { useLocale, useMessages } from '../i18n/useLocale'
@@ -21,12 +20,9 @@ const NAV_ITEMS = [
   { key: 'aiAutomation', route: 'aiProcessAutomation' },
   { key: 'dome', route: 'dome' },
   { key: 'caseStudies', route: 'caseStudies' },
-  { key: 'about', pending: SITE.about },
-  { key: 'contact', pending: SITE.contact },
-] as const satisfies readonly ({ key: keyof Messages['nav'] } & (
-  | { route: RouteId; pending?: never }
-  | { route?: never; pending: string }
-))[]
+  { key: 'about', route: 'about' },
+  { key: 'contact', route: 'contact' },
+] as const satisfies readonly { key: keyof Messages['nav']; route: RouteId }[]
 
 // Stroke icons for the top-bar auth control (render white on the accent button).
 const UserIcon = (
@@ -52,7 +48,7 @@ export function Navigation() {
   const homeHref = localizedHref('home', locale)
   const navItems = NAV_ITEMS.map((item) => ({
     label: t[item.key],
-    to: 'route' in item && item.route ? localizedHref(item.route, locale) : item.pending,
+    to: localizedHref(item.route, locale),
   }))
 
   // Auth state for the top-bar Sign in / Sign out control. Read after mount from the

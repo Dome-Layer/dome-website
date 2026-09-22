@@ -11,7 +11,6 @@ import { SectionHeading } from '../components/ui/SectionHeading'
 import { AGENT_FLOW_LIVE, useToolHref } from '../lib/tools'
 import { localizedHref, type RouteId } from '../i18n/routes'
 import { useLocale } from '../i18n/useLocale'
-import { SITE } from '../lib/siteRoutes'
 import { routeMeta } from '../lib/seo'
 
 export const meta = routeMeta('dome')
@@ -115,7 +114,7 @@ export default function DomePage() {
         eyebrow="Capabilities"
         heading="Working AI tools, built and run by us."
         lead="DOME is the set of tools we build to show what governed AI looks like in practice. Five are live and one is rolling out, and you can try them before any engagement."
-        primary={{ label: 'Book a guided demo', to: SITE.contact }}
+        primary={{ label: 'Book a guided demo', to: localizedHref('contact', locale) }}
         secondary={{ label: 'Sign in to the tools', to: '/login' }}
       />
 
@@ -232,7 +231,7 @@ export default function DomePage() {
                 Larger programmes are delivered together with our partner, Ionita Consulting.
               </p>
             </div>
-            <ForwardLink to={SITE.about}>About the partnership</ForwardLink>
+            <ForwardLink to={localizedHref('about', locale)}>About the partnership</ForwardLink>
           </div>
         </div>
       </section>

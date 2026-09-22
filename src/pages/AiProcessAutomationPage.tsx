@@ -8,7 +8,6 @@ import { MediaSplit } from '../components/media/MediaSplit'
 import { AiLabel, Picture } from '../components/media/Picture'
 import { SectionHeading } from '../components/ui/SectionHeading'
 import { caseStudiesFor } from '../content/caseStudies'
-import { SITE } from '../lib/siteRoutes'
 import { localizedHref } from '../i18n/routes'
 import { useLocale } from '../i18n/useLocale'
 import { routeMeta } from '../lib/seo'
@@ -59,7 +58,7 @@ export default function AiProcessAutomationPage() {
         eyebrow="AI process automation"
         heading="Automate the routine. Keep people on the decisions."
         lead="We automate well-defined steps in finance, procurement and compliance workflows, with rules you can read and a record of every decision."
-        primary={{ label: 'Book an automation review', to: SITE.contact }}
+        primary={{ label: 'Book an automation review', to: localizedHref('contact', locale) }}
         secondary={{ label: 'See how it works', to: localizedHref('dome', locale) }}
       />
 

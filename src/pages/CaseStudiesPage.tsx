@@ -6,7 +6,6 @@ import { SectionHeading } from '../components/ui/SectionHeading'
 import { CASE_STUDIES, type Segment } from '../content/caseStudies'
 import { localizedHref } from '../i18n/routes'
 import { useLocale } from '../i18n/useLocale'
-import { SITE } from '../lib/siteRoutes'
 import { routeMeta } from '../lib/seo'
 
 export const meta = routeMeta('caseStudies')
@@ -26,7 +25,7 @@ export default function CaseStudiesPage() {
         eyebrow="Case studies"
         heading="What we built, and what changed."
         lead="Anonymised accounts of the work: the problem as the client described it, what we did, and the outcomes the engagement actually produced."
-        primary={{ label: 'Talk about your project', to: SITE.contact }}
+        primary={{ label: 'Talk about your project', to: localizedHref('contact', locale) }}
         secondary={{ label: 'See what we build', to: localizedHref('dome', locale) }}
       />
 

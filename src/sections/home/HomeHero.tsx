@@ -1,7 +1,6 @@
 import { HeroMedia } from '../../components/media/HeroMedia'
 import { ButtonLink } from '../../components/ui/Button'
 import { Eyebrow } from '../../components/ui/Eyebrow'
-import { SITE } from '../../lib/siteRoutes'
 import { localizedHref } from '../../i18n/routes'
 import { useLocale } from '../../i18n/useLocale'
 
@@ -21,7 +20,7 @@ export function HomeHero() {
             stays governed, measurable and explainable.
           </p>
           <div className="mt-2 flex flex-wrap gap-3">
-            <ButtonLink to={SITE.contact}>Book an introductory call</ButtonLink>
+            <ButtonLink to={localizedHref('contact', locale)}>Book an introductory call</ButtonLink>
             <ButtonLink to={localizedHref('caseStudies', locale)} variant="secondary">
               See our work
             </ButtonLink>

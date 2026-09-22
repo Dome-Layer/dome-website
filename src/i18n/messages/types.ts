@@ -43,13 +43,27 @@ export interface Messages {
     label: string
   }
   footer: {
-    eyebrow: string
+    tagline: string
+    privacy: string
+    terms: string
+    rights: string
+  }
+  /** The contact form, which moved out of the footer onto its own page (plan phase 1c). */
+  contactForm: {
     heading: string
     intro: string
+    nameLabel: string
+    namePlaceholder: string
     emailLabel: string
     emailPlaceholder: string
+    companyLabel: string
+    companyOptional: string
+    companyPlaceholder: string
+    topicLabel: string
     messageLabel: string
     messagePlaceholder: string
+    privacyNote: string
+    privacyLink: string
     send: string
     sending: string
     successTitle: string
@@ -57,10 +71,6 @@ export interface Messages {
     sendAnother: string
     rateLimited: string
     genericError: string
-    tagline: string
-    privacy: string
-    terms: string
-    rights: string
   }
   errors: {
     notFoundTitle: string

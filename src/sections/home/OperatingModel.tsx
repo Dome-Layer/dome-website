@@ -1,7 +1,8 @@
 import type { ReactNode } from 'react'
 import { ForwardLink } from '../../components/ui/Button'
 import { Eyebrow } from '../../components/ui/Eyebrow'
-import { SITE } from '../../lib/siteRoutes'
+import { localizedHref } from '../../i18n/routes'
+import { useLocale } from '../../i18n/useLocale'
 
 const icon = {
   fill: 'none',
@@ -32,6 +33,7 @@ function Row({ title, body, children }: { title: string; body: string; children:
  * one-person project (design feedback, 16 September).
  */
 export function OperatingModel() {
+  const locale = useLocale()
   return (
     <section className="bg-[var(--color-bg-base)] py-20 md:py-24">
       <div className="mx-auto grid max-w-[1280px] items-start gap-12 px-6 md:px-12 lg:grid-cols-2 lg:gap-20">
@@ -44,7 +46,7 @@ export function OperatingModel() {
             We staff each engagement around the problem rather than a fixed headcount. You get
             senior people throughout, and a team that grows or shrinks with the scope.
           </p>
-          <ForwardLink to={SITE.about}>How we are set up</ForwardLink>
+          <ForwardLink to={localizedHref('about', locale)}>How we are set up</ForwardLink>
         </div>
         <div className="flex flex-col border-b border-[var(--color-border-default)]">
           <Row
