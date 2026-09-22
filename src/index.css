@@ -120,6 +120,14 @@ html.lenis, html.lenis body { height: auto; }
     --color-accent-active:    #0066CC;
     --color-accent-subtle:    #E8F3FF;
     --color-focus-ring:       rgba(0, 128, 255, 0.25);
+
+    /* Media overlays (v2.1). Defined per theme so they follow the manual toggle and not only the
+       OS preference. The scrims sit between imagery and text to hold WCAG AA in both themes; the
+       fade is the one permitted functional gradient, taking media into the page background. The
+       home hero video is dark, so in the light theme it needs the strong scrim. */
+    --color-scrim:            rgba(255, 255, 255, 0.72);
+    --color-scrim-strong:     rgba(255, 255, 255, 0.88);
+    --color-media-fade:       #FFFFFF;
   }
 
   [data-theme="dark"] {
@@ -144,6 +152,10 @@ html.lenis, html.lenis body { height: auto; }
     --color-accent-active:    #0066CC;
     --color-accent-subtle:    #001A33;
     --color-focus-ring:       rgba(64, 168, 255, 0.3);
+
+    --color-scrim:            rgba(10, 10, 10, 0.64);
+    --color-scrim-strong:     rgba(10, 10, 10, 0.84);
+    --color-media-fade:       #0A0A0A;
   }
 
   html {

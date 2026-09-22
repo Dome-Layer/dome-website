@@ -5,7 +5,9 @@
     "useDefineForClassFields": true,
     "lib": ["ES2022", "DOM", "DOM.Iterable"],
     "module": "ESNext",
-    "types": ["vite/client"],
+    // "node" is here for the vitest tests, which run in Node: src/content/media.test.ts
+    // reads public/media to check the manifest against the files actually on disk.
+    "types": ["vite/client", "node"],
     "skipLibCheck": true,
     "baseUrl": ".",
     "paths": {

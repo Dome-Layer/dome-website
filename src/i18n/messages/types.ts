@@ -1,3 +1,4 @@
+import type { DescribedMediaId } from '../../content/media'
 import type { RouteId } from '../routes'
 
 export interface PageMetaText {
@@ -70,4 +71,11 @@ export interface Messages {
   }
   breadcrumbHome: string
   meta: Record<RouteId, PageMetaText>
+  /**
+   * Alt text for every non-decorative asset in `src/content/media.ts`, keyed by media id. The
+   * decorative assets are absent on purpose: they render `aria-hidden`.
+   */
+  media: Record<DescribedMediaId, string>
+  /** Visible label on AI-generated imagery, which the legal notice commits us to showing. */
+  aiGeneratedLabel: string
 }

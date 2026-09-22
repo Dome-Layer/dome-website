@@ -143,4 +143,30 @@ export const en: Messages = {
       imageAlt: 'DOME',
     },
   },
+  media: {
+    homeHeroStill: 'Two colleagues reviewing an approval workflow on a laptop',
+    aiProcessAutomationHero:
+      'Finance desk with a monitor showing an approval flowchart and a stack of invoices',
+    enterpriseUxHero: 'Designer placing a blue sticky note on a wall of wireframes',
+    capabilitiesHero: 'Server room corridor lit in cool white and blue',
+    aboutHero: 'Florence rooftops and the cathedral dome seen from a studio window',
+    caseStudiesHero: 'Process maps and a tablet dashboard on a light wooden table',
+    contactHero: 'Quiet meeting room with a round table by a window overlooking Florence',
+    caseProcurementWorkflowRedesign:
+      'Procurement specialist working at two monitors with a purchasing interface',
+    caseAiComplianceAssessments:
+      'Analyst reviewing a highlighted regulation on a tablet beside a binder',
+    caseMetalsTradingPlatform:
+      'Warehouse of stacked aluminium ingots with a tablet showing price charts',
+    caseFoodTraceabilityPlatform:
+      'Hand scanning a QR label on a crate of vegetables in a distribution centre',
+    caseTradingAppRedesign: 'Smartphone showing a trading app with price charts, city street behind',
+    caseAiProcurementPlatform:
+      'Three colleagues in front of a wall screen showing a workflow diagram',
+    caseAiTrainingVideos:
+      'Small video studio with a camera, light and a monitor showing a training screen',
+    francescoProdomo: 'Francesco Prodomo',
+    ionitaLogo: 'Ionita Consulting',
+  },
+  aiGeneratedLabel: 'AI-generated image',
 }
