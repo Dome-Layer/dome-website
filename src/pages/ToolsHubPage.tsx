@@ -74,7 +74,7 @@ const TOOLS: Tool[] = [
       "Run a governed invoice-to-approval workflow across the tools — extraction, a policy rules engine, a multi-model council, and a human approval gate, every step audited.",
     prodHost: "agent-flow.domelayer.com",
     accent: "#EC4899",
-    detailPath: "/tools/agent-flow",
+    detailPath: "/dome/agent-flow",
     comingSoon: !AGENT_FLOW_LIVE,
   },
 ];

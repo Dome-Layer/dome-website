@@ -17,35 +17,46 @@ interface PublicRoute {
  * to the matcher in middleware.ts (a test checks the last two).
  */
 export const PUBLIC_ROUTES = {
-  home: { file: 'pages/HomePage.tsx', path: { en: '/', it: '/it' }, updatedAt: '2026-09-11' },
+  home: { file: 'pages/HomePage.tsx', path: { en: '/', it: '/it' }, updatedAt: '2026-09-22' },
+  enterpriseUx: {
+    file: 'pages/EnterpriseUxPage.tsx',
+    path: { en: '/services/enterprise-ux', it: '/it/servizi/ux-enterprise' },
+    updatedAt: '2026-09-22',
+  },
+  aiProcessAutomation: {
+    file: 'pages/AiProcessAutomationPage.tsx',
+    path: { en: '/services/ai-process-automation', it: '/it/servizi/automazione-processi-ai' },
+    updatedAt: '2026-09-22',
+  },
+  dome: { file: 'pages/DomePage.tsx', path: { en: '/dome', it: '/it/dome' }, updatedAt: '2026-09-22' },
   processAnalyzer: {
     file: 'pages/ProcessAnalyzerPage.tsx',
-    path: { en: '/tools/process-analyzer', it: '/it/strumenti/process-analyzer' },
+    path: { en: '/dome/process-analyzer', it: '/it/dome/process-analyzer' },
     updatedAt: '2026-04-09',
   },
   dataIntelligence: {
     file: 'pages/DataIntelligencePage.tsx',
-    path: { en: '/tools/data-intelligence', it: '/it/strumenti/data-intelligence' },
+    path: { en: '/dome/data-intelligence', it: '/it/dome/data-intelligence' },
     updatedAt: '2026-04-09',
   },
   llmCouncil: {
     file: 'pages/LlmCouncilPage.tsx',
-    path: { en: '/tools/llm-council', it: '/it/strumenti/llm-council' },
+    path: { en: '/dome/llm-council', it: '/it/dome/llm-council' },
     updatedAt: '2026-04-13',
   },
   documentIntelligence: {
     file: 'pages/DocumentIntelligencePage.tsx',
-    path: { en: '/tools/document-intelligence', it: '/it/strumenti/document-intelligence' },
+    path: { en: '/dome/document-intelligence', it: '/it/dome/document-intelligence' },
     updatedAt: '2026-04-29',
   },
   governanceDashboard: {
     file: 'pages/GovernanceDashboardPage.tsx',
-    path: { en: '/tools/governance-dashboard', it: '/it/strumenti/governance-dashboard' },
+    path: { en: '/dome/governance-dashboard', it: '/it/dome/governance-dashboard' },
     updatedAt: '2026-06-12',
   },
   agentFlow: {
     file: 'pages/AgentFlowPage.tsx',
-    path: { en: '/tools/agent-flow', it: '/it/strumenti/agent-flow' },
+    path: { en: '/dome/agent-flow', it: '/it/dome/agent-flow' },
     updatedAt: '2026-09-11',
   },
   privacy: { file: 'pages/PrivacyPage.tsx', path: { en: '/privacy', it: '/it/privacy' }, updatedAt: '2026-04-17' },
@@ -55,6 +66,9 @@ export const PUBLIC_ROUTES = {
 export type RouteId = keyof typeof PUBLIC_ROUTES
 
 export const ROUTE_IDS = Object.keys(PUBLIC_ROUTES) as RouteId[]
+
+/** Pages that are neither a tool nor legal: the ones llms.txt lists first. */
+export const PAGE_IDS = ['home', 'enterpriseUx', 'aiProcessAutomation', 'dome'] as const satisfies readonly RouteId[]
 
 /** Tool pages, in the order the site presents them. */
 export const TOOL_ROUTE_IDS = [

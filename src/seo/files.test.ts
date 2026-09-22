@@ -6,8 +6,8 @@ describe('sitemap.xml', () => {
   it('lists every page per published locale with hreflang alternates', () => {
     const xml = buildSitemap(['en', 'it'])
     expect(xml.match(/<url>/g)).toHaveLength(ROUTE_IDS.length * 2)
-    expect(xml).toContain('<loc>https://domelayer.com/it/strumenti/agent-flow</loc>')
-    expect(xml).toContain('<xhtml:link rel="alternate" hreflang="x-default" href="https://domelayer.com/tools/agent-flow"/>')
+    expect(xml).toContain('<loc>https://domelayer.com/it/dome/agent-flow</loc>')
+    expect(xml).toContain('<xhtml:link rel="alternate" hreflang="x-default" href="https://domelayer.com/dome/agent-flow"/>')
   })
 
   it('lists English only while Italian is dormant', () => {

@@ -132,7 +132,7 @@ describe.skipIf(AGENT_FLOW_LIVE)("ToolsHubPage: Agent Flow while not live", () =
   it("links the Agent Flow card to its details page, not the unreachable app", () => {
     renderHub();
     const card = screen.getByText("Agent Flow").closest("a");
-    expect(card).toHaveAttribute("href", "/tools/agent-flow");
+    expect(card).toHaveAttribute("href", "/dome/agent-flow");
     expect(card).toHaveTextContent("Coming soon");
   });
 

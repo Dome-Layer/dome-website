@@ -7,8 +7,9 @@ import { isAuthenticated, clearToken } from '../lib/auth'
 import { HUB_PATH } from '../lib/routes'
 import { SITE } from '../lib/siteRoutes'
 import { LanguageSwitcher } from './LanguageSwitcher'
-import { localizedHref } from '../i18n/routes'
+import { localizedHref, type RouteId } from '../i18n/routes'
 import { useLocale, useMessages } from '../i18n/useLocale'
+import type { Messages } from '../i18n/messages/types'
 
 /**
  * The restructured site's primary navigation: real pages, not hash anchors into a one-page site.
@@ -16,13 +17,16 @@ import { useLocale, useMessages } from '../i18n/useLocale'
  * (plan phase 1c).
  */
 const NAV_ITEMS = [
-  { key: 'enterpriseUx', to: SITE.enterpriseUx },
-  { key: 'aiAutomation', to: SITE.aiProcessAutomation },
-  { key: 'dome', to: SITE.dome },
-  { key: 'caseStudies', to: SITE.caseStudies },
-  { key: 'about', to: SITE.about },
-  { key: 'contact', to: SITE.contact },
-] as const
+  { key: 'enterpriseUx', route: 'enterpriseUx' },
+  { key: 'aiAutomation', route: 'aiProcessAutomation' },
+  { key: 'dome', route: 'dome' },
+  { key: 'caseStudies', pending: SITE.caseStudies },
+  { key: 'about', pending: SITE.about },
+  { key: 'contact', pending: SITE.contact },
+] as const satisfies readonly ({ key: keyof Messages['nav'] } & (
+  | { route: RouteId; pending?: never }
+  | { route?: never; pending: string }
+))[]
 
 // Stroke icons for the top-bar auth control (render white on the accent button).
 const UserIcon = (
@@ -44,8 +48,12 @@ export function Navigation() {
   const [mobileOpen, setMobileOpen] = useState(false)
   const location = useLocation()
   const t = useMessages().nav
-  const homeHref = localizedHref('home', useLocale())
-  const navItems = NAV_ITEMS.map((item) => ({ label: t[item.key], to: item.to }))
+  const locale = useLocale()
+  const homeHref = localizedHref('home', locale)
+  const navItems = NAV_ITEMS.map((item) => ({
+    label: t[item.key],
+    to: 'route' in item && item.route ? localizedHref(item.route, locale) : item.pending,
+  }))
 
   // Auth state for the top-bar Sign in / Sign out control. Read after mount from the
   // cross-subdomain cookie: pages are prerendered signed-out, so reading it during render

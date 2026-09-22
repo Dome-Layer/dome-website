@@ -2,6 +2,15 @@
 @import "@fontsource-variable/jetbrains-mono";
 @import "tailwindcss";
 
+/**
+ * Bind Tailwind's `dark:` variant to the manual theme toggle rather than to prefers-color-scheme.
+ * The site's theme is `[data-theme]` on <html>, set by the toggle and restored by theme-init.js, so
+ * the stock variant would ignore a visitor who chose a theme against their OS setting. Used for the
+ * light/dark asset swaps the design system asks for (v2.1 section 14), where one image cannot read
+ * in both themes.
+ */
+@custom-variant dark ([data-theme="dark"] &);
+
 @theme {
   /* ── v2.0 Colour Ramps ── */
 

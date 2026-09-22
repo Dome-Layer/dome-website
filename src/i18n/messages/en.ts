@@ -62,6 +62,33 @@ export const en: Messages = {
       twitterDescription: 'Production-ready AI with governance built in, for regulated enterprises.',
       imageAlt: 'DOME: governance-driven AI for regulated enterprises',
     },
+    enterpriseUx: {
+      name: 'Enterprise UX and product',
+      title: 'Enterprise UX and product consulting | DOME',
+      description:
+        'User research, service design and interface design for complex enterprise platforms, delivered with a design system your developers can build from.',
+      ogDescription:
+        'We untangle complex internal tools and customer platforms: research, service design, interface design and a design system your team can build from.',
+      imageAlt: 'DOME enterprise UX and product consulting',
+    },
+    aiProcessAutomation: {
+      name: 'AI process automation',
+      title: 'AI process automation | DOME',
+      description:
+        'We map a business process, automate the parts with clear rules and route the rest to your team with a decision brief and a complete audit trail.',
+      ogDescription:
+        'Automate a process without losing control of it: clear rules where they apply, a human decision where they do not, and an audit trail throughout.',
+      imageAlt: 'DOME AI process automation',
+    },
+    dome: {
+      name: 'DOME capabilities',
+      title: 'DOME capabilities: the tools we build and operate | DOME',
+      description:
+        'Six working tools covering the path from process discovery to audited execution. They are proof of how we build governed AI, not products for sale.',
+      ogDescription:
+        'Process analysis, document and data intelligence, a multi-model council, a governed agent workflow and a governance dashboard. Built and operated by us.',
+      imageAlt: 'DOME capabilities: tools we build and operate',
+    },
     processAnalyzer: {
       name: 'Process Analyzer',
       title: 'Process Analyzer | DOME',
