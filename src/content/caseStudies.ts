@@ -11,6 +11,13 @@ import type { MediaId } from "./media";
  *
  * `related` names other studies by id, so a detail page can offer a next read without a second
  * list to keep in step. `caseStudy(id)` and `caseStudyBySlug(slug)` are the only lookups.
+ *
+ * The Italian is written, not translated: same meaning, Italian enterprise register, and kept near
+ * the English length. Titles and summaries especially, because a summary is the page's meta
+ * description and Italian that runs long gets truncated in search results. Use the terms the field
+ * uses ("acquisti indiretti" for non-resale purchasing, "filiera" for supply chain, "esperienza
+ * d'acquisto" for shopper experience) rather than a dictionary rendering, and address the reader
+ * as "voi", never "tu".
  */
 export type Segment = "ux" | "automation" | "dome";
 
@@ -60,11 +67,11 @@ export const CASE_STUDIES: readonly CaseStudy[] = [
     },
     title: {
       en: "Procurement workflow redesign for a European food retailer",
-      it: "Riprogettazione dei flussi di acquisto per un retailer alimentare europeo",
+      it: "Acquisti indiretti ridisegnati per un retailer alimentare europeo",
     },
     summary: {
       en: "A research-led redesign of non-resale purchasing journeys across five enterprise platforms, rolled out with a standard training programme.",
-      it: "Una riprogettazione basata sulla ricerca dei percorsi di acquisto indiretto su cinque piattaforme enterprise, accompagnata da un programma di formazione standard.",
+      it: "Percorsi di acquisto indiretto ridisegnati su cinque piattaforme enterprise, con ricerca sul campo e un programma di formazione standard.",
     },
     client: {
       en: "European food retailer, head-office procurement",
@@ -72,7 +79,7 @@ export const CASE_STUDIES: readonly CaseStudy[] = [
     },
     role: {
       en: "Journey mapping, content design, onboarding programme",
-      it: "Mappatura dei percorsi, contenuti, programma di onboarding",
+      it: "Journey mapping, content design, programma di onboarding",
     },
     challenge: {
       en: [
@@ -109,7 +116,7 @@ export const CASE_STUDIES: readonly CaseStudy[] = [
           body: "Abbiamo seguito le richieste dall’inserimento all’ordine di acquisto su tutte e cinque le piattaforme, annotando dove le persone esitavano, tornavano indietro o chiedevano aiuto.",
         },
         {
-          title: "Riprogettare il flusso dalla richiesta all’ordine",
+          title: "Dalla richiesta all’ordine",
           body: "Abbiamo riorganizzato i punti di accesso in base a cosa si acquista, così ogni richiesta parte dal percorso corretto e non da quello più familiare.",
         },
         {
@@ -164,19 +171,19 @@ export const CASE_STUDIES: readonly CaseStudy[] = [
     },
     title: {
       en: "AI-assisted compliance assessments",
-      it: "Valutazioni di conformità assistite dall’AI",
+      it: "Valutazioni di conformità con AI",
     },
     summary: {
       en: "A regulatory library and assessment tools that help compliance teams find gaps faster, with an assistant that explains each finding.",
-      it: "Una libreria normativa e strumenti di valutazione che aiutano i team di compliance a individuare le lacune più rapidamente, con un assistente che spiega ogni rilievo.",
+      it: "Una libreria normativa e strumenti di valutazione che aiutano i team compliance a trovare prima le lacune, con un assistente che spiega ogni rilievo.",
     },
     client: {
       en: "Risk and compliance platform",
-      it: "Piattaforma di rischio e compliance",
+      it: "Piattaforma risk e compliance",
     },
     role: {
       en: "Discovery, prototyping, AI assessment design",
-      it: "Discovery, prototipazione, progettazione delle valutazioni AI",
+      it: "Discovery, prototipazione, design delle valutazioni AI",
     },
     challenge: {
       en: [
@@ -210,7 +217,7 @@ export const CASE_STUDIES: readonly CaseStudy[] = [
       it: [
         {
           title: "Discovery",
-          body: "Abbiamo lavorato con gli utenti di compliance e legali per mappare come si svolgono oggi le valutazioni e dove si perde tempo.",
+          body: "Abbiamo mappato con i team compliance e legal come si svolgono oggi le valutazioni e dove si perde tempo.",
         },
         {
           title: "Libreria normativa",
@@ -218,11 +225,11 @@ export const CASE_STUDIES: readonly CaseStudy[] = [
         },
         {
           title: "Strumenti di valutazione",
-          body: "Abbiamo progettato strumenti analitici che misurano l’organizzazione rispetto alla libreria e mostrano le lacune in un’unica vista.",
+          body: "Abbiamo progettato strumenti che misurano l’organizzazione rispetto alla libreria e mostrano le lacune in un’unica vista.",
         },
         {
           title: "Un assistente per ogni rilievo",
-          body: "Abbiamo aggiunto un assistente AI che spiega perché una lacuna è stata segnalata e rimanda al testo di origine, così chi revisiona può verificarlo.",
+          body: "Abbiamo aggiunto un assistente AI che spiega perché una lacuna è segnalata e rimanda al testo di origine, verificabile da chi revisiona.",
         },
       ],
     },
@@ -268,15 +275,15 @@ export const CASE_STUDIES: readonly CaseStudy[] = [
     },
     title: {
       en: "A governed invoice-to-approval workflow",
-      it: "Un flusso governato dalla fattura all’approvazione",
+      it: "Flusso governato dalla fattura all’approvazione",
     },
     summary: {
       en: "Extraction, policy rules, a multi-model review and a named approver, recorded as one audit trail you can reconstruct step by step.",
-      it: "Estrazione, regole di policy, revisione multi-modello e un approvatore nominativo, registrati in un unico audit trail ricostruibile passo per passo.",
+      it: "Estrazione, regole di policy, revisione multi-modello e un approvatore nominativo, in un unico audit trail ricostruibile passo per passo.",
     },
     client: {
       en: "DOME reference build, no client data",
-      it: "Realizzazione di riferimento DOME, senza dati di clienti",
+      it: "Progetto di riferimento DOME, nessun dato di clienti",
     },
     role: {
       en: "Design, build and operation",
@@ -325,7 +332,7 @@ export const CASE_STUDIES: readonly CaseStudy[] = [
           body: "LLM Council chiede a più modelli di valutare le eccezioni e registra dove concordano e dove no.",
         },
         {
-          title: "Approvare con nome e cognome",
+          title: "Approvazione nominativa",
           body: "Un approvatore nominativo prende la decisione finale. Il Governance Dashboard mostra ogni passaggio che la precede.",
         },
       ],
@@ -372,11 +379,11 @@ export const CASE_STUDIES: readonly CaseStudy[] = [
     },
     title: {
       en: "A trading platform for a metals consortium",
-      it: "Una piattaforma di trading per un consorzio dei metalli",
+      it: "Piattaforma di trading per un consorzio metalli",
     },
     summary: {
       en: "Automated settlement, stock monitoring and compliance alerts replaced paper-based steps shared by traders, financiers and insurers.",
-      it: "Regolamento automatico, monitoraggio delle scorte e alert di conformità hanno sostituito passaggi cartacei condivisi da trader, finanziatori e assicuratori.",
+      it: "Regolamento automatico, monitoraggio scorte e alert di conformità al posto di passaggi cartacei condivisi tra trader, finanziatori e assicuratori.",
     },
     client: {
       en: "Consortium of traders, financiers, insurers and logistics firms",
@@ -417,15 +424,15 @@ export const CASE_STUDIES: readonly CaseStudy[] = [
       ],
       it: [
         {
-          title: "Una rete di trading condivisa",
-          body: "Abbiamo progettato una rete privata in cui ogni membro lavora sullo stesso registro delle operazioni.",
+          title: "Rete di trading condivisa",
+          body: "Abbiamo progettato una rete privata in cui ogni membro lavora sullo stesso registro operazioni.",
         },
         {
           title: "Regolamento automatico",
           body: "Le interfacce gestiscono copertura e regolamento di fine giornata senza reinserimenti manuali.",
         },
         {
-          title: "Monitoraggio delle scorte",
+          title: "Monitoraggio scorte",
           body: "Le scorte in magazzino sono monitorate e riconciliate automaticamente, con prezzi dinamici per stoccaggio e assicurazione.",
         },
         {
@@ -476,11 +483,11 @@ export const CASE_STUDIES: readonly CaseStudy[] = [
     },
     title: {
       en: "Traceability platform for a food retailer",
-      it: "Piattaforma di tracciabilità per un retailer alimentare",
+      it: "Tracciabilità di filiera per un retailer alimentare",
     },
     summary: {
       en: "UX lead and design system for a platform that traces products from supplier to shelf, rolled out across stores.",
-      it: "Guida UX e design system per una piattaforma che traccia i prodotti dal fornitore allo scaffale, distribuita nei punti vendita.",
+      it: "Guida UX e design system per una piattaforma che traccia i prodotti dal fornitore allo scaffale, poi estesa ai punti vendita.",
     },
     client: {
       en: "Food retailer and its supply chain partners",
@@ -521,8 +528,8 @@ export const CASE_STUDIES: readonly CaseStudy[] = [
           body: "Abbiamo definito come ogni partner inserisce i dati di produzione, mantenendo l’operazione rapida per chi la svolge accanto al proprio lavoro.",
         },
         {
-          title: "Esperienza del consumatore",
-          body: "Abbiamo progettato il flusso di scansione QR in modo che il percorso del prodotto si legga chiaramente sullo smartphone in pochi secondi.",
+          title: "Esperienza d’acquisto",
+          body: "Abbiamo progettato la scansione QR perché la storia del prodotto si legga sullo smartphone in pochi secondi.",
         },
         {
           title: "Design system",
@@ -567,11 +574,11 @@ export const CASE_STUDIES: readonly CaseStudy[] = [
     },
     title: {
       en: "Trading app redesign for a digital assets platform",
-      it: "Riprogettazione dell’app di trading per una piattaforma di asset digitali",
+      it: "App di trading ridisegnata per una piattaforma di asset digitali",
     },
     summary: {
       en: "A responsive redesign of a trading app for mobile and desktop, built on a modular design framework.",
-      it: "Una riprogettazione responsive di un’app di trading per mobile e desktop, basata su un framework di design modulare.",
+      it: "Riprogettazione responsive di un’app di trading per mobile e desktop, su un framework di design modulare.",
     },
     client: {
       en: "Digital assets trading platform",
@@ -663,11 +670,11 @@ export const CASE_STUDIES: readonly CaseStudy[] = [
     },
     title: {
       en: "AI-assisted procurement platform",
-      it: "Piattaforma di acquisto assistita dall’AI",
+      it: "Piattaforma acquisti assistita dall’AI",
     },
     summary: {
       en: "A proof of concept that brings requests, risk checks, contracts and suppliers into one flow, with machine learning taking on the manual steps.",
-      it: "Un proof of concept che riunisce richieste, controlli di rischio, contratti e fornitori in un unico flusso, con il machine learning che si occupa dei passaggi manuali.",
+      it: "Un proof of concept che riunisce richieste, controlli di rischio, contratti e fornitori in un solo flusso, con il machine learning sui passaggi manuali.",
     },
     client: {
       en: "Global procurement organisation",
@@ -705,14 +712,14 @@ export const CASE_STUDIES: readonly CaseStudy[] = [
       it: [
         {
           title: "Un flusso per ogni ruolo",
-          body: "Abbiamo progettato un unico percorso in cui ogni ruolo interviene nel proprio passaggio, con il quadro completo disponibile quando serve.",
+          body: "Abbiamo progettato un solo percorso in cui ogni ruolo interviene al proprio passaggio, con il quadro completo quando serve.",
         },
         {
           title: "Machine learning sui passaggi manuali",
           body: "I modelli si occupano di classificazioni e controlli che prima si facevano a mano.",
         },
         {
-          title: "Rischio e spesa sempre visibili",
+          title: "Rischio e spesa a vista",
           body: "Segnali di rischio e spesa restano visibili lungo tutto l’acquisto, non solo alla fine.",
         },
       ],
@@ -759,11 +766,11 @@ export const CASE_STUDIES: readonly CaseStudy[] = [
     },
     title: {
       en: "Training videos at scale for an enterprise system rollout",
-      it: "Video formativi su larga scala per il rilascio di un sistema enterprise",
+      it: "Formazione video su larga scala per un rollout enterprise",
     },
     summary: {
       en: "A repeatable production process that turned complex system workflows into on-demand training videos with AI presenters.",
-      it: "Un processo di produzione ripetibile che ha trasformato flussi di sistema complessi in video formativi on demand con presentatori AI.",
+      it: "Un processo ripetibile che trasforma flussi di sistema complessi in video formativi on demand con presentatori AI.",
     },
     client: {
       en: "Enterprise organisation, internal systems",
@@ -805,11 +812,11 @@ export const CASE_STUDIES: readonly CaseStudy[] = [
       it: [
         {
           title: "Validare i contenuti",
-          body: "Abbiamo verificato ogni flusso con i responsabili del sistema prima di scrivere una sola riga.",
+          body: "Abbiamo validato ogni flusso con i responsabili di sistema prima di scrivere una riga.",
         },
         {
           title: "Scrivere per lo schermo",
-          body: "Abbiamo scritto sceneggiature tecniche allineate alle registrazioni dello schermo sulla logica di business reale.",
+          body: "Abbiamo scritto sceneggiature tecniche allineate alle registrazioni della logica di business reale.",
         },
         {
           title: "Produrre con presentatori AI",
