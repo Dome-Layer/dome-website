@@ -5,7 +5,7 @@ export const en: Messages = {
     description:
       'DOME is an AI and product consultancy for regulated enterprises, based in Florence and working across Europe. We design enterprise software people use and build AI process automation you can audit.',
     llmsIntro:
-      'We work in three areas: enterprise UX and product, AI process automation, and DOME capabilities. The capabilities are AI tools we build and operate ourselves (process analysis, document and data intelligence, a multi-model council, a governed agent workflow and a governance dashboard). They show how we deliver governed AI and are not sold as products. Every tool records its decisions in an audit trail, and a named person signs off where a policy requires it.',
+      'We work in three areas: AI process automation, enterprise UX and product, and DOME capabilities. The capabilities are AI tools we build and operate ourselves (process analysis, document and data intelligence, a multi-model council, a governed agent workflow and a governance dashboard). They show how we deliver governed AI and are not sold as products. Every tool records its decisions in an audit trail, and a named person signs off where a policy requires it.',
     llmsSections: { pages: 'Pages', tools: 'Tools we build and operate', legal: 'Legal' },
   },
   nav: {

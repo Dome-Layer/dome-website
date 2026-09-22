@@ -1,17 +1,22 @@
 import type { Messages } from './types'
 
-// Draft Italian, pending native review (plan phase 1d). Marketing copy addresses the reader as
-// "voi"; tool names stay in English.
+// Italian copy, written rather than translated: it follows the English meaning but uses Italian
+// enterprise register and is kept at or below the English length, because Italian runs about 15%
+// longer by default and the meta descriptions were being truncated in search results.
+//
+// Rules: address the reader as "voi" throughout, never "tu" (both slipped in before). Keep the
+// English technical terms Italian professionals actually keep, audit trail, compliance, governance,
+// UX, AI. Tool names stay in English. Prefer dropping articles and auxiliaries to padding.
 export const it: Messages = {
   site: {
     description:
-      'DOME è una società di consulenza AI e di prodotto per le imprese regolamentate, con sede a Firenze e al lavoro in tutta Europa. Progettiamo software aziendale che le persone usano e realizziamo automazioni dei processi con AI che potete verificare.',
+      'DOME è una società di consulenza AI e di prodotto per imprese regolamentate, con sede a Firenze e attiva in tutta Europa. Progettiamo software enterprise che le persone usano volentieri e automazioni AI verificabili.',
     llmsIntro:
-      'Lavoriamo in tre ambiti: UX enterprise e prodotto, automazione dei processi con AI e capacità DOME. Le capacità sono strumenti AI che sviluppiamo e gestiamo direttamente (analisi dei processi, intelligenza su documenti e dati, un council multi-modello, un flusso agentico governato e una dashboard di governance). Mostrano come realizziamo AI governata e non sono in vendita come prodotti. Ogni strumento registra le proprie decisioni in un audit trail e una persona nominativa approva dove la policy lo richiede.',
+      'Lavoriamo su tre fronti: automazione dei processi con AI, UX enterprise e prodotto, e gli strumenti DOME. Gli strumenti li sviluppiamo e gestiamo noi (analisi dei processi, intelligenza su documenti e dati, un council multi-modello, un flusso agentico governato e una dashboard di governance): mostrano come realizziamo AI governata e non sono in vendita. Ogni strumento registra le proprie decisioni in un audit trail, e dove la policy lo richiede approva una persona con nome e cognome.',
     llmsSections: { pages: 'Pagine', tools: 'Strumenti che sviluppiamo e gestiamo', legal: 'Note legali' },
   },
   nav: {
-    homeLabel: 'Home di DOME',
+    homeLabel: 'DOME, home',
     enterpriseUx: 'UX enterprise',
     aiAutomation: 'Automazione AI',
     dome: 'DOME',
@@ -24,9 +29,9 @@ export const it: Messages = {
     openMenu: 'Apri il menu',
     closeMenu: 'Chiudi il menu',
   },
-  switcher: { label: 'Leggi questa pagina in inglese' },
+  switcher: { label: 'Versione inglese di questa pagina' },
   footer: {
-    tagline: 'AI operativa guidata dalla governance',
+    tagline: 'AI operativa, con la governance integrata',
     privacy: 'Informativa sulla privacy',
     terms: 'Termini di servizio',
     rights: 'Tutti i diritti riservati.',
@@ -37,14 +42,14 @@ export const it: Messages = {
     nameLabel: 'Nome',
     namePlaceholder: 'Il vostro nome',
     emailLabel: 'Email di lavoro',
-    emailPlaceholder: 'voi@azienda.com',
+    emailPlaceholder: 'nome@azienda.com',
     companyLabel: 'Azienda',
     companyOptional: '(facoltativo)',
     companyPlaceholder: 'Nome dell’azienda',
     topicLabel: 'Argomento',
     messageLabel: 'Messaggio',
     messagePlaceholder: 'Raccontateci il vostro progetto',
-    privacyNote: 'Usiamo i vostri dati solo per rispondere al messaggio. Vedi la nostra',
+    privacyNote: 'Usiamo i vostri dati solo per rispondervi. Consultate la nostra',
     privacyLink: 'informativa sulla privacy',
     send: 'Invia messaggio',
     sending: 'Invio in corso',
@@ -65,9 +70,9 @@ export const it: Messages = {
   meta: {
     home: {
       name: 'Home',
-      title: 'DOME | AI governata per le imprese regolamentate',
+      title: 'DOME | AI governata per imprese regolamentate',
       description:
-        'DOME aiuta le imprese regolamentate a portare l’AI in produzione con la governance integrata, dall’automazione dei processi agli strumenti che sviluppiamo e gestiamo direttamente.',
+        'DOME porta l’AI in produzione nelle imprese regolamentate, con la governance integrata: dall’automazione dei processi agli strumenti che gestiamo noi.',
       ogDescription:
         'Progettata per la produzione fin dal primo giorno. Aiutiamo le imprese regolamentate a usare l’AI con governance, supervisione e audit trail completo.',
       twitterDescription: 'AI pronta per la produzione, con la governance integrata, per le imprese regolamentate.',
@@ -77,7 +82,7 @@ export const it: Messages = {
       name: 'UX enterprise e prodotto',
       title: 'Consulenza UX enterprise e prodotto | DOME',
       description:
-        'Ricerca utente, service design e progettazione di interfacce per piattaforme enterprise complesse, con un design system su cui il vostro team di sviluppo può costruire.',
+        'Ricerca utente, service design e progettazione di interfacce per piattaforme enterprise complesse, con un design system pronto per il vostro team di sviluppo.',
       ogDescription:
         'Semplifichiamo strumenti interni e piattaforme complesse: ricerca, service design, progettazione di interfacce e un design system pronto per lo sviluppo.',
       imageAlt: 'DOME, consulenza UX enterprise e prodotto',
@@ -92,13 +97,13 @@ export const it: Messages = {
       imageAlt: 'DOME, automazione dei processi con AI',
     },
     dome: {
-      name: 'Capacità DOME',
-      title: 'Capacità DOME: gli strumenti che costruiamo e gestiamo | DOME',
+      name: 'Strumenti DOME',
+      title: 'DOME: gli strumenti che costruiamo e gestiamo | DOME',
       description:
-        'Sei strumenti operativi che coprono il percorso dalla scoperta del processo all’esecuzione verificabile. Sono la prova di come costruiamo AI governata, non prodotti in vendita.',
+        'Sei strumenti operativi, dall’analisi del processo all’esecuzione verificabile. Sono la prova di come costruiamo AI governata, non prodotti da vendere.',
       ogDescription:
         'Analisi dei processi, document e data intelligence, un consiglio multi-modello, un flusso agentico governato e una dashboard di governance. Costruiti e gestiti da noi.',
-      imageAlt: 'Capacità DOME: gli strumenti che costruiamo e gestiamo',
+      imageAlt: 'DOME: gli strumenti che costruiamo e gestiamo',
     },
     processAnalyzer: {
       name: 'Process Analyzer',
@@ -116,7 +121,7 @@ export const it: Messages = {
       name: 'Data Intelligence',
       title: 'Data Intelligence | DOME',
       description:
-        'Caricate un foglio di calcolo e ricevete una dashboard di analisi governata, con scelta automatica dei grafici e un pannello di domande in linguaggio naturale.',
+        'Caricate un foglio di calcolo e ricevete una dashboard governata: grafici scelti automaticamente e domande in linguaggio naturale.',
       ogDescription:
         'Caricate un foglio di calcolo. Ricevete una dashboard di analisi governata, con scelta deterministica dei grafici e domande in linguaggio naturale, senza configurazione manuale.',
       twitterDescription:
@@ -128,7 +133,7 @@ export const it: Messages = {
       name: 'LLM Council',
       title: 'LLM Council | DOME',
       description:
-        'Sottoponete una domanda strategica a tre consulenti AI. Deliberano in modo indipendente, si confrontano tra loro e producono un verdetto governato con audit trail completo.',
+        'Sottoponete una domanda strategica a tre consulenti AI: deliberano separatamente, si confrontano e producono un verdetto governato con audit trail completo.',
       imageAlt: 'DOME LLM Council: deliberazione AI governata',
       twitterImageAlt: 'DOME LLM Council',
     },
@@ -148,7 +153,7 @@ export const it: Messages = {
       name: 'Governance Dashboard',
       title: 'Governance Dashboard | DOME',
       description:
-        'Audit trail in tempo reale, report di conformità ed esportazione in PDF per tutti e quattro gli strumenti AI di DOME. Ogni evento di governance, punteggio di affidabilità e decisione umana in un unico posto.',
+        'Audit trail in tempo reale, report di conformità ed export PDF sui quattro strumenti DOME: ogni evento, indice di confidenza e decisione umana in un’unica vista.',
       ogDescription:
         'Audit trail, report di conformità ed esportazione in PDF per tutti e quattro gli strumenti AI di DOME. Ogni evento di governance e ogni decisione umana in un unico posto.',
       twitterDescription: 'Audit trail in tempo reale e report di conformità per tutti e quattro gli strumenti AI di DOME.',
@@ -159,7 +164,7 @@ export const it: Messages = {
       name: 'Agent Flow',
       title: 'Agent Flow | DOME',
       description:
-        'Un flusso governato dalla fattura all’approvazione: estrazione con Document Intelligence, un motore di regole di policy, un LLM Council multi-modello e un’approvazione umana, con ogni passaggio registrato.',
+        'Dalla fattura all’approvazione, governata: estrazione con Document Intelligence, motore di regole, LLM Council multi-modello e firma di una persona. Ogni passaggio resta agli atti.',
       ogDescription:
         'Un flusso governato dalla fattura all’approvazione tra gli strumenti DOME, con un’approvazione umana e un audit trail completo.',
       twitterDescription: 'Flusso governato dalla fattura all’approvazione, con approvazione umana e audit trail completo.',
@@ -170,7 +175,7 @@ export const it: Messages = {
       name: 'Chi siamo',
       title: 'Chi siamo | DOME, consulenza AI e di prodotto per imprese regolamentate',
       description:
-        'DOME è una società di consulenza AI e di prodotto con sede a Firenze, che lavora in tutta Europa con team acquisti, finance, compliance e supply chain in settori regolamentati.',
+        'Consulenza AI e di prodotto, con sede a Firenze, al fianco di team acquisti, finance, compliance e supply chain in settori regolamentati in tutta Europa.',
       ogDescription:
         'Un responsabile dell’incarico, una rete di specialisti e un partner di delivery. Come siamo organizzati e che cosa potete aspettarvi.',
       imageAlt: 'Chi siamo, DOME',
@@ -179,7 +184,7 @@ export const it: Messages = {
       name: 'Contatti',
       title: 'Contatti DOME | Prenotate una call o scriveteci',
       description:
-        'Prenotate una call da 15 o 30 minuti, oppure scriveteci del vostro progetto. Rispondiamo entro due giorni lavorativi. Sede a Firenze, lavoriamo in tutta Europa in inglese e italiano.',
+        'Prenotate una call da 15 o 30 minuti, o scriveteci del vostro progetto. Rispondiamo entro due giorni lavorativi. Sede a Firenze, operiamo in tutta Europa.',
       ogDescription: 'Prenotate una call o scriveteci. Rispondiamo entro due giorni lavorativi.',
       imageAlt: 'Contatti DOME',
     },
@@ -187,23 +192,23 @@ export const it: Messages = {
       name: 'Casi studio',
       title: 'Casi studio | DOME',
       description:
-        'Racconti anonimizzati di lavori di UX enterprise e automazione con AI negli acquisti retail, nel trade finance, nelle filiere alimentari, nella compliance e negli asset digitali.',
+        'Progetti anonimizzati di UX enterprise e automazione AI: acquisti retail, trade finance, filiere alimentari, compliance e asset digitali.',
       ogDescription:
-        'Che cosa abbiamo costruito e che cosa è cambiato. I dettagli dei clienti sono sempre anonimizzati.',
+        'Che cosa abbiamo costruito e che cosa è cambiato. I dati dei clienti sono sempre anonimizzati.',
       imageAlt: 'Casi studio DOME',
     },
     privacy: {
       name: 'Informativa privacy',
       title: 'Informativa privacy | DOME',
       description:
-        'Come DOME raccoglie, usa e protegge i dati personali dei visitatori del sito e degli utenti registrati degli strumenti, e come esercitare i diritti previsti dal GDPR.',
+        'Come DOME raccoglie, usa e protegge i dati personali di visitatori e utenti registrati, e come esercitare i diritti previsti dal GDPR.',
       imageAlt: 'DOME',
     },
     terms: {
       name: 'Termini di servizio',
       title: 'Termini di servizio | DOME',
       description:
-        'I termini che si applicano all’uso degli strumenti DOME: account, uso consentito, elaborazione con AI, limitazioni di responsabilità e legge applicabile.',
+        'I termini d’uso degli strumenti DOME: account, uso consentito, elaborazione con AI, responsabilità e legge applicabile.',
       imageAlt: 'DOME',
     },
   },
