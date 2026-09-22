@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { useNavigate, type MetaFunction } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { ToolPageLayout } from '../layouts/ToolPageLayout'
 import { Section } from '../components/Section'
@@ -7,21 +7,9 @@ import { Container } from '../components/Container'
 import { TextReveal } from '../components/TextReveal'
 import { fadeUp, dramaticFadeUp, viewportConfig } from '../lib/motion'
 import { useToolHref } from '../lib/tools'
-import { buildMeta } from '../lib/seo'
+import { routeMeta } from '../lib/seo'
 
-export const meta: MetaFunction = () =>
-  buildMeta({
-    title: 'Process Analyzer | DOME',
-    description:
-      'Convert a plain-language description of any business process into a structured process map with governance analysis and automation assessment.',
-    path: '/tools/process-analyzer',
-    ogDescription:
-      'Describe any business process in plain language. Get a structured process map, governance gap analysis, and AI automation assessment.',
-    twitterDescription:
-      'Describe any business process in plain language. Receive a structured map, governance gaps, and automation opportunities.',
-    imageAlt: 'DOME Process Analyzer: governance-driven process mapping',
-    twitterImageAlt: 'DOME Process Analyzer',
-  })
+export const meta = routeMeta('processAnalyzer')
 
 const steps = [
   {

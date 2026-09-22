@@ -1,15 +1,7 @@
-import type { MetaFunction } from "react-router"
 import { DomeLogo } from "../components/DomeLogo"
-import { buildMeta } from "../lib/seo"
+import { routeMeta } from "../lib/seo"
 
-export const meta: MetaFunction = () =>
-  buildMeta({
-    title: "Privacy policy | DOME",
-    description:
-      "How DOME collects, uses and protects personal data for website visitors and registered tool users, and how to exercise your rights under the GDPR.",
-    path: "/privacy",
-    imageAlt: "DOME",
-  })
+export const meta = routeMeta("privacy")
 
 const s = {
   h2: {

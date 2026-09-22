@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { useNavigate, type MetaFunction } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { ToolPageLayout } from '../layouts/ToolPageLayout'
 import { Section } from '../components/Section'
@@ -7,17 +7,9 @@ import { Container } from '../components/Container'
 import { TextReveal } from '../components/TextReveal'
 import { fadeUp, dramaticFadeUp, viewportConfig } from '../lib/motion'
 import { useToolHref } from '../lib/tools'
-import { buildMeta } from '../lib/seo'
+import { routeMeta } from '../lib/seo'
 
-export const meta: MetaFunction = () =>
-  buildMeta({
-    title: 'LLM Council | DOME',
-    description:
-      'Pose a strategic question to a panel of three AI advisors. They deliberate independently, cross-examine each other, and produce a governed verdict with full audit trail.',
-    path: '/tools/llm-council',
-    imageAlt: 'DOME LLM Council: governed AI deliberation',
-    twitterImageAlt: 'DOME LLM Council',
-  })
+export const meta = routeMeta('llmCouncil')
 
 const steps = [
   {

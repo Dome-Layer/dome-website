@@ -22,5 +22,16 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true
   },
-  "include": ["vite.config.ts", "react-router.config.ts"]
+  "include": [
+    "vite.config.ts",
+    "react-router.config.ts",
+    // Imported by the build config to write the sitemap, robots.txt and llms.txt.
+    "src/i18n/locales.ts",
+    "src/i18n/routes.ts",
+    "src/i18n/messages/*.ts",
+    // Reached from the message catalogues: it types the alt-text keys.
+    "src/content/media.ts",
+    "src/lib/structuredData.ts",
+    "src/seo/files.ts"
+  ]
 }

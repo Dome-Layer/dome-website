@@ -6,17 +6,11 @@ import { DomeLogo } from './DomeLogo'
 import { ThemeToggle } from './ThemeToggle'
 import { isAuthenticated, clearToken } from '../lib/auth'
 import { HUB_PATH } from '../lib/routes'
+import { LanguageSwitcher } from './LanguageSwitcher'
+import { localizedHref, routeIdFromPath } from '../i18n/routes'
+import { useLocale, useMessages } from '../i18n/useLocale'
 
-const navItems = [
-  { label: 'Method', href: '#method' },
-  { label: 'Architecture', href: '#architecture' },
-  { label: 'Tools', href: '#tools' },
-  { label: 'Engagement', href: '#engagement' },
-  { label: 'About', href: '#about' },
-  { label: 'Contact', href: '#contact' },
-]
-
-const sectionIds = ['method', 'architecture', 'tools', 'engagement', 'about', 'contact']
+const sectionIds = ['method', 'architecture', 'tools', 'engagement', 'about', 'contact'] as const
 
 // Stroke icons for the top-bar auth control (render white on the accent button).
 const UserIcon = (
@@ -38,7 +32,10 @@ export function Navigation() {
   const [mobileOpen, setMobileOpen] = useState(false)
   const [activeSection, setActiveSection] = useState<number>(-1)
   const location = useLocation()
-  const isHomePage = location.pathname === '/'
+  const t = useMessages().nav
+  const homeHref = localizedHref('home', useLocale())
+  const isHomePage = routeIdFromPath(location.pathname) === 'home'
+  const navItems = sectionIds.map((id) => ({ label: t[id], href: `#${id}` }))
   const lenis = useLenis()
 
   // Auth state for the top-bar Sign in / Sign out control. Read after mount from the
@@ -120,9 +117,9 @@ export function Navigation() {
     if (isHomePage) {
       lenis?.scrollTo(href, { offset: -64 })
     } else {
-      window.location.href = '/' + href
+      window.location.href = homeHref + href
     }
-  }, [isHomePage, lenis])
+  }, [isHomePage, lenis, homeHref])
 
   const handleMobileNavClick = useCallback((href: string) => {
     setMobileOpen(false)
@@ -131,9 +128,9 @@ export function Navigation() {
         lenis?.scrollTo(href, { offset: -64 })
       }, 100)
     } else {
-      window.location.href = '/' + href
+      window.location.href = homeHref + href
     }
-  }, [isHomePage, lenis])
+  }, [isHomePage, lenis, homeHref])
 
   return (
     <>
@@ -145,7 +142,7 @@ export function Navigation() {
         }`}
       >
         <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 sm:px-8 lg:px-12 h-16">
-          <a href="/" className="relative z-10 flex-shrink-0" aria-label="DOME — Home">
+          <a href={homeHref} className="relative z-10 flex-shrink-0" aria-label={t.homeLabel}>
             <DomeLogo size="md" />
           </a>
 
@@ -178,14 +175,14 @@ export function Navigation() {
                   className="inline-flex items-center gap-2 px-5 py-2.5 text-[13px] font-semibold bg-[#0080FF] text-white rounded-lg hover:bg-[#40A8FF] active:bg-[#0066CC] transition-colors duration-150"
                 >
                   {UserIcon}
-                  Your tools
+                  {t.yourTools}
                 </a>
                 <button
                   onClick={handleSignOut}
                   className="inline-flex items-center gap-2 px-4 py-2.5 text-[13px] font-semibold text-[var(--color-text-secondary)] border border-[var(--color-border-default)] rounded-lg hover:text-[var(--color-text-primary)] hover:border-[var(--color-border-strong)] hover:bg-[var(--color-bg-muted)] transition-colors duration-150"
                 >
                   {SignOutIcon}
-                  Sign out
+                  {t.signOut}
                 </button>
               </>
             ) : (
@@ -194,19 +191,23 @@ export function Navigation() {
                 className="inline-flex items-center gap-2 px-5 py-2.5 text-[13px] font-semibold bg-[#0080FF] text-white rounded-lg hover:bg-[#40A8FF] active:bg-[#0066CC] transition-colors duration-150"
               >
                 {UserIcon}
-                Sign in
+                {t.signIn}
               </a>
             )}
-            <ThemeToggle />
+            <div className="flex items-center gap-1">
+              <LanguageSwitcher />
+              <ThemeToggle />
+            </div>
           </div>
 
-          {/* Mobile: theme toggle + hamburger */}
+          {/* Mobile: language, theme toggle + hamburger */}
           <div className="lg:hidden flex items-center gap-1">
+            <LanguageSwitcher />
             <ThemeToggle />
             <button
               className="relative z-10 flex flex-col justify-center items-center w-10 h-10 gap-[5px]"
               onClick={() => setMobileOpen(!mobileOpen)}
-              aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
+              aria-label={mobileOpen ? t.closeMenu : t.openMenu}
               aria-expanded={mobileOpen}
             >
               <span
@@ -274,7 +275,7 @@ export function Navigation() {
                         className="inline-flex items-center gap-2 px-8 py-3.5 text-[13px] font-semibold bg-[#0080FF] text-white rounded-lg"
                       >
                         {UserIcon}
-                        Your tools
+                        {t.yourTools}
                       </a>
                       <button
                         onClick={() => {
@@ -284,7 +285,7 @@ export function Navigation() {
                         className="inline-flex items-center gap-2 px-8 py-3 text-[13px] font-semibold text-[var(--color-text-secondary)] border border-[var(--color-border-default)] rounded-lg hover:text-[var(--color-text-primary)] hover:border-[var(--color-border-strong)] transition-colors duration-150"
                       >
                         {SignOutIcon}
-                        Sign out
+                        {t.signOut}
                       </button>
                     </div>
                   ) : (
@@ -294,7 +295,7 @@ export function Navigation() {
                       className="inline-flex items-center gap-2 px-8 py-3.5 text-[13px] font-semibold bg-[#0080FF] text-white rounded-lg"
                     >
                       {UserIcon}
-                      Sign in
+                      {t.signIn}
                     </a>
                   )}
                 </motion.li>

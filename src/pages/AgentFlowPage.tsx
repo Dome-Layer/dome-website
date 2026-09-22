@@ -1,5 +1,4 @@
 import { useEffect } from 'react'
-import type { MetaFunction } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { ToolPageLayout } from '../layouts/ToolPageLayout'
 import { Section } from '../components/Section'
@@ -7,20 +6,9 @@ import { Container } from '../components/Container'
 import { TextReveal } from '../components/TextReveal'
 import { fadeUp, dramaticFadeUp, viewportConfig } from '../lib/motion'
 import { AGENT_FLOW_LIVE, useToolHref } from '../lib/tools'
-import { buildMeta } from '../lib/seo'
+import { routeMeta } from '../lib/seo'
 
-export const meta: MetaFunction = () =>
-  buildMeta({
-    title: 'Agent Flow | DOME',
-    description:
-      'A governed invoice-to-approval workflow: Document Intelligence extraction, a policy rules engine, a multi-model LLM Council, and a human approval gate, with every step audited.',
-    path: '/tools/agent-flow',
-    ogDescription:
-      'A governed invoice-to-approval workflow across the DOME tools, with a human-in-the-loop gate and a full audit trail.',
-    twitterDescription: 'Governed invoice-to-approval workflow with a human-in-the-loop gate and full audit trail.',
-    imageAlt: 'DOME Agent Flow: governed invoice-to-approval workflow',
-    twitterImageAlt: 'DOME Agent Flow',
-  })
+export const meta = routeMeta('agentFlow')
 
 const ACCENT = '#EC4899'
 const ACCENT_HOVER = '#F472B6'
