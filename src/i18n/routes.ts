@@ -6,6 +6,11 @@ interface PublicRoute {
   path: Record<Locale, string>
   /** Last meaningful content change, used for the sitemap lastmod (YYYY-MM-DD). */
   updatedAt: string
+  /**
+   * Case study this route renders, by id. Such a route takes its title and description from the
+   * case content rather than from the message catalogues, so a summary lives in exactly one place.
+   */
+  caseStudy?: string
 }
 
 /**
@@ -59,6 +64,59 @@ export const PUBLIC_ROUTES = {
     path: { en: '/dome/agent-flow', it: '/it/dome/agent-flow' },
     updatedAt: '2026-09-11',
   },
+  caseStudies: {
+    file: 'pages/CaseStudiesPage.tsx',
+    path: { en: '/case-studies', it: '/it/casi-studio' },
+    updatedAt: '2026-09-22',
+  },
+  caseProcurement: {
+    file: 'pages/CaseStudyPage.tsx',
+    path: { en: '/case-studies/procurement-workflow-redesign', it: '/it/casi-studio/riprogettazione-acquisti' },
+    updatedAt: '2026-09-22',
+    caseStudy: 'procurement',
+  },
+  caseCompliance: {
+    file: 'pages/CaseStudyPage.tsx',
+    path: { en: '/case-studies/ai-compliance-assessments', it: '/it/casi-studio/valutazioni-conformita-ai' },
+    updatedAt: '2026-09-22',
+    caseStudy: 'compliance',
+  },
+  caseInvoice: {
+    file: 'pages/CaseStudyPage.tsx',
+    path: { en: '/case-studies/governed-invoice-approval', it: '/it/casi-studio/approvazione-fatture-governata' },
+    updatedAt: '2026-09-22',
+    caseStudy: 'invoice',
+  },
+  caseMetals: {
+    file: 'pages/CaseStudyPage.tsx',
+    path: { en: '/case-studies/metals-trading-platform', it: '/it/casi-studio/piattaforma-trading-metalli' },
+    updatedAt: '2026-09-22',
+    caseStudy: 'metals',
+  },
+  caseTraceability: {
+    file: 'pages/CaseStudyPage.tsx',
+    path: { en: '/case-studies/food-traceability-platform', it: '/it/casi-studio/piattaforma-tracciabilita-alimentare' },
+    updatedAt: '2026-09-22',
+    caseStudy: 'traceability',
+  },
+  caseTrading: {
+    file: 'pages/CaseStudyPage.tsx',
+    path: { en: '/case-studies/trading-app-redesign', it: '/it/casi-studio/riprogettazione-app-trading' },
+    updatedAt: '2026-09-22',
+    caseStudy: 'trading',
+  },
+  casePlatform: {
+    file: 'pages/CaseStudyPage.tsx',
+    path: { en: '/case-studies/ai-procurement-platform', it: '/it/casi-studio/piattaforma-acquisti-ai' },
+    updatedAt: '2026-09-22',
+    caseStudy: 'platform',
+  },
+  caseTraining: {
+    file: 'pages/CaseStudyPage.tsx',
+    path: { en: '/case-studies/ai-training-videos', it: '/it/casi-studio/video-formativi-ai' },
+    updatedAt: '2026-09-22',
+    caseStudy: 'training',
+  },
   privacy: { file: 'pages/PrivacyPage.tsx', path: { en: '/privacy', it: '/it/privacy' }, updatedAt: '2026-04-17' },
   terms: { file: 'pages/TermsPage.tsx', path: { en: '/terms', it: '/it/termini' }, updatedAt: '2026-04-17' },
 } satisfies Record<string, PublicRoute>
@@ -66,6 +124,27 @@ export const PUBLIC_ROUTES = {
 export type RouteId = keyof typeof PUBLIC_ROUTES
 
 export const ROUTE_IDS = Object.keys(PUBLIC_ROUTES) as RouteId[]
+
+/** Routes whose metadata is hand-written in the message catalogues (everything but case studies). */
+export type StaticRouteId = Exclude<RouteId, 'caseProcurement' | 'caseCompliance' | 'caseInvoice' | 'caseMetals' | 'caseTraceability' | 'caseTrading' | 'casePlatform' | 'caseTraining'>
+
+/** Route ids that render a case study, in manifest order. */
+export const CASE_STUDY_ROUTE_IDS = ROUTE_IDS.filter((id) => caseStudyIdFor(id) !== undefined)
+
+/**
+ * The case study a route renders, if it renders one. Widened to the declared interface because
+ * `satisfies` keeps each entry's literal type, and `caseStudy` is absent from the ones that omit it.
+ */
+export function caseStudyIdFor(id: RouteId): string | undefined {
+  return (PUBLIC_ROUTES[id] as PublicRoute).caseStudy
+}
+
+/** The route that renders a given case study, for linking from a card. */
+export function caseStudyHref(studyId: string, locale: Locale): string {
+  const id = ROUTE_IDS.find((routeId) => caseStudyIdFor(routeId) === studyId)
+  if (!id) throw new Error(`No route renders case study "${studyId}"`)
+  return localizedHref(id, locale)
+}
 
 /** Pages that are neither a tool nor legal: the ones llms.txt lists first. */
 export const PAGE_IDS = ['home', 'enterpriseUx', 'aiProcessAutomation', 'dome'] as const satisfies readonly RouteId[]

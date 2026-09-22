@@ -2,8 +2,11 @@ import { HeroMedia } from '../../components/media/HeroMedia'
 import { ButtonLink } from '../../components/ui/Button'
 import { Eyebrow } from '../../components/ui/Eyebrow'
 import { SITE } from '../../lib/siteRoutes'
+import { localizedHref } from '../../i18n/routes'
+import { useLocale } from '../../i18n/useLocale'
 
 export function HomeHero() {
+  const locale = useLocale()
   return (
     <section className="relative h-[620px] overflow-hidden md:h-[780px]">
       <HeroMedia />
@@ -19,7 +22,7 @@ export function HomeHero() {
           </p>
           <div className="mt-2 flex flex-wrap gap-3">
             <ButtonLink to={SITE.contact}>Book an introductory call</ButtonLink>
-            <ButtonLink to={SITE.caseStudies} variant="secondary">
+            <ButtonLink to={localizedHref('caseStudies', locale)} variant="secondary">
               See our work
             </ButtonLink>
           </div>

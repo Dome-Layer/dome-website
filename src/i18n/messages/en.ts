@@ -155,6 +155,15 @@ export const en: Messages = {
       imageAlt: 'DOME Agent Flow: governed invoice-to-approval workflow',
       twitterImageAlt: 'DOME Agent Flow',
     },
+    caseStudies: {
+      name: 'Case studies',
+      title: 'Case studies | DOME',
+      description:
+        'Anonymised accounts of enterprise UX and AI automation work in retail procurement, trade finance, food supply chains, compliance and digital assets.',
+      ogDescription:
+        'What we have built, and what changed as a result. Client details are anonymised throughout.',
+      imageAlt: 'DOME case studies',
+    },
     privacy: {
       name: 'Privacy policy',
       title: 'Privacy policy | DOME',

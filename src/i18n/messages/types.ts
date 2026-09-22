@@ -1,5 +1,5 @@
 import type { DescribedMediaId } from '../../content/media'
-import type { RouteId } from '../routes'
+import type { StaticRouteId } from '../routes'
 
 export interface PageMetaText {
   /** Short page name, used in breadcrumbs and llms.txt. */
@@ -70,7 +70,11 @@ export interface Messages {
     homeLink: string
   }
   breadcrumbHome: string
-  meta: Record<RouteId, PageMetaText>
+  /**
+   * Metadata for every page whose words are not already content. Case study routes are absent:
+   * their title and description come from the study itself, through `pageMeta`.
+   */
+  meta: Record<StaticRouteId, PageMetaText>
   /**
    * Alt text for every non-decorative asset in `src/content/media.ts`, keyed by media id. The
    * decorative assets are absent on purpose: they render `aria-hidden`.

@@ -1,5 +1,6 @@
 import { CONTENT_LANGUAGE, type Locale } from '../i18n/locales'
 import { MESSAGES } from '../i18n/messages'
+import { pageMeta } from '../i18n/pageMeta'
 import { TOOL_ROUTE_IDS, localizedHref, type RouteId } from '../i18n/routes'
 
 export const SITE_URL = 'https://domelayer.com'
@@ -51,14 +52,14 @@ function website(locales: Locale[]): Node {
 
 /** The JSON-LD graph for a public page: organisation, website, the page itself and, below home, a breadcrumb. */
 export function pageStructuredData(id: RouteId, locale: Locale, locales: Locale[]): Node {
-  const t = MESSAGES[locale].meta
+  const t = pageMeta(id, locale)
   const url = absoluteUrl(localizedHref(id, locale))
   const page: Node = {
     '@type': 'WebPage',
     '@id': `${url}#webpage`,
     url,
-    name: t[id].title,
-    description: t[id].description,
+    name: t.title,
+    description: t.description,
     inLanguage: CONTENT_LANGUAGE[locale],
     isPartOf: { '@id': WEBSITE_ID },
     publisher: { '@id': ORGANIZATION_ID },
@@ -75,12 +76,12 @@ export function pageStructuredData(id: RouteId, locale: Locale, locales: Locale[
       '@id': breadcrumbId,
       itemListElement: [
         { '@type': 'ListItem', position: 1, name: MESSAGES[locale].breadcrumbHome, item: absoluteUrl(localizedHref('home', locale)) },
-        { '@type': 'ListItem', position: 2, name: t[id].name, item: url },
+        { '@type': 'ListItem', position: 2, name: t.name, item: url },
       ],
     })
   }
   if ((TOOL_ROUTE_IDS as readonly RouteId[]).includes(id)) {
-    page.about = { '@type': 'Thing', name: t[id].name, description: t[id].description }
+    page.about = { '@type': 'Thing', name: t.name, description: t.description }
   }
 
   return { '@context': 'https://schema.org', '@graph': graph }
