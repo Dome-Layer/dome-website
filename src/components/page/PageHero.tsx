@@ -29,9 +29,19 @@ export function PageHero({ media, breadcrumbs, eyebrow, heading, lead, primary, 
     <section className="relative overflow-hidden">
       <div className="absolute inset-0">
         <Picture id={media} priority className="h-full w-full object-cover" />
+        {/*
+          Two scrims, same reasoning as the home hero. On phones the copy spans the full width, so a
+          gradient that reaches transparent would leave the end of every line on bare media; the
+          mobile one therefore covers the width and only softens at the very edge. From `md` up the
+          copy sits in the left third, so the image can still show through on the right.
+        */}
         <div
           aria-hidden="true"
-          className="absolute inset-0 bg-[linear-gradient(90deg,var(--color-scrim-strong)_0%,var(--color-scrim)_52%,transparent_85%)]"
+          className="absolute inset-0 md:hidden bg-[linear-gradient(90deg,var(--color-scrim-strong)_0%,var(--color-scrim-strong)_78%,var(--color-scrim)_100%)]"
+        />
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 hidden md:block bg-[linear-gradient(90deg,var(--color-scrim-strong)_0%,var(--color-scrim)_52%,transparent_85%)]"
         />
         <div
           aria-hidden="true"
@@ -39,8 +49,8 @@ export function PageHero({ media, breadcrumbs, eyebrow, heading, lead, primary, 
         />
       </div>
 
-      <div className="relative mx-auto max-w-[1280px] px-6 py-24 md:px-12 md:py-32">
-        <div className="flex max-w-[640px] flex-col gap-5">
+      <div className="relative mx-auto max-w-[1280px] px-6 py-20 md:px-12 md:py-32">
+        <div className="flex max-w-[20rem] flex-col gap-5 sm:max-w-[30rem] md:max-w-[640px]">
           {breadcrumbs && (
             <nav aria-label="Breadcrumb">
               <ol className="flex flex-wrap items-center gap-2 text-[13px] text-[var(--color-text-secondary)]">
@@ -60,10 +70,10 @@ export function PageHero({ media, breadcrumbs, eyebrow, heading, lead, primary, 
             </nav>
           )}
           <Eyebrow>{eyebrow}</Eyebrow>
-          <h1 className="text-balance text-[36px] font-bold leading-[1.08] tracking-[-0.03em] text-[var(--color-text-primary)] md:text-[52px]">
+          <h1 className="text-balance text-[32px] font-bold leading-[1.15] tracking-[-0.02em] text-[var(--color-text-primary)] md:text-[52px] md:leading-[1.08] md:tracking-[-0.03em]">
             {heading}
           </h1>
-          <p className="max-w-[560px] text-[17px] leading-[1.7] text-[var(--color-text-secondary)] md:text-[18px]">
+          <p className="max-w-[560px] text-[15px] leading-[1.6] text-[var(--color-text-primary)] sm:text-[16px] md:text-[18px] md:leading-[1.7] md:text-[var(--color-text-secondary)]">
             {lead}
           </p>
           <div className="mt-2 flex flex-wrap gap-3">
