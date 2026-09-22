@@ -145,4 +145,30 @@ export const it: Messages = {
       imageAlt: 'DOME',
     },
   },
+  media: {
+    homeHeroStill: 'Due colleghi esaminano un flusso di approvazione su un laptop',
+    aiProcessAutomationHero:
+      'Scrivania amministrativa con un monitor che mostra un diagramma di approvazione e una pila di fatture',
+    enterpriseUxHero: 'Designer che applica un post-it blu su una parete di wireframe',
+    capabilitiesHero: 'Corridoio di una sala server illuminato di bianco e blu',
+    aboutHero: 'I tetti di Firenze e la cupola del Duomo visti dalla finestra di uno studio',
+    caseStudiesHero: 'Mappe di processo e una dashboard su tablet su un tavolo di legno chiaro',
+    contactHero: 'Sala riunioni con tavolo rotondo accanto a una finestra su Firenze',
+    caseProcurementWorkflowRedesign:
+      'Specialista acquisti al lavoro su due monitor con un’interfaccia di acquisto',
+    caseAiComplianceAssessments:
+      'Analista che esamina una norma evidenziata su tablet accanto a un raccoglitore',
+    caseMetalsTradingPlatform:
+      'Magazzino di lingotti di alluminio con un tablet che mostra grafici dei prezzi',
+    caseFoodTraceabilityPlatform:
+      'Mano che scansiona un’etichetta QR su una cassetta di verdure in un centro di distribuzione',
+    caseTradingAppRedesign:
+      'Smartphone con un’app di trading e grafici dei prezzi, sullo sfondo una strada di città',
+    caseAiProcurementPlatform: 'Tre colleghi davanti a uno schermo con un diagramma di flusso',
+    caseAiTrainingVideos:
+      'Piccolo studio video con telecamera, luce e un monitor con una schermata formativa',
+    francescoProdomo: 'Francesco Prodomo',
+    ionitaLogo: 'Ionita Consulting',
+  },
+  aiGeneratedLabel: 'Immagine generata con AI',
 }

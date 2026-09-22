@@ -29,6 +29,8 @@
     "src/i18n/locales.ts",
     "src/i18n/routes.ts",
     "src/i18n/messages/*.ts",
+    // Reached from the message catalogues: it types the alt-text keys.
+    "src/content/media.ts",
     "src/lib/structuredData.ts",
     "src/seo/files.ts"
   ]
