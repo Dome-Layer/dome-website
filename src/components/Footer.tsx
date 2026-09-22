@@ -204,7 +204,7 @@ export function Footer() {
           <div className="flex flex-col gap-3 text-body-sm text-dome-nickel">
             <a href={localizedHref('enterpriseUx', locale)} className="hover:text-dome-signal-blue transition-colors">{messages.nav.enterpriseUx}</a>
             <a href={localizedHref('aiProcessAutomation', locale)} className="hover:text-dome-signal-blue transition-colors">{messages.nav.aiAutomation}</a>
-            <a href={SITE.caseStudies} className="hover:text-dome-signal-blue transition-colors">{messages.nav.caseStudies}</a>
+            <a href={localizedHref('caseStudies', locale)} className="hover:text-dome-signal-blue transition-colors">{messages.nav.caseStudies}</a>
             <a href={SITE.about} className="hover:text-dome-signal-blue transition-colors">{messages.nav.about}</a>
           </div>
         </div>

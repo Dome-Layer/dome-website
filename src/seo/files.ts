@@ -1,5 +1,6 @@
 import { DEFAULT_LOCALE, type Locale } from '../i18n/locales'
 import { MESSAGES } from '../i18n/messages'
+import { pageMeta } from '../i18n/pageMeta'
 import { PAGE_IDS, PUBLIC_ROUTES, ROUTE_IDS, TOOL_ROUTE_IDS, localizedHref, type RouteId } from '../i18n/routes'
 import { SITE_URL, absoluteUrl } from '../lib/structuredData'
 
@@ -44,8 +45,10 @@ export function buildRobots(): string {
 const LEGAL_IDS: RouteId[] = ['privacy', 'terms']
 
 function linkList(ids: readonly RouteId[], locale: Locale): string[] {
-  const meta = MESSAGES[locale].meta
-  return ids.map((id) => `- [${meta[id].name}](${absoluteUrl(localizedHref(id, locale))}): ${meta[id].description}`)
+  return ids.map((id) => {
+    const meta = pageMeta(id, locale)
+    return `- [${meta.name}](${absoluteUrl(localizedHref(id, locale))}): ${meta.description}`
+  })
 }
 
 function llmsSection(locale: Locale): string[] {

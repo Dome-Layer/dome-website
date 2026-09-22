@@ -1,8 +1,8 @@
 import type { MetaDescriptor, MetaFunction } from 'react-router'
 import { DEFAULT_LOCALE, OG_LOCALE, type Locale } from '../i18n/locales'
-import { MESSAGES } from '../i18n/messages'
 import { PUBLISHED_LOCALES } from '../i18n/published'
-import { localeFromPath, localizedHref, type RouteId } from '../i18n/routes'
+import { pageMeta } from '../i18n/pageMeta'
+import { localeFromPath, localizedHref, routeIdFromPath, type RouteId } from '../i18n/routes'
 import { SITE_URL, absoluteUrl, pageStructuredData } from './structuredData'
 
 export { SITE_URL }
@@ -15,7 +15,7 @@ const DEFAULT_OG_IMAGE = `${SITE_URL}/og-image.png`
  * Router uses only the deepest matching route's meta, so every page returns the complete set.
  */
 export function buildMeta(id: RouteId, locale: Locale, locales: Locale[] = PUBLISHED_LOCALES): MetaDescriptor[] {
-  const page = MESSAGES[locale].meta[id]
+  const page = pageMeta(id, locale)
   const url = absoluteUrl(localizedHref(id, locale))
   return [
     { title: page.title },
@@ -48,4 +48,15 @@ export function buildMeta(id: RouteId, locale: Locale, locales: Locale[] = PUBLI
 /** A route module's `meta` export: the locale comes from the URL being rendered. */
 export function routeMeta(id: RouteId): MetaFunction {
   return ({ location }) => buildMeta(id, localeFromPath(location.pathname))
+}
+
+/**
+ * A `meta` export for a route module that several routes share, as the case study pages do: the
+ * route is resolved from the URL being rendered rather than named up front.
+ */
+export function pathRouteMeta(): MetaFunction {
+  return ({ location }) => {
+    const id = routeIdFromPath(location.pathname)
+    return id ? buildMeta(id, localeFromPath(location.pathname)) : []
+  }
 }

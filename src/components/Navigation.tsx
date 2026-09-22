@@ -20,7 +20,7 @@ const NAV_ITEMS = [
   { key: 'enterpriseUx', route: 'enterpriseUx' },
   { key: 'aiAutomation', route: 'aiProcessAutomation' },
   { key: 'dome', route: 'dome' },
-  { key: 'caseStudies', pending: SITE.caseStudies },
+  { key: 'caseStudies', route: 'caseStudies' },
   { key: 'about', pending: SITE.about },
   { key: 'contact', pending: SITE.contact },
 ] as const satisfies readonly ({ key: keyof Messages['nav'] } & (

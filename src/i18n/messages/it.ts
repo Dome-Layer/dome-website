@@ -157,6 +157,15 @@ export const it: Messages = {
       imageAlt: 'DOME Agent Flow: flusso governato dalla fattura all’approvazione',
       twitterImageAlt: 'DOME Agent Flow',
     },
+    caseStudies: {
+      name: 'Casi studio',
+      title: 'Casi studio | DOME',
+      description:
+        'Racconti anonimizzati di lavori di UX enterprise e automazione con AI negli acquisti retail, nel trade finance, nelle filiere alimentari, nella compliance e negli asset digitali.',
+      ogDescription:
+        'Che cosa abbiamo costruito e che cosa è cambiato. I dettagli dei clienti sono sempre anonimizzati.',
+      imageAlt: 'Casi studio DOME',
+    },
     privacy: {
       name: 'Informativa privacy',
       title: 'Informativa privacy | DOME',
