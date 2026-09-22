@@ -42,7 +42,8 @@ export function Capabilities() {
         </h2>
         <p className="text-[17px] leading-[1.7] text-[var(--color-text-secondary)]">
           Our own tools cover the path from process discovery to audited execution. Prospective
-          clients can try them before any engagement starts.
+          clients can try them before any engagement starts, and where data cannot leave your
+          network, three of them run against a local open-weight model instead of a cloud API.
         </p>
         <ul className="flex flex-wrap gap-2">
           {TOOLS.map((tool) => (

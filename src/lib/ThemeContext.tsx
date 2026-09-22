@@ -29,6 +29,16 @@ function writeThemeCookie(theme: Theme): void {
   document.cookie = `${COOKIE_NAME}=${theme}; Path=/; SameSite=Lax; Max-Age=${COOKIE_MAX_AGE}${domainPart}${secure}`
 }
 
+/**
+ * Dark by default.
+ *
+ * DOME is a dark-first brand, so the OS `prefers-color-scheme` is deliberately not consulted: a
+ * visitor whose system is set to light still sees the site as designed. Only an explicit choice
+ * through the theme toggle switches it, and that choice is remembered in the `dome-theme` cookie,
+ * which is set for `*.domelayer.com` so it follows them into the tools.
+ *
+ * Keep in step with `public/theme-init.js`, which applies the same rule before first paint.
+ */
 function readInitialTheme(): Theme {
   // Cookie takes priority: shared across all *.domelayer.com subdomains
   const cookie = readThemeCookie()
@@ -39,7 +49,7 @@ function readInitialTheme(): Theme {
   } catch {
     // localStorage may be unavailable
   }
-  return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+  return 'dark'
 }
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
@@ -53,6 +63,9 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     setTheme(readInitialTheme())
   }, [])
 
+  // Apply only. Nothing is persisted here: the dark default is not a preference the visitor
+  // expressed, and storing it would pin them to today's default for a year and make the cookie
+  // notice's "remembers your theme preference" untrue for someone who never chose.
   useEffect(() => {
     if (theme === null) return
     if (theme === 'dark') {
@@ -60,16 +73,24 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     } else {
       document.documentElement.removeAttribute('data-theme')
     }
-    localStorage.setItem(COOKIE_NAME, theme)
-    writeThemeCookie(theme)
   }, [theme])
 
+  /** The only thing that writes the cookie: an explicit choice by the visitor. */
   function toggleTheme() {
-    setTheme(prev => (prev === 'dark' ? 'light' : 'dark'))
+    setTheme(prev => {
+      const next: Theme = prev === 'dark' ? 'light' : 'dark'
+      try {
+        localStorage.setItem(COOKIE_NAME, next)
+      } catch {
+        // localStorage may be unavailable; the cookie still carries the choice.
+      }
+      writeThemeCookie(next)
+      return next
+    })
   }
 
   return (
-    <ThemeContext.Provider value={{ theme: theme ?? 'light', toggleTheme }}>
+    <ThemeContext.Provider value={{ theme: theme ?? 'dark', toggleTheme }}>
       {children}
     </ThemeContext.Provider>
   )

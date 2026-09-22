@@ -68,8 +68,12 @@ const AGENT_FLOW_STEPS = [
 const STANDARDS = [
   { title: 'Hosted in the EU', body: 'The demo tools and their data run on infrastructure in the European Union.' },
   {
+    title: 'They can run on your infrastructure',
+    body: 'Process analysis, document and data intelligence each run against a local open-weight model through Ollama, as a configuration change rather than a rewrite. Nothing has to leave your network.',
+  },
+  {
     title: 'Not tied to one AI provider',
-    body: 'Models can change without redesigning the workflow or the controls around it.',
+    body: 'Claude, Azure OpenAI or a local model, chosen per deployment. Models can change without redesigning the workflow or the controls around it.',
   },
   {
     title: 'Logged by design',
@@ -196,7 +200,7 @@ export default function DomePage() {
       <section className="bg-[var(--color-bg-base)] py-20 md:py-24">
         <div className="mx-auto flex max-w-[1280px] flex-col gap-12 px-6 md:px-12">
           <SectionHeading eyebrow="How the tools are built" heading="The same standards we bring to client work" />
-          <div className="grid gap-6 md:grid-cols-3">
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
             {STANDARDS.map((item) => (
               <div key={item.title} className="flex flex-col gap-3 border-t border-[var(--color-border-default)] pt-6">
                 <h3 className="text-lg font-semibold leading-[1.3]">{item.title}</h3>

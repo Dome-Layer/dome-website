@@ -12,12 +12,19 @@ import { routeMeta } from '../lib/seo'
 
 export const meta = routeMeta('about')
 
-/** Confirmed with Francesco against canvas Version 10. Update here, not in the copy. */
+/**
+ * Confirmed with Francesco 2026-09-22. Update here, not in the copy.
+ *
+ * The provider figure replaced "2 working languages", which said nothing a client weighs: any
+ * consultancy works in any language now. Three providers is checkable, and it is the claim that
+ * matters to a buyer who cannot send data to a US API. Process Analyzer, Document Intelligence and
+ * Data Intelligence each ship an Ollama provider alongside Claude and Azure OpenAI.
+ */
 const FACTS = [
   { figure: '3', label: 'service lines, from UX research to audited automation' },
   { figure: '6', label: 'AI tools we build and operate ourselves' },
-  { figure: '2', label: 'working languages, English and Italian' },
-  { figure: '8', label: 'years delivering with our partner firm' },
+  { figure: '3', label: 'model providers, including open-weight models on your own infrastructure' },
+  { figure: '10', label: 'years delivering with our partner firm' },
 ]
 
 const SETUP = [
@@ -135,7 +142,7 @@ export default function AboutPage() {
             </h2>
             <p className="text-[17px] leading-[1.7] text-[var(--color-text-secondary)]">
               Larger programmes are delivered together with Ionita Consulting, based in Utrecht, with
-              whom we have worked for eight years. Together we can staff engagements that need more
+              whom we have worked for ten years. Together we can staff engagements that need more
               specialists or a longer runway.
             </p>
           </div>

@@ -108,6 +108,7 @@ export default function AiProcessAutomationPage() {
           'Policy rules kept outside the model, readable by your team',
           'A named person signs off where the policy requires it',
           'An audit trail you can export for each run',
+          'Runs against a local open-weight model where data cannot leave your network',
         ]}
       />
 
