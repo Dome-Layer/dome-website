@@ -1,19 +1,14 @@
 import { Picture } from '../media/Picture'
 import { ButtonLink } from '../ui/Button'
 import { localizedHref } from '../../i18n/routes'
-import { useLocale } from '../../i18n/useLocale'
+import { useLocale, useMessages } from '../../i18n/useLocale'
+import type { ClosingText } from '../../i18n/messages/types'
 
 /** The call to action every page ends on: a texture panel, a question and two ways to answer it. */
-export function ClosingCta({
-  heading,
-  body,
-  primaryLabel,
-}: {
-  heading: string
-  body: string
-  primaryLabel: string
-}) {
+export function ClosingCta({ text }: { text: ClosingText }) {
+  const { heading, body, primary } = text
   const locale = useLocale()
+  const common = useMessages().common
   return (
     <section className="bg-[var(--color-bg-base)] pb-20 md:pb-24">
       <div className="mx-auto max-w-[1280px] px-6 md:px-12">
@@ -28,10 +23,10 @@ export function ClosingCta({
             </div>
             <div className="flex shrink-0 flex-wrap gap-3">
               <ButtonLink to={localizedHref('contact', locale)} arrow={false}>
-                {primaryLabel}
+                {primary}
               </ButtonLink>
               <ButtonLink to={localizedHref('contact', locale)} variant="secondary" arrow={false}>
-                Send a message
+                {common.sendMessage}
               </ButtonLink>
             </div>
           </div>

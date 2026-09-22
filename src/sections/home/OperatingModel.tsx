@@ -2,7 +2,7 @@ import type { ReactNode } from 'react'
 import { ForwardLink } from '../../components/ui/Button'
 import { Eyebrow } from '../../components/ui/Eyebrow'
 import { localizedHref } from '../../i18n/routes'
-import { useLocale } from '../../i18n/useLocale'
+import { useLocale, useMessages } from '../../i18n/useLocale'
 
 const icon = {
   fill: 'none',
@@ -11,6 +11,27 @@ const icon = {
   strokeLinecap: 'round',
   strokeLinejoin: 'round',
 } as const
+
+/** One icon per operating-model row, in the order the catalogue lists them. */
+const ICONS = [
+  <>
+    <circle cx="9" cy="8" r="4" />
+    <path d="M2 21v-1a7 7 0 0 1 11.5-5.4" />
+    <path d="M16 19l2 2 4-4" />
+  </>,
+  <>
+    <circle cx="12" cy="5" r="2.5" />
+    <circle cx="5" cy="18" r="2.5" />
+    <circle cx="19" cy="18" r="2.5" />
+    <path d="M10.8 7.2 6.2 15.8M13.2 7.2l4.6 8.6M7.5 18h9" />
+  </>,
+  <>
+    <path d="M3 21h18" />
+    <path d="M5 21V7l7-4 7 4v14" />
+    <path d="M9 21v-6h6v6" />
+    <path d="M9 10h.01M15 10h.01" />
+  </>,
+]
 
 function Row({ title, body, children }: { title: string; body: string; children: ReactNode }) {
   return (
@@ -34,47 +55,26 @@ function Row({ title, body, children }: { title: string; body: string; children:
  */
 export function OperatingModel() {
   const locale = useLocale()
+  const t = useMessages().pages.home.operatingModel
   return (
     <section className="bg-[var(--color-bg-base)] py-20 md:py-24">
       <div className="mx-auto grid max-w-[1280px] items-start gap-12 px-6 md:px-12 lg:grid-cols-2 lg:gap-20">
         <div className="flex flex-col gap-5 lg:sticky lg:top-24">
-          <Eyebrow>About DOME</Eyebrow>
+          <Eyebrow>{t.eyebrow}</Eyebrow>
           <h2 className="text-[32px] font-bold leading-[1.15] tracking-[-0.025em] md:text-[40px]">
-            One accountable lead. The right specialists for the work.
+            {t.heading}
           </h2>
           <p className="text-[17px] leading-[1.7] text-[var(--color-text-secondary)]">
-            We staff each engagement around the problem rather than a fixed headcount. You get
-            senior people throughout, and a team that grows or shrinks with the scope.
+            {t.lead}
           </p>
-          <ForwardLink to={localizedHref('about', locale)}>How we are set up</ForwardLink>
+          <ForwardLink to={localizedHref('about', locale)}>{t.cta}</ForwardLink>
         </div>
         <div className="flex flex-col border-b border-[var(--color-border-default)]">
-          <Row
-            title="Engagement lead"
-            body="One senior lead owns the engagement from the first call to handover, and stays accountable for the outcome."
-          >
-            <circle cx="9" cy="8" r="4" />
-            <path d="M2 21v-1a7 7 0 0 1 11.5-5.4" />
-            <path d="M16 19l2 2 4-4" />
-          </Row>
-          <Row
-            title="Specialist network"
-            body="UX researchers, designers, engineers, data and compliance specialists join when the work needs them."
-          >
-            <circle cx="12" cy="5" r="2.5" />
-            <circle cx="5" cy="18" r="2.5" />
-            <circle cx="19" cy="18" r="2.5" />
-            <path d="M10.8 7.2 6.2 15.8M13.2 7.2l4.6 8.6M7.5 18h9" />
-          </Row>
-          <Row
-            title="Delivery partner"
-            body="Larger programmes run with an established partner firm, so the team can grow with the scope."
-          >
-            <path d="M3 21h18" />
-            <path d="M5 21V7l7-4 7 4v14" />
-            <path d="M9 21v-6h6v6" />
-            <path d="M9 10h.01M15 10h.01" />
-          </Row>
+          {t.items.map((item, i) => (
+            <Row key={item.title} title={item.title} body={item.body}>
+              {ICONS[i]}
+            </Row>
+          ))}
         </div>
       </div>
     </section>

@@ -3,12 +3,6 @@ import { Link } from 'react-router'
 import { localizedHref } from '../../i18n/routes'
 import { useLocale, useMessages } from '../../i18n/useLocale'
 
-const TOPICS = [
-  'AI process automation',
-  'Enterprise UX and product',
-  'DOME capabilities',
-  'Something else',
-]
 
 const field =
   'w-full rounded-[var(--radius-md)] border border-[var(--color-border-default)] bg-[var(--color-bg-base)] px-4 py-3 text-[15px] text-[var(--color-text-primary)] placeholder:text-[var(--color-text-tertiary)] focus:border-[var(--color-border-accent)]'
@@ -21,7 +15,9 @@ const label = 'text-[13px] font-medium text-[var(--color-text-secondary)]'
  */
 export function ContactForm() {
   const locale = useLocale()
-  const t = useMessages().contactForm
+  const messages = useMessages()
+  const t = messages.contactForm
+  const TOPICS = messages.common.topics
 
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')

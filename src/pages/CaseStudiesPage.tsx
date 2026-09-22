@@ -5,35 +5,32 @@ import { ClosingCta } from '../components/page/ClosingCta'
 import { SectionHeading } from '../components/ui/SectionHeading'
 import { CASE_STUDIES, type Segment } from '../content/caseStudies'
 import { localizedHref } from '../i18n/routes'
-import { useLocale } from '../i18n/useLocale'
+import { useLocale, useMessages } from '../i18n/useLocale'
 import { routeMeta } from '../lib/seo'
 
 export const meta = routeMeta('caseStudies')
 
-const GROUPS: { segment: Segment; eyebrow: string; heading: string }[] = [
-  { segment: 'automation', eyebrow: 'AI process automation', heading: 'Work that follows a policy' },
-  { segment: 'ux', eyebrow: 'Enterprise UX and product', heading: 'Platforms people have to use every day' },
-  { segment: 'dome', eyebrow: 'DOME capabilities', heading: 'The method running end to end' },
-]
 
 export default function CaseStudiesPage() {
   const locale = useLocale()
+  const t = useMessages().pages.caseStudies
+  const segments: Segment[] = ['automation', 'ux', 'dome']
   return (
     <PublicPage>
       <PageHero
         media="caseStudiesHero"
-        eyebrow="Case studies"
-        heading="What we built, and what changed."
-        lead="Anonymised accounts of the work: the problem as the client described it, what we did, and the outcomes the engagement actually produced."
-        primary={{ label: 'Talk about your project', to: localizedHref('contact', locale) }}
-        secondary={{ label: 'See what we build', to: localizedHref('dome', locale) }}
+        eyebrow={t.hero.eyebrow}
+        heading={t.hero.heading}
+        lead={t.hero.lead}
+        primary={{ label: t.hero.primary, to: localizedHref('contact', locale) }}
+        secondary={{ label: t.hero.secondary, to: localizedHref('dome', locale) }}
       />
 
-      {GROUPS.map((group) => {
-        const studies = CASE_STUDIES.filter((study) => study.segment === group.segment)
+      {t.groups.map((group, i) => {
+        const studies = CASE_STUDIES.filter((study) => study.segment === segments[i])
         if (studies.length === 0) return null
         return (
-          <section key={group.segment} className="bg-[var(--color-bg-base)] py-16 md:py-20">
+          <section key={group.eyebrow} className="bg-[var(--color-bg-base)] py-16 md:py-20">
             <div className="mx-auto flex max-w-[1280px] flex-col gap-10 px-6 md:px-12">
               <SectionHeading eyebrow={group.eyebrow} heading={group.heading} />
               <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -49,17 +46,12 @@ export default function CaseStudiesPage() {
       <section className="bg-[var(--color-bg-base)] pb-16">
         <div className="mx-auto max-w-[1280px] px-6 md:px-12">
           <p className="text-sm text-[var(--color-text-secondary)]">
-            Client details are anonymised throughout: we describe the sector and the function, never
-            the organisation. Only outcomes the engagement actually produced are claimed.
+            {t.note}
           </p>
         </div>
       </section>
 
-      <ClosingCta
-        heading="Recognise one of these problems?"
-        body="Tell us which one, and we will tell you how we would approach it."
-        primaryLabel="Book an introductory call"
-      />
+      <ClosingCta text={t.closing} />
     </PublicPage>
   )
 }
