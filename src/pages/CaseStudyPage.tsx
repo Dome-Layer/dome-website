@@ -8,7 +8,6 @@ import { Eyebrow } from '../components/ui/Eyebrow'
 import { caseStudy, type CaseStudy } from '../content/caseStudies'
 import { caseStudyIdFor, localizedHref, routeIdFromPath } from '../i18n/routes'
 import { useLocale } from '../i18n/useLocale'
-import { SITE } from '../lib/siteRoutes'
 import { pathRouteMeta } from '../lib/seo'
 
 /** One module serves all eight case studies, so the study comes from the URL. */
@@ -127,7 +126,7 @@ function Study({ study }: { study: CaseStudy }) {
             <Panel title="Client" items={[study.client[locale]]} />
             <Panel title="Our role" items={[study.role[locale]]} />
             <Panel title="Capabilities" items={study.capabilities[locale]} />
-            <ButtonLink to={SITE.contact}>Discuss a similar project</ButtonLink>
+            <ButtonLink to={localizedHref('contact', locale)}>Discuss a similar project</ButtonLink>
           </aside>
         </div>
       </section>

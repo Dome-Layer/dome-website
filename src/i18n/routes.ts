@@ -64,6 +64,8 @@ export const PUBLIC_ROUTES = {
     path: { en: '/dome/agent-flow', it: '/it/dome/agent-flow' },
     updatedAt: '2026-09-11',
   },
+  about: { file: 'pages/AboutPage.tsx', path: { en: '/about', it: '/it/chi-siamo' }, updatedAt: '2026-09-22' },
+  contact: { file: 'pages/ContactPage.tsx', path: { en: '/contact', it: '/it/contatti' }, updatedAt: '2026-09-22' },
   caseStudies: {
     file: 'pages/CaseStudiesPage.tsx',
     path: { en: '/case-studies', it: '/it/casi-studio' },
@@ -147,7 +149,7 @@ export function caseStudyHref(studyId: string, locale: Locale): string {
 }
 
 /** Pages that are neither a tool nor legal: the ones llms.txt lists first. */
-export const PAGE_IDS = ['home', 'enterpriseUx', 'aiProcessAutomation', 'dome'] as const satisfies readonly RouteId[]
+export const PAGE_IDS = ['home', 'enterpriseUx', 'aiProcessAutomation', 'dome', 'caseStudies', 'about', 'contact'] as const satisfies readonly RouteId[]
 
 /** Tool pages, in the order the site presents them. */
 export const TOOL_ROUTE_IDS = [

@@ -22,6 +22,8 @@ export const config = {
     '/dome/document-intelligence',
     '/dome/governance-dashboard',
     '/dome/agent-flow',
+    '/about',
+    '/contact',
     '/case-studies',
     '/case-studies/procurement-workflow-redesign',
     '/case-studies/ai-compliance-assessments',

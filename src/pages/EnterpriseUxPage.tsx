@@ -1,3 +1,5 @@
+import { localizedHref } from '../i18n/routes'
+import { useLocale } from '../i18n/useLocale'
 import { PublicPage } from '../layouts/PublicPage'
 import { PageHero } from '../components/page/PageHero'
 import { FeatureBand } from '../components/page/FeatureBand'
@@ -6,7 +8,6 @@ import { RelatedWork } from '../components/page/RelatedWork'
 import { ClosingCta } from '../components/page/ClosingCta'
 import { SectionHeading } from '../components/ui/SectionHeading'
 import { caseStudiesFor } from '../content/caseStudies'
-import { SITE } from '../lib/siteRoutes'
 import { routeMeta } from '../lib/seo'
 
 export const meta = routeMeta('enterpriseUx')
@@ -53,6 +54,7 @@ const STEPS = [
 ]
 
 export default function EnterpriseUxPage() {
+  const locale = useLocale()
   return (
     <PublicPage>
       <PageHero
@@ -61,8 +63,8 @@ export default function EnterpriseUxPage() {
         eyebrow="Enterprise UX and product"
         heading="Internal tools your teams actually want to use."
         lead="We redesign complex enterprise platforms, from procurement workflows to trading screens, around the people who use them every day."
-        primary={{ label: 'Book a UX review', to: SITE.contact }}
-        secondary={{ label: 'See how we work', to: SITE.about }}
+        primary={{ label: 'Book a UX review', to: localizedHref('contact', locale) }}
+        secondary={{ label: 'See how we work', to: localizedHref('about', locale) }}
       />
 
       <section className="bg-[var(--color-bg-base)] py-20 md:py-24">
