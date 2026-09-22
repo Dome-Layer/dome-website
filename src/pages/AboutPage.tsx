@@ -7,87 +7,46 @@ import { ForwardLink } from '../components/ui/Button'
 import { Eyebrow } from '../components/ui/Eyebrow'
 import { SectionHeading } from '../components/ui/SectionHeading'
 import { localizedHref } from '../i18n/routes'
-import { useLocale } from '../i18n/useLocale'
+import { useLocale, useMessages } from '../i18n/useLocale'
 import { routeMeta } from '../lib/seo'
 
 export const meta = routeMeta('about')
 
-/**
- * Confirmed with Francesco 2026-09-22. Update here, not in the copy.
- *
- * The provider figure replaced "2 working languages", which said nothing a client weighs: any
- * consultancy works in any language now. Three providers is checkable, and it is the claim that
- * matters to a buyer who cannot send data to a US API. Process Analyzer, Document Intelligence and
- * Data Intelligence each ship an Ollama provider alongside Claude and Azure OpenAI.
- */
-const FACTS = [
-  { figure: '3', label: 'service lines, from UX research to audited automation' },
-  { figure: '6', label: 'AI tools we build and operate ourselves' },
-  { figure: '3', label: 'model providers, including open-weight models on your own infrastructure' },
-  { figure: '10', label: 'years delivering with our partner firm' },
-]
 
-const SETUP = [
-  {
-    title: 'Engagement lead',
-    body: 'A senior lead owns each engagement from the first call to handover. You have one point of contact, and one person accountable for the outcome.',
-  },
-  {
-    title: 'Specialist network',
-    body: 'We bring in UX researchers, interface designers, engineers, data specialists and compliance advisers from our network of collaborating consultants, when the work needs them.',
-  },
-  {
-    title: 'Delivery partner',
-    body: 'Larger programmes are delivered with Ionita Consulting, which gives us the capacity to staff longer or broader engagements without changing how we work.',
-  },
-]
 
-const EXPECT = [
-  { title: 'Small, senior teams', body: 'The people you meet at the start are the people who do the work.' },
-  {
-    title: 'Governance from the start',
-    body: 'Controls and audit needs shape the design from the first workshop, not after go-live.',
-  },
-  {
-    title: 'Proof before commitment',
-    body: 'You see working tools and past outcomes before you commit to anything.',
-  },
-]
 
 export default function AboutPage() {
   const locale = useLocale()
+  const messages = useMessages()
+  const t = messages.pages.about
 
   return (
     <PublicPage>
       <PageHero
         media="aboutHero"
-        eyebrow="About DOME"
-        heading="An AI and product consultancy for regulated enterprises."
-        lead="We help regulated enterprises design software people use, and automate work in a way auditors can follow."
-        primary={{ label: 'Talk to us', to: '/contact' }}
-        secondary={{ label: 'See our work', to: localizedHref('caseStudies', locale) }}
+        eyebrow={t.hero.eyebrow}
+        heading={t.hero.heading}
+        lead={t.hero.lead}
+        primary={{ label: t.hero.primary, to: localizedHref('contact', locale) }}
+        secondary={{ label: t.hero.secondary, to: localizedHref('caseStudies', locale) }}
       />
 
       <section className="bg-[var(--color-bg-base)] py-20 md:py-24">
         <div className="mx-auto grid max-w-[1280px] gap-12 px-6 md:px-12 lg:grid-cols-2 lg:gap-16">
           <SectionHeading
-            eyebrow="Who we are"
-            heading="Complex enterprise work, made simpler to use and safer to automate."
+            eyebrow={t.who.eyebrow}
+            heading={t.who.heading}
           />
           <div className="flex flex-col gap-4">
-            <p className="text-[17px] leading-[1.75] text-[var(--color-text-secondary)]">
-              DOME works with procurement, finance, compliance and supply chain teams in regulated
-              sectors. We bring enterprise UX and AI process automation together, so the systems
-              people use every day are clear to work with and clear to audit.
-            </p>
-            <p className="text-[17px] leading-[1.75] text-[var(--color-text-secondary)]">
-              We also build and run our own governed AI tools. Our advice on automation comes from
-              systems we operate, not from slides.
-            </p>
+            {t.who.paragraphs.map((paragraph) => (
+              <p key={paragraph} className="text-[17px] leading-[1.75] text-[var(--color-text-secondary)]">
+                {paragraph}
+              </p>
+            ))}
           </div>
         </div>
         <div className="mx-auto mt-12 grid max-w-[1280px] gap-6 px-6 md:px-12 sm:grid-cols-2 lg:grid-cols-4">
-          {FACTS.map((fact) => (
+          {t.facts.map((fact) => (
             <div
               key={fact.figure}
               className="flex flex-col gap-2 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-subtle)] p-6"
@@ -104,12 +63,12 @@ export default function AboutPage() {
       <FullBleedSection media="textureNetwork">
         <div className="flex flex-col gap-12 py-20 md:py-28">
           <SectionHeading
-            eyebrow="How we are set up"
-            heading="A team shaped around each engagement"
-            lead="We do not carry a bench of consultants waiting for work. Each engagement gets the specialists its problem calls for, under one accountable lead."
+            eyebrow={t.setup.eyebrow}
+            heading={t.setup.heading}
+            lead={t.setup.lead}
           />
           <div className="grid gap-6 md:grid-cols-3">
-            {SETUP.map((item) => (
+            {t.setup.items.map((item) => (
               <div key={item.title} className="flex flex-col gap-3">
                 <h3 className="text-xl font-semibold leading-[1.3]">{item.title}</h3>
                 <p className="text-[15px] leading-[1.65] text-[var(--color-text-secondary)]">{item.body}</p>
@@ -121,9 +80,9 @@ export default function AboutPage() {
 
       <section className="bg-[var(--color-bg-base)] py-20 md:py-24">
         <div className="mx-auto flex max-w-[1280px] flex-col gap-12 px-6 md:px-12">
-          <SectionHeading eyebrow="How we work together" heading="What you can expect from us" />
+          <SectionHeading eyebrow={t.expect.eyebrow} heading={t.expect.heading} />
           <div className="grid gap-6 md:grid-cols-3">
-            {EXPECT.map((item) => (
+            {t.expect.items.map((item) => (
               <div key={item.title} className="flex flex-col gap-3 border-t border-[var(--color-border-default)] pt-6">
                 <h3 className="text-lg font-semibold leading-[1.3]">{item.title}</h3>
                 <p className="text-[15px] leading-[1.65] text-[var(--color-text-secondary)]">{item.body}</p>
@@ -136,20 +95,18 @@ export default function AboutPage() {
       <section className="border-y border-[var(--color-border-subtle)] bg-[var(--color-bg-subtle)] py-16 md:py-20">
         <div className="mx-auto grid max-w-[1280px] items-center gap-10 px-6 md:px-12 lg:grid-cols-[1fr_280px]">
           <div className="flex flex-col gap-4">
-            <Eyebrow>Our delivery partner</Eyebrow>
+            <Eyebrow>{t.partner.eyebrow}</Eyebrow>
             <h2 className="text-[28px] font-bold leading-[1.2] tracking-[-0.02em] md:text-[32px]">
-              Ionita Consulting
+              {t.partner.heading}
             </h2>
             <p className="text-[17px] leading-[1.7] text-[var(--color-text-secondary)]">
-              Larger programmes are delivered together with Ionita Consulting, based in Utrecht, with
-              whom we have worked for ten years. Together we can staff engagements that need more
-              specialists or a longer runway.
+              {t.partner.body}
             </p>
           </div>
           <div>
             <img
               src="/media/partner-ionita-logo-light-bg.svg"
-              alt="Ionita Consulting"
+              alt={messages.media.ionitaLogo}
               width={300}
               height={150}
               loading="lazy"
@@ -157,7 +114,7 @@ export default function AboutPage() {
             />
             <img
               src="/media/partner-ionita-logo-dark-bg.svg"
-              alt="Ionita Consulting"
+              alt={messages.media.ionitaLogo}
               width={300}
               height={150}
               loading="lazy"
@@ -169,23 +126,22 @@ export default function AboutPage() {
 
       <section className="bg-[var(--color-bg-base)] py-20 md:py-24">
         <div className="mx-auto flex max-w-[1280px] flex-col gap-10 px-6 md:px-12">
-          <SectionHeading eyebrow="Leadership" heading="Who leads the work" />
+          <SectionHeading eyebrow={t.leadership.eyebrow} heading={t.leadership.heading} />
           <div className="flex flex-col items-start gap-8 sm:flex-row sm:items-center">
             <div className="w-[160px] shrink-0 overflow-hidden rounded-[var(--radius-lg)]">
               <Picture id="francescoProdomo" sizes="160px" className="h-full w-full object-cover" />
             </div>
             <div className="flex flex-col gap-2">
-              <p className="text-xl font-semibold">Francesco Prodomo</p>
-              <p className="text-[15px] text-[var(--color-text-accent)]">Founder and engagement lead</p>
+              <p className="text-xl font-semibold">{t.leadership.name}</p>
+              <p className="text-[15px] text-[var(--color-text-accent)]">{t.leadership.role}</p>
               <p className="max-w-[560px] text-[15px] leading-[1.65] text-[var(--color-text-secondary)]">
-                Ten years in enterprise product design and procurement systems, from user research to
-                delivery.
+                {t.leadership.bio}
               </p>
               <a
                 href="https://www.linkedin.com/in/francesco-prodomo"
                 className="mt-1 inline-flex w-fit items-center gap-2 text-sm font-semibold text-[var(--color-text-accent)] hover:underline"
               >
-                LinkedIn profile
+                {t.leadership.linkedin}
               </a>
             </div>
           </div>
@@ -195,19 +151,15 @@ export default function AboutPage() {
       <FullBleedSection media="textureArchitecture">
         <div className="flex flex-col items-start gap-6 py-16 md:py-20">
           <SectionHeading
-            eyebrow="Where we work"
-            heading="Based in Florence, working across Europe"
-            lead="We work with clients in English and Italian, on site or remotely."
+            eyebrow={t.where.eyebrow}
+            heading={t.where.heading}
+            lead={t.where.lead}
           />
-          <ForwardLink to={localizedHref('caseStudies', locale)}>See our case studies</ForwardLink>
+          <ForwardLink to={localizedHref('caseStudies', locale)}>{t.where.cta}</ForwardLink>
         </div>
       </FullBleedSection>
 
-      <ClosingCta
-        heading="Tell us about the process that slows your team down."
-        body="A 30-minute call is enough to tell whether we can help."
-        primaryLabel="Book an introductory call"
-      />
+      <ClosingCta text={t.closing} />
     </PublicPage>
   )
 }

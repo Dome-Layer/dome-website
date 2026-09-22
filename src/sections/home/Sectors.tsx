@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react'
 import { Eyebrow } from '../../components/ui/Eyebrow'
+import { useMessages } from '../../i18n/useLocale'
 
 const icon = {
   fill: 'none',
@@ -24,29 +25,30 @@ function Tile({ children, label }: { children: ReactNode; label: string }) {
 
 /** The five sectors, as icon tiles. A compact grid on mobile rather than a scroller. */
 export function Sectors() {
+  const t = useMessages().pages.home.sectors
   return (
     <section className="bg-[var(--color-bg-base)]">
       <div className="mx-auto flex max-w-[1280px] flex-col gap-4 px-6 pb-10 pt-6 md:px-12">
-        <Eyebrow tone="muted">Sectors we work in</Eyebrow>
+        <Eyebrow tone="muted">{t.eyebrow}</Eyebrow>
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
-          <Tile label="Retail procurement">
+          <Tile label={t.items[0]}>
             <path d="M6 7h12l-1 13H7L6 7z" />
             <path d="M9 7a3 3 0 0 1 6 0" />
           </Tile>
-          <Tile label="Commodity and trade finance">
+          <Tile label={t.items[1]}>
             <ellipse cx="12" cy="6" rx="7" ry="3" />
             <path d="M5 6v6c0 1.7 3.1 3 7 3s7-1.3 7-3V6M5 12v6c0 1.7 3.1 3 7 3s7-1.3 7-3v-6" />
           </Tile>
-          <Tile label="Food and agricultural supply chains">
+          <Tile label={t.items[2]}>
             <path d="M12 21V11" />
             <path d="M12 11c0-4 3-7 8-7 0 5-3 8-8 8z" />
             <path d="M12 14c0-3-2.5-5.5-7-5.5 0 4 2.5 6.5 7 6.5z" />
           </Tile>
-          <Tile label="Compliance and regulatory">
+          <Tile label={t.items[3]}>
             <path d="M12 3l7 3v5c0 5-3.5 8.5-7 10-3.5-1.5-7-5-7-10V6l7-3z" />
             <path d="M9 12l2 2 4-4" />
           </Tile>
-          <Tile label="Digital assets">
+          <Tile label={t.items[4]}>
             <rect x="3" y="3" width="8" height="8" rx="1.5" />
             <rect x="13" y="13" width="8" height="8" rx="1.5" />
             <path d="M11 7h3a3 3 0 0 1 3 3v3" />

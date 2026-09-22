@@ -2,16 +2,8 @@ import { MediaSplit } from '../../components/media/MediaSplit'
 import { ForwardLink } from '../../components/ui/Button'
 import { Eyebrow } from '../../components/ui/Eyebrow'
 import { localizedHref } from '../../i18n/routes'
-import { useLocale } from '../../i18n/useLocale'
+import { useLocale, useMessages } from '../../i18n/useLocale'
 
-const TOOLS = [
-  'Process Analyzer',
-  'LLM Council',
-  'Document Intelligence',
-  'Data Intelligence',
-  'Governance Dashboard',
-  'Agent Flow (rolling out)',
-]
 
 /**
  * The capability showcase. The tools are named, deliberately as plain pills rather than links:
@@ -20,6 +12,7 @@ const TOOLS = [
  */
 export function Capabilities() {
   const locale = useLocale()
+  const t = useMessages().pages.home.capabilities
   return (
     <MediaSplit
       className="border-y border-[var(--color-border-subtle)] bg-[var(--color-bg-subtle)]"
@@ -36,17 +29,15 @@ export function Capabilities() {
       }
     >
       <div className="flex max-w-[520px] flex-col gap-5">
-        <Eyebrow>DOME capabilities</Eyebrow>
+        <Eyebrow>{t.eyebrow}</Eyebrow>
         <h2 className="text-[32px] font-bold leading-[1.15] tracking-[-0.025em] md:text-[40px]">
-          Tools we build and operate
+          {t.heading}
         </h2>
         <p className="text-[17px] leading-[1.7] text-[var(--color-text-secondary)]">
-          Our own tools cover the path from process discovery to audited execution. Prospective
-          clients can try them before any engagement starts, and where data cannot leave your
-          network, three of them run against a local open-weight model instead of a cloud API.
+          {t.lead}
         </p>
         <ul className="flex flex-wrap gap-2">
-          {TOOLS.map((tool) => (
+          {t.tools.map((tool) => (
             <li
               key={tool}
               className="rounded-full border border-[var(--color-border-default)] bg-[var(--color-bg-base)] px-3 py-1.5 text-[13px] text-[var(--color-text-secondary)]"
@@ -56,7 +47,7 @@ export function Capabilities() {
           ))}
         </ul>
         <div className="mt-2">
-          <ForwardLink to={localizedHref('dome', locale)}>Explore DOME capabilities</ForwardLink>
+          <ForwardLink to={localizedHref('dome', locale)}>{t.cta}</ForwardLink>
         </div>
       </div>
     </MediaSplit>

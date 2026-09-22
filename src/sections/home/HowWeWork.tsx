@@ -4,35 +4,32 @@ import { Picture } from '../../components/media/Picture'
 import { Eyebrow } from '../../components/ui/Eyebrow'
 import { useMediaQuery } from '../../lib/useMediaQuery'
 import { useReducedMotion } from '../../lib/useReducedMotion'
+import { useMessages } from '../../i18n/useLocale'
+import type { ItemText } from '../../i18n/messages/types'
 
-/**
- * The DOME method. The four phase letters spell DOME, which is why they stay in English in the
- * Italian copy too (design feedback round 1).
- */
-const PHASES = [
-  { letter: 'D', name: 'Discover', body: 'Map the workflow, the systems it touches and where regulation applies.' },
-  { letter: 'O', name: 'Orchestrate', body: 'Design the architecture, the data flows and the controls around them.' },
-  { letter: 'M', name: 'Model', body: 'Configure AI components inside agreed limits on accuracy and risk.' },
-  { letter: 'E', name: 'Execute', body: 'Deploy, integrate and monitor, with every automated decision on record.' },
-]
 
 /** Share of the scroll the phases take, leaving the last slice for the governance strip. */
 const PHASE_SHARE = 0.82
 
+/** The four phase letters spell DOME, so they stay in English in every locale (design round 1). */
+const LETTERS = ['D', 'O', 'M', 'E']
+
 function Phase({
   phase,
   index,
+  label,
   progress,
   animated,
 }: {
-  phase: (typeof PHASES)[number]
+  phase: ItemText
+  label: string
   index: number
   progress: MotionValue<number>
   animated: boolean
 }) {
   // Each phase fades and lifts over its own slice of the scroll, one after another.
-  const start = (index / PHASES.length) * PHASE_SHARE
-  const end = start + PHASE_SHARE / PHASES.length / 2
+  const start = (index / LETTERS.length) * PHASE_SHARE
+  const end = start + PHASE_SHARE / LETTERS.length / 2
   const opacity = useTransform(progress, [start, end], [0, 1])
   const y = useTransform(progress, [start, end], [16, 0])
   const dotScale = useTransform(progress, [start, start + 0.02], [0, 1])
@@ -45,14 +42,16 @@ function Phase({
         style={animated ? { scale: dotScale } : undefined}
       />
       <div className="flex flex-col gap-2.5">
-        <Eyebrow>Phase {String(index + 1).padStart(2, '0')}</Eyebrow>
+        <Eyebrow>
+          {label} {String(index + 1).padStart(2, '0')}
+        </Eyebrow>
         <p
           aria-hidden="true"
           className="text-[64px] font-bold leading-none tracking-[-0.03em] text-[var(--color-border-strong)]"
         >
-          {phase.letter}
+          {LETTERS[index]}
         </p>
-        <h3 className="text-2xl font-semibold leading-[1.25] tracking-[-0.015em]">{phase.name}</h3>
+        <h3 className="text-2xl font-semibold leading-[1.25] tracking-[-0.015em]">{phase.title}</h3>
         <p className="text-[15px] leading-[1.65] text-[var(--color-text-secondary)]">{phase.body}</p>
       </div>
     </motion.li>
@@ -72,6 +71,7 @@ function Phase({
  * section reads the same either way.
  */
 export function HowWeWork() {
+  const t = useMessages().pages.home.howWeWork
   const prefersReduced = useReducedMotion()
   /**
    * Only animate where the frame is actually pinned. The sticky layout is `lg:` and up, and below
@@ -129,12 +129,12 @@ export function HowWeWork() {
       />
       <div className="relative mx-auto flex max-w-[1280px] flex-col justify-center gap-10 px-6 py-20 md:px-12 md:py-28 lg:h-screen lg:gap-14 lg:py-0">
         <div className="flex max-w-[720px] flex-col gap-4">
-          <Eyebrow>How we work</Eyebrow>
+          <Eyebrow>{t.eyebrow}</Eyebrow>
           <h2 className="text-[32px] font-bold leading-[1.15] tracking-[-0.025em] md:text-[40px]">
-            One method from first workshop to production
+            {t.heading}
           </h2>
           <p className="text-[17px] leading-[1.7] text-[var(--color-text-secondary)] md:text-[18px]">
-            Governance is part of every phase, so nothing has to be retrofitted before go-live.
+            {t.lead}
           </p>
         </div>
 
@@ -145,8 +145,15 @@ export function HowWeWork() {
             style={animated ? { scaleX: lineScale } : undefined}
           />
           <ol className="grid gap-8 md:grid-cols-4 md:gap-0">
-            {PHASES.map((phase, index) => (
-              <Phase key={phase.letter} phase={phase} index={index} progress={progress} animated={animated} />
+            {t.phases.map((phase, index) => (
+              <Phase
+                key={phase.title}
+                phase={phase}
+                index={index}
+                label={t.phaseLabel}
+                progress={progress}
+                animated={animated}
+              />
             ))}
           </ol>
         </div>
@@ -156,7 +163,7 @@ export function HowWeWork() {
           style={animated ? { opacity: stripOpacity, y: stripY } : undefined}
         >
           <div aria-hidden="true" className="h-2 w-2 shrink-0 rounded-full bg-[var(--color-accent)]" />
-          <Eyebrow>Governance built into every phase</Eyebrow>
+          <Eyebrow>{t.governance}</Eyebrow>
         </motion.div>
       </div>
     </div>

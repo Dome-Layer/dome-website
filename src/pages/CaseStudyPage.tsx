@@ -7,7 +7,7 @@ import { ButtonLink, ForwardLink } from '../components/ui/Button'
 import { Eyebrow } from '../components/ui/Eyebrow'
 import { caseStudy, type CaseStudy } from '../content/caseStudies'
 import { caseStudyIdFor, localizedHref, routeIdFromPath } from '../i18n/routes'
-import { useLocale } from '../i18n/useLocale'
+import { useLocale, useMessages } from '../i18n/useLocale'
 import { pathRouteMeta } from '../lib/seo'
 
 /** One module serves all eight case studies, so the study comes from the URL. */
@@ -34,6 +34,8 @@ function Panel({ title, items }: { title: string; items: readonly string[] }) {
 
 function Study({ study }: { study: CaseStudy }) {
   const locale = useLocale()
+  const messages = useMessages()
+  const t = messages.pages.caseStudy
   const related = study.related.map((id) => caseStudy(id)).filter((s): s is CaseStudy => s !== undefined)
 
   return (
@@ -43,7 +45,7 @@ function Study({ study }: { study: CaseStudy }) {
           <nav aria-label="Breadcrumb">
             <ol className="flex flex-wrap items-center gap-2 text-[13px] text-[var(--color-text-secondary)]">
               <li>
-                <ForwardLink to={localizedHref('caseStudies', locale)}>Case studies</ForwardLink>
+                <ForwardLink to={localizedHref('caseStudies', locale)}>{t.back}</ForwardLink>
               </li>
             </ol>
           </nav>
@@ -65,7 +67,7 @@ function Study({ study }: { study: CaseStudy }) {
             {study.media === 'tabletMockup' ? (
               <img
                 src={TABLET_MOCKUP}
-                alt="A DOME tool shown on a tablet"
+                alt={messages.media.tabletMockup}
                 width={760}
                 height={570}
                 className="my-10 h-auto w-[min(560px,80%)]"
@@ -84,7 +86,7 @@ function Study({ study }: { study: CaseStudy }) {
         <div className="mx-auto grid max-w-[1280px] gap-12 px-6 md:px-12 lg:grid-cols-[1fr_320px] lg:gap-16">
           <div className="flex flex-col gap-12">
             <div className="flex flex-col gap-4">
-              <h2 className="text-[26px] font-bold leading-[1.2] tracking-[-0.02em] md:text-[32px]">The challenge</h2>
+              <h2 className="text-[26px] font-bold leading-[1.2] tracking-[-0.02em] md:text-[32px]">{t.challenge}</h2>
               {study.challenge[locale].map((paragraph) => (
                 <p key={paragraph} className="text-[17px] leading-[1.75] text-[var(--color-text-secondary)]">
                   {paragraph}
@@ -93,7 +95,7 @@ function Study({ study }: { study: CaseStudy }) {
             </div>
 
             <div className="flex flex-col gap-6">
-              <h2 className="text-[26px] font-bold leading-[1.2] tracking-[-0.02em] md:text-[32px]">What we did</h2>
+              <h2 className="text-[26px] font-bold leading-[1.2] tracking-[-0.02em] md:text-[32px]">{t.whatWeDid}</h2>
               <ol className="flex flex-col">
                 {study.steps[locale].map((step, index) => (
                   <li key={step.title} className="flex gap-5 border-t border-[var(--color-border-default)] py-6">
@@ -110,7 +112,7 @@ function Study({ study }: { study: CaseStudy }) {
             </div>
 
             <div className="flex flex-col gap-4 rounded-[var(--radius-lg)] border border-[var(--color-border-accent)] bg-[var(--color-accent-subtle)] p-8">
-              <h2 className="text-[22px] font-bold leading-[1.2] tracking-[-0.02em]">Outcomes</h2>
+              <h2 className="text-[22px] font-bold leading-[1.2] tracking-[-0.02em]">{t.outcomes}</h2>
               <ul className="flex flex-col gap-3">
                 {study.outcomes[locale].map((outcome) => (
                   <li key={outcome} className="flex items-start gap-3">
@@ -123,10 +125,10 @@ function Study({ study }: { study: CaseStudy }) {
           </div>
 
           <aside className="flex flex-col gap-8 lg:sticky lg:top-24 lg:self-start">
-            <Panel title="Client" items={[study.client[locale]]} />
-            <Panel title="Our role" items={[study.role[locale]]} />
-            <Panel title="Capabilities" items={study.capabilities[locale]} />
-            <ButtonLink to={localizedHref('contact', locale)}>Discuss a similar project</ButtonLink>
+            <Panel title={t.client} items={[study.client[locale]]} />
+            <Panel title={t.role} items={[study.role[locale]]} />
+            <Panel title={t.capabilities} items={study.capabilities[locale]} />
+            <ButtonLink to={localizedHref('contact', locale)}>{t.cta}</ButtonLink>
           </aside>
         </div>
       </section>
@@ -134,7 +136,7 @@ function Study({ study }: { study: CaseStudy }) {
       {related.length > 0 && (
         <section className="bg-[var(--color-bg-base)] pb-20 md:pb-24">
           <div className="mx-auto flex max-w-[1280px] flex-col gap-8 px-6 md:px-12">
-            <h2 className="text-[26px] font-bold leading-[1.2] tracking-[-0.02em] md:text-[32px]">Read next</h2>
+            <h2 className="text-[26px] font-bold leading-[1.2] tracking-[-0.02em] md:text-[32px]">{t.readNext}</h2>
             <div className="grid gap-6 md:grid-cols-2">
               {related.map((item) => (
                 <CaseCard key={item.id} study={item} />
@@ -148,6 +150,7 @@ function Study({ study }: { study: CaseStudy }) {
 }
 
 export default function CaseStudyPage() {
+  const t = useMessages().pages.caseStudy
   const { pathname } = useLocation()
   const routeId = routeIdFromPath(pathname)
   const studyId = routeId ? caseStudyIdFor(routeId) : undefined
@@ -159,14 +162,10 @@ export default function CaseStudyPage() {
         <Study study={study} />
       ) : (
         <section className="mx-auto max-w-[1280px] px-6 py-32 md:px-12">
-          <h1 className="text-[32px] font-bold">Case study not found</h1>
+          <h1 className="text-[32px] font-bold">{t.notFound}</h1>
         </section>
       )}
-      <ClosingCta
-        heading="Recognise this problem?"
-        body="Tell us where your process gets stuck, and we will tell you how we would approach it."
-        primaryLabel="Book an introductory call"
-      />
+      <ClosingCta text={t.closing} />
     </PublicPage>
   )
 }

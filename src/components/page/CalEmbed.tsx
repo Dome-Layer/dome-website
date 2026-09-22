@@ -1,12 +1,7 @@
 import { useState } from 'react'
 import { CAL_EVENTS, CAL_PUBLIC_URL, calUrl, type CalEvent } from '../../lib/cal'
+import { useMessages } from '../../i18n/useLocale'
 
-const TOPICS = [
-  'AI process automation',
-  'Enterprise UX and product',
-  'DOME capabilities',
-  'Something else',
-] as const
 
 /**
  * The booking calendar, behind one click.
@@ -16,6 +11,9 @@ const TOPICS = [
  * before they choose, which is the point of the two-click pattern.
  */
 export function CalEmbed() {
+  const messages = useMessages()
+  const t = messages.pages.contact.calendar
+  const TOPICS = messages.common.topics
   const [topic, setTopic] = useState<string>(TOPICS[0])
   const [loaded, setLoaded] = useState<CalEvent | null>(null)
 
@@ -23,7 +21,7 @@ export function CalEmbed() {
     <div className="flex flex-col gap-5">
       <fieldset className="flex flex-col gap-3">
         <legend className="mb-3 text-[13px] font-medium text-[var(--color-text-secondary)]">
-          What would you like to talk about?
+          {t.topicLegend}
         </legend>
         <div className="flex flex-wrap gap-2">
           {TOPICS.map((option) => (
@@ -55,7 +53,7 @@ export function CalEmbed() {
       ) : (
         <div className="flex flex-col items-start gap-3 rounded-[var(--radius-lg)] border border-dashed border-[var(--color-border-default)] bg-[var(--color-bg-subtle)] p-8">
           <p className="text-[15px] text-[var(--color-text-secondary)]">
-            The calendar has not loaded yet. It opens here when you choose a length.
+            {t.notLoaded}
           </p>
           <div className="flex flex-wrap gap-3">
             <button
@@ -63,25 +61,25 @@ export function CalEmbed() {
               onClick={() => setLoaded('standard')}
               className="inline-flex items-center rounded-[var(--radius-md)] bg-[var(--color-accent)] px-6 py-3 text-sm font-semibold text-[var(--color-text-on-accent)] hover:bg-[var(--color-accent-hover)]"
             >
-              Show available times (30 min)
+              {t.show30}
             </button>
             <button
               type="button"
               onClick={() => setLoaded('short')}
               className="inline-flex items-center rounded-[var(--radius-md)] border border-[var(--color-border-strong)] px-6 py-3 text-sm font-semibold text-[var(--color-text-primary)] hover:bg-[var(--color-bg-muted)]"
             >
-              Just 15 minutes
+              {t.show15}
             </button>
           </div>
         </div>
       )}
 
       <p className="text-[13px] leading-[1.6] text-[var(--color-text-tertiary)]">
-        The calendar is provided by Cal.com and loads only when you click.{' '}
+        {t.notice}{' '}
         <a href={CAL_PUBLIC_URL} className="underline hover:text-[var(--color-text-secondary)]">
           Cal.com
         </a>{' '}
-        privacy policy then applies. Nothing is sent to them before that.
+        {t.noticeEnd}
       </p>
     </div>
   )

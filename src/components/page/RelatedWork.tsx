@@ -4,7 +4,7 @@ import { ForwardLink } from '../ui/Button'
 import { Eyebrow } from '../ui/Eyebrow'
 import type { CaseStudy } from '../../content/caseStudies'
 import { caseStudyHref, localizedHref } from '../../i18n/routes'
-import { useLocale } from '../../i18n/useLocale'
+import { useLocale, useMessages } from '../../i18n/useLocale'
 
 const CARD_SIZES = '(min-width: 1024px) 400px, (min-width: 768px) 50vw, 100vw'
 
@@ -16,13 +16,14 @@ const TABLET_MOCKUP = '/DOME%20iPad%20Mockup.png'
 
 export function CaseCard({ study }: { study: CaseStudy }) {
   const locale = useLocale()
+  const messages = useMessages()
   return (
     <article className="group relative flex flex-col overflow-hidden rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-base)] transition-colors hover:border-[var(--color-border-strong)]">
       <div className="relative flex h-[220px] items-center justify-center overflow-hidden bg-[var(--color-bg-muted)]">
         {study.media === 'tabletMockup' ? (
           <img
             src={TABLET_MOCKUP}
-            alt="A DOME tool shown on a tablet"
+            alt={messages.media.tabletMockup}
             width={760}
             height={570}
             loading="lazy"
@@ -53,7 +54,7 @@ export function CaseCard({ study }: { study: CaseStudy }) {
 
 /** A row of matched case studies, with the standing note that clients are anonymised. */
 export function RelatedWork({
-  eyebrow = 'Related work',
+  eyebrow,
   heading,
   studies,
 }: {
@@ -62,16 +63,18 @@ export function RelatedWork({
   studies: CaseStudy[]
 }) {
   const locale = useLocale()
+  const messages = useMessages()
+  const common = messages.common
   return (
     <section className="bg-[var(--color-bg-base)] py-20 md:py-24">
       <div className="mx-auto flex max-w-[1280px] flex-col gap-12 px-6 md:px-12">
         <div className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
           <div className="flex max-w-[720px] flex-col gap-4">
-            <Eyebrow>{eyebrow}</Eyebrow>
+            <Eyebrow>{eyebrow ?? common.relatedWork}</Eyebrow>
             <h2 className="text-[32px] font-bold leading-[1.15] tracking-[-0.025em] md:text-[40px]">{heading}</h2>
-            <p className="text-sm text-[var(--color-text-secondary)]">Client details are anonymised.</p>
+            <p className="text-sm text-[var(--color-text-secondary)]">{common.anonymised}</p>
           </div>
-          <ForwardLink to={localizedHref('caseStudies', locale)}>View all case studies</ForwardLink>
+          <ForwardLink to={localizedHref('caseStudies', locale)}>{common.viewAllCaseStudies}</ForwardLink>
         </div>
         <div className="grid gap-6 md:grid-cols-3">
           {studies.map((study) => (

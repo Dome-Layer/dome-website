@@ -7,11 +7,13 @@ import { SelectedWork } from '../sections/home/SelectedWork'
 import { Capabilities } from '../sections/home/Capabilities'
 import { OperatingModel } from '../sections/home/OperatingModel'
 import { ClosingCta } from '../components/page/ClosingCta'
+import { useMessages } from '../i18n/useLocale'
 import { routeMeta } from '../lib/seo'
 
 export const meta = routeMeta('home')
 
 export default function HomePage() {
+  const t = useMessages().pages
   return (
     <PublicPage>
       <HomeHero />
@@ -21,11 +23,7 @@ export default function HomePage() {
       <SelectedWork />
       <Capabilities />
       <OperatingModel />
-      <ClosingCta
-        heading="Tell us about the process that slows your team down."
-        body="A 30-minute call is enough to tell whether we can help."
-        primaryLabel="Book an introductory call"
-      />
+      <ClosingCta text={t.home.closing} />
     </PublicPage>
   )
 }
