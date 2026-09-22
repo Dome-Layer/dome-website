@@ -92,10 +92,6 @@
   --text-label:   0.8125rem;
 }
 
-/* ── Lenis smooth scroll ── */
-html.lenis, html.lenis body { height: auto; }
-.lenis.lenis-smooth { scroll-behavior: auto !important; }
-
 /* ── Semantic CSS custom properties — light theme (default) ── */
 @layer base {
   :root {
