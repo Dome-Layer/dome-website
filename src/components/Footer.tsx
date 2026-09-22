@@ -20,8 +20,8 @@ export function Footer() {
   const t = messages.footer
 
   const links = [
-    { href: localizedHref('enterpriseUx', locale), label: messages.nav.enterpriseUx },
     { href: localizedHref('aiProcessAutomation', locale), label: messages.nav.aiAutomation },
+    { href: localizedHref('enterpriseUx', locale), label: messages.nav.enterpriseUx },
     { href: localizedHref('dome', locale), label: messages.nav.dome },
     { href: localizedHref('caseStudies', locale), label: messages.nav.caseStudies },
     { href: localizedHref('about', locale), label: messages.nav.about },

@@ -13,8 +13,8 @@ import { isItalianPublished } from './src/i18n/locales'
 export const config = {
   matcher: [
     '/',
-    '/services/enterprise-ux',
     '/services/ai-process-automation',
+    '/services/enterprise-ux',
     '/dome',
     '/dome/process-analyzer',
     '/dome/data-intelligence',

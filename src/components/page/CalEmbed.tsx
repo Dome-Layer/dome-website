@@ -2,8 +2,8 @@ import { useState } from 'react'
 import { CAL_EVENTS, CAL_PUBLIC_URL, calUrl, type CalEvent } from '../../lib/cal'
 
 const TOPICS = [
-  'Enterprise UX and product',
   'AI process automation',
+  'Enterprise UX and product',
   'DOME capabilities',
   'Something else',
 ] as const

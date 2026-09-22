@@ -10,8 +10,7 @@ no on-page label, so they are listed here instead.
 
 - **AI-generated** means the image was produced by a generative model from a written brief. No
   image on this site depicts a real client, a real project, or an identifiable person or place.
-- **Photograph** means a real photograph. The portrait of Francesco Prodomo was enhanced but not
-  generated, so it carries no AI label: labelling it would misrepresent it in the other direction.
+- **Photograph** means a real photograph, not generated, so it carries no AI label.
 - **Partner** means supplied by the organisation named, and used with their permission.
 - **No image on this site is licensed stock.** If that changes, the licensor and the licence will
   be named in the table below.
@@ -38,7 +37,7 @@ no on-page label, so they are listed here instead.
 | Case study: trading app redesign | AI-generated | Yes |
 | Case study: AI procurement platform | AI-generated | Yes |
 | Case study: AI training videos | AI-generated | Yes |
-| About, and the leadership card | Photograph of Francesco Prodomo, enhanced | No, see above |
+| About, and the leadership card | Photograph of Francesco Prodomo | No |
 | About, and DOME capabilities | Ionita Consulting, used with permission | No |
 
 ## Questions
