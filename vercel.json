@@ -51,6 +51,21 @@
   ],
   "redirects": [
     {
+      "source": "/tools/:slug",
+      "destination": "/dome/:slug",
+      "permanent": true
+    },
+    {
+      "source": "/tools",
+      "destination": "/dome",
+      "permanent": true
+    },
+    {
+      "source": "/it/strumenti/:slug",
+      "destination": "/it/dome/:slug",
+      "permanent": true
+    },
+    {
       "source": "/(.*)",
       "has": [{ "type": "host", "value": "www.domelayer.com" }],
       "destination": "https://domelayer.com/$1",

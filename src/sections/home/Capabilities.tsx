@@ -1,7 +1,8 @@
 import { MediaSplit } from '../../components/media/MediaSplit'
 import { ForwardLink } from '../../components/ui/Button'
 import { Eyebrow } from '../../components/ui/Eyebrow'
-import { SITE } from '../../lib/siteRoutes'
+import { localizedHref } from '../../i18n/routes'
+import { useLocale } from '../../i18n/useLocale'
 
 const TOOLS = [
   'Process Analyzer',
@@ -18,6 +19,7 @@ const TOOLS = [
  * the capabilities page rather than into a tool.
  */
 export function Capabilities() {
+  const locale = useLocale()
   return (
     <MediaSplit
       className="border-y border-[var(--color-border-subtle)] bg-[var(--color-bg-subtle)]"
@@ -53,7 +55,7 @@ export function Capabilities() {
           ))}
         </ul>
         <div className="mt-2">
-          <ForwardLink to={SITE.dome}>Explore DOME capabilities</ForwardLink>
+          <ForwardLink to={localizedHref('dome', locale)}>Explore DOME capabilities</ForwardLink>
         </div>
       </div>
     </MediaSplit>

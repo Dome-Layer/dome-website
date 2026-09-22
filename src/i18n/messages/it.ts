@@ -64,6 +64,33 @@ export const it: Messages = {
       twitterDescription: 'AI pronta per la produzione, con la governance integrata, per le imprese regolamentate.',
       imageAlt: 'DOME: AI governata per le imprese regolamentate',
     },
+    enterpriseUx: {
+      name: 'UX enterprise e prodotto',
+      title: 'Consulenza UX enterprise e prodotto | DOME',
+      description:
+        'Ricerca utente, service design e progettazione di interfacce per piattaforme enterprise complesse, con un design system su cui il vostro team di sviluppo può costruire.',
+      ogDescription:
+        'Semplifichiamo strumenti interni e piattaforme complesse: ricerca, service design, progettazione di interfacce e un design system pronto per lo sviluppo.',
+      imageAlt: 'DOME, consulenza UX enterprise e prodotto',
+    },
+    aiProcessAutomation: {
+      name: 'Automazione dei processi con AI',
+      title: 'Automazione dei processi con AI | DOME',
+      description:
+        'Mappiamo un processo, automatizziamo le parti con regole chiare e portiamo le altre al vostro team con una sintesi decisionale e un audit trail completo.',
+      ogDescription:
+        'Automatizzare un processo senza perderne il controllo: regole chiare dove si applicano, una decisione umana dove non bastano, e un audit trail completo.',
+      imageAlt: 'DOME, automazione dei processi con AI',
+    },
+    dome: {
+      name: 'Capacità DOME',
+      title: 'Capacità DOME: gli strumenti che costruiamo e gestiamo | DOME',
+      description:
+        'Sei strumenti operativi che coprono il percorso dalla scoperta del processo all’esecuzione verificabile. Sono la prova di come costruiamo AI governata, non prodotti in vendita.',
+      ogDescription:
+        'Analisi dei processi, document e data intelligence, un consiglio multi-modello, un flusso agentico governato e una dashboard di governance. Costruiti e gestiti da noi.',
+      imageAlt: 'Capacità DOME: gli strumenti che costruiamo e gestiamo',
+    },
     processAnalyzer: {
       name: 'Process Analyzer',
       title: 'Process Analyzer | DOME',

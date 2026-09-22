@@ -6,7 +6,7 @@ const CHROME = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 14_0) AppleWebKit/537.36 
 
 const request = (overrides: Partial<LocaleRedirectInput> = {}): LocaleRedirectInput => ({
   method: 'GET',
-  pathname: '/tools/llm-council',
+  pathname: '/dome/llm-council',
   cookie: null,
   acceptLanguage: 'it-IT,it;q=0.9,en;q=0.8',
   userAgent: CHROME,
@@ -16,7 +16,7 @@ const request = (overrides: Partial<LocaleRedirectInput> = {}): LocaleRedirectIn
 
 describe('localeRedirectTarget', () => {
   it('sends a first-time Italian browser to the Italian counterpart', () => {
-    expect(localeRedirectTarget(request())).toBe('/it/strumenti/llm-council')
+    expect(localeRedirectTarget(request())).toBe('/it/dome/llm-council')
     expect(localeRedirectTarget(request({ pathname: '/' }))).toBe('/it')
   })
 
@@ -26,7 +26,7 @@ describe('localeRedirectTarget', () => {
   })
 
   it('ignores an invalid cookie value', () => {
-    expect(localeRedirectTarget(request({ cookie: 'dome_locale=fr' }))).toBe('/it/strumenti/llm-council')
+    expect(localeRedirectTarget(request({ cookie: 'dome_locale=fr' }))).toBe('/it/dome/llm-council')
   })
 
   it('never redirects crawlers or AI agents', () => {
@@ -47,7 +47,7 @@ describe('localeRedirectTarget', () => {
   })
 
   it('never touches Italian deep links, auth routes or unknown paths', () => {
-    expect(localeRedirectTarget(request({ pathname: '/it/strumenti/llm-council' }))).toBeUndefined()
+    expect(localeRedirectTarget(request({ pathname: '/it/dome/llm-council' }))).toBeUndefined()
     expect(localeRedirectTarget(request({ pathname: '/login' }))).toBeUndefined()
     expect(localeRedirectTarget(request({ pathname: '/app' }))).toBeUndefined()
     expect(localeRedirectTarget(request({ pathname: '/api/contact' }))).toBeUndefined()

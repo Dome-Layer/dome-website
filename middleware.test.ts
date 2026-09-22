@@ -15,15 +15,15 @@ describe('middleware', () => {
   })
 
   it('redirects once with a 307, keeping the query string and setting the cookie', () => {
-    const res = get('/tools/agent-flow?utm_source=email', { 'accept-language': 'it-IT,it;q=0.9' })
+    const res = get('/dome/agent-flow?utm_source=email', { 'accept-language': 'it-IT,it;q=0.9' })
     expect(res.status).toBe(307)
-    expect(res.headers.get('location')).toBe('/it/strumenti/agent-flow?utm_source=email')
+    expect(res.headers.get('location')).toBe('/it/dome/agent-flow?utm_source=email')
     expect(res.headers.get('set-cookie')).toMatch(/^dome_locale=it; Path=\/; Max-Age=31536000; SameSite=Lax; Secure$/)
     expect(res.headers.get('cache-control')).toBe('private, no-store')
   })
 
   it('lets everything else through to the static page', () => {
-    const res = get('/tools/agent-flow', { 'accept-language': 'it-IT', cookie: 'dome_locale=en' })
+    const res = get('/dome/agent-flow', { 'accept-language': 'it-IT', cookie: 'dome_locale=en' })
     expect(res.status).toBe(200)
     expect(res.headers.get('x-middleware-next')).toBe('1')
   })
