@@ -36,15 +36,24 @@ describe('the manifest and the files on disk agree', () => {
     expect(orphans).toEqual([])
   })
 
-  it('records every asset in CREDITS.md', () => {
+  it('credits every asset publicly, keyed by its usedOn line', () => {
+    // CREDITS.md is a visitor-facing attribution record, not a file listing, so it is keyed on the
+    // human `usedOn` string rather than on file names. The legal notice points at it, so an asset
+    // missing from it is a compliance gap, not just untidiness.
     const credits = readFileSync(join(MEDIA_DIR, 'CREDITS.md'), 'utf8')
-    // The table lists file bases with a `-*` wildcard in place of the width and extension.
-    const undocumented = manifestPaths.filter((src) => {
-      const file = src.replace('/media/', '')
-      const base = file.replace(/-\d+\.(avif|jpg|webm|mp4)$/, '')
-      return !credits.includes(base)
-    })
-    expect(undocumented).toEqual([])
+    const uncredited = MEDIA_IDS.filter((id) => !credits.includes(MEDIA[id].usedOn))
+    expect(uncredited).toEqual([])
+  })
+
+  it('credits nothing that is not in the manifest', () => {
+    const credits = readFileSync(join(MEDIA_DIR, 'CREDITS.md'), 'utf8')
+    const used = new Set(MEDIA_IDS.map((id) => MEDIA[id].usedOn))
+    const rows = credits
+      .split('\n')
+      .filter((line) => line.startsWith('| ') && !line.startsWith('| Used on') && !line.startsWith('|---'))
+      .map((line) => line.split('|')[1].trim())
+    expect(rows.filter((row) => !used.has(row))).toEqual([])
+    expect(rows).toHaveLength(MEDIA_IDS.length)
   })
 })
 

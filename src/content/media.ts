@@ -11,8 +11,38 @@
  * time.
  *
  * Adding an asset: add the files under `public/media/`, add an entry here, add its alt text to both
- * catalogues (or mark it decorative), and record its provenance in `public/media/CREDITS.md`.
- * `media.test.ts` checks the manifest against the files on disk and against CREDITS.
+ * catalogues (or mark it decorative), and add a row to `public/media/CREDITS.md` keyed by this
+ * entry's `usedOn` string. `media.test.ts` checks all of that, so none of the four can drift.
+ *
+ * ## Why CREDITS.md is public
+ *
+ * The legal notice states that the AI-generated background textures "are listed in our image
+ * credits". Those textures are decorative and carry no on-page label, so that promise is what
+ * discharges the disclosure duty for them, and the credits therefore have to stay reachable.
+ * It is deliberately an attribution record for visitors, not an engineering one: the encoding
+ * detail that used to sit in it lives below instead. **PR3b replaces it with a localised
+ * `/credits` page rendered from this manifest**, at which point the raw file goes.
+ *
+ * ## Encoding
+ *
+ * Every raster asset ships as AVIF with a JPEG fallback in two widths. Full-bleed imagery is 16:9
+ * at 1376x768 and 768x428 (the narrow variant is 428 rather than 432 because the encoder rounds to
+ * even heights); the portrait is square at 600x600 and 320x320; the hero poster is 1920x1080 and
+ * 960x540. The hero video is AV1 in WebM (1920x1080, 1.1 MB) with an H.264 MP4 fallback (1280x720,
+ * 2.1 MB, 30 s). Both are silent, the audio track having been stripped at encode time, which
+ * matters because the video autoplays.
+ *
+ * Reproducing them:
+ *
+ * ```
+ * ffmpeg -i in -vf scale=W:-2:flags=lanczos -q:v 4 out.jpg
+ * ffmpeg -i in -vf scale=W:-2:flags=lanczos,format=yuv420p10le -c:v libsvtav1 -crf 34 -frames:v 1 out.avif
+ * ffmpeg -i in -an -c:v libsvtav1 -crf 40 hero-home-1080.webm
+ * ffmpeg -i in -an -vf scale=1280:-2 -c:v libx264 -preset slow -crf 26 -movflags +faststart hero-home-720.mp4
+ * ```
+ *
+ * Originals live outside the deployed folder, in `_design/media-originals/` under the DOME root.
+ * The prompts the AI images were generated from are in `_design/domelayer-redesign/IMAGE_BRIEF.md`.
  */
 
 /** Where an asset came from. Drives the credit line and the visible AI label. */
@@ -122,7 +152,7 @@ export const MEDIA = {
     decorative: true,
     source: 'own',
     aiLabel: false,
-    usedOn: 'Home hero poster, and the LCP image',
+    usedOn: 'Home hero poster frame',
   },
   homeHeroStill: {
     kind: 'image',
