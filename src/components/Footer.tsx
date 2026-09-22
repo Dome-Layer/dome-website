@@ -5,12 +5,12 @@ import { Container } from './Container'
 import { fadeUp, viewportConfig } from '../lib/motion'
 import { localizedHref } from '../i18n/routes'
 import { useLocale, useMessages } from '../i18n/useLocale'
+import { SITE } from '../lib/siteRoutes'
 
 export function Footer() {
   const locale = useLocale()
   const messages = useMessages()
   const t = messages.footer
-  const homeHref = localizedHref('home', locale)
   const [email, setEmail] = useState('')
   const [message, setMessage] = useState('')
   const [honeypot, setHoneypot] = useState('')
@@ -202,10 +202,10 @@ export function Footer() {
           </div>
 
           <div className="flex flex-col gap-3 text-body-sm text-dome-nickel">
-            <a href={`${homeHref}#method`} className="hover:text-dome-signal-blue transition-colors">{messages.nav.method}</a>
-            <a href={`${homeHref}#architecture`} className="hover:text-dome-signal-blue transition-colors">{messages.nav.architecture}</a>
-            <a href={`${homeHref}#engagement`} className="hover:text-dome-signal-blue transition-colors">{messages.nav.engagement}</a>
-            <a href={`${homeHref}#about`} className="hover:text-dome-signal-blue transition-colors">{messages.nav.about}</a>
+            <a href={SITE.enterpriseUx} className="hover:text-dome-signal-blue transition-colors">{messages.nav.enterpriseUx}</a>
+            <a href={SITE.aiProcessAutomation} className="hover:text-dome-signal-blue transition-colors">{messages.nav.aiAutomation}</a>
+            <a href={SITE.caseStudies} className="hover:text-dome-signal-blue transition-colors">{messages.nav.caseStudies}</a>
+            <a href={SITE.about} className="hover:text-dome-signal-blue transition-colors">{messages.nav.about}</a>
           </div>
         </div>
 

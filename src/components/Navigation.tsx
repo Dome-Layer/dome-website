@@ -1,16 +1,28 @@
 import { useState, useEffect, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { useLocation } from 'react-router-dom'
-import { useLenis } from 'lenis/react'
+import { Link, useLocation } from 'react-router-dom'
 import { DomeLogo } from './DomeLogo'
 import { ThemeToggle } from './ThemeToggle'
 import { isAuthenticated, clearToken } from '../lib/auth'
 import { HUB_PATH } from '../lib/routes'
+import { SITE } from '../lib/siteRoutes'
 import { LanguageSwitcher } from './LanguageSwitcher'
-import { localizedHref, routeIdFromPath } from '../i18n/routes'
+import { localizedHref } from '../i18n/routes'
 import { useLocale, useMessages } from '../i18n/useLocale'
 
-const sectionIds = ['method', 'architecture', 'tools', 'engagement', 'about', 'contact'] as const
+/**
+ * The restructured site's primary navigation: real pages, not hash anchors into a one-page site.
+ * The old section-anchor model and its Lenis scroll tracking went with the home page rebuild
+ * (plan phase 1c).
+ */
+const NAV_ITEMS = [
+  { key: 'enterpriseUx', to: SITE.enterpriseUx },
+  { key: 'aiAutomation', to: SITE.aiProcessAutomation },
+  { key: 'dome', to: SITE.dome },
+  { key: 'caseStudies', to: SITE.caseStudies },
+  { key: 'about', to: SITE.about },
+  { key: 'contact', to: SITE.contact },
+] as const
 
 // Stroke icons for the top-bar auth control (render white on the accent button).
 const UserIcon = (
@@ -30,13 +42,10 @@ const SignOutIcon = (
 export function Navigation() {
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
-  const [activeSection, setActiveSection] = useState<number>(-1)
   const location = useLocation()
   const t = useMessages().nav
   const homeHref = localizedHref('home', useLocale())
-  const isHomePage = routeIdFromPath(location.pathname) === 'home'
-  const navItems = sectionIds.map((id) => ({ label: t[id], href: `#${id}` }))
-  const lenis = useLenis()
+  const navItems = NAV_ITEMS.map((item) => ({ label: t[item.key], to: item.to }))
 
   // Auth state for the top-bar Sign in / Sign out control. Read after mount from the
   // cross-subdomain cookie: pages are prerendered signed-out, so reading it during render
@@ -68,69 +77,10 @@ export function Navigation() {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
-  // Track active section (homepage only)
-  useEffect(() => {
-    if (!isHomePage) return
-
-    const getActiveSection = () => {
-      const offset = window.innerHeight * 0.35
-      const atBottom = (window.innerHeight + window.scrollY) >= document.body.scrollHeight - 2
-
-      if (atBottom) {
-        setActiveSection(sectionIds.length - 1)
-        return
-      }
-
-      for (let i = sectionIds.length - 1; i >= 0; i--) {
-        const el = document.getElementById(sectionIds[i])
-        if (el && el.getBoundingClientRect().top <= offset) {
-          setActiveSection(i)
-          return
-        }
-      }
-
-      setActiveSection(-1)
-    }
-
-    getActiveSection()
-    window.addEventListener('scroll', getActiveSection, { passive: true })
-    return () => window.removeEventListener('scroll', getActiveSection)
-  }, [isHomePage])
-
-  // Scroll to hash on initial load (e.g. navigating back from a tool page via /#tools)
-  useEffect(() => {
-    if (!isHomePage || !lenis) return
-    const hash = window.location.hash
-    if (!hash) return
-    const id = setTimeout(() => {
-      lenis.scrollTo(hash, { offset: -64 })
-    }, 300)
-    return () => clearTimeout(id)
-  }, [isHomePage, lenis])
-
   useEffect(() => {
     document.body.style.overflow = mobileOpen ? 'hidden' : ''
     return () => { document.body.style.overflow = '' }
   }, [mobileOpen])
-
-  const handleNavClick = useCallback((_index: number, href: string) => {
-    if (isHomePage) {
-      lenis?.scrollTo(href, { offset: -64 })
-    } else {
-      window.location.href = homeHref + href
-    }
-  }, [isHomePage, lenis, homeHref])
-
-  const handleMobileNavClick = useCallback((href: string) => {
-    setMobileOpen(false)
-    if (isHomePage) {
-      setTimeout(() => {
-        lenis?.scrollTo(href, { offset: -64 })
-      }, 100)
-    } else {
-      window.location.href = homeHref + href
-    }
-  }, [isHomePage, lenis, homeHref])
 
   return (
     <>
@@ -149,22 +99,19 @@ export function Navigation() {
           {/* Desktop nav */}
           <div className="hidden lg:flex items-center gap-4">
             <ul className="flex items-center gap-1" role="list">
-              {navItems.map((item, i) => (
+              {navItems.map((item) => (
                 <li key={item.label}>
-                  <a
-                    href={item.href}
-                    onClick={(e) => {
-                      e.preventDefault()
-                      handleNavClick(i, item.href)
-                    }}
+                  <Link
+                    to={item.to}
+                    aria-current={location.pathname === item.to ? 'page' : undefined}
                     className={`relative px-3 py-2 rounded-lg text-[13px] font-medium transition-colors duration-150 ${
-                      activeSection === i
+                      location.pathname === item.to
                         ? 'text-[#0080FF]'
                         : 'text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] hover:bg-[var(--color-bg-muted)]'
                     }`}
                   >
                     {item.label}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -248,13 +195,13 @@ export function Navigation() {
                       ease: [0.16, 1, 0.3, 1],
                     }}
                   >
-                    <a
-                      href={item.href}
-                      onClick={() => handleMobileNavClick(item.href)}
+                    <Link
+                      to={item.to}
+                      onClick={() => setMobileOpen(false)}
                       className="text-2xl font-semibold text-[var(--color-text-primary)] hover:text-[#0080FF] transition-colors tracking-tight"
                     >
                       {item.label}
-                    </a>
+                    </Link>
                   </motion.li>
                 ))}
                 <motion.li

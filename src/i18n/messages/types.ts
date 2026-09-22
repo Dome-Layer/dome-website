@@ -26,10 +26,10 @@ export interface Messages {
   }
   nav: {
     homeLabel: string
-    method: string
-    architecture: string
-    tools: string
-    engagement: string
+    enterpriseUx: string
+    aiAutomation: string
+    dome: string
+    caseStudies: string
     about: string
     contact: string
     signIn: string
