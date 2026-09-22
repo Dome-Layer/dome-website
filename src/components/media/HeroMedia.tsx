@@ -51,10 +51,17 @@ export function HeroMedia() {
 
   return (
     <>
+      {/*
+        The source footage is near-black, which is right for the dark theme and wrong for the light
+        one: a white scrim over black reads as muddy grey. Inverting it gives a genuinely light
+        frame with cool silver streaks that keep the original's structure and contrast, and it costs
+        nothing, where a second brightened encode would mean another 3.2 MB and a src swap on every
+        theme change. `invert` applies by default and is removed in the dark theme.
+      */}
       <Picture
         id="homeHeroPoster"
         priority
-        className="absolute inset-0 h-full w-full object-cover [object-position:center_35%]"
+        className="absolute inset-0 h-full w-full object-cover [object-position:center_35%] invert dark:invert-0"
       />
       {showVideo && (
         <video
@@ -67,7 +74,7 @@ export function HeroMedia() {
           poster={poster.jpeg[poster.jpeg.length - 1].src}
           aria-hidden="true"
           tabIndex={-1}
-          className="absolute inset-0 h-full w-full object-cover [object-position:center_35%]"
+          className="absolute inset-0 h-full w-full object-cover [object-position:center_35%] invert dark:invert-0"
         >
           {MEDIA.homeHeroVideo.sources.map((source) => (
             <source key={source.src} src={source.src} type={source.type} />
@@ -75,11 +82,19 @@ export function HeroMedia() {
         </video>
       )}
 
-      {/* Two scrims, both theme-keyed. The horizontal one holds the copy at AA over a busy frame;
-          the vertical one fades the media into the page background at the bottom edge. */}
+      {/*
+        Scrims, all theme-keyed. On phones the copy spans the full width, so the desktop gradient's
+        transparent right-hand third left the end of every line sitting on bare media: the mobile
+        overlay therefore covers the whole width and only softens towards the edge. From `md` up the
+        copy is confined to the left, so the media can still show through on the right.
+      */}
       <div
         aria-hidden="true"
-        className="absolute inset-0 bg-[linear-gradient(90deg,var(--color-scrim-strong)_0%,var(--color-scrim)_48%,transparent_80%)]"
+        className="absolute inset-0 md:hidden bg-[linear-gradient(90deg,var(--color-scrim-strong)_0%,var(--color-scrim-strong)_72%,var(--color-scrim)_100%)]"
+      />
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 hidden md:block bg-[linear-gradient(90deg,var(--color-scrim-strong)_0%,var(--color-scrim)_48%,transparent_80%)]"
       />
       <div
         aria-hidden="true"

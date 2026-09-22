@@ -11,8 +11,8 @@ import { routeMeta } from '../lib/seo'
 export const meta = routeMeta('caseStudies')
 
 const GROUPS: { segment: Segment; eyebrow: string; heading: string }[] = [
-  { segment: 'ux', eyebrow: 'Enterprise UX and product', heading: 'Platforms people have to use every day' },
   { segment: 'automation', eyebrow: 'AI process automation', heading: 'Work that follows a policy' },
+  { segment: 'ux', eyebrow: 'Enterprise UX and product', heading: 'Platforms people have to use every day' },
   { segment: 'dome', eyebrow: 'DOME capabilities', heading: 'The method running end to end' },
 ]
 

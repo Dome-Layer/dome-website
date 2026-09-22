@@ -6,17 +6,17 @@ import { useLocale } from '../../i18n/useLocale'
 const SERVICES: { number: string; title: string; body: string; cta: string; route: RouteId }[] = [
   {
     number: '01',
-    title: 'Enterprise UX and product',
-    body: 'We untangle complex internal tools and customer platforms: user research, service design, interface design and a design system your developers can build from.',
-    cta: 'Explore UX and product',
-    route: 'enterpriseUx',
-  },
-  {
-    number: '02',
     title: 'AI process automation',
     body: 'We map a process, automate the parts with clear rules and route the rest to your team with a decision brief and a complete audit trail.',
     cta: 'Explore process automation',
     route: 'aiProcessAutomation',
+  },
+  {
+    number: '02',
+    title: 'Enterprise UX and product',
+    body: 'We untangle complex internal tools and customer platforms: user research, service design, interface design and a design system your developers can build from.',
+    cta: 'Explore UX and product',
+    route: 'enterpriseUx',
   },
   {
     number: '03',

@@ -4,8 +4,8 @@ import { localizedHref } from '../../i18n/routes'
 import { useLocale, useMessages } from '../../i18n/useLocale'
 
 const TOPICS = [
-  'Enterprise UX and product',
   'AI process automation',
+  'Enterprise UX and product',
   'DOME capabilities',
   'Something else',
 ]

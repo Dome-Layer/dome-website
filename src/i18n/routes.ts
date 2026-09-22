@@ -23,14 +23,14 @@ interface PublicRoute {
  */
 export const PUBLIC_ROUTES = {
   home: { file: 'pages/HomePage.tsx', path: { en: '/', it: '/it' }, updatedAt: '2026-09-22' },
-  enterpriseUx: {
-    file: 'pages/EnterpriseUxPage.tsx',
-    path: { en: '/services/enterprise-ux', it: '/it/servizi/ux-enterprise' },
-    updatedAt: '2026-09-22',
-  },
   aiProcessAutomation: {
     file: 'pages/AiProcessAutomationPage.tsx',
     path: { en: '/services/ai-process-automation', it: '/it/servizi/automazione-processi-ai' },
+    updatedAt: '2026-09-22',
+  },
+  enterpriseUx: {
+    file: 'pages/EnterpriseUxPage.tsx',
+    path: { en: '/services/enterprise-ux', it: '/it/servizi/ux-enterprise' },
     updatedAt: '2026-09-22',
   },
   dome: { file: 'pages/DomePage.tsx', path: { en: '/dome', it: '/it/dome' }, updatedAt: '2026-09-22' },
@@ -149,7 +149,7 @@ export function caseStudyHref(studyId: string, locale: Locale): string {
 }
 
 /** Pages that are neither a tool nor legal: the ones llms.txt lists first. */
-export const PAGE_IDS = ['home', 'enterpriseUx', 'aiProcessAutomation', 'dome', 'caseStudies', 'about', 'contact'] as const satisfies readonly RouteId[]
+export const PAGE_IDS = ['home', 'aiProcessAutomation', 'enterpriseUx', 'dome', 'caseStudies', 'about', 'contact'] as const satisfies readonly RouteId[]
 
 /** Tool pages, in the order the site presents them. */
 export const TOOL_ROUTE_IDS = [

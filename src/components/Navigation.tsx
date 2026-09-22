@@ -16,8 +16,8 @@ import type { Messages } from '../i18n/messages/types'
  * (plan phase 1c).
  */
 const NAV_ITEMS = [
-  { key: 'enterpriseUx', route: 'enterpriseUx' },
   { key: 'aiAutomation', route: 'aiProcessAutomation' },
+  { key: 'enterpriseUx', route: 'enterpriseUx' },
   { key: 'dome', route: 'dome' },
   { key: 'caseStudies', route: 'caseStudies' },
   { key: 'about', route: 'about' },

@@ -75,8 +75,8 @@ interface MediaAssetBase {
   source: MediaSource
   /**
    * AI-generated imagery shows a visible "AI-generated image" label, which the legal notice
-   * commits us to. The portrait is deliberately false: it is a real photograph that was only
-   * enhanced, so labelling it would be misleading in the other direction.
+   * commits us to. It is false for the portrait, which is a real photograph: labelling that would
+   * be misleading in the other direction.
    */
   aiLabel: boolean
   /** Licence or permission, for anything that is not ours outright. */
