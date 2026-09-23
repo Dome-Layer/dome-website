@@ -139,7 +139,8 @@ export default function PrivacyPage() {
         </h1>
         <p style={{ ...s.p, marginBottom: "0" }}>
           Applies to: domelayer.com and all subdomains (analyzer.domelayer.com,
-          llm-council.domelayer.com, data-intelligence.domelayer.com)
+          llm-council.domelayer.com, document-intelligence.domelayer.com,
+          data-intelligence.domelayer.com, governance.domelayer.com)
         </p>
 
         {/* ── Who we are ── */}
