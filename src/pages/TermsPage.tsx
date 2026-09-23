@@ -98,7 +98,8 @@ export default function TermsPage() {
         </h1>
         <p style={{ ...s.p, marginBottom: "0" }}>
           Applies to: analyzer.domelayer.com, llm-council.domelayer.com,
-          data-intelligence.domelayer.com
+          document-intelligence.domelayer.com, data-intelligence.domelayer.com,
+          governance.domelayer.com
         </p>
 
         {/* ── Who provides ── */}
