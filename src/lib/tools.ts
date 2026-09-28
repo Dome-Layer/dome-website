@@ -6,14 +6,16 @@ import { isStagingHost } from "./auth";
  */
 
 /**
- * Whether the Agent Flow app is actually reachable.
+ * Whether Agent Flow is open to visitors as a self-serve app.
  *
- * The marketing page, the home tools section and the /app hub all surface Agent Flow,
- * but agent-flow.domelayer.com has no DNS record yet: the P5 frontend has not been
- * deployed (roadmap Sprint A). While this is false, every Agent Flow launch link
- * renders as a "coming soon" state instead of a link that fails to open.
+ * It is not, by decision (DOME_DECISIONS 2026-09-28): Agent Flow runs as a private
+ * demo shown in a live walkthrough, because every run makes paid model calls and
+ * anyone can sign up to DOME. While this is false, every Agent Flow entry point
+ * offers "Book a private demo" instead of a launch link, and
+ * agent-flow.domelayer.com has no DNS record.
  *
- * Flip to true in the same change that makes agent-flow.domelayer.com resolve.
+ * Flip to true only if Agent Flow becomes self-serve, in the same change that makes
+ * agent-flow.domelayer.com resolve.
  */
 export const AGENT_FLOW_LIVE = false as boolean;
 

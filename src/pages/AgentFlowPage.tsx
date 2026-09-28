@@ -7,6 +7,8 @@ import { TextReveal } from '../components/TextReveal'
 import { fadeUp, dramaticFadeUp, viewportConfig } from '../lib/motion'
 import { AGENT_FLOW_LIVE, useToolHref } from '../lib/tools'
 import { routeMeta } from '../lib/seo'
+import { localizedHref } from '../i18n/routes'
+import { useLocale } from '../i18n/useLocale'
 
 export const meta = routeMeta('agentFlow')
 
@@ -33,6 +35,7 @@ const steps = [
 
 export default function AgentFlowPage() {
   const launchHref = useToolHref('agent-flow.domelayer.com')
+  const locale = useLocale()
 
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -78,21 +81,18 @@ export default function AgentFlowPage() {
                 </a>
               ) : (
                 <>
-                  <span
-                    aria-disabled="true"
-                    className="inline-flex items-center px-5 py-2.5 text-[13px] font-semibold rounded-lg border border-[var(--color-border-default)] text-[var(--color-text-secondary)] cursor-default select-none"
-                  >
-                    Coming soon
-                  </span>
                   <a
-                    href="/#contact"
+                    href={localizedHref('contact', locale)}
                     className="inline-flex items-center gap-1.5 px-5 py-2.5 text-[13px] font-semibold text-white rounded-lg transition-colors duration-150"
                     style={{ backgroundColor: ACCENT }}
                     onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = ACCENT_HOVER)}
                     onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = ACCENT)}
                   >
-                    Request a demo
+                    Book a private demo
                   </a>
+                  <span className="text-[13px] text-[var(--color-text-secondary)]">
+                    Shown live, on real invoices, in a guided walkthrough.
+                  </span>
                 </>
               )}
             </div>

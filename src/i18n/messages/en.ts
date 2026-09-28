@@ -456,7 +456,7 @@ export const en: Messages = {
       },
       agentFlow: {
         eyebrow: 'The method in production',
-        badge: 'Rolling out',
+        badge: 'Private demo',
         heading: 'Agent Flow: from invoice to approval, every step on record',
         lead: 'Agent Flow chains the building blocks into one governed workflow, with a named person signing off wherever the policy requires it.',
         cta: 'How Agent Flow works',
