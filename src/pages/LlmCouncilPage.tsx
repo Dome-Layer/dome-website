@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router'
 import { motion } from 'framer-motion'
 import { ToolPageLayout } from '../layouts/ToolPageLayout'
 import { Section } from '../components/Section'
@@ -8,30 +8,18 @@ import { TextReveal } from '../components/TextReveal'
 import { fadeUp, dramaticFadeUp, viewportConfig } from '../lib/motion'
 import { useToolHref } from '../lib/tools'
 import { routeMeta } from '../lib/seo'
+import { localizedHref } from '../i18n/routes'
+import { useLocale, useMessages } from '../i18n/useLocale'
 
 export const meta = routeMeta('llmCouncil')
 
-const steps = [
-  {
-    number: '01',
-    title: 'Pose a strategic question',
-    body: 'Submit any high-stakes question — a market entry decision, a risk assessment, a policy trade-off. No structured format required: plain language is sufficient.',
-  },
-  {
-    number: '02',
-    title: 'Three advisors deliberate independently',
-    body: 'A panel of three AI advisors each analyses the question from a distinct perspective. They reason independently first, then cross-examine each other\'s positions — surfacing disagreement rather than suppressing it.',
-  },
-  {
-    number: '03',
-    title: 'A governed verdict with full audit trail',
-    body: 'The Council produces a synthesised verdict that reflects areas of consensus and documents dissenting views. Every reasoning step is logged: the full deliberation trail is available for review and governance sign-off.',
-  },
-]
 
 export default function LlmCouncilPage() {
   const navigate = useNavigate()
   const launchHref = useToolHref('llm-council.domelayer.com')
+  const locale = useLocale()
+  const t = useMessages().pages.tools
+  const text = t.llmCouncil
 
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -50,14 +38,14 @@ export default function LlmCouncilPage() {
           >
             <div className="flex items-center gap-3 mb-6">
               <button
-                onClick={() => navigate('/#tools')}
+                onClick={() => navigate(localizedHref('dome', locale))}
                 className="text-[13px] text-[var(--color-text-tertiary)] hover:text-[var(--color-text-secondary)] transition-colors duration-150"
               >
-                ← Tools
+                ← {t.back}
               </button>
               <span className="text-[var(--color-border-default)]">/</span>
               <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#7B5EA7]">
-                ORCHESTRATE
+                {text.phase}
               </span>
             </div>
 
@@ -65,7 +53,7 @@ export default function LlmCouncilPage() {
               LLM Council
             </h1>
             <p className="text-body text-[var(--color-text-secondary)] max-w-lg mb-8">
-              Pose a strategic question to a panel of three AI advisors. They deliberate independently, cross-examine each other, and produce a governed verdict with full audit trail.
+              {text.lead}
             </p>
             <a
               href={launchHref}
@@ -73,7 +61,7 @@ export default function LlmCouncilPage() {
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-6 py-3 text-[13px] font-semibold bg-[#7B5EA7] text-white rounded-lg hover:bg-[#9B7EC7] active:bg-[#5A3E87] transition-colors duration-150"
             >
-              Open LLM Council
+              {text.open}
               <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
                 <path d="M2.5 9.5L9.5 2.5M9.5 2.5H4.5M9.5 2.5V7.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
@@ -92,7 +80,7 @@ export default function LlmCouncilPage() {
             viewport={viewportConfig}
           >
             <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#7B5EA7] mb-4">
-              What it does
+              {t.whatItDoes}
             </p>
             <TextReveal
               as="p"
@@ -100,7 +88,7 @@ export default function LlmCouncilPage() {
               stagger={0.025}
               className="text-body text-[var(--color-text-secondary)] leading-relaxed"
             >
-              LLM Council structures AI-assisted deliberation around high-stakes decisions. Rather than producing a single model response, it convenes a panel of three advisors that reason independently, challenge each other's positions, and resolve disagreement through structured cross-examination. The output is not just an answer — it is an auditable deliberation: every reasoning step, every challenge raised, and every point of consensus or dissent is logged and available for governance review. Decision-makers receive a verdict they can interrogate, not just accept.
+              {text.whatItDoes}
             </TextReveal>
           </motion.div>
         </Container>
@@ -117,7 +105,7 @@ export default function LlmCouncilPage() {
             className="mb-10"
           >
             <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#7B5EA7] mb-4">
-              How it works
+              {t.howItWorks}
             </p>
             <TextReveal
               as="h2"
@@ -125,14 +113,14 @@ export default function LlmCouncilPage() {
               stagger={0.06}
               className="text-h2 font-display font-semibold text-[var(--color-text-primary)]"
             >
-              Ask, deliberate, decide.
+              {text.howItWorks.heading}
             </TextReveal>
           </motion.div>
 
           <div className="flex flex-col gap-6">
-            {steps.map((step, i) => (
+            {text.howItWorks.steps.map((step, i) => (
               <motion.div
-                key={step.number}
+                key={step.title}
                 variants={fadeUp}
                 initial="hidden"
                 whileInView="visible"
@@ -141,7 +129,7 @@ export default function LlmCouncilPage() {
                 className="flex gap-6 p-6 rounded-xl border border-[var(--color-border-default)] bg-[var(--color-bg-base)]"
               >
                 <span className="text-[13px] font-semibold tabular-nums text-[var(--color-border-strong)] flex-shrink-0 mt-0.5">
-                  {step.number}
+                  {String(i + 1).padStart(2, '0')}
                 </span>
                 <div>
                   <h3 className="text-[15px] font-semibold text-[var(--color-text-primary)] mb-2">{step.title}</h3>
@@ -163,7 +151,7 @@ export default function LlmCouncilPage() {
             viewport={viewportConfig}
           >
             <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#7B5EA7] mb-4">
-              DOME method — Orchestrate
+              {t.method}: {text.method.phase}
             </p>
             <TextReveal
               as="p"
@@ -171,7 +159,7 @@ export default function LlmCouncilPage() {
               stagger={0.025}
               className="text-body text-[var(--color-text-secondary)] leading-relaxed"
             >
-              The Deliberate phase ensures that consequential decisions are not delegated to a single model inference. LLM Council is the practical implementation of this principle: it enforces structured disagreement, requires independent reasoning before consensus is sought, and produces an audit trail that satisfies governance requirements. Where other phases of DOME constrain what AI can do, Deliberate constrains how AI reaches conclusions — making the reasoning process itself accountable.
+              {text.method.body}
             </TextReveal>
           </motion.div>
         </Container>

@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router'
 import { motion } from 'framer-motion'
 import { ToolPageLayout } from '../layouts/ToolPageLayout'
 import { Section } from '../components/Section'
@@ -8,30 +8,18 @@ import { TextReveal } from '../components/TextReveal'
 import { fadeUp, dramaticFadeUp, viewportConfig } from '../lib/motion'
 import { useToolHref } from '../lib/tools'
 import { routeMeta } from '../lib/seo'
+import { localizedHref } from '../i18n/routes'
+import { useLocale, useMessages } from '../i18n/useLocale'
 
 export const meta = routeMeta('dataIntelligence')
 
-const steps = [
-  {
-    number: '01',
-    title: 'Upload a spreadsheet',
-    body: 'Provide a CSV, XLSX, or XLS file. The tool receives column names, data types, sample values, and aggregates — raw row data is discarded immediately and never stored.',
-  },
-  {
-    number: '02',
-    title: 'Governed dashboard generation',
-    body: 'A language model classifies each column. A deterministic rules engine — not the model — then selects the appropriate chart type for each data relationship. The model informs; governance decides.',
-  },
-  {
-    number: '03',
-    title: 'Natural language Q&A',
-    body: 'Once the dashboard is generated, ask questions about the data in plain language. The Q&A panel operates on the classified column summary, not on the raw data.',
-  },
-]
 
 export default function DataIntelligencePage() {
   const navigate = useNavigate()
   const launchHref = useToolHref('data-intelligence.domelayer.com')
+  const locale = useLocale()
+  const t = useMessages().pages.tools
+  const text = t.dataIntelligence
 
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -50,14 +38,14 @@ export default function DataIntelligencePage() {
           >
             <div className="flex items-center gap-3 mb-6">
               <button
-                onClick={() => navigate('/#tools')}
+                onClick={() => navigate(localizedHref('dome', locale))}
                 className="text-[13px] text-[var(--color-text-tertiary)] hover:text-[var(--color-text-secondary)] transition-colors duration-150"
               >
-                ← Tools
+                ← {t.back}
               </button>
               <span className="text-[var(--color-border-default)]">/</span>
               <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#10B981]">
-                Orchestrate & Model
+                {text.phase}
               </span>
             </div>
 
@@ -65,7 +53,7 @@ export default function DataIntelligencePage() {
               Data Intelligence
             </h1>
             <p className="text-body text-[var(--color-text-secondary)] max-w-lg mb-8">
-              Upload a spreadsheet and receive a governed analytics dashboard with automatic chart selection and a natural language Q&A panel.
+              {text.lead}
             </p>
             <a
               href={launchHref}
@@ -73,7 +61,7 @@ export default function DataIntelligencePage() {
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-6 py-3 text-[13px] font-semibold bg-[#10B981] text-white rounded-lg hover:bg-[#34D399] active:bg-[#059669] transition-colors duration-150"
             >
-              Open Data Intelligence
+              {text.open}
               <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
                 <path d="M2.5 9.5L9.5 2.5M9.5 2.5H4.5M9.5 2.5V7.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
@@ -92,7 +80,7 @@ export default function DataIntelligencePage() {
             viewport={viewportConfig}
           >
             <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#10B981] mb-4">
-              What it does
+              {t.whatItDoes}
             </p>
             <TextReveal
               as="p"
@@ -100,7 +88,7 @@ export default function DataIntelligencePage() {
               stagger={0.025}
               className="text-body text-[var(--color-text-secondary)] leading-relaxed"
             >
-              Data Intelligence transforms structured spreadsheet data into a governed analytics dashboard without manual configuration. The system classifies each column by type — date, category, metric — then applies a rules engine to determine which chart types are appropriate. Chart selection is deterministic and auditable: the same data always produces the same chart decisions, and every governance rule applied is recorded. A natural language Q&A panel allows analysts to interrogate the data after the dashboard is generated.
+              {text.whatItDoes}
             </TextReveal>
           </motion.div>
         </Container>
@@ -117,7 +105,7 @@ export default function DataIntelligencePage() {
             className="mb-10"
           >
             <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#10B981] mb-4">
-              How it works
+              {t.howItWorks}
             </p>
             <TextReveal
               as="h2"
@@ -125,14 +113,14 @@ export default function DataIntelligencePage() {
               stagger={0.06}
               className="text-h2 font-display font-semibold text-[var(--color-text-primary)]"
             >
-              Upload, classify, analyse.
+              {text.howItWorks.heading}
             </TextReveal>
           </motion.div>
 
           <div className="flex flex-col gap-6">
-            {steps.map((step, i) => (
+            {text.howItWorks.steps.map((step, i) => (
               <motion.div
-                key={step.number}
+                key={step.title}
                 variants={fadeUp}
                 initial="hidden"
                 whileInView="visible"
@@ -141,7 +129,7 @@ export default function DataIntelligencePage() {
                 className="flex gap-6 p-6 rounded-xl border border-[var(--color-border-default)] bg-[var(--color-bg-base)]"
               >
                 <span className="text-[13px] font-semibold tabular-nums text-[var(--color-border-strong)] flex-shrink-0 mt-0.5">
-                  {step.number}
+                  {String(i + 1).padStart(2, '0')}
                 </span>
                 <div>
                   <h3 className="text-[15px] font-semibold text-[var(--color-text-primary)] mb-2">{step.title}</h3>
@@ -163,7 +151,7 @@ export default function DataIntelligencePage() {
             viewport={viewportConfig}
           >
             <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#10B981] mb-4">
-              DOME method — Orchestrate & Model
+              {t.method}: {text.method.phase}
             </p>
             <TextReveal
               as="p"
@@ -171,7 +159,7 @@ export default function DataIntelligencePage() {
               stagger={0.025}
               className="text-body text-[var(--color-text-secondary)] leading-relaxed"
             >
-              The Orchestrate and Model phases define how AI components are coordinated and configured within a governance framework. Data Intelligence is a practical demonstration of this: the language model is confined to column classification — a bounded, low-risk task — while a deterministic rules engine makes the consequential decisions about data presentation. This separation of responsibilities is the architectural pattern DOME applies across all governed AI deployments.
+              {text.method.body}
             </TextReveal>
           </motion.div>
         </Container>

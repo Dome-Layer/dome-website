@@ -57,6 +57,46 @@ export interface ServicePageText {
  * Shape of every message catalogue. Each locale's catalogue is typed with it, so a missing or
  * misspelt key fails `tsc`. Page body copy moves in here when the pages are rebuilt (plan 1c, 1d).
  */
+/** A DOME tool's detail page under /dome. Tool and DOME phase names stay English. */
+export interface ToolPageText {
+  /** Hero eyebrow: the DOME phase the tool belongs to. */
+  phase: string
+  lead: string
+  /** Launch button, e.g. "Open Process Analyzer". */
+  open: string
+  whatItDoes: string
+  howItWorks: { heading: string; steps: readonly ItemText[] }
+  /** "DOME method: <phase>" section: the phase name and its paragraph. */
+  method: { phase: string; body: string }
+}
+
+/**
+ * One block of a legal document. Strings may use the inline markup rendered by
+ * `LegalDocument`: **bold**, `code`, [label](target) where target is a route id such as
+ * `privacy`, or a `mailto:` address, and a newline for a line break.
+ */
+export type LegalBlock =
+  | { p: string }
+  | { h3: string }
+  /** A bold lead-in paragraph naming the data item that follows. */
+  | { label: string }
+  /** The legal basis line under a data item, set in small italics. */
+  | { basis: string }
+  | { list: readonly string[] }
+  /** A highlighted notice box. */
+  | { warning: string }
+  | { table: { head: readonly string[]; rows: readonly (readonly string[])[] } }
+
+export interface LegalDocumentText {
+  back: string
+  updated: string
+  title: string
+  appliesTo: string
+  sections: readonly { heading: string; blocks: readonly LegalBlock[] }[]
+  /** Link to the sibling document at the foot of the page. */
+  sibling: string
+}
+
 export interface Messages {
   site: {
     /** One-paragraph description of DOME, for structured data and llms.txt. */
@@ -235,5 +275,29 @@ export interface Messages {
         legal: string
       }
     }
+    /** The DOME tool detail pages. Their copy was hardcoded in English until 2026-09-28. */
+    tools: {
+      /** Back link to the DOME page. */
+      back: string
+      whatItDoes: string
+      howItWorks: string
+      /** Prefix of the "DOME method: <phase>" eyebrow. */
+      method: string
+      processAnalyzer: ToolPageText
+      llmCouncil: ToolPageText
+      documentIntelligence: ToolPageText
+      dataIntelligence: ToolPageText
+      governanceDashboard: ToolPageText
+      agentFlow: {
+        phase: string
+        lead: string
+        openQueue: string
+        bookDemo: string
+        demoNote: string
+        steps: readonly ItemText[]
+      }
+    }
+    privacy: LegalDocumentText
+    terms: LegalDocumentText
   }
 }

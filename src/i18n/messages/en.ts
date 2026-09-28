@@ -625,5 +625,398 @@ export const en: Messages = {
         legal: 'Dome di Francesco Prodomo · P.IVA 07242670482',
       },
     },
+    tools: {
+      back: 'Tools',
+      whatItDoes: 'What it does',
+      howItWorks: 'How it works',
+      method: 'DOME method',
+      processAnalyzer: {
+        phase: 'Discover',
+        lead: 'Convert a plain-language description of any business process into a structured process map with governance analysis and automation assessment.',
+        open: 'Open Process Analyzer',
+        whatItDoes:
+          'Process Analyzer takes unstructured business process descriptions and returns structured, visual outputs that operations managers and process owners can act on immediately. It identifies which systems touch each step, estimates processing time, and flags where governance controls are absent or insufficient. The tool also assesses which parts of the process are candidates for AI automation, with a clear indication of what oversight would be needed before any automation is deployed.',
+        howItWorks: {
+          heading: 'Three steps from description to map.',
+          steps: [
+            { title: 'Describe the process', body: 'Write a plain-language description of any business process: a procurement workflow, an approval chain, an onboarding sequence. No templates or structured input required.' },
+            { title: 'Receive a structured map', body: 'The tool generates a visual flowchart (Mermaid.js), identifies the systems involved, estimates time at each stage, and surfaces governance exposure points.' },
+            { title: 'Understand automation opportunities', body: 'Each step is assessed for AI automation potential, with a confidence score and a plain explanation of what governance measures would be required before deployment.' },
+          ],
+        },
+        method: {
+          phase: 'Discover',
+          body: 'The Discover phase maps what actually exists before any AI architecture is designed. Process Analyzer is the practical implementation of this phase: it builds the process inventory, exposes regulatory and governance gaps, and produces the structured foundation that all subsequent DOME phases require. A deployment cannot be designed until the process landscape is understood.',
+        },
+      },
+      llmCouncil: {
+        phase: 'Orchestrate',
+        lead: 'Pose a strategic question to a panel of three AI advisors. They deliberate independently, cross-examine each other, and produce a governed verdict with full audit trail.',
+        open: 'Open LLM Council',
+        whatItDoes:
+          "LLM Council structures AI-assisted deliberation around high-stakes decisions. Rather than producing a single model response, it convenes a panel of three advisors that reason independently, challenge each other's positions, and resolve disagreement through structured cross-examination. The output is not just an answer: it is an auditable deliberation. Every reasoning step, every challenge raised, and every point of consensus or dissent is logged and available for governance review. Decision-makers receive a verdict they can interrogate, not just accept.",
+        howItWorks: {
+          heading: 'Ask, deliberate, decide.',
+          steps: [
+            { title: 'Pose a strategic question', body: 'Submit any high-stakes question, such as a market entry decision, a risk assessment or a policy trade-off. No structured format required: plain language is sufficient.' },
+            { title: 'Three advisors deliberate independently', body: "A panel of three AI advisors each analyses the question from a distinct perspective. They reason independently first, then cross-examine each other's positions, surfacing disagreement rather than suppressing it." },
+            { title: 'A governed verdict with full audit trail', body: 'The Council produces a synthesised verdict that reflects areas of consensus and documents dissenting views. Every reasoning step is logged: the full deliberation trail is available for review and governance sign-off.' },
+          ],
+        },
+        method: {
+          phase: 'Orchestrate',
+          body: 'The Orchestrate phase ensures that consequential decisions are not delegated to a single model inference. LLM Council is the practical implementation of this principle: it enforces structured disagreement, requires independent reasoning before consensus is sought, and produces an audit trail that satisfies governance requirements. Where other phases of DOME constrain what AI can do, Orchestrate constrains how AI reaches conclusions, making the reasoning process itself accountable.',
+        },
+      },
+      documentIntelligence: {
+        phase: 'Model',
+        lead: 'Extract structured data from any document: invoices, lab reports, utility bills, contracts. Governance validation and full audit trail included.',
+        open: 'Open Document Intelligence',
+        whatItDoes:
+          'Document Intelligence converts unstructured source documents into structured, validated data without manual data entry or custom templates. It identifies document type and industry automatically, extracts every relevant field with a confidence score, and applies a governance rules engine that checks for anomalies, missing required fields, expired dates, large monetary amounts, potential personal data exposure, and more. Every extraction is saved to a searchable audit history. The output is a governed, exportable dataset ready for downstream systems.',
+        howItWorks: {
+          heading: 'Upload, extract, validate.',
+          steps: [
+            { title: 'Upload or photograph a document', body: 'Provide a PDF or image file, or capture a document directly from your camera. The system accepts invoices, lab reports, utility bills, contracts, bank statements, and more. No templates or configuration required.' },
+            { title: 'Extraction and governance validation', body: 'Fields are extracted with confidence scores, document type and industry are identified automatically, and 16 governance rules are applied to flag anomalies, missing data, expired dates, large monetary amounts, and potential compliance concerns.' },
+            { title: 'Review, save, and export', body: 'Inspect every extracted field with its section, type, and confidence score. Review governance flags by severity. Export to CSV for downstream processing, or save to your history for audit and traceability.' },
+          ],
+        },
+        method: {
+          phase: 'Model',
+          body: 'The Model phase is where governed AI decisions produce operational outputs. Document Intelligence is the Model-phase entry point for organisations that need structured data from unstructured documents at scale. Rather than trusting raw model extraction, every output is validated against a deterministic governance rules engine before it reaches downstream systems, ensuring that what enters your workflows is auditable, consistent, and defensible. This is where the DOME cycle turns process discovery into governed execution.',
+        },
+      },
+      dataIntelligence: {
+        phase: 'Orchestrate & Model',
+        lead: 'Upload a spreadsheet and receive a governed analytics dashboard with automatic chart selection and a natural language Q&A panel.',
+        open: 'Open Data Intelligence',
+        whatItDoes:
+          'Data Intelligence transforms structured spreadsheet data into a governed analytics dashboard without manual configuration. The system classifies each column by type (date, category, metric), then applies a rules engine to determine which chart types are appropriate. Chart selection is deterministic and auditable: the same data always produces the same chart decisions, and every governance rule applied is recorded. A natural language Q&A panel allows analysts to interrogate the data after the dashboard is generated.',
+        howItWorks: {
+          heading: 'Upload, classify, analyse.',
+          steps: [
+            { title: 'Upload a spreadsheet', body: 'Provide a CSV, XLSX, or XLS file. The tool receives column names, data types, sample values, and aggregates. Raw row data is discarded immediately and never stored.' },
+            { title: 'Governed dashboard generation', body: 'A language model classifies each column. A deterministic rules engine, not the model, then selects the appropriate chart type for each data relationship. The model informs; governance decides.' },
+            { title: 'Natural language Q&A', body: 'Once the dashboard is generated, ask questions about the data in plain language. The Q&A panel operates on the classified column summary, not on the raw data.' },
+          ],
+        },
+        method: {
+          phase: 'Orchestrate & Model',
+          body: 'The Orchestrate and Model phases define how AI components are coordinated and configured within a governance framework. Data Intelligence is a practical demonstration of this: the language model is confined to column classification (a bounded, low-risk task), while a deterministic rules engine makes the consequential decisions about data presentation. This separation of responsibilities is the architectural pattern DOME applies across all governed AI deployments.',
+        },
+      },
+      governanceDashboard: {
+        phase: 'Govern',
+        lead: 'The observation and compliance layer that spans every DOME AI tool. One signed-in view of every governance event, confidence score, and human-in-loop decision, with PDF export for audit and regulatory submissions.',
+        open: 'Open Governance Dashboard',
+        whatItDoes:
+          'The Governance Dashboard is the cross-cutting observation layer for the entire DOME platform. It aggregates governance events emitted by all four AI tools into a single, searchable audit trail. Operations managers, compliance officers, and auditors can inspect every AI decision, review confidence distributions, identify rules triggered, and flag human-in-loop actions, all without touching the individual tools. PDF reports are generated on demand for any time window and tool subset.',
+        howItWorks: {
+          heading: 'From tool usage to compliance report.',
+          steps: [
+            { title: 'Use the AI tools normally', body: 'Run any of the four DOME tools: Process Analyzer, LLM Council, Data Intelligence, or Document Intelligence. Every request automatically emits a governance event capturing the action, confidence score, rules applied, and human-in-loop recommendation.' },
+            { title: 'Review the audit trail', body: 'The Event Log shows every governance event in reverse-chronological order. Filter by tool, date range, action type, confidence threshold, or human-review status. Click any event to inspect the full decision record.' },
+            { title: 'Export for compliance', body: 'Generate a PDF audit report for any date range and tool subset in one click. Reports include a summary, confidence distribution, and a full event table with review decisions, ready for internal audit or regulatory submission.' },
+          ],
+        },
+        method: {
+          phase: 'Govern',
+          body: 'The Govern layer is the thread that runs through every other DOME phase. Where Discover maps processes, Orchestrate coordinates decisions, and Model extracts or analyses data, Govern records what actually happened and ensures it can be explained, audited, and challenged. The Governance Dashboard makes the Govern layer tangible: a live, inspectable record that turns AI activity into accountable evidence, the foundation for any regulated deployment.',
+        },
+      },
+      agentFlow: {
+        phase: 'Execute',
+        lead: 'A self-hosted n8n workflow that runs a real invoice-to-approval process across the DOME tools (extraction, a policy rules engine, a multi-model council, and a human approval gate), emitting a full audit trail the Governance Dashboard reconstructs.',
+        openQueue: 'Open the approval queue',
+        bookDemo: 'Book a private demo',
+        demoNote: 'Shown live, on real invoices, in a guided walkthrough.',
+        steps: [
+          { title: 'An invoice arrives', body: 'A vendor emails an invoice to the AP inbox, or it is uploaded through the workflow form. A self-hosted n8n workflow picks it up and opens a governed run with a single workflow id that follows it end to end.' },
+          { title: 'Extract, then evaluate against policy', body: 'Document Intelligence extracts the fields and confidence; a data-driven rules engine then decides the approval path from amount tier, purchase category, country and VAT, vendor allowlist, PO match, currency, and duplicate detection.' },
+          { title: 'Council brief, then a human gate', body: 'Ambiguous or high-value invoices get a multi-model LLM Council decision brief. A named approver signs off on a branded review page, or low-risk invoices auto-approve under policy. Every step is written to the Governance Dashboard as one reconstructable timeline.' },
+        ],
+      },
+    },
+    privacy: {
+      back: '← Back to domelayer.com',
+      updated: 'Last updated: April 2026',
+      title: 'Privacy policy',
+      appliesTo:
+        'Applies to: domelayer.com and all subdomains (analyzer.domelayer.com, llm-council.domelayer.com, document-intelligence.domelayer.com, data-intelligence.domelayer.com, governance.domelayer.com)',
+      sections: [
+        {
+          heading: 'Who we are',
+          blocks: [
+            { p: 'Dome is operated by Francesco Prodomo, a sole trader registered in Italy (P.IVA 07242670482), trading as Dome. References to "Dome", "we", or "us" in this policy refer to Francesco Prodomo trading as Dome.' },
+            { p: 'Location: Florence, Italy\nContact for privacy matters: [privacy@domelayer.com](mailto:privacy@domelayer.com)' },
+            { p: 'Francesco Prodomo is the data controller for all personal data collected through domelayer.com and its associated tools.' },
+          ],
+        },
+        {
+          heading: 'What this policy covers',
+          blocks: [
+            { p: 'This policy explains what personal data we collect when you visit domelayer.com or register to use the Dome AI tools, why we collect it, how long we keep it, and what rights you have over it.' },
+            { p: 'This policy applies exclusively to domelayer.com and the Dome portfolio tools. It does not apply to AI systems or software that Dome designs and deploys for third-party clients: those engagements are governed by separate contracts and data processing agreements negotiated per project.' },
+            { p: 'We do not sell personal data. We do not use personal data for advertising.' },
+          ],
+        },
+        {
+          heading: 'What data we collect and why',
+          blocks: [
+            { h3: 'Website visitors (no account required)' },
+            { p: 'When you visit domelayer.com, we do not place analytics cookies or third-party tracking scripts. A single functional cookie, `dome-theme`, may be set to remember your light or dark theme preference. This cookie contains no personal data and is not used for tracking.' },
+            { basis: 'Legal basis: Legitimate interest (Art. 6(1)(f) GDPR), for storing a visual preference to improve your browsing experience.' },
+            { p: 'We may in future deploy privacy-preserving, cookieless analytics tools to understand aggregate usage patterns. Such tools do not set cookies and do not collect personal data. This policy will be updated if we introduce them. We will never introduce cookie-based analytics or advertising trackers without updating this policy and, where required by law, obtaining your consent first.' },
+            { h3: 'Registered tool users' },
+            { p: 'When you register to use the Dome AI tools, we collect and process the following data:' },
+            { label: 'Email address' },
+            { p: 'Collected when you request access. Used to send you a magic link to authenticate your account. Also used, with your explicit consent, to send you product updates or commercial communications from Dome.' },
+            { basis: 'Legal basis: Contract performance (Art. 6(1)(b)) for authentication. Consent (Art. 6(1)(a)) for marketing communications.' },
+            { label: 'Sign-in timestamps and session metadata' },
+            { p: 'Each time you authenticate, we record the time and method of sign-in as standard security practice.' },
+            { basis: 'Legal basis: Legitimate interest (Art. 6(1)(f)), for security, fraud prevention, and service integrity.' },
+            { label: 'Data you submit to the tools' },
+            { p: "When you use a Dome tool, you may upload files, enter text, or interact with AI features. We collect and may store data derived from these interactions to provide the service, including session state, analysis outputs, saved results, governance log metadata, and other structured data necessary to deliver the tool's functionality." },
+            { p: 'We process this data to operate the service. We do not use it to train AI models, share it with third parties for commercial purposes, or access it except to provide technical support when you request it.' },
+            { p: 'The specific data retained depends on the tool used and the features you engage with. All stored data is associated with your account, protected by row-level security controls, and accessible only to your authenticated session. You may delete your saved data at any time from within the tool.' },
+            { basis: 'Legal basis: Contract performance (Art. 6(1)(b)), for delivering the functionality you have requested.' },
+            { label: 'Governance log metadata' },
+            { p: "Each action taken within a Dome tool generates a governance event record containing: a hash of your input (not the input itself), the action type, a timestamp, and which governance rules were applied. This metadata record is the audit trail that underpins Dome's governance architecture." },
+            { basis: 'Legal basis: Legitimate interest (Art. 6(1)(f)), for service integrity and quality assurance.' },
+            { label: 'Marketing consent record' },
+            { p: 'If you opt in to marketing communications at registration, we store a record of that consent: the date, your choice, and the version of the consent text shown to you.' },
+            { basis: 'Legal basis: Legal obligation (Art. 6(1)(c)), for documenting consent as required under GDPR.' },
+          ],
+        },
+        {
+          heading: 'What we do not do',
+          blocks: [
+            {
+              list: [
+                'We do not collect passwords. Authentication is exclusively by magic link.',
+                'We do not collect payment information. All Dome tools are free to use.',
+                'We do not use your data to train AI models.',
+                'We do not share your data with third parties for commercial or advertising purposes.',
+                'We do not knowingly collect data from minors under 18.',
+              ],
+            },
+          ],
+        },
+        {
+          heading: 'Who we share your data with',
+          blocks: [
+            { p: 'We use the following third-party service providers to operate Dome. Each acts as a data processor under a data processing agreement:' },
+            { p: '**Supabase Inc.**: Database and authentication. Data is stored in the European Union (Frankfurt, Germany: eu-central-1; and Paris, France: eu-west-3). supabase.com/privacy' },
+            { p: '**Vercel Inc.**: Website and application hosting. vercel.com/legal/privacy-policy' },
+            { p: '**Resend Inc.**: Transactional email. Used to send magic links and, with your consent, product communications. resend.com/legal/privacy-policy' },
+            { p: '**Anthropic PBC**: AI processing. When you use a Dome tool, your input is transmitted to the Anthropic API to generate a response. Anthropic processes this under its API data processing terms. anthropic.com/privacy' },
+            { p: 'We do not use advertising networks, social media trackers, or data brokers.' },
+          ],
+        },
+        {
+          heading: 'International transfers',
+          blocks: [
+            { p: 'All personal data is stored within the European Union on Supabase infrastructure located in Frankfurt and Paris.' },
+            { p: 'Vercel, Resend, and Anthropic are US-based. Transfers to these processors are governed by Standard Contractual Clauses (SCCs) under GDPR Article 46.' },
+            { p: "**UK users:** Transfers between the UK and EU are covered by the UK-EU adequacy decision currently in effect. UK users may direct complaints to the Information Commissioner's Office (ico.org.uk)." },
+          ],
+        },
+        {
+          heading: 'How long we keep your data',
+          blocks: [
+            {
+              table: {
+                head: ['Data', 'Retention'],
+                rows: [
+                  ['Email address and account record', 'Until you request account deletion'],
+                  ['Sign-in timestamps', '12 months rolling'],
+                  ['Tool session data and saved outputs', 'Until you delete them, or until account deletion'],
+                  ['Governance log metadata', '90 days rolling'],
+                  ['Marketing consent record', 'Duration of account, plus 3 years after deletion'],
+                ],
+              },
+            },
+            { p: 'On account deletion, we erase your personal data within 30 days, except where retention is required by law.' },
+          ],
+        },
+        {
+          heading: 'Your rights',
+          blocks: [
+            { p: 'To exercise any right, email [privacy@domelayer.com](mailto:privacy@domelayer.com) from the address associated with your account. We respond within 30 days.' },
+            {
+              list: [
+                '**Access**: request a copy of all personal data we hold about you.',
+                '**Rectification**: ask us to correct inaccurate data.',
+                '**Erasure**: ask us to delete your data within 30 days.',
+                '**Restriction**: ask us to pause processing while a dispute is resolved.',
+                '**Portability**: request your data in a structured, machine-readable format.',
+                '**Object**: object to processing based on legitimate interest.',
+                '**Withdraw consent**: withdraw marketing consent at any time via the unsubscribe link in any email or by contacting privacy@domelayer.com.',
+              ],
+            },
+            { p: '**Complain**: lodge a complaint with a supervisory authority:' },
+            {
+              list: [
+                'Italy: Garante per la Protezione dei Dati Personali (garante.privacy.it)',
+                "UK: Information Commissioner's Office (ico.org.uk)",
+                'You may also contact the authority in your country of residence.',
+              ],
+            },
+          ],
+        },
+        {
+          heading: 'Cookies',
+          blocks: [
+            {
+              table: {
+                head: ['Cookie', 'Purpose', 'Duration', 'Consent required'],
+                rows: [
+                  ['`dome-theme`', 'Stores light/dark theme preference', '1 year', 'No: functional, no tracking'],
+                  ['Authentication session', 'Keeps you signed in across Dome tools', 'Session', 'No: strictly necessary'],
+                ],
+              },
+            },
+            { p: 'No third-party cookies are set.' },
+          ],
+        },
+        {
+          heading: 'Security',
+          blocks: [
+            { p: 'We implement appropriate technical and organisational measures to protect your data, including row-level security on all database tables, HTTPS encryption in transit, and magic link authentication with no stored passwords.' },
+            { p: 'No system is completely secure. If you believe your account has been compromised, contact [privacy@domelayer.com](mailto:privacy@domelayer.com) immediately.' },
+          ],
+        },
+        {
+          heading: 'Changes to this policy',
+          blocks: [
+            { p: 'We may update this policy to reflect changes in our practices or legal requirements. If we make material changes, we will notify registered users by email at least 30 days before the changes take effect. The "last updated" date at the top of this page reflects the current version.' },
+          ],
+        },
+        {
+          heading: 'Contact',
+          blocks: [
+            { p: '[privacy@domelayer.com](mailto:privacy@domelayer.com)\nFrancesco Prodomo trading as Dome · Florence, Italy · P.IVA 07242670482' },
+          ],
+        },
+      ],
+      sibling: 'Terms of service →',
+    },
+    terms: {
+      back: '← Back to domelayer.com',
+      updated: 'Last updated: April 2026',
+      title: 'Terms of service',
+      appliesTo:
+        'Applies to: analyzer.domelayer.com, llm-council.domelayer.com, document-intelligence.domelayer.com, data-intelligence.domelayer.com, governance.domelayer.com',
+      sections: [
+        {
+          heading: 'Who provides these tools',
+          blocks: [
+            { p: 'The Dome AI tools are operated by Francesco Prodomo, a sole trader registered in Italy (P.IVA 07242670482), trading as Dome.' },
+            { p: 'Location: Florence, Italy\nContact: [hello@domelayer.com](mailto:hello@domelayer.com)' },
+          ],
+        },
+        {
+          heading: 'What these terms cover',
+          blocks: [
+            { p: 'By registering for and using any Dome AI tool, you agree to these terms. Please read them before registering. If you do not agree, do not use the tools.' },
+            { p: 'These terms apply to the Dome portfolio tools available at the subdomains listed above. They do not govern engagements where Dome designs or deploys AI systems for third-party organisations: those are governed by separate project agreements.' },
+            { p: 'These terms apply alongside our [Privacy Policy](privacy), which is incorporated by reference.' },
+          ],
+        },
+        {
+          heading: 'The tools',
+          blocks: [
+            { p: 'Dome provides a suite of free AI-assisted tools for exploring governance-driven operational AI concepts, including process analysis, document intelligence, data intelligence, and related demonstrations.' },
+            { p: 'The tools are provided free of charge on an "as is" basis for demonstration and evaluation purposes.' },
+          ],
+        },
+        {
+          heading: 'Your account',
+          blocks: [
+            { p: 'You register using your email address. We send a magic link each time you wish to sign in: no password is required or stored. You are responsible for keeping your email account secure.' },
+            { p: 'You may only register one account per email address. You may not share your account or register on behalf of another person without their knowledge and consent.' },
+            { p: 'We reserve the right to suspend or terminate accounts that breach these terms, are used in a way that is harmful to others, or compromise the integrity of the service.' },
+          ],
+        },
+        {
+          heading: 'Acceptable use',
+          blocks: [
+            { p: 'You agree to use the Dome tools only for lawful purposes and in accordance with these terms.' },
+            { label: 'You must not:' },
+            {
+              list: [
+                'Upload files or enter content that you do not have the legal right to process. If content contains personal data of third parties, you are responsible for ensuring you have a lawful basis under GDPR or applicable law to process that data using a third-party AI service.',
+                'Upload content containing special categories of personal data (health data, biometric data, political opinions, religious beliefs, or similar) unless you have a documented lawful basis and, where required, explicit consent from the relevant individuals.',
+                'Attempt to reverse-engineer, extract model weights from, or systematically probe the underlying AI systems.',
+                'Use the tools to generate content that is unlawful, defamatory, fraudulent, or harmful to others.',
+                'Use automated means to access the tools at a scale that disrupts service availability.',
+                "Attempt to access another user's data or circumvent authentication controls.",
+              ],
+            },
+          ],
+        },
+        {
+          heading: 'Data and AI processing',
+          blocks: [
+            { p: 'When you use a Dome tool, content you submit is transmitted to an AI model for processing. Dome may store data derived from your use of the tools, including session state, saved analyses, and governance metadata, to provide the service. Full details of what is collected, how it is used, and how long it is retained are set out in the [Privacy Policy](privacy).' },
+            { p: 'You retain full ownership of all content you submit and all outputs generated from it. Dome claims no licence or rights over your inputs or outputs.' },
+            { p: 'You are responsible for ensuring that content you submit does not include confidential information belonging to third parties that you are not authorised to share with an external AI processing service.' },
+          ],
+        },
+        {
+          heading: 'AI outputs: important disclaimer',
+          blocks: [
+            { warning: '**AI outputs are not professional advice.** Nothing produced by the Dome tools constitutes legal, financial, procurement, compliance, operational, or any other form of professional advice. You should not act on AI-generated outputs without independent verification by a qualified professional.' },
+            { p: 'The Dome tools use large language models to generate analyses, summaries, classifications, and recommendations. These outputs are generated automatically and are provided for informational and demonstration purposes only.' },
+            { p: 'Dome does not guarantee the accuracy, completeness, or fitness for purpose of any AI-generated output. AI models can produce errors and outputs that appear plausible but are factually incorrect. You are solely responsible for evaluating outputs before relying on them.' },
+            { p: 'This disclaimer is particularly important in regulated contexts (procurement, finance, trade compliance, legal, and similar domains) where incorrect outputs could have material consequences.' },
+          ],
+        },
+        {
+          heading: 'Availability and changes',
+          blocks: [
+            { p: 'The Dome tools are provided free of charge and are subject to change, interruption, or discontinuation at any time. We will endeavour to give reasonable notice before significant changes or shutdowns, but make no commitments regarding uptime, availability, or feature continuity.' },
+            { p: 'We may add, modify, or remove features at any time.' },
+          ],
+        },
+        {
+          heading: 'Intellectual property',
+          blocks: [
+            { p: 'The Dome name, logo, website, and tool interfaces are the property of Francesco Prodomo. You may not reproduce or use them without written permission.' },
+            { p: 'All rights to your submitted content and derived outputs remain with you.' },
+          ],
+        },
+        {
+          heading: 'Limitation of liability',
+          blocks: [
+            { p: 'To the fullest extent permitted by applicable law, Francesco Prodomo and Dome shall not be liable for any indirect, incidental, consequential, or punitive damages arising from your use of the tools, including losses arising from reliance on AI-generated outputs.' },
+            { p: 'Our total liability to you for any claim arising from use of the tools shall not exceed zero euros, reflecting that the tools are provided to you free of charge.' },
+            { p: 'Nothing in these terms excludes or limits liability for death or personal injury caused by negligence, fraud, or any other liability that cannot be excluded under Italian law.' },
+          ],
+        },
+        {
+          heading: 'Governing law and jurisdiction',
+          blocks: [
+            { p: 'These terms are governed by Italian law. Any disputes arising from these terms or your use of the Dome tools shall be subject to the exclusive jurisdiction of the Tribunale di Firenze, Italy.' },
+            { p: 'If you are a consumer resident in another EU member state or the UK, you retain the benefit of any mandatory protections provided by the laws of your country of residence that cannot be excluded by contract.' },
+          ],
+        },
+        {
+          heading: 'Changes to these terms',
+          blocks: [
+            { p: 'We may update these terms from time to time. If we make material changes, we will notify you by email at least 30 days before they take effect. Continued use of the tools after the effective date constitutes acceptance of the revised terms.' },
+            { p: 'The current version is always available at [domelayer.com/terms](terms).' },
+          ],
+        },
+        {
+          heading: 'Contact',
+          blocks: [
+            { p: '[hello@domelayer.com](mailto:hello@domelayer.com)\nFrancesco Prodomo trading as Dome · Florence, Italy · P.IVA 07242670482' },
+          ],
+        },
+      ],
+      sibling: '← Privacy policy',
+    },
   },
 }

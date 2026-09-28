@@ -8,34 +8,18 @@ import { fadeUp, dramaticFadeUp, viewportConfig } from '../lib/motion'
 import { AGENT_FLOW_LIVE, useToolHref } from '../lib/tools'
 import { routeMeta } from '../lib/seo'
 import { localizedHref } from '../i18n/routes'
-import { useLocale } from '../i18n/useLocale'
+import { useLocale, useMessages } from '../i18n/useLocale'
 
 export const meta = routeMeta('agentFlow')
 
 const ACCENT = '#EC4899'
 const ACCENT_HOVER = '#F472B6'
 
-const steps = [
-  {
-    number: '01',
-    title: 'An invoice arrives',
-    body: 'A vendor emails an invoice to the AP inbox, or it is uploaded through the workflow form. A self-hosted n8n workflow picks it up and opens a governed run with a single workflow id that follows it end to end.',
-  },
-  {
-    number: '02',
-    title: 'Extract, then evaluate against policy',
-    body: 'Document Intelligence extracts the fields and confidence; a data-driven rules engine then decides the approval path from amount tier, purchase category, country and VAT, vendor allowlist, PO match, currency, and duplicate detection.',
-  },
-  {
-    number: '03',
-    title: 'Council brief, then a human gate',
-    body: 'Ambiguous or high-value invoices get a multi-model LLM Council decision brief. A named approver signs off on a branded review page — or low-risk invoices auto-approve under policy. Every step is written to the Governance Dashboard as one reconstructable timeline.',
-  },
-]
 
 export default function AgentFlowPage() {
   const launchHref = useToolHref('agent-flow.domelayer.com')
   const locale = useLocale()
+  const text = useMessages().pages.tools.agentFlow
 
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -48,7 +32,7 @@ export default function AgentFlowPage() {
         <Container narrow>
           <motion.div variants={fadeUp} initial="hidden" animate="visible" className="pt-8 pb-4">
             <p className="text-[11px] font-semibold uppercase tracking-[0.18em] mb-4" style={{ color: ACCENT }}>
-              EXECUTE
+              {text.phase}
             </p>
             <TextReveal
               as="h1"
@@ -59,9 +43,7 @@ export default function AgentFlowPage() {
               Governed Agent Flow
             </TextReveal>
             <p className="mt-4 text-body text-[var(--color-text-secondary)] max-w-xl">
-              A self-hosted n8n workflow that runs a real invoice-to-approval process across the DOME
-              tools — extraction, a policy rules engine, a multi-model council, and a human approval
-              gate — emitting a full audit trail the Governance Dashboard reconstructs.
+              {text.lead}
             </p>
             <div className="mt-8 flex items-center gap-4">
               {AGENT_FLOW_LIVE ? (
@@ -74,7 +56,7 @@ export default function AgentFlowPage() {
                   onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = ACCENT_HOVER)}
                   onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = ACCENT)}
                 >
-                  Open the approval queue
+                  {text.openQueue}
                   <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
                     <path d="M2.5 9.5L9.5 2.5M9.5 2.5H4.5M9.5 2.5V7.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
@@ -88,10 +70,10 @@ export default function AgentFlowPage() {
                     onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = ACCENT_HOVER)}
                     onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = ACCENT)}
                   >
-                    Book a private demo
+                    {text.bookDemo}
                   </a>
                   <span className="text-[13px] text-[var(--color-text-secondary)]">
-                    Shown live, on real invoices, in a guided walkthrough.
+                    {text.demoNote}
                   </span>
                 </>
               )}
@@ -110,13 +92,13 @@ export default function AgentFlowPage() {
             viewport={viewportConfig}
             className="grid gap-6 sm:grid-cols-3"
           >
-            {steps.map((s) => (
+            {text.steps.map((s, i) => (
               <div
-                key={s.number}
+                key={s.title}
                 className="rounded-xl border border-[var(--color-border-default)] bg-[var(--color-bg-base)] p-6"
               >
                 <span className="block text-[13px] font-semibold mb-3" style={{ color: ACCENT }}>
-                  {s.number}
+                  {String(i + 1).padStart(2, '0')}
                 </span>
                 <h3 className="text-h3 font-display font-semibold text-[var(--color-text-primary)] mb-2">
                   {s.title}

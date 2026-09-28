@@ -37,32 +37,32 @@ export const PUBLIC_ROUTES = {
   processAnalyzer: {
     file: 'pages/ProcessAnalyzerPage.tsx',
     path: { en: '/dome/process-analyzer', it: '/it/dome/process-analyzer' },
-    updatedAt: '2026-04-09',
+    updatedAt: '2026-09-28',
   },
   dataIntelligence: {
     file: 'pages/DataIntelligencePage.tsx',
     path: { en: '/dome/data-intelligence', it: '/it/dome/data-intelligence' },
-    updatedAt: '2026-04-09',
+    updatedAt: '2026-09-28',
   },
   llmCouncil: {
     file: 'pages/LlmCouncilPage.tsx',
     path: { en: '/dome/llm-council', it: '/it/dome/llm-council' },
-    updatedAt: '2026-04-13',
+    updatedAt: '2026-09-28',
   },
   documentIntelligence: {
     file: 'pages/DocumentIntelligencePage.tsx',
     path: { en: '/dome/document-intelligence', it: '/it/dome/document-intelligence' },
-    updatedAt: '2026-04-29',
+    updatedAt: '2026-09-28',
   },
   governanceDashboard: {
     file: 'pages/GovernanceDashboardPage.tsx',
     path: { en: '/dome/governance-dashboard', it: '/it/dome/governance-dashboard' },
-    updatedAt: '2026-06-12',
+    updatedAt: '2026-09-28',
   },
   agentFlow: {
     file: 'pages/AgentFlowPage.tsx',
     path: { en: '/dome/agent-flow', it: '/it/dome/agent-flow' },
-    updatedAt: '2026-09-11',
+    updatedAt: '2026-09-28',
   },
   about: { file: 'pages/AboutPage.tsx', path: { en: '/about', it: '/it/chi-siamo' }, updatedAt: '2026-09-22' },
   contact: { file: 'pages/ContactPage.tsx', path: { en: '/contact', it: '/it/contatti' }, updatedAt: '2026-09-22' },
@@ -119,8 +119,8 @@ export const PUBLIC_ROUTES = {
     updatedAt: '2026-09-22',
     caseStudy: 'training',
   },
-  privacy: { file: 'pages/PrivacyPage.tsx', path: { en: '/privacy', it: '/it/privacy' }, updatedAt: '2026-04-17' },
-  terms: { file: 'pages/TermsPage.tsx', path: { en: '/terms', it: '/it/termini' }, updatedAt: '2026-04-17' },
+  privacy: { file: 'pages/PrivacyPage.tsx', path: { en: '/privacy', it: '/it/privacy' }, updatedAt: '2026-09-28' },
+  terms: { file: 'pages/TermsPage.tsx', path: { en: '/terms', it: '/it/termini' }, updatedAt: '2026-09-28' },
 } satisfies Record<string, PublicRoute>
 
 export type RouteId = keyof typeof PUBLIC_ROUTES
