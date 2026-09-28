@@ -30,7 +30,7 @@ interface Tool {
   accent: string;
   /** Details page on the marketing site, used while the tool is not reachable. */
   detailPath?: string;
-  /** Not reachable yet: the card links to its details page with a "coming soon" label. */
+  /** Not self-serve: the card links to its details page, which offers a private demo. */
   comingSoon?: boolean;
 }
 
@@ -171,7 +171,7 @@ function ToolsHub() {
               <p className="hub-card-desc">{tool.description}</p>
               <span className="hub-card-cta">
                 {tool.comingSoon ? (
-                  "Coming soon · Learn more"
+                  "Private demo · Book a walkthrough"
                 ) : (
                   <>
                     Open {tool.name}

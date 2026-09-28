@@ -463,7 +463,7 @@ export const it: Messages = {
       },
       agentFlow: {
         eyebrow: 'Il metodo in produzione',
-        badge: 'In rilascio',
+        badge: 'Demo privata',
         heading: 'Agent Flow: dalla fattura all’approvazione, ogni passaggio agli atti',
         lead: 'Agent Flow mette in fila i mattoni in un unico flusso governato, con una persona che firma dove la policy lo richiede.',
         cta: 'Come funziona Agent Flow',

@@ -133,7 +133,7 @@ describe.skipIf(AGENT_FLOW_LIVE)("ToolsHubPage: Agent Flow while not live", () =
     renderHub();
     const card = screen.getByText("Agent Flow").closest("a");
     expect(card).toHaveAttribute("href", "/dome/agent-flow");
-    expect(card).toHaveTextContent("Coming soon");
+    expect(card).toHaveTextContent("Private demo");
   });
 
   it("never links to an agent-flow host, on production or staging", () => {
