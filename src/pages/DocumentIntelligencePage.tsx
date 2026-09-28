@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router'
 import { motion } from 'framer-motion'
 import { ToolPageLayout } from '../layouts/ToolPageLayout'
 import { Section } from '../components/Section'
@@ -8,30 +8,18 @@ import { TextReveal } from '../components/TextReveal'
 import { fadeUp, dramaticFadeUp, viewportConfig } from '../lib/motion'
 import { useToolHref } from '../lib/tools'
 import { routeMeta } from '../lib/seo'
+import { localizedHref } from '../i18n/routes'
+import { useLocale, useMessages } from '../i18n/useLocale'
 
 export const meta = routeMeta('documentIntelligence')
 
-const steps = [
-  {
-    number: '01',
-    title: 'Upload or photograph a document',
-    body: 'Provide a PDF or image file, or capture a document directly from your camera. The system accepts invoices, lab reports, utility bills, contracts, bank statements, and more — no templates or configuration required.',
-  },
-  {
-    number: '02',
-    title: 'Extraction and governance validation',
-    body: 'Fields are extracted with confidence scores, document type and industry are identified automatically, and 16 governance rules are applied to flag anomalies, missing data, expired dates, large monetary amounts, and potential compliance concerns.',
-  },
-  {
-    number: '03',
-    title: 'Review, save, and export',
-    body: 'Inspect every extracted field with its section, type, and confidence score. Review governance flags by severity. Export to CSV for downstream processing, or save to your history for audit and traceability.',
-  },
-]
 
 export default function DocumentIntelligencePage() {
   const navigate = useNavigate()
   const launchHref = useToolHref('document-intelligence.domelayer.com')
+  const locale = useLocale()
+  const t = useMessages().pages.tools
+  const text = t.documentIntelligence
 
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -50,14 +38,14 @@ export default function DocumentIntelligencePage() {
           >
             <div className="flex items-center gap-3 mb-6">
               <button
-                onClick={() => navigate('/#tools')}
+                onClick={() => navigate(localizedHref('dome', locale))}
                 className="text-[13px] text-[var(--color-text-tertiary)] hover:text-[var(--color-text-secondary)] transition-colors duration-150"
               >
-                ← Tools
+                ← {t.back}
               </button>
               <span className="text-[var(--color-border-default)]">/</span>
               <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#F59E0B]">
-                Model
+                {text.phase}
               </span>
             </div>
 
@@ -65,7 +53,7 @@ export default function DocumentIntelligencePage() {
               Document Intelligence
             </h1>
             <p className="text-body text-[var(--color-text-secondary)] max-w-lg mb-8">
-              Extract structured data from any document — invoices, lab reports, utility bills, contracts. Governance validation and full audit trail included.
+              {text.lead}
             </p>
             <a
               href={launchHref}
@@ -73,7 +61,7 @@ export default function DocumentIntelligencePage() {
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-6 py-3 text-[13px] font-semibold bg-[#F59E0B] text-white rounded-lg hover:bg-[#FBBF24] active:bg-[#D97706] transition-colors duration-150"
             >
-              Open Document Intelligence
+              {text.open}
               <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
                 <path d="M2.5 9.5L9.5 2.5M9.5 2.5H4.5M9.5 2.5V7.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
@@ -92,7 +80,7 @@ export default function DocumentIntelligencePage() {
             viewport={viewportConfig}
           >
             <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#F59E0B] mb-4">
-              What it does
+              {t.whatItDoes}
             </p>
             <TextReveal
               as="p"
@@ -100,7 +88,7 @@ export default function DocumentIntelligencePage() {
               stagger={0.025}
               className="text-body text-[var(--color-text-secondary)] leading-relaxed"
             >
-              Document Intelligence converts unstructured source documents into structured, validated data without manual data entry or custom templates. It identifies document type and industry automatically, extracts every relevant field with a confidence score, and applies a governance rules engine that checks for anomalies, missing required fields, expired dates, large monetary amounts, potential personal data exposure, and more. Every extraction is saved to a searchable audit history. The output is a governed, exportable dataset ready for downstream systems.
+              {text.whatItDoes}
             </TextReveal>
           </motion.div>
         </Container>
@@ -117,7 +105,7 @@ export default function DocumentIntelligencePage() {
             className="mb-10"
           >
             <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#F59E0B] mb-4">
-              How it works
+              {t.howItWorks}
             </p>
             <TextReveal
               as="h2"
@@ -125,14 +113,14 @@ export default function DocumentIntelligencePage() {
               stagger={0.06}
               className="text-h2 font-display font-semibold text-[var(--color-text-primary)]"
             >
-              Upload, extract, validate.
+              {text.howItWorks.heading}
             </TextReveal>
           </motion.div>
 
           <div className="flex flex-col gap-6">
-            {steps.map((step, i) => (
+            {text.howItWorks.steps.map((step, i) => (
               <motion.div
-                key={step.number}
+                key={step.title}
                 variants={fadeUp}
                 initial="hidden"
                 whileInView="visible"
@@ -141,7 +129,7 @@ export default function DocumentIntelligencePage() {
                 className="flex gap-6 p-6 rounded-xl border border-[var(--color-border-default)] bg-[var(--color-bg-base)]"
               >
                 <span className="text-[13px] font-semibold tabular-nums text-[var(--color-border-strong)] flex-shrink-0 mt-0.5">
-                  {step.number}
+                  {String(i + 1).padStart(2, '0')}
                 </span>
                 <div>
                   <h3 className="text-[15px] font-semibold text-[var(--color-text-primary)] mb-2">{step.title}</h3>
@@ -163,7 +151,7 @@ export default function DocumentIntelligencePage() {
             viewport={viewportConfig}
           >
             <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#F59E0B] mb-4">
-              DOME method — Model
+              {t.method}: {text.method.phase}
             </p>
             <TextReveal
               as="p"
@@ -171,7 +159,7 @@ export default function DocumentIntelligencePage() {
               stagger={0.025}
               className="text-body text-[var(--color-text-secondary)] leading-relaxed"
             >
-              The Model phase is where governed AI decisions produce operational outputs. Document Intelligence is the Model-phase entry point for organisations that need structured data from unstructured documents at scale. Rather than trusting raw model extraction, every output is validated against a deterministic governance rules engine before it reaches downstream systems — ensuring that what enters your workflows is auditable, consistent, and defensible. This is the final step of the DOME cycle: from process discovery to governed execution.
+              {text.method.body}
             </TextReveal>
           </motion.div>
         </Container>
