@@ -49,7 +49,11 @@ export function PageHero({ media, breadcrumbs, eyebrow, heading, lead, primary, 
         />
       </div>
 
-      <div className="relative mx-auto max-w-[1280px] px-6 py-20 md:px-12 md:py-32">
+      {/*
+        The fixed 64px nav overlays the hero, so on phones the top padding is the nav plus a 48px
+        gap (plus the staging banner, when there is one). From `md` up 128px already clears it.
+      */}
+      <div className="relative mx-auto max-w-[1280px] px-6 pb-20 pt-[calc(7rem+var(--dome-banner-h,0px))] md:px-12 md:py-32">
         <div className="flex max-w-[20rem] flex-col gap-5 sm:max-w-[30rem] md:max-w-[640px]">
           {breadcrumbs && (
             <nav aria-label="Breadcrumb">
