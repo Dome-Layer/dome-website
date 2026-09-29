@@ -740,7 +740,7 @@ export const en: Messages = {
     },
     privacy: {
       back: '← Back to domelayer.com',
-      updated: 'Last updated: April 2026',
+      updated: 'Last updated: September 2026',
       title: 'Privacy policy',
       appliesTo:
         'Applies to: domelayer.com and all subdomains (analyzer.domelayer.com, llm-council.domelayer.com, document-intelligence.domelayer.com, data-intelligence.domelayer.com, governance.domelayer.com)',
@@ -765,14 +765,22 @@ export const en: Messages = {
           heading: 'What data we collect and why',
           blocks: [
             { h3: 'Website visitors (no account required)' },
-            { p: 'When you visit domelayer.com, we do not place analytics cookies or third-party tracking scripts. A single functional cookie, `dome-theme`, may be set to remember your light or dark theme preference. This cookie contains no personal data and is not used for tracking.' },
-            { basis: 'Legal basis: Legitimate interest (Art. 6(1)(f) GDPR), for storing a visual preference to improve your browsing experience.' },
+            { p: 'When you visit domelayer.com, we do not place analytics cookies or third-party tracking scripts. Two functional cookies may be set: `dome-theme` remembers your light or dark theme preference and `dome_locale` remembers the language you chose. Neither contains personal data or is used for tracking. The full list is in the Cookies section below.' },
+            { basis: 'Legal basis: Legitimate interest (Art. 6(1)(f) GDPR), for storing a display preference you chose.' },
+            { p: 'Like any website, our hosting providers keep standard server logs, which include your IP address, for security and to keep the service running. If a page fails, our error monitoring receives a technical report (for example the browser type and the page address). Error reports do not include your name or email address.' },
+            { basis: 'Legal basis: Legitimate interest (Art. 6(1)(f)), for the security and reliability of the website.' },
+            { h3: 'Contact form and call bookings' },
+            { p: 'If you write to us through the contact form, we receive your name, work email, company (if you give it), the topic and your message, and use them only to reply. To protect the form from abuse, your IP address is used as a rate-limit key and is kept for at most one hour.' },
+            { p: 'If you book a call, the calendar is provided by Cal.com and loads only when you choose to book. The details you enter there (name, email and any notes) reach us through Cal.com.' },
+            { basis: 'Legal basis: Steps taken at your request before entering into a contract (Art. 6(1)(b)), and legitimate interest (Art. 6(1)(f)) in answering business enquiries and protecting the form from abuse.' },
             { p: 'We may in future deploy privacy-preserving, cookieless analytics tools to understand aggregate usage patterns. Such tools do not set cookies and do not collect personal data. This policy will be updated if we introduce them. We will never introduce cookie-based analytics or advertising trackers without updating this policy and, where required by law, obtaining your consent first.' },
             { h3: 'Registered tool users' },
             { p: 'When you register to use the Dome AI tools, we collect and process the following data:' },
             { label: 'Email address' },
-            { p: 'Collected when you request access. Used to send you a magic link to authenticate your account. Also used, with your explicit consent, to send you product updates or commercial communications from Dome.' },
-            { basis: 'Legal basis: Contract performance (Art. 6(1)(b)) for authentication. Consent (Art. 6(1)(a)) for marketing communications.' },
+            { p: 'Collected when you register, either directly by email (magic link) or through your Google or GitHub account. Used to authenticate your account. Also used, with your explicit consent, to send you product updates or commercial communications from Dome.' },
+            { label: 'Sign-in with Google or GitHub' },
+            { p: 'If you choose to sign in with Google or GitHub, that provider shares with us your email address, your name, a link to your profile picture and an account identifier. We use them only to create and recognise your account. Google and GitHub process your sign-in under their own privacy policies, as independent controllers. We never see your Google or GitHub password.' },
+            { basis: 'Legal basis: Contract performance (Art. 6(1)(b)) for authentication, including sign-in with Google or GitHub. Consent (Art. 6(1)(a)) for marketing communications.' },
             { label: 'Sign-in timestamps and session metadata' },
             { p: 'Each time you authenticate, we record the time and method of sign-in as standard security practice.' },
             { basis: 'Legal basis: Legitimate interest (Art. 6(1)(f)), for security, fraud prevention, and service integrity.' },
@@ -782,7 +790,7 @@ export const en: Messages = {
             { p: 'The specific data retained depends on the tool used and the features you engage with. All stored data is associated with your account, protected by row-level security controls, and accessible only to your authenticated session. You may delete your saved data at any time from within the tool.' },
             { basis: 'Legal basis: Contract performance (Art. 6(1)(b)), for delivering the functionality you have requested.' },
             { label: 'Governance log metadata' },
-            { p: "Each action taken within a Dome tool generates a governance event record containing: a hash of your input (not the input itself), the action type, a timestamp, and which governance rules were applied. This metadata record is the audit trail that underpins Dome's governance architecture." },
+            { p: "Each action taken within a Dome tool generates a governance event record containing: a hash of your input (not the input itself), the action type, a timestamp, which governance rules were applied and triggered, a short summary of the result, and technical metadata such as confidence scores. This metadata record is the audit trail that underpins Dome's governance architecture." },
             { basis: 'Legal basis: Legitimate interest (Art. 6(1)(f)), for service integrity and quality assurance.' },
             { label: 'Marketing consent record' },
             { p: 'If you opt in to marketing communications at registration, we store a record of that consent: the date, your choice, and the version of the consent text shown to you.' },
@@ -794,7 +802,7 @@ export const en: Messages = {
           blocks: [
             {
               list: [
-                'We do not collect passwords. Authentication is exclusively by magic link.',
+                'We do not collect or store passwords. You sign in with a magic link sent to your email, or through your Google or GitHub account.',
                 'We do not collect payment information. All Dome tools are free to use.',
                 'We do not use your data to train AI models.',
                 'We do not share your data with third parties for commercial or advertising purposes.',
@@ -807,18 +815,26 @@ export const en: Messages = {
           heading: 'Who we share your data with',
           blocks: [
             { p: 'We use the following third-party service providers to operate Dome. Each acts as a data processor under a data processing agreement:' },
-            { p: '**Supabase Inc.**: Database and authentication. Data is stored in the European Union (Frankfurt, Germany: eu-central-1; and Paris, France: eu-west-3). supabase.com/privacy' },
+            { p: '**Supabase Inc.**: Database and authentication. Data is stored in the European Union (Frankfurt, Germany: eu-central-1). supabase.com/privacy' },
             { p: '**Vercel Inc.**: Website and application hosting. vercel.com/legal/privacy-policy' },
-            { p: '**Resend Inc.**: Transactional email. Used to send magic links and, with your consent, product communications. resend.com/legal/privacy-policy' },
-            { p: '**Anthropic PBC**: AI processing. When you use a Dome tool, your input is transmitted to the Anthropic API to generate a response. Anthropic processes this under its API data processing terms. anthropic.com/privacy' },
+            { p: '**Railway Corp.**: Hosting of the back-end services behind the Dome tools. railway.com/legal/privacy' },
+            { p: '**Resend Inc.**: Transactional email. Used to send magic links, to deliver messages sent through the contact form to us and, with your consent, product communications. resend.com/legal/privacy-policy' },
+            { p: '**Functional Software Inc. (Sentry)**: Error monitoring for the website and the tools. Error data is stored in the European Union (Germany). sentry.io/privacy' },
+            { p: '**Upstash Inc.**: Rate limiting for the contact form, using your IP address for at most one hour. upstash.com/trust/privacy.pdf' },
+            { p: '**Cal.com Inc.**: Call booking, only when you choose to book a call. cal.com/privacy' },
+            { h3: 'AI processing' },
+            { p: 'When you use a Dome tool, your input is transmitted to an AI provider to generate a response. Each provider processes it under its API data processing terms and does not use API data to train its models by default.' },
+            { p: '**Anthropic PBC**: All Dome tools. anthropic.com/privacy' },
+            { p: '**OpenAI**: LLM Council only, as one of its three independent advisors. openai.com/policies/privacy-policy' },
+            { p: '**Google (Gemini API)**: LLM Council only, as one of its three independent advisors. policies.google.com/privacy' },
             { p: 'We do not use advertising networks, social media trackers, or data brokers.' },
           ],
         },
         {
           heading: 'International transfers',
           blocks: [
-            { p: 'All personal data is stored within the European Union on Supabase infrastructure located in Frankfurt and Paris.' },
-            { p: 'Vercel, Resend, and Anthropic are US-based. Transfers to these processors are governed by Standard Contractual Clauses (SCCs) under GDPR Article 46.' },
+            { p: 'Your account and the data you save in the tools are stored within the European Union, on Supabase infrastructure in Frankfurt. Error monitoring data is also stored in the European Union.' },
+            { p: 'Vercel, Railway, Resend, Upstash, Cal.com, Anthropic, OpenAI and Google are based in the United States or process data there. Transfers to them rely on the EU-US Data Privacy Framework where the provider is certified under it, and otherwise on Standard Contractual Clauses (SCCs) under GDPR Article 46.' },
             { p: "**UK users:** Transfers between the UK and EU are covered by the UK-EU adequacy decision currently in effect. UK users may direct complaints to the Information Commissioner's Office (ico.org.uk)." },
           ],
         },
@@ -832,7 +848,10 @@ export const en: Messages = {
                   ['Email address and account record', 'Until you request account deletion'],
                   ['Sign-in timestamps', '12 months rolling'],
                   ['Tool session data and saved outputs', 'Until you delete them, or until account deletion'],
-                  ['Governance log metadata', '90 days rolling'],
+                  ['Governance log metadata', '12 months rolling'],
+                  ['Contact form messages and call bookings', 'Up to 24 months after our last exchange'],
+                  ['Contact form rate-limit record (IP address)', '1 hour'],
+                  ['Server and error logs', 'Up to 90 days'],
                   ['Marketing consent record', 'Duration of account, plus 3 years after deletion'],
                 ],
               },
@@ -872,18 +891,20 @@ export const en: Messages = {
               table: {
                 head: ['Cookie', 'Purpose', 'Duration', 'Consent required'],
                 rows: [
+                  ['`dome_auth_token`', 'Keeps you signed in across domelayer.com and the Dome tools', 'Until your sign-in expires (at most 8 hours)', 'No: strictly necessary'],
                   ['`dome-theme`', 'Stores light/dark theme preference', '1 year', 'No: functional, no tracking'],
-                  ['Authentication session', 'Keeps you signed in across Dome tools', 'Session', 'No: strictly necessary'],
+                  ['`dome_locale`', 'Remembers the language you chose', '1 year', 'No: functional, no tracking'],
                 ],
               },
             },
-            { p: 'No third-party cookies are set.' },
+            { p: 'Your browser also keeps your theme preference in local storage, and holds a temporary sign-in record while you sign in, which is removed once you are signed in.' },
+            { p: 'No third-party cookies are set while you browse. The Cal.com booking calendar loads only when you choose to book a call, and Cal.com may then set its own cookies under its privacy policy.' },
           ],
         },
         {
           heading: 'Security',
           blocks: [
-            { p: 'We implement appropriate technical and organisational measures to protect your data, including row-level security on all database tables, HTTPS encryption in transit, and magic link authentication with no stored passwords.' },
+            { p: 'We implement appropriate technical and organisational measures to protect your data, including row-level security on all database tables, HTTPS encryption in transit, and passwordless sign-in (magic link, Google or GitHub) with no stored passwords.' },
             { p: 'No system is completely secure. If you believe your account has been compromised, contact [privacy@domelayer.com](mailto:privacy@domelayer.com) immediately.' },
           ],
         },
@@ -904,7 +925,7 @@ export const en: Messages = {
     },
     terms: {
       back: '← Back to domelayer.com',
-      updated: 'Last updated: April 2026',
+      updated: 'Last updated: September 2026',
       title: 'Terms of service',
       appliesTo:
         'Applies to: analyzer.domelayer.com, llm-council.domelayer.com, document-intelligence.domelayer.com, data-intelligence.domelayer.com, governance.domelayer.com',
@@ -934,7 +955,7 @@ export const en: Messages = {
         {
           heading: 'Your account',
           blocks: [
-            { p: 'You register using your email address. We send a magic link each time you wish to sign in: no password is required or stored. You are responsible for keeping your email account secure.' },
+            { p: 'You register with your email address, either by requesting a magic link or by signing in with your Google or GitHub account. No Dome password is required or stored. You are responsible for keeping your email, Google or GitHub account secure.' },
             { p: 'You may only register one account per email address. You may not share your account or register on behalf of another person without their knowledge and consent.' },
             { p: 'We reserve the right to suspend or terminate accounts that breach these terms, are used in a way that is harmful to others, or compromise the integrity of the service.' },
           ],
@@ -959,7 +980,7 @@ export const en: Messages = {
         {
           heading: 'Data and AI processing',
           blocks: [
-            { p: 'When you use a Dome tool, content you submit is transmitted to an AI model for processing. Dome may store data derived from your use of the tools, including session state, saved analyses, and governance metadata, to provide the service. Full details of what is collected, how it is used, and how long it is retained are set out in the [Privacy Policy](privacy).' },
+            { p: 'When you use a Dome tool, content you submit is transmitted to an AI model for processing: Anthropic for all tools, and additionally OpenAI and Google for LLM Council. Dome may store data derived from your use of the tools, including session state, saved analyses, and governance metadata, to provide the service. Full details of what is collected, how it is used, and how long it is retained are set out in the [Privacy Policy](privacy).' },
             { p: 'You retain full ownership of all content you submit and all outputs generated from it. Dome claims no licence or rights over your inputs or outputs.' },
             { p: 'You are responsible for ensuring that content you submit does not include confidential information belonging to third parties that you are not authorised to share with an external AI processing service.' },
           ],
@@ -992,7 +1013,7 @@ export const en: Messages = {
           blocks: [
             { p: 'To the fullest extent permitted by applicable law, Francesco Prodomo and Dome shall not be liable for any indirect, incidental, consequential, or punitive damages arising from your use of the tools, including losses arising from reliance on AI-generated outputs.' },
             { p: 'Our total liability to you for any claim arising from use of the tools shall not exceed zero euros, reflecting that the tools are provided to you free of charge.' },
-            { p: 'Nothing in these terms excludes or limits liability for death or personal injury caused by negligence, fraud, or any other liability that cannot be excluded under Italian law.' },
+            { p: 'Nothing in these terms excludes or limits liability for wilful misconduct or gross negligence (Article 1229 of the Italian Civil Code), for death or personal injury caused by negligence, for fraud, or any other liability that cannot be excluded under Italian law.' },
           ],
         },
         {
