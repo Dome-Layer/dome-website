@@ -76,7 +76,8 @@ interface MediaAssetBase {
   /**
    * AI-generated imagery shows a visible "AI-generated image" label, which the legal notice
    * commits us to. It is false for the portrait, which is a real photograph: labelling that would
-   * be misleading in the other direction.
+   * be misleading in the other direction. The portrait's clothing was edited with AI (appearance
+   * unchanged), which `public/media/CREDITS.md` discloses.
    */
   aiLabel: boolean
   /** Licence or permission, for anything that is not ours outright. */

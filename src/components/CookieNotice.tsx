@@ -56,9 +56,9 @@ export function CookieNotice() {
         }}
       >
         <strong style={{ color: "var(--color-text-primary)", fontWeight: 600 }}>
-          Dome uses only two cookies.
+          Dome uses only functional cookies.
         </strong>{" "}
-        One keeps you signed in. One remembers your theme preference. No analytics, no tracking, no
+        One keeps you signed in. Two remember your theme and language. No analytics, no tracking, no
         advertising.{" "}
         <a
           href="/privacy"
