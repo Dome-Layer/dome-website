@@ -17,7 +17,3 @@ export function readLocaleCookie(cookieHeader: string | null | undefined): Local
   }
   return undefined
 }
-
-export function rememberLocale(locale: Locale): void {
-  document.cookie = localeCookie(locale)
-}

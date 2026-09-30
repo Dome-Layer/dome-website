@@ -1,0 +1,42 @@
+// Cloudflare Workers config for domelayer.com (Sprint H phase 1, DOME_DECISIONS 2026-09-30).
+// Build first with `npm run build:cloudflare`, then `wrangler deploy` (production) or
+// `wrangler deploy --env staging`. The one secret, RESEND_API_KEY, is set with
+// `wrangler secret put` (add `--env staging` for staging), never in this file.
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "dome-website",
+  "main": "worker/index.ts",
+  "compatibility_date": "2026-09-01",
+  "compatibility_flags": ["nodejs_compat"],
+  "assets": {
+    "directory": "build/client",
+    "binding": "ASSETS",
+    // /about is served from about/index.html and /about/ redirects to it, matching the sitemap.
+    "html_handling": "drop-trailing-slash",
+    "not_found_handling": "none",
+    // The Worker runs for pages and the API only. Bundles and media are served directly: they are
+    // free and unlimited, while Worker invocations count against 100k requests a day.
+    "run_worker_first": ["/*", "!/assets/*", "!/media/*"]
+  },
+  // Contact form: 3 submissions per minute per IP, counted per Cloudflare location, nothing stored.
+  // Bindings are not inherited by environments, so staging repeats it with its own namespace.
+  "ratelimits": [{ "name": "CONTACT_RATE_LIMITER", "namespace_id": "1001", "simple": { "limit": 3, "period": 60 } }],
+  "vars": {
+    "ENVIRONMENT": "production",
+    "DOME_PUBLISH_IT": "true",
+    "CONTACT_EMAIL": "hello@domelayer.com"
+  },
+  "observability": { "enabled": true },
+  "env": {
+    "staging": {
+      "name": "dome-website-staging",
+      "ratelimits": [{ "name": "CONTACT_RATE_LIMITER", "namespace_id": "1002", "simple": { "limit": 3, "period": 60 } }],
+      "vars": {
+        "ENVIRONMENT": "staging",
+        "DOME_PUBLISH_IT": "true",
+        "DOME_NOINDEX": "true",
+        "CONTACT_EMAIL": "hello@domelayer.com"
+      }
+    }
+  }
+}
