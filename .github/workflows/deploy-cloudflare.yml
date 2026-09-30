@@ -1,0 +1,89 @@
+# Deploys domelayer.com to Cloudflare Workers (Sprint H, DOME_DECISIONS 2026-09-30).
+# A push to `staging` deploys the Worker dome-website-staging (staging.domelayer.com); a push to
+# `main` deploys dome-website (domelayer.com and www). Tests and the build must pass first.
+#
+# Repository secrets: CLOUDFLARE_API_TOKEN (Workers-only token), CLOUDFLARE_ACCOUNT_ID.
+# Build values are variables on the GitHub environments cloudflare-staging and
+# cloudflare-production. They are public: they ship in the site's JavaScript anyway.
+# The Worker's own secret, RESEND_API_KEY, lives in Cloudflare (`wrangler secret put`).
+
+name: deploy (Cloudflare)
+
+on:
+  push:
+    branches: [main, staging]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+# One deploy per branch at a time, and never cancel one half way.
+concurrency:
+  group: deploy-cloudflare-${{ github.ref_name }}
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: deploy ${{ github.ref_name }}
+    if: github.ref_name == 'main' || github.ref_name == 'staging'
+    runs-on: ubuntu-latest
+    environment:
+      name: ${{ github.ref_name == 'main' && 'cloudflare-production' || 'cloudflare-staging' }}
+      url: ${{ github.ref_name == 'main' && 'https://domelayer.com' || 'https://staging.domelayer.com' }}
+    env:
+      IS_PRODUCTION: ${{ github.ref_name == 'main' }}
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          # Wrangler needs Node 22 or later (CI's other jobs stay on 20).
+          node-version: '22'
+          cache: 'npm'
+      - name: Install dependencies
+        run: npm ci
+      - name: Test (vitest)
+        run: npm test
+      - name: Build for Cloudflare
+        env:
+          VITE_SUPABASE_URL: ${{ vars.VITE_SUPABASE_URL }}
+          VITE_SUPABASE_ANON_KEY: ${{ vars.VITE_SUPABASE_ANON_KEY }}
+          VITE_AUTH_BACKEND: ${{ vars.VITE_AUTH_BACKEND }}
+          VITE_SENTRY_DSN: ${{ vars.VITE_SENTRY_DSN }}
+          VITE_SENTRY_ENVIRONMENT: ${{ vars.VITE_SENTRY_ENVIRONMENT }}
+          DOME_PUBLISH_IT: 'true'
+          DOME_NOINDEX: ${{ github.ref_name == 'main' && 'false' || 'true' }}
+        run: |
+          for name in VITE_SUPABASE_URL VITE_SUPABASE_ANON_KEY VITE_AUTH_BACKEND; do
+            if [ -z "${!name}" ]; then echo "::error::$name is not set on this environment"; exit 1; fi
+          done
+          npm run build:cloudflare
+      - name: Deploy
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          message="$(git log -1 --format=%s | cut -c1-100)"
+          if [ "$IS_PRODUCTION" = "true" ]; then
+            npx wrangler deploy --env="" --tag "${GITHUB_SHA::7}" --message "$message"
+          else
+            npx wrangler deploy --env staging --tag "${GITHUB_SHA::7}" --message "$message"
+          fi
+      - name: Smoke test
+        run: |
+          if [ "$IS_PRODUCTION" = "true" ]; then host=https://domelayer.com; else host=https://staging.domelayer.com; fi
+          fail=0
+          check() { # path, expected status
+            code=$(curl -s -o /dev/null -w '%{http_code}' "$host$1?deploy=${GITHUB_SHA::7}")
+            echo "$1 -> $code (want $2)"; [ "$code" = "$2" ] || fail=1
+          }
+          sleep 5
+          check / 200
+          check /it 200
+          check /login 200
+          check /privacy 200
+          check /tools/llm-council 308
+          check /nope 404
+          robots=$(curl -s -D - -o /dev/null "$host/" | tr -d '\r' | grep -i '^x-robots-tag' || true)
+          if [ "$IS_PRODUCTION" = "true" ] && [ -n "$robots" ]; then echo "::error::production answered with $robots"; fail=1; fi
+          if [ "$IS_PRODUCTION" != "true" ] && [ -z "$robots" ]; then echo "::error::staging is missing noindex"; fail=1; fi
+          exit $fail
