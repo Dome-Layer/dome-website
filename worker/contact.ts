@@ -1,19 +1,17 @@
 import { Resend } from 'resend';
-import { Ratelimit } from '@upstash/ratelimit';
-import { Redis } from '@upstash/redis/cloudflare';
 
 // The contact form endpoint for the Cloudflare Worker: api/contact.ts ported from Vercel's
-// (req, res) handler to the Web Request/Response API, same validation, rate limit and email.
-// api/contact.ts is deleted when Vercel is retired (Sprint H phase 1); until then keep the two
-// in step.
+// (req, res) handler to the Web Request/Response API, with the same validation and email.
+// Rate limiting uses Cloudflare's rate-limiting binding (3 per minute per IP, counted per
+// Cloudflare location, nothing stored) instead of the Upstash database, which was deleted.
+// api/contact.ts is deleted when Vercel is retired (Sprint H phase 1).
 
 export interface ContactEnv {
   RESEND_API_KEY?: string;
   CONTACT_EMAIL?: string;
-  UPSTASH_REDIS_REST_URL?: string;
-  UPSTASH_REDIS_REST_TOKEN?: string;
-  RATELIMIT_PREFIX?: string;
   ENVIRONMENT?: string;
+  /** Cloudflare rate-limiting binding (wrangler.jsonc "ratelimits"). */
+  CONTACT_RATE_LIMITER?: RateLimit;
 }
 
 const ALLOWED_ORIGIN = 'https://domelayer.com';
@@ -21,46 +19,21 @@ const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const MAX_FIELD_LENGTH = 200;
 const MAX_MESSAGE_LENGTH = 5000;
 
-type RateLimitResult = { success: boolean; limit: number; remaining: number; reset: number };
-
-// One limiter per isolate, keyed by the settings it was built from.
-let cached: { key: string; limiter: Ratelimit } | null = null;
-
-function getRatelimiter(env: ContactEnv): Ratelimit | null {
-  const url = env.UPSTASH_REDIS_REST_URL;
-  const token = env.UPSTASH_REDIS_REST_TOKEN;
-  if (!url || !token) return null;
-  const prefix = `${env.RATELIMIT_PREFIX ?? ''}contact_form`;
-  const key = `${url}|${prefix}`;
-  if (cached?.key === key) return cached.limiter;
-  const limiter = new Ratelimit({
-    redis: new Redis({ url, token }),
-    limiter: Ratelimit.slidingWindow(3, '1 h'),
-    analytics: true,
-    prefix,
-  });
-  cached = { key, limiter };
-  return limiter;
-}
-
-async function checkContactRateLimit(env: ContactEnv, ip: string): Promise<RateLimitResult> {
-  const ratelimit = getRatelimiter(env);
-
-  if (!ratelimit) {
+// Returns whether this submission may go ahead.
+async function withinRateLimit(env: ContactEnv, ip: string): Promise<boolean> {
+  const limiter = env.CONTACT_RATE_LIMITER;
+  if (!limiter) {
     if (env.ENVIRONMENT === 'production') {
-      console.error('[rate_limit] Upstash env vars missing in production: failing closed');
-      return { success: false, limit: 3, remaining: 0, reset: 0 };
+      console.error('[rate_limit] CONTACT_RATE_LIMITER binding missing in production: failing closed');
+      return false;
     }
-    console.warn('[rate_limit] Upstash env vars missing: fail-open in non-production');
-    return { success: true, limit: 3, remaining: 3, reset: 0 };
+    return true;
   }
-
   try {
-    const { success, limit, remaining, reset } = await ratelimit.limit(ip);
-    return { success, limit, remaining, reset };
+    return (await limiter.limit({ key: ip })).success;
   } catch (err) {
-    console.error('[rate_limit] Upstash check failed', err);
-    return { success: true, limit: 3, remaining: 3, reset: 0 };
+    console.error('[rate_limit] rate-limiting binding failed', err);
+    return true;
   }
 }
 
@@ -105,25 +78,18 @@ export async function handleContact(request: Request, env: ContactEnv): Promise<
   const body = (await request.json().catch(() => ({}))) as Record<string, unknown> | null;
   const { name, email, company, topic, message, hp } = body ?? {};
 
-  // Honeypot: bots fill hidden fields, humans don't. Honeypot trips short-circuit BEFORE the
-  // rate-limit check so dumb-bot traffic does not consume the IP's hourly budget.
+  // Honeypot: bots fill hidden fields, humans don't. It short-circuits before the rate limit so
+  // dumb-bot traffic does not use up the IP's allowance.
   if (hp) {
     console.log(JSON.stringify({ event: 'contact_honeypot_triggered', ip: getClientIp(request) }));
     return json(200, { success: true }, headers);
   }
 
   const ip = getClientIp(request);
-  const rl = await checkContactRateLimit(env, ip);
-
-  headers.set('X-RateLimit-Limit', String(rl.limit));
-  headers.set('X-RateLimit-Remaining', String(rl.remaining));
-  headers.set('X-RateLimit-Reset', String(rl.reset));
-
-  if (!rl.success) {
-    const retryAfter = rl.reset > 0 ? Math.max(1, Math.ceil((rl.reset - Date.now()) / 1000)) : 3600;
-    headers.set('Retry-After', String(retryAfter));
+  if (!(await withinRateLimit(env, ip))) {
+    headers.set('Retry-After', '60');
     console.log(JSON.stringify({ event: 'contact_rate_limited', ip }));
-    return json(429, { error: 'Too many requests. Please try again in an hour.' }, headers);
+    return json(429, { error: 'Too many requests. Please try again in a minute.' }, headers);
   }
 
   if (typeof email !== 'string' || !email || !message) {

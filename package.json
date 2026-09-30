@@ -20,8 +20,6 @@
     "@fontsource-variable/jetbrains-mono": "^5.2.8",
     "@sentry/react": "^10.57.0",
     "@supabase/supabase-js": "^2.108.1",
-    "@upstash/ratelimit": "^2.0.8",
-    "@upstash/redis": "^1.38.0",
     "framer-motion": "^12.40.0",
     "react": "^19.2.7",
     "react-dom": "^19.2.7",

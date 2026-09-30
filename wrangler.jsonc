@@ -1,7 +1,7 @@
 // Cloudflare Workers config for domelayer.com (Sprint H phase 1, DOME_DECISIONS 2026-09-30).
 // Build first with `npm run build:cloudflare`, then `wrangler deploy` (production) or
-// `wrangler deploy --env staging`. Secrets (RESEND_API_KEY, UPSTASH_REDIS_REST_URL,
-// UPSTASH_REDIS_REST_TOKEN) are set with `wrangler secret put`, never in this file.
+// `wrangler deploy --env staging`. The one secret, RESEND_API_KEY, is set with
+// `wrangler secret put` (add `--env staging` for staging), never in this file.
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "dome-website",
@@ -18,6 +18,9 @@
     // free and unlimited, while Worker invocations count against 100k requests a day.
     "run_worker_first": ["/*", "!/assets/*", "!/media/*"]
   },
+  // Contact form: 3 submissions per minute per IP, counted per Cloudflare location, nothing stored.
+  // Bindings are not inherited by environments, so staging repeats it with its own namespace.
+  "ratelimits": [{ "name": "CONTACT_RATE_LIMITER", "namespace_id": "1001", "simple": { "limit": 3, "period": 60 } }],
   "vars": {
     "ENVIRONMENT": "production",
     "DOME_PUBLISH_IT": "true",
@@ -27,11 +30,11 @@
   "env": {
     "staging": {
       "name": "dome-website-staging",
+      "ratelimits": [{ "name": "CONTACT_RATE_LIMITER", "namespace_id": "1002", "simple": { "limit": 3, "period": 60 } }],
       "vars": {
         "ENVIRONMENT": "staging",
         "DOME_PUBLISH_IT": "true",
         "DOME_NOINDEX": "true",
-        "RATELIMIT_PREFIX": "staging:",
         "CONTACT_EMAIL": "hello@domelayer.com"
       }
     }

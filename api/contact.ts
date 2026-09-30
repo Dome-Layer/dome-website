@@ -1,7 +1,5 @@
 import type { IncomingMessage, ServerResponse } from 'node:http';
 import { Resend } from 'resend';
-import { Ratelimit } from '@upstash/ratelimit';
-import { Redis } from '@upstash/redis';
 
 // The request and response Vercel's Node runtime hands to the function, declared here so the
 // @vercel/node package is not needed: it was only ever a type import, and it pins undici 5.
@@ -19,30 +17,9 @@ const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const MAX_FIELD_LENGTH = 200;
 const MAX_MESSAGE_LENGTH = 5000;
 
-// ── Rate limiting ───────────────────────────────────────────────────────────
-// Inlined here (rather than ./_lib/rateLimit) because Vercel's serverless
-// bundler does not consistently resolve relative imports under api/ in ESM
-// mode — see commit history for the failed extraction attempt.
-
-let _ratelimit: Ratelimit | null = null;
-
-function getRatelimiter(): Ratelimit | null {
-  if (_ratelimit) return _ratelimit;
-  const url = process.env.UPSTASH_REDIS_REST_URL;
-  const token = process.env.UPSTASH_REDIS_REST_TOKEN;
-  if (!url || !token) return null;
-  // RATELIMIT_PREFIX namespaces keys when a single Upstash database is shared
-  // across environments (e.g. `staging:` on the staging Vercel project).
-  // Empty by default — production keys remain `contact_form:*`.
-  const envPrefix = process.env.RATELIMIT_PREFIX ?? '';
-  _ratelimit = new Ratelimit({
-    redis: new Redis({ url, token }),
-    limiter: Ratelimit.slidingWindow(3, '1 h'),
-    analytics: true,
-    prefix: `${envPrefix}contact_form`,
-  });
-  return _ratelimit;
-}
+// No rate limit here: the Upstash database behind it was deleted, so the limiter had been failing
+// open. Rate limiting lives in the Cloudflare Worker (worker/contact.ts), which replaces this
+// function when domelayer.com moves off Vercel (Sprint H phase 1).
 
 function getClientIp(req: VercelRequest): string {
   const realIp = req.headers['x-real-ip'];
@@ -50,29 +27,6 @@ function getClientIp(req: VercelRequest): string {
   const xff = req.headers['x-forwarded-for'];
   if (typeof xff === 'string' && xff) return xff.split(',')[0]!.trim();
   return req.socket?.remoteAddress ?? 'unknown';
-}
-
-type RateLimitResult = { success: boolean; limit: number; remaining: number; reset: number };
-
-async function checkContactRateLimit(ip: string): Promise<RateLimitResult> {
-  const ratelimit = getRatelimiter();
-
-  if (!ratelimit) {
-    if (process.env.NODE_ENV === 'production') {
-      console.error('[rate_limit] Upstash env vars missing in production — failing closed');
-      return { success: false, limit: 3, remaining: 0, reset: 0 };
-    }
-    console.warn('[rate_limit] Upstash env vars missing — fail-open in non-production');
-    return { success: true, limit: 3, remaining: 3, reset: 0 };
-  }
-
-  try {
-    const { success, limit, remaining, reset } = await ratelimit.limit(ip);
-    return { success, limit, remaining, reset };
-  } catch (err) {
-    console.error('[rate_limit] Upstash check failed', err);
-    return { success: true, limit: 3, remaining: 3, reset: 0 };
-  }
 }
 
 function escapeHtml(str: string): string {
@@ -99,28 +53,10 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
   const { name, email, company, topic, message, hp } = req.body ?? {};
 
-  // Honeypot: bots fill hidden fields, humans don't. Honeypot trips short-
-  // circuit BEFORE the rate-limit check so dumb-bot traffic does not consume
-  // the IP's hourly budget; smart bots that leave it empty still hit the cap.
+  // Honeypot: bots fill hidden fields, humans don't.
   if (hp) {
     console.log(JSON.stringify({ event: 'contact_honeypot_triggered', ip: getClientIp(req) }));
     return res.status(200).json({ success: true });
-  }
-
-  const ip = getClientIp(req);
-  const rl = await checkContactRateLimit(ip);
-
-  res.setHeader('X-RateLimit-Limit', String(rl.limit));
-  res.setHeader('X-RateLimit-Remaining', String(rl.remaining));
-  res.setHeader('X-RateLimit-Reset', String(rl.reset));
-
-  if (!rl.success) {
-    const retryAfter = rl.reset > 0
-      ? Math.max(1, Math.ceil((rl.reset - Date.now()) / 1000))
-      : 3600;
-    res.setHeader('Retry-After', String(retryAfter));
-    console.log(JSON.stringify({ event: 'contact_rate_limited', ip }));
-    return res.status(429).json({ error: 'Too many requests. Please try again in an hour.' });
   }
 
   if (typeof email !== 'string' || !email || !message) {

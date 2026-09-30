@@ -116,6 +116,33 @@ describe('worker', () => {
     expect(await (await post({ hp: 'bot', email: 'a@b.co', message: 'x' })).json()).toEqual({ success: true })
   })
 
+  it('uses the rate-limiting binding keyed by the client IP', async () => {
+    const limit = vi.fn(async () => ({ success: false }))
+    const env = makeEnv({ CONTACT_RATE_LIMITER: { limit } as unknown as RateLimit })
+    const res = await worker.fetch(
+      new Request('https://domelayer.com/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'cf-connecting-ip': '203.0.113.7' },
+        body: JSON.stringify({ email: 'a@b.co', message: 'hello' }),
+      }),
+      env,
+    )
+    expect(res.status).toBe(429)
+    expect(res.headers.get('retry-after')).toBe('60')
+    expect(limit).toHaveBeenCalledWith({ key: '203.0.113.7' })
+
+    limit.mockResolvedValueOnce({ success: true })
+    const allowed = await worker.fetch(
+      new Request('https://domelayer.com/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'cf-connecting-ip': '203.0.113.7' },
+        body: JSON.stringify({ email: 'not-an-email', message: 'hello' }),
+      }),
+      env,
+    )
+    expect(allowed.status).toBe(400)
+  })
+
   it('fails closed in production when the rate limiter is not configured', async () => {
     const res = await worker.fetch(
       new Request('https://domelayer.com/api/contact', {
