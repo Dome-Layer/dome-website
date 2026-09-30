@@ -1,7 +1,15 @@
-import type { VercelRequest, VercelResponse } from '@vercel/node';
+import type { IncomingMessage, ServerResponse } from 'node:http';
 import { Resend } from 'resend';
 import { Ratelimit } from '@upstash/ratelimit';
 import { Redis } from '@upstash/redis';
+
+// The request and response Vercel's Node runtime hands to the function, declared here so the
+// @vercel/node package is not needed: it was only ever a type import, and it pins undici 5.
+type VercelRequest = IncomingMessage & { body?: Record<string, unknown> };
+type VercelResponse = ServerResponse & {
+  status(code: number): VercelResponse;
+  json(body: unknown): VercelResponse;
+};
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -115,7 +123,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return res.status(429).json({ error: 'Too many requests. Please try again in an hour.' });
   }
 
-  if (!email || !message) {
+  if (typeof email !== 'string' || !email || !message) {
     return res.status(400).json({ error: 'Missing fields' });
   }
 
