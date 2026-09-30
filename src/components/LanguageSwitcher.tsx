@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useLocation } from 'react-router'
-import { rememberLocale } from '../i18n/cookie'
+import { localeCookie } from '../i18n/cookie'
 import type { Locale } from '../i18n/locales'
 import { IT_PUBLISHED } from '../i18n/published'
 import { localizedHref, routeIdFromPath } from '../i18n/routes'
@@ -41,7 +41,7 @@ export function LanguageSwitcher({ className = '' }: LanguageSwitcherProps) {
       hrefLang={target}
       lang={target}
       aria-label={t.switcher.label}
-      onClick={() => rememberLocale(target)}
+      onClick={() => { document.cookie = localeCookie(target) }}
       className={`h-9 min-w-9 px-2 rounded-lg inline-flex items-center justify-center text-[12px] font-semibold tracking-[0.08em] transition-colors duration-150 text-[var(--color-text-secondary)] hover:bg-[var(--color-bg-muted)] hover:text-[var(--color-text-primary)] ${className}`}
     >
       {target.toUpperCase()}

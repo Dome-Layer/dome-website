@@ -38,3 +38,5 @@ dist-ssr
 *.key
 
 TOOL_CONTEXT.md
+# Wrangler local state (Cloudflare, Sprint H)
+.wrangler/
