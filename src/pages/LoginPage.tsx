@@ -6,6 +6,7 @@ import { DomeLogo } from "../components/DomeLogo";
 import { sanitizeRedirect } from "../lib/auth";
 import { storePendingConsent, hasLocalConsent } from "../lib/compliance";
 import { signInWithProvider, type OAuthProvider } from "../lib/supabase";
+import { track } from "../lib/analytics";
 
 const AUTH_BACKEND =
   import.meta.env.VITE_AUTH_BACKEND ?? "https://auth.domelayer.com";
@@ -58,6 +59,7 @@ export default function LoginPage() {
   const handleSubmit = async () => {
     if (!email.trim() || consentBlocked || busy) return;
     storePendingConsent(marketingConsent);
+    track("sign_in_started", { method: "magic_link" });
     setStatus("loading");
     setErrorMsg(null);
 
@@ -85,6 +87,7 @@ export default function LoginPage() {
     // Record consent on this device before redirecting so the callback can persist
     // it without showing the interstitial (terms + optional marketing).
     storePendingConsent(marketingConsent);
+    track("sign_in_started", { method: provider });
     setOauthLoading(provider);
     setErrorMsg(null);
 

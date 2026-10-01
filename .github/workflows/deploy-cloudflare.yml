@@ -50,6 +50,8 @@ jobs:
           VITE_AUTH_BACKEND: ${{ vars.VITE_AUTH_BACKEND }}
           VITE_SENTRY_DSN: ${{ vars.VITE_SENTRY_DSN }}
           VITE_SENTRY_ENVIRONMENT: ${{ vars.VITE_SENTRY_ENVIRONMENT }}
+          # Umami (Sprint C item 3). Public id; the tracker only reports from domelayer.com.
+          VITE_UMAMI_WEBSITE_ID: ${{ vars.VITE_UMAMI_WEBSITE_ID }}
           DOME_PUBLISH_IT: 'true'
           DOME_NOINDEX: ${{ github.ref_name == 'main' && 'false' || 'true' }}
         run: |

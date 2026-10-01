@@ -32,7 +32,7 @@ export const en: Messages = {
   },
   cookieNotice: {
     lead: 'Dome uses only functional cookies.',
-    body: 'One keeps you signed in, two remember your theme and language. No analytics, no tracking, no advertising.',
+    body: 'One keeps you signed in, two remember your theme and language. We count visits in aggregate, without cookies. No tracking, no advertising.',
     link: 'See our cookie policy',
     dismiss: 'Got it',
   },
@@ -779,7 +779,7 @@ export const en: Messages = {
           heading: 'What data we collect and why',
           blocks: [
             { h3: 'Website visitors (no account required)' },
-            { p: 'When you visit domelayer.com, we do not place analytics cookies or third-party tracking scripts. Two functional cookies may be set: `dome-theme` remembers your light or dark theme preference and `dome_locale` remembers the language you chose. Neither contains personal data or is used for tracking. The full list, including what your browser stores, is in our [cookie policy](cookies).' },
+            { p: 'When you visit domelayer.com, we do not place analytics cookies or third-party tracking scripts; we count visits in aggregate, without cookies (below). Two functional cookies may be set: `dome-theme` remembers your light or dark theme preference and `dome_locale` remembers the language you chose. Neither contains personal data or is used for tracking. The full list, including what your browser stores, is in our [cookie policy](cookies).' },
             { basis: 'Legal basis: Legitimate interest (Art. 6(1)(f) GDPR), for storing a display preference you chose.' },
             { p: 'Like any website, our hosting providers keep standard server logs, which include your IP address, for security and to keep the service running. If a page fails, our error monitoring receives a technical report (for example the browser type and the page address). Error reports do not include your name or email address.' },
             { basis: 'Legal basis: Legitimate interest (Art. 6(1)(f)), for the security and reliability of the website.' },
@@ -787,7 +787,8 @@ export const en: Messages = {
             { p: 'If you write to us through the contact form, we receive your name, work email, company (if you give it), the topic and your message, and use them only to reply. To protect the form from abuse, our hosting provider counts submissions per IP address over one minute; the count is not stored.' },
             { p: 'If you book a call, the calendar is provided by Cal.com and loads only when you choose to book. The details you enter there (name, email and any notes) reach us through Cal.com.' },
             { basis: 'Legal basis: Steps taken at your request before entering into a contract (Art. 6(1)(b)), and legitimate interest (Art. 6(1)(f)) in answering business enquiries and protecting the form from abuse.' },
-            { p: 'We may in future deploy privacy-preserving, cookieless analytics tools to understand aggregate usage patterns. Such tools do not set cookies and do not collect personal data. This policy will be updated if we introduce them. We will never introduce cookie-based analytics or advertising trackers without updating this policy and, where required by law, obtaining your consent first.' },
+            { p: '**Aggregate measurement.** We count visits to domelayer.com with Umami, without cookies and without storing your IP address, which is used only to derive an approximate location and a visitor code that changes every month. We see totals, never individuals. Details are in our [cookie policy](cookies). We will never introduce cookie-based analytics or advertising trackers without updating this policy and, where required by law, obtaining your consent first.' },
+            { basis: 'Legal basis: Legitimate interest (Art. 6(1)(f)), in understanding in aggregate how the website is used.' },
             { h3: 'Registered tool users' },
             { p: 'When you register to use the Dome AI tools, we collect and process the following data:' },
             { label: 'Email address' },
@@ -836,6 +837,7 @@ export const en: Messages = {
             { p: '**Resend Inc.**: Transactional email. Used to send magic links, to deliver messages sent through the contact form to us and, with your consent, product communications. resend.com/legal/privacy-policy' },
             { p: '**Functional Software Inc. (Sentry)**: Error monitoring for the website and the tools. Error data is stored in the European Union (Germany). sentry.io/privacy' },
             { p: '**Cal.com Inc.**: Call booking, only when you choose to book a call. cal.com/privacy' },
+            { p: '**Umami Software, Inc.**: Aggregate measurement of visits to this website, without cookies. Data hosted in the European Union (Germany). umami.is/privacy' },
             { h3: 'AI processing' },
             { p: 'When you use a Dome tool, your input is transmitted to an AI provider to generate a response. Each provider processes it under its API data processing terms and does not use API data to train its models by default.' },
             { p: '**Anthropic PBC**: All Dome tools. anthropic.com/privacy' },
@@ -848,7 +850,7 @@ export const en: Messages = {
           heading: 'International transfers',
           blocks: [
             { p: 'Your account and the data you save in the tools are stored within the European Union, on Supabase infrastructure in Frankfurt. Error monitoring data is also stored in the European Union.' },
-            { p: 'Cloudflare, Vercel, Railway, Resend, Cal.com, Anthropic, OpenAI and Google are based in the United States or process data there. Transfers to them rely on the EU-US Data Privacy Framework where the provider is certified under it, and otherwise on Standard Contractual Clauses (SCCs) under GDPR Article 46.' },
+            { p: 'Cloudflare, Vercel, Railway, Resend, Cal.com, Umami, Anthropic, OpenAI and Google are based in the United States or process data there. Transfers to them rely on the EU-US Data Privacy Framework where the provider is certified under it, and otherwise on Standard Contractual Clauses (SCCs) under GDPR Article 46.' },
             { p: "**UK users:** Transfers between the UK and EU are covered by the UK-EU adequacy decision currently in effect. UK users may direct complaints to the Information Commissioner's Office (ico.org.uk)." },
           ],
         },
@@ -865,6 +867,7 @@ export const en: Messages = {
                   ['Governance log metadata', '12 months rolling'],
                   ['Contact form messages and call bookings', 'Up to 24 months after our last exchange'],
                   ['Contact form rate-limit counter (IP address)', '1 minute, not stored'],
+                  ['Website measurement (Umami): page views and events, no IP address', '6 months'],
                   ['Server and error logs', 'Up to 90 days'],
                   ['Marketing consent record', 'Duration of account, plus 3 years after deletion'],
                 ],
@@ -937,7 +940,7 @@ export const en: Messages = {
           heading: 'In short',
           blocks: [
             { p: 'We use three cookies and a few entries in your browser’s storage. All of them are set by us, on our own domain, for one of three reasons: to keep you signed in, to remember a choice you made, or to make a page work. None of them is used to track you, to build a profile of you or to advertise to you, and none is shared with anyone else.' },
-            { p: 'That is why this site has no consent banner. Cookies and storage of this kind are technical: under Article 122 of the Italian Privacy Code and the Garante’s cookie guidelines of June 2021 they need no consent, only this information.' },
+            { p: 'That is why this site has no consent banner. Cookies and storage of this kind are technical: under Article 122 of the Italian Privacy Code and the Garante’s cookie guidelines of June 2021 they need no consent, only this information. Our measurement of visits (below) uses neither cookies nor browser storage and is set up to meet the conditions under which the Garante treats analytics like technical cookies.' },
             { p: 'A first visit sets nothing. Everything below appears only after you do something: sign in, switch theme or language, close the cookie notice, or use a tool. There is one exception: if your browser prefers Italian and you open an English page, we take you to the Italian version once and set `dome_locale` so that we do not do it again.' },
           ],
         },
@@ -981,8 +984,9 @@ export const en: Messages = {
         {
           heading: 'Measurement',
           blocks: [
-            { p: 'We do not run analytics on this website or in the tools. What we count, we count on our own systems: messages sent through the contact form, calls booked, and, for signed-in users, the tool runs each tool records in its audit trail, as described in the [privacy policy](privacy).' },
-            { p: 'If we add aggregate measurement that uses no cookies, this page will describe it before it starts.' },
+            { p: 'We measure visits to domelayer.com in aggregate with **Umami** (Umami Software, Inc.), with the data hosted in the European Union. It sets no cookies and stores nothing in your browser. The script is served from our own domain and sends one short report per page view, and one when you send a message, open the booking calendar, follow a link to book a call, start signing in or switch language.' },
+            { p: 'Your IP address is not stored. Umami uses it only to work out an approximate location (country, region and city) and to recognise visits from the same browser within a calendar month, through a code that cannot be reversed and changes every month. We see totals, never individuals: how many visits, where they come from, which pages and services interest people, and how many messages and bookings follow. We do not use this to profile you, do not combine it with other data and do not share it. Umami keeps it for 6 months.' },
+            { p: 'If your browser sends Do Not Track, nothing is measured. The sign-in pages are reported without their address parameters. The Dome tools are not measured: what we count there is the tool runs each tool records in its audit trail, as described in the [privacy policy](privacy).' },
           ],
         },
         {

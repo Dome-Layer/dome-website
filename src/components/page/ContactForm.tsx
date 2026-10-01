@@ -2,6 +2,7 @@ import { useState, type FormEvent } from 'react'
 import { Link } from 'react-router'
 import { localizedHref } from '../../i18n/routes'
 import { useLocale, useMessages } from '../../i18n/useLocale'
+import { track } from '../../lib/analytics'
 
 
 const field =
@@ -45,6 +46,7 @@ export function ContactForm() {
         return
       }
       setSubmitted(true)
+      track('contact_sent', { topic })
       setName('')
       setEmail('')
       setCompany('')

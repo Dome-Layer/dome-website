@@ -5,6 +5,7 @@ import type { Locale } from '../i18n/locales'
 import { IT_PUBLISHED } from '../i18n/published'
 import { localizedHref, routeIdFromPath } from '../i18n/routes'
 import { useLocale, useMessages } from '../i18n/useLocale'
+import { track } from '../lib/analytics'
 
 const OTHER: Record<Locale, Locale> = { en: 'it', it: 'en' }
 
@@ -41,7 +42,10 @@ export function LanguageSwitcher({ className = '' }: LanguageSwitcherProps) {
       hrefLang={target}
       lang={target}
       aria-label={t.switcher.label}
-      onClick={() => { document.cookie = localeCookie(target) }}
+      onClick={() => {
+        document.cookie = localeCookie(target)
+        track('locale_switch', { to: target })
+      }}
       className={`h-9 min-w-9 px-2 rounded-lg inline-flex items-center justify-center text-[12px] font-semibold tracking-[0.08em] transition-colors duration-150 text-[var(--color-text-secondary)] hover:bg-[var(--color-bg-muted)] hover:text-[var(--color-text-primary)] ${className}`}
     >
       {target.toUpperCase()}
