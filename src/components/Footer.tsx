@@ -56,6 +56,10 @@ export function Footer() {
             <a href={localizedHref('terms', locale)} className="transition-colors hover:text-dome-nickel">
               {t.terms}
             </a>
+            <span aria-hidden="true">&middot;</span>
+            <a href={localizedHref('cookies', locale)} className="transition-colors hover:text-dome-nickel">
+              {t.cookies}
+            </a>
           </div>
           <span>
             &copy; {new Date().getFullYear()} DOME. {t.rights}

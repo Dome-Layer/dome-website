@@ -67,12 +67,6 @@ const s = {
     color: "var(--color-text-tertiary)",
     borderBottom: "2px solid var(--color-border-default)",
   } as CSSProperties,
-  td: {
-    padding: "10px 12px",
-    color: "var(--color-text-secondary)",
-    borderBottom: "1px solid var(--color-border-subtle)",
-    verticalAlign: "top",
-  } as CSSProperties,
   link: {
     color: "var(--color-text-accent)",
     textDecoration: "none",
@@ -113,7 +107,7 @@ function Block({ block, locale }: { block: LegalBlock; locale: Locale }) {
       </ul>
     )
   return (
-    <table style={s.table}>
+    <table className="legal-table" style={s.table}>
       <thead>
         <tr>
           {block.table.head.map((h) => (
@@ -127,7 +121,8 @@ function Block({ block, locale }: { block: LegalBlock; locale: Locale }) {
         {block.table.rows.map((row) => (
           <tr key={row[0]}>
             {row.map((cell, i) => (
-              <td key={i} style={s.td}>
+              // data-label heads each cell when the table stacks on a phone (index.css).
+              <td key={i} data-label={block.table.head[i]}>
                 {renderInline(cell, locale)}
               </td>
             ))}

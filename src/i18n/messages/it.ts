@@ -34,7 +34,14 @@ export const it: Messages = {
     tagline: 'AI operativa, con la governance integrata',
     privacy: 'Informativa sulla privacy',
     terms: 'Termini di servizio',
+    cookies: 'Cookie policy',
     rights: 'Tutti i diritti riservati.',
+  },
+  cookieNotice: {
+    lead: 'Dome usa solo cookie tecnici.',
+    body: 'Uno mantiene l’accesso, due ricordano tema e lingua. Nessuna analisi, nessun tracciamento, nessuna pubblicità.',
+    link: 'Leggete la cookie policy',
+    dismiss: 'Ho capito',
   },
   contactForm: {
     heading: 'Scriveteci',
@@ -209,6 +216,13 @@ export const it: Messages = {
       title: 'Termini di servizio | DOME',
       description:
         'I termini d’uso degli strumenti DOME: account, uso consentito, elaborazione con AI, responsabilità e legge applicabile.',
+      imageAlt: 'DOME',
+    },
+    cookies: {
+      name: 'Cookie policy',
+      title: 'Cookie policy | DOME',
+      description:
+        'Tutti i cookie e le voci di memoria del browser usati da domelayer.com e dagli strumenti DOME: che cosa contengono, quanto durano e perché nessuno richiede consenso.',
       imageAlt: 'DOME',
     },
   },
@@ -747,7 +761,7 @@ export const it: Messages = {
     },
     privacy: {
       back: '← Torna a domelayer.com',
-      updated: 'Ultimo aggiornamento: settembre 2026',
+      updated: 'Ultimo aggiornamento: ottobre 2026',
       title: 'Informativa sulla privacy',
       appliesTo:
         'Si applica a: domelayer.com e a tutti i sottodomini (analyzer.domelayer.com, llm-council.domelayer.com, document-intelligence.domelayer.com, data-intelligence.domelayer.com, governance.domelayer.com)',
@@ -772,7 +786,7 @@ export const it: Messages = {
           heading: 'Quali dati raccogliamo e perché',
           blocks: [
             { h3: 'Visitatori del sito (senza account)' },
-            { p: 'Quando visitate domelayer.com non impostiamo cookie analitici né script di tracciamento di terze parti. Possono essere impostati due cookie funzionali: `dome-theme` ricorda la vostra preferenza per il tema chiaro o scuro e `dome_locale` ricorda la lingua che avete scelto. Nessuno dei due contiene dati personali né viene usato per il tracciamento. L’elenco completo è nella sezione Cookie qui sotto.' },
+            { p: 'Quando visitate domelayer.com non impostiamo cookie analitici né script di tracciamento di terze parti. Possono essere impostati due cookie funzionali: `dome-theme` ricorda la vostra preferenza per il tema chiaro o scuro e `dome_locale` ricorda la lingua che avete scelto. Nessuno dei due contiene dati personali né viene usato per il tracciamento. L’elenco completo, compreso ciò che resta nella memoria del browser, è nella [cookie policy](cookies).' },
             { basis: 'Base giuridica: legittimo interesse (art. 6, par. 1, lett. f) GDPR), per memorizzare una preferenza di visualizzazione che avete scelto.' },
             { p: 'Come per qualsiasi sito web, i nostri fornitori di hosting conservano i normali log del server, che includono il vostro indirizzo IP, per motivi di sicurezza e per mantenere il servizio in funzione. Se una pagina non funziona, il nostro sistema di monitoraggio degli errori riceve un rapporto tecnico (ad esempio il tipo di browser e l’indirizzo della pagina). I rapporti di errore non includono il vostro nome né il vostro indirizzo email.' },
             { basis: 'Base giuridica: legittimo interesse (art. 6, par. 1, lett. f), per la sicurezza e l’affidabilità del sito.' },
@@ -894,18 +908,7 @@ export const it: Messages = {
         {
           heading: 'Cookie',
           blocks: [
-            {
-              table: {
-                head: ['Cookie', 'Finalità', 'Durata', 'Consenso richiesto'],
-                rows: [
-                  ['`dome_auth_token`', 'Mantiene l’accesso attivo su domelayer.com e negli strumenti Dome', 'Fino alla scadenza dell’accesso (al massimo 8 ore)', 'No: strettamente necessario'],
-                  ['`dome-theme`', 'Memorizza la preferenza per il tema chiaro o scuro', '1 anno', 'No: funzionale, nessun tracciamento'],
-                  ['`dome_locale`', 'Ricorda la lingua che avete scelto', '1 anno', 'No: funzionale, nessun tracciamento'],
-                ],
-              },
-            },
-            { p: 'Il vostro browser conserva inoltre la preferenza per il tema nella memoria locale e, durante l’accesso, un record temporaneo che viene rimosso una volta completato l’accesso.' },
-            { p: 'Durante la navigazione non vengono impostati cookie di terze parti. Il calendario di prenotazione di Cal.com si carica solo quando scegliete di prenotare una chiamata; da quel momento Cal.com può impostare i propri cookie secondo la propria informativa sulla privacy.' },
+            { p: 'Tutti i cookie e le voci di memoria del browser che usiamo sono elencati, con finalità e durata, nella nostra [cookie policy](cookies). In sintesi: un cookie mantiene l’accesso, due ricordano tema e lingua, e nessuno viene usato per tracciamento o pubblicità. Durante la navigazione non vengono impostati cookie di terze parti.' },
           ],
         },
         {
@@ -929,6 +932,90 @@ export const it: Messages = {
         },
       ],
       sibling: 'Termini di servizio →',
+    },
+    cookies: {
+      back: '← Torna a domelayer.com',
+      updated: 'Ultimo aggiornamento: ottobre 2026',
+      title: 'Cookie policy',
+      appliesTo:
+        'Si applica a: domelayer.com e a tutti i sottodomini (analyzer.domelayer.com, llm-council.domelayer.com, document-intelligence.domelayer.com, data-intelligence.domelayer.com, governance.domelayer.com)',
+      sections: [
+        {
+          heading: 'In sintesi',
+          blocks: [
+            { p: 'Usiamo tre cookie e alcune voci nella memoria del vostro browser. Sono tutti impostati da noi, sul nostro dominio, per uno di tre motivi: mantenere l’accesso, ricordare una scelta che avete fatto o far funzionare una pagina. Nessuno serve a tracciarvi, a profilarvi o a mostrarvi pubblicità, e nessuno viene condiviso con altri.' },
+            { p: 'Per questo il sito non mostra un banner di consenso. Cookie e memorizzazioni di questo tipo sono tecnici: ai sensi dell’art. 122 del Codice privacy e delle Linee guida cookie del Garante del giugno 2021 non richiedono consenso, ma solo questa informativa.' },
+            { p: 'Alla prima visita non viene impostato nulla. Tutto ciò che segue compare solo dopo una vostra azione: l’accesso, il cambio di tema o di lingua, la chiusura dell’avviso sui cookie o l’uso di uno strumento. C’è un’eccezione: se il vostro browser preferisce l’italiano e aprite una pagina in inglese, vi portiamo una sola volta alla versione italiana e impostiamo `dome_locale` per non ripeterlo.' },
+          ],
+        },
+        {
+          heading: 'Cookie',
+          blocks: [
+            {
+              table: {
+                head: ['Cookie', 'A cosa serve', 'Durata', 'Tipo'],
+                rows: [
+                  ['`dome_auth_token`', 'Mantiene l’accesso attivo su domelayer.com e negli strumenti Dome. Impostato al momento dell’accesso, per tutti i sottodomini di domelayer.com.', 'Fino alla scadenza dell’accesso, al massimo 8 ore', 'Strettamente necessario'],
+                  ['`dome-theme`', 'Ricorda se avete scelto il tema chiaro o scuro, sul sito e negli strumenti. Impostato quando cambiate tema.', '1 anno', 'Funzionale: una preferenza vostra'],
+                  ['`dome_locale`', 'Ricorda la lingua. Impostato quando cambiate lingua, oppure una sola volta quando portiamo un browser in italiano alla versione italiana. Solo su domelayer.com.', '1 anno', 'Funzionale: una preferenza vostra'],
+                ],
+              },
+            },
+          ],
+        },
+        {
+          heading: 'Memoria del browser',
+          blocks: [
+            { p: 'Alcune informazioni restano nella memoria locale del browser, che dura finché non la cancellate, o nella memoria di sessione, che dura finché non chiudete la scheda. Ogni voce viene letta solo dalla pagina che l’ha scritta.' },
+            {
+              table: {
+                head: ['Voce', 'Dove', 'Che cosa contiene', 'Durata'],
+                rows: [
+                  ['`dome-theme`', 'Memoria locale, su domelayer.com e in ogni strumento', 'Il tema scelto, copia dell’omonimo cookie', 'Finché non la cancellate'],
+                  ['`dome-cookie-notice-dismissed`', 'Memoria locale, domelayer.com', 'Il fatto che avete chiuso l’avviso sui cookie, perché non ricompaia', 'Finché non la cancellate'],
+                  ['`dome_pending_consent`', 'Memoria locale, domelayer.com', 'Alla registrazione: la versione dei termini accettata e la vostra scelta sugli aggiornamenti di prodotto, finché non vengono salvate nel vostro account', 'Fino al completamento della registrazione'],
+                  ['`dome_consent_accepted`', 'Memoria locale, domelayer.com', 'La versione dei termini accettata, perché questo dispositivo non ve la richieda', 'Finché non la cancellate'],
+                  ['`sb-…-auth-token`, `sb-…-code-verifier`', 'Memoria locale, domelayer.com', 'Un record temporaneo creato dal nostro fornitore di autenticazione, Supabase, durante l’accesso', 'Rimosso ad accesso completato, di solito entro pochi minuti'],
+                  ['`dome_auth_redirect`', 'Memoria di sessione, domelayer.com', 'La pagina dello strumento a cui riportarvi dopo l’accesso', 'Fino alla chiusura della scheda'],
+                  ['`react-router-scroll-positions`', 'Memoria di sessione, domelayer.com', 'Il punto in cui eravate su ogni pagina, perché il tasto Indietro vi riporti lì', 'Fino alla chiusura della scheda'],
+                  ['`dome_doc_result_…`', 'Memoria di sessione, document-intelligence.domelayer.com', 'Il risultato dell’ultima estrazione e il nome del file, per la pagina dei risultati', 'Fino alla chiusura della scheda'],
+                  ['`dome_session_…`', 'Memoria di sessione, data-intelligence.domelayer.com', 'Le righe del foglio di calcolo caricato e la relativa analisi, perché la dashboard si apra senza interrogare di nuovo il server', 'Fino alla chiusura della scheda'],
+                ],
+              },
+            },
+          ],
+        },
+        {
+          heading: 'Misurazione',
+          blocks: [
+            { p: 'Non usiamo strumenti di analisi né sul sito né negli strumenti. Ciò che contiamo lo contiamo sui nostri sistemi: i messaggi inviati dal modulo di contatto, le chiamate prenotate e, per gli utenti registrati, le esecuzioni che ogni strumento registra nel proprio audit trail, come descritto nell’[informativa sulla privacy](privacy).' },
+            { p: 'Se introdurremo una misurazione aggregata senza cookie, questa pagina la descriverà prima che venga attivata.' },
+          ],
+        },
+        {
+          heading: 'Altri servizi',
+          blocks: [
+            { p: '**Cloudflare**, che ospita questo sito, non vi imposta cookie. Per proteggere il modulo di contatto dagli abusi conta gli invii per indirizzo IP nell’arco di un minuto; il conteggio non viene conservato.' },
+            { p: '**Sentry**, il nostro servizio di monitoraggio degli errori (regione UE), invia un rapporto tecnico se una pagina non funziona. Non imposta cookie e non salva nulla nel browser.' },
+            { p: '**I caratteri** sono serviti dai nostri domini. Nessuna pagina carica risorse da Google Fonts.' },
+            { p: '**Cal.com** fornisce il calendario di prenotazione nella pagina dei contatti. Si carica solo quando scegliete di prenotare una chiamata; da quel momento Cal.com può impostare i propri cookie, secondo la propria informativa sulla privacy.' },
+          ],
+        },
+        {
+          heading: 'Le vostre scelte',
+          blocks: [
+            { p: 'Potete cancellare cookie e memoria del browser in qualsiasi momento dalle impostazioni del browser, oppure bloccarli del tutto. Cancellare `dome_auth_token` vi disconnette; cancellare gli altri azzera soltanto il tema, la lingua, l’avviso sui cookie o la posizione nella pagina.' },
+          ],
+        },
+        {
+          heading: 'Modifiche e contatti',
+          blocks: [
+            { p: 'Aggiorniamo questa pagina ogni volta che aggiungiamo, modifichiamo o rimuoviamo un cookie o una voce di memoria, e prima che una nuova venga usata. La data in alto indica la versione in vigore.' },
+            { p: '[privacy@domelayer.com](mailto:privacy@domelayer.com)\nFrancesco Prodomo, operante come Dome · Firenze, Italia · P.IVA 07242670482' },
+          ],
+        },
+      ],
+      sibling: 'Informativa sulla privacy →',
     },
     terms: {
       back: '← Torna a domelayer.com',

@@ -119,8 +119,9 @@ export const PUBLIC_ROUTES = {
     updatedAt: '2026-09-22',
     caseStudy: 'training',
   },
-  privacy: { file: 'pages/PrivacyPage.tsx', path: { en: '/privacy', it: '/it/privacy' }, updatedAt: '2026-09-28' },
+  privacy: { file: 'pages/PrivacyPage.tsx', path: { en: '/privacy', it: '/it/privacy' }, updatedAt: '2026-10-01' },
   terms: { file: 'pages/TermsPage.tsx', path: { en: '/terms', it: '/it/termini' }, updatedAt: '2026-09-28' },
+  cookies: { file: 'pages/CookiesPage.tsx', path: { en: '/cookies', it: '/it/cookie' }, updatedAt: '2026-10-01' },
 } satisfies Record<string, PublicRoute>
 
 export type RouteId = keyof typeof PUBLIC_ROUTES

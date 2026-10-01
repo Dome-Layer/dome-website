@@ -35,6 +35,7 @@ export const config = {
     '/case-studies/ai-training-videos',
     '/privacy',
     '/terms',
+    '/cookies',
   ],
 }
 
