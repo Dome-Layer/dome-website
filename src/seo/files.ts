@@ -42,7 +42,7 @@ export function buildRobots(): string {
   return ['User-agent: *', 'Allow: /', '', `Sitemap: ${SITE_URL}/sitemap.xml`, ''].join('\n')
 }
 
-const LEGAL_IDS: RouteId[] = ['privacy', 'terms']
+const LEGAL_IDS: RouteId[] = ['privacy', 'terms', 'cookies']
 
 function linkList(ids: readonly RouteId[], locale: Locale): string[] {
   return ids.map((id) => {

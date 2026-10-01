@@ -27,7 +27,14 @@ export const en: Messages = {
     tagline: 'Governance-Driven Operational AI',
     privacy: 'Privacy policy',
     terms: 'Terms of service',
+    cookies: 'Cookie policy',
     rights: 'All rights reserved.',
+  },
+  cookieNotice: {
+    lead: 'Dome uses only functional cookies.',
+    body: 'One keeps you signed in, two remember your theme and language. No analytics, no tracking, no advertising.',
+    link: 'See our cookie policy',
+    dismiss: 'Got it',
   },
   contactForm: {
     heading: 'Send a message',
@@ -202,6 +209,13 @@ export const en: Messages = {
       title: 'Terms of service | DOME',
       description:
         'The terms that apply to using the DOME tools: accounts, acceptable use, AI processing, disclaimers and governing law.',
+      imageAlt: 'DOME',
+    },
+    cookies: {
+      name: 'Cookie policy',
+      title: 'Cookie policy | DOME',
+      description:
+        'Every cookie and browser storage entry used by domelayer.com and the DOME tools, what each holds, how long it lasts, and why none needs consent.',
       imageAlt: 'DOME',
     },
   },
@@ -740,7 +754,7 @@ export const en: Messages = {
     },
     privacy: {
       back: '← Back to domelayer.com',
-      updated: 'Last updated: September 2026',
+      updated: 'Last updated: October 2026',
       title: 'Privacy policy',
       appliesTo:
         'Applies to: domelayer.com and all subdomains (analyzer.domelayer.com, llm-council.domelayer.com, document-intelligence.domelayer.com, data-intelligence.domelayer.com, governance.domelayer.com)',
@@ -765,7 +779,7 @@ export const en: Messages = {
           heading: 'What data we collect and why',
           blocks: [
             { h3: 'Website visitors (no account required)' },
-            { p: 'When you visit domelayer.com, we do not place analytics cookies or third-party tracking scripts. Two functional cookies may be set: `dome-theme` remembers your light or dark theme preference and `dome_locale` remembers the language you chose. Neither contains personal data or is used for tracking. The full list is in the Cookies section below.' },
+            { p: 'When you visit domelayer.com, we do not place analytics cookies or third-party tracking scripts. Two functional cookies may be set: `dome-theme` remembers your light or dark theme preference and `dome_locale` remembers the language you chose. Neither contains personal data or is used for tracking. The full list, including what your browser stores, is in our [cookie policy](cookies).' },
             { basis: 'Legal basis: Legitimate interest (Art. 6(1)(f) GDPR), for storing a display preference you chose.' },
             { p: 'Like any website, our hosting providers keep standard server logs, which include your IP address, for security and to keep the service running. If a page fails, our error monitoring receives a technical report (for example the browser type and the page address). Error reports do not include your name or email address.' },
             { basis: 'Legal basis: Legitimate interest (Art. 6(1)(f)), for the security and reliability of the website.' },
@@ -887,18 +901,7 @@ export const en: Messages = {
         {
           heading: 'Cookies',
           blocks: [
-            {
-              table: {
-                head: ['Cookie', 'Purpose', 'Duration', 'Consent required'],
-                rows: [
-                  ['`dome_auth_token`', 'Keeps you signed in across domelayer.com and the Dome tools', 'Until your sign-in expires (at most 8 hours)', 'No: strictly necessary'],
-                  ['`dome-theme`', 'Stores light/dark theme preference', '1 year', 'No: functional, no tracking'],
-                  ['`dome_locale`', 'Remembers the language you chose', '1 year', 'No: functional, no tracking'],
-                ],
-              },
-            },
-            { p: 'Your browser also keeps your theme preference in local storage, and holds a temporary sign-in record while you sign in, which is removed once you are signed in.' },
-            { p: 'No third-party cookies are set while you browse. The Cal.com booking calendar loads only when you choose to book a call, and Cal.com may then set its own cookies under its privacy policy.' },
+            { p: 'Every cookie and browser storage entry we use is listed, with its purpose and duration, in our [cookie policy](cookies). In short: one cookie keeps you signed in, two remember your theme and language, and none is used for tracking or advertising. No third-party cookies are set while you browse.' },
           ],
         },
         {
@@ -922,6 +925,90 @@ export const en: Messages = {
         },
       ],
       sibling: 'Terms of service →',
+    },
+    cookies: {
+      back: '← Back to domelayer.com',
+      updated: 'Last updated: October 2026',
+      title: 'Cookie policy',
+      appliesTo:
+        'Applies to: domelayer.com and all subdomains (analyzer.domelayer.com, llm-council.domelayer.com, document-intelligence.domelayer.com, data-intelligence.domelayer.com, governance.domelayer.com)',
+      sections: [
+        {
+          heading: 'In short',
+          blocks: [
+            { p: 'We use three cookies and a few entries in your browser’s storage. All of them are set by us, on our own domain, for one of three reasons: to keep you signed in, to remember a choice you made, or to make a page work. None of them is used to track you, to build a profile of you or to advertise to you, and none is shared with anyone else.' },
+            { p: 'That is why this site has no consent banner. Cookies and storage of this kind are technical: under Article 122 of the Italian Privacy Code and the Garante’s cookie guidelines of June 2021 they need no consent, only this information.' },
+            { p: 'A first visit sets nothing. Everything below appears only after you do something: sign in, switch theme or language, close the cookie notice, or use a tool. There is one exception: if your browser prefers Italian and you open an English page, we take you to the Italian version once and set `dome_locale` so that we do not do it again.' },
+          ],
+        },
+        {
+          heading: 'Cookies',
+          blocks: [
+            {
+              table: {
+                head: ['Cookie', 'What it does', 'Duration', 'Type'],
+                rows: [
+                  ['`dome_auth_token`', 'Keeps you signed in on domelayer.com and in the Dome tools. Set when you sign in, for every domelayer.com subdomain.', 'Until your sign-in expires, at most 8 hours', 'Strictly necessary'],
+                  ['`dome-theme`', 'Remembers whether you chose the light or the dark theme, on the site and in the tools. Set when you switch theme.', '1 year', 'Functional: a preference you set'],
+                  ['`dome_locale`', 'Remembers your language. Set when you switch language, or once when we take an Italian-language browser to the Italian site. domelayer.com only.', '1 year', 'Functional: a preference you set'],
+                ],
+              },
+            },
+          ],
+        },
+        {
+          heading: 'Browser storage',
+          blocks: [
+            { p: 'Some information is kept in your browser’s local storage, which lasts until you clear it, or its session storage, which lasts until you close the tab. Only the page that wrote an entry reads it back.' },
+            {
+              table: {
+                head: ['Entry', 'Where', 'What it holds', 'How long'],
+                rows: [
+                  ['`dome-theme`', 'Local storage, on domelayer.com and in each tool', 'Your theme choice, a copy of the cookie of the same name', 'Until you clear it'],
+                  ['`dome-cookie-notice-dismissed`', 'Local storage, domelayer.com', 'That you closed the cookie notice, so that it does not come back', 'Until you clear it'],
+                  ['`dome_pending_consent`', 'Local storage, domelayer.com', 'When you register: the version of the terms you accepted and your choice about product updates, until they are saved to your account', 'Until registration completes'],
+                  ['`dome_consent_accepted`', 'Local storage, domelayer.com', 'The version of the terms you accepted, so that this device does not ask you again', 'Until you clear it'],
+                  ['`sb-…-auth-token`, `sb-…-code-verifier`', 'Local storage, domelayer.com', 'A temporary record created by our sign-in provider, Supabase, while you sign in', 'Removed once you are signed in, usually within minutes'],
+                  ['`dome_auth_redirect`', 'Session storage, domelayer.com', 'The tool page to take you back to after you sign in', 'Until you close the tab'],
+                  ['`react-router-scroll-positions`', 'Session storage, domelayer.com', 'Where you were on each page, so that Back returns you to the same place', 'Until you close the tab'],
+                  ['`dome_doc_result_…`', 'Session storage, document-intelligence.domelayer.com', 'The result of your last extraction and the file name, for the result page', 'Until you close the tab'],
+                  ['`dome_session_…`', 'Session storage, data-intelligence.domelayer.com', 'The rows of the spreadsheet you uploaded and their analysis, so that the dashboard opens without asking the server again', 'Until you close the tab'],
+                ],
+              },
+            },
+          ],
+        },
+        {
+          heading: 'Measurement',
+          blocks: [
+            { p: 'We do not run analytics on this website or in the tools. What we count, we count on our own systems: messages sent through the contact form, calls booked, and, for signed-in users, the tool runs each tool records in its audit trail, as described in the [privacy policy](privacy).' },
+            { p: 'If we add aggregate measurement that uses no cookies, this page will describe it before it starts.' },
+          ],
+        },
+        {
+          heading: 'Other services',
+          blocks: [
+            { p: '**Cloudflare**, which hosts this website, sets no cookies on it. To protect the contact form from abuse, it counts submissions per IP address over one minute; the count is not stored.' },
+            { p: '**Sentry**, our error monitoring (EU region), sends a technical report if a page fails. It sets no cookies and stores nothing in your browser.' },
+            { p: '**Fonts** are served from our own domains. No page loads anything from Google Fonts.' },
+            { p: '**Cal.com** provides the booking calendar on the contact page. It loads only when you choose to book a call; from then on Cal.com may set its own cookies, under its own privacy policy.' },
+          ],
+        },
+        {
+          heading: 'Your choices',
+          blocks: [
+            { p: 'You can delete cookies and browser storage at any time in your browser’s settings, and block them altogether. Deleting `dome_auth_token` signs you out; deleting any of the others only resets your theme, your language, the cookie notice or the page you were on.' },
+          ],
+        },
+        {
+          heading: 'Changes and contact',
+          blocks: [
+            { p: 'We update this page whenever we add, change or remove a cookie or a storage entry, and before a new one is used. The date at the top shows the current version.' },
+            { p: '[privacy@domelayer.com](mailto:privacy@domelayer.com)\nFrancesco Prodomo trading as Dome · Florence, Italy · P.IVA 07242670482' },
+          ],
+        },
+      ],
+      sibling: 'Privacy policy →',
     },
     terms: {
       back: '← Back to domelayer.com',

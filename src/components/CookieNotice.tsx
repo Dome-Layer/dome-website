@@ -1,8 +1,12 @@
 import { useEffect, useState } from "react"
+import { localizedHref } from "../i18n/routes"
+import { useLocale, useMessages } from "../i18n/useLocale"
 
 const LS_KEY = "dome-cookie-notice-dismissed"
 
 export function CookieNotice() {
+  const locale = useLocale()
+  const t = useMessages().cookieNotice
   // Hidden in the prerendered HTML; shown after mount only if not dismissed before.
   const [dismissed, setDismissed] = useState(true)
 
@@ -56,12 +60,11 @@ export function CookieNotice() {
         }}
       >
         <strong style={{ color: "var(--color-text-primary)", fontWeight: 600 }}>
-          Dome uses only functional cookies.
+          {t.lead}
         </strong>{" "}
-        One keeps you signed in. Two remember your theme and language. No analytics, no tracking, no
-        advertising.{" "}
+        {t.body}{" "}
         <a
-          href="/privacy"
+          href={localizedHref("cookies", locale)}
           style={{
             color: "var(--color-text-accent)",
             textDecoration: "none",
@@ -69,7 +72,7 @@ export function CookieNotice() {
           onMouseEnter={(e) => ((e.target as HTMLAnchorElement).style.textDecoration = "underline")}
           onMouseLeave={(e) => ((e.target as HTMLAnchorElement).style.textDecoration = "none")}
         >
-          Read our privacy policy
+          {t.link}
         </a>
       </p>
       <button
@@ -90,7 +93,7 @@ export function CookieNotice() {
         onMouseEnter={(e) => ((e.target as HTMLButtonElement).style.opacity = "0.85")}
         onMouseLeave={(e) => ((e.target as HTMLButtonElement).style.opacity = "1")}
       >
-        Got it
+        {t.dismiss}
       </button>
     </div>
   )

@@ -127,7 +127,18 @@ export interface Messages {
     tagline: string
     privacy: string
     terms: string
+    cookies: string
     rights: string
+  }
+  /**
+   * The cookie notice shown at the foot of public pages until dismissed. Hardcoded English on every
+   * locale until 2026-10-01. It must never say less than the cookie page does.
+   */
+  cookieNotice: {
+    lead: string
+    body: string
+    link: string
+    dismiss: string
   }
   /** The contact form, which moved out of the footer onto its own page (plan phase 1c). */
   contactForm: {
@@ -299,5 +310,7 @@ export interface Messages {
     }
     privacy: LegalDocumentText
     terms: LegalDocumentText
+    /** The cookie policy (Sprint C item 2): every cookie and browser storage entry, and why. */
+    cookies: LegalDocumentText
   }
 }

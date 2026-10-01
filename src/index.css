@@ -240,6 +240,44 @@
 }
 
 /* ── Reduced motion ── */
+/**
+ * Legal tables (LegalDocument). Four columns do not fit a phone, so below 640px each row becomes a
+ * card and every cell is headed by its column name from data-label. Cell styles live here rather
+ * than inline so the media query can override them.
+ */
+.legal-table td {
+  padding: 10px 12px;
+  color: var(--color-text-secondary);
+  border-bottom: 1px solid var(--color-border-subtle);
+  vertical-align: top;
+}
+
+@media (max-width: 639px) {
+  .legal-table thead {
+    display: none;
+  }
+  .legal-table tr {
+    display: block;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--color-border-subtle);
+  }
+  .legal-table td {
+    display: block;
+    padding: 4px 0;
+    border-bottom: none;
+    overflow-wrap: anywhere;
+  }
+  .legal-table td::before {
+    content: attr(data-label);
+    display: block;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-text-tertiary);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after {
