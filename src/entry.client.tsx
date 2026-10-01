@@ -2,6 +2,7 @@ import { StrictMode, startTransition } from 'react'
 import { hydrateRoot } from 'react-dom/client'
 import { HydratedRouter } from 'react-router/dom'
 import * as Sentry from '@sentry/react'
+import { startAnalytics } from './lib/analytics'
 
 if (import.meta.env.VITE_SENTRY_DSN) {
   Sentry.init({
@@ -17,6 +18,8 @@ if (import.meta.env.VITE_SENTRY_DSN) {
 if (import.meta.env.VITE_SENTRY_ENVIRONMENT === 'staging') {
   document.documentElement.style.setProperty('--dome-banner-h', '2rem')
 }
+
+startAnalytics()
 
 startTransition(() => {
   hydrateRoot(

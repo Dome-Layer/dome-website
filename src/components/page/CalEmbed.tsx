@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { CAL_EVENTS, CAL_PUBLIC_URL, calUrl, type CalEvent } from '../../lib/cal'
 import { useMessages } from '../../i18n/useLocale'
+import { track } from '../../lib/analytics'
 
 
 /**
@@ -16,6 +17,10 @@ export function CalEmbed() {
   const TOPICS = messages.common.topics
   const [topic, setTopic] = useState<string>(TOPICS[0])
   const [loaded, setLoaded] = useState<CalEvent | null>(null)
+  const openCalendar = (event: CalEvent) => {
+    setLoaded(event)
+    track('booking_opened', { length: event, topic })
+  }
 
   return (
     <div className="flex flex-col gap-5">
@@ -58,14 +63,14 @@ export function CalEmbed() {
           <div className="flex flex-wrap gap-3">
             <button
               type="button"
-              onClick={() => setLoaded('standard')}
+              onClick={() => openCalendar('standard')}
               className="inline-flex items-center rounded-[var(--radius-md)] bg-[var(--color-accent)] px-6 py-3 text-sm font-semibold text-[var(--color-text-on-accent)] hover:bg-[var(--color-accent-hover)]"
             >
               {t.show30}
             </button>
             <button
               type="button"
-              onClick={() => setLoaded('short')}
+              onClick={() => openCalendar('short')}
               className="inline-flex items-center rounded-[var(--radius-md)] border border-[var(--color-border-strong)] px-6 py-3 text-sm font-semibold text-[var(--color-text-primary)] hover:bg-[var(--color-bg-muted)]"
             >
               {t.show15}

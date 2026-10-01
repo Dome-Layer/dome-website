@@ -39,7 +39,7 @@ export const it: Messages = {
   },
   cookieNotice: {
     lead: 'Dome usa solo cookie tecnici.',
-    body: 'Uno mantiene l’accesso, due ricordano tema e lingua. Nessuna analisi, nessun tracciamento, nessuna pubblicità.',
+    body: 'Uno mantiene l’accesso, due ricordano tema e lingua. Contiamo le visite in forma aggregata, senza cookie. Nessun tracciamento, nessuna pubblicità.',
     link: 'Leggete la cookie policy',
     dismiss: 'Ho capito',
   },
@@ -786,7 +786,7 @@ export const it: Messages = {
           heading: 'Quali dati raccogliamo e perché',
           blocks: [
             { h3: 'Visitatori del sito (senza account)' },
-            { p: 'Quando visitate domelayer.com non impostiamo cookie analitici né script di tracciamento di terze parti. Possono essere impostati due cookie funzionali: `dome-theme` ricorda la vostra preferenza per il tema chiaro o scuro e `dome_locale` ricorda la lingua che avete scelto. Nessuno dei due contiene dati personali né viene usato per il tracciamento. L’elenco completo, compreso ciò che resta nella memoria del browser, è nella [cookie policy](cookies).' },
+            { p: 'Quando visitate domelayer.com non impostiamo cookie analitici né script di tracciamento di terze parti; contiamo le visite in forma aggregata, senza cookie (vedi sotto). Possono essere impostati due cookie funzionali: `dome-theme` ricorda la vostra preferenza per il tema chiaro o scuro e `dome_locale` ricorda la lingua che avete scelto. Nessuno dei due contiene dati personali né viene usato per il tracciamento. L’elenco completo, compreso ciò che resta nella memoria del browser, è nella [cookie policy](cookies).' },
             { basis: 'Base giuridica: legittimo interesse (art. 6, par. 1, lett. f) GDPR), per memorizzare una preferenza di visualizzazione che avete scelto.' },
             { p: 'Come per qualsiasi sito web, i nostri fornitori di hosting conservano i normali log del server, che includono il vostro indirizzo IP, per motivi di sicurezza e per mantenere il servizio in funzione. Se una pagina non funziona, il nostro sistema di monitoraggio degli errori riceve un rapporto tecnico (ad esempio il tipo di browser e l’indirizzo della pagina). I rapporti di errore non includono il vostro nome né il vostro indirizzo email.' },
             { basis: 'Base giuridica: legittimo interesse (art. 6, par. 1, lett. f), per la sicurezza e l’affidabilità del sito.' },
@@ -794,7 +794,8 @@ export const it: Messages = {
             { p: 'Se ci scrivete tramite il modulo di contatto, riceviamo il vostro nome, l’email di lavoro, l’azienda (se la indicate), l’argomento e il messaggio, e li usiamo solo per rispondervi. Per proteggere il modulo dagli abusi, il nostro fornitore di hosting conta gli invii per indirizzo IP nell’arco di un minuto; il conteggio non viene conservato.' },
             { p: 'Se prenotate una chiamata, il calendario è fornito da Cal.com e si carica solo quando scegliete di prenotare. I dati che inserite (nome, email ed eventuali note) ci arrivano tramite Cal.com.' },
             { basis: 'Base giuridica: misure precontrattuali adottate su vostra richiesta (art. 6, par. 1, lett. b) e legittimo interesse (art. 6, par. 1, lett. f) a rispondere alle richieste commerciali e a proteggere il modulo dagli abusi.' },
-            { p: 'In futuro potremmo adottare strumenti di analisi rispettosi della privacy e senza cookie, per comprendere l’utilizzo in forma aggregata. Questi strumenti non impostano cookie e non raccolgono dati personali. Se li introdurremo, aggiorneremo questa informativa. Non introdurremo mai strumenti di analisi basati su cookie o tracker pubblicitari senza aggiornare questa informativa e, ove la legge lo richieda, senza aver prima ottenuto il vostro consenso.' },
+            { p: '**Misurazione aggregata.** Contiamo le visite a domelayer.com con Umami, senza cookie e senza conservare il vostro indirizzo IP, che serve solo a ricavare una posizione approssimativa e un codice di visitatore che cambia ogni mese. Vediamo solo dati complessivi, mai le singole persone. I dettagli sono nella [cookie policy](cookies). Non introdurremo mai strumenti di analisi basati su cookie o tracker pubblicitari senza aggiornare questa informativa e, ove la legge lo richieda, senza aver prima ottenuto il vostro consenso.' },
+            { basis: 'Base giuridica: legittimo interesse (art. 6, par. 1, lett. f GDPR), a comprendere in forma aggregata come viene usato il sito.' },
             { h3: 'Utenti registrati degli strumenti' },
             { p: 'Quando vi registrate per usare gli strumenti AI di Dome, raccogliamo e trattiamo i seguenti dati:' },
             { label: 'Indirizzo email' },
@@ -843,6 +844,7 @@ export const it: Messages = {
             { p: '**Resend Inc.**: email transazionali. Usato per inviare i magic link, per recapitarci i messaggi inviati tramite il modulo di contatto e, con il vostro consenso, comunicazioni sui prodotti. resend.com/legal/privacy-policy' },
             { p: '**Functional Software Inc. (Sentry)**: monitoraggio degli errori del sito e degli strumenti. I dati sugli errori sono conservati nell’Unione Europea (Germania). sentry.io/privacy' },
             { p: '**Cal.com Inc.**: prenotazione di chiamate, solo quando scegliete di prenotarne una. cal.com/privacy' },
+            { p: '**Umami Software, Inc.**: misurazione aggregata delle visite a questo sito, senza cookie. Dati ospitati nell’Unione europea (Germania). umami.is/privacy' },
             { h3: 'Elaborazione AI' },
             { p: 'Quando usate uno strumento Dome, il vostro input viene trasmesso a un fornitore AI per generare una risposta. Ciascun fornitore lo tratta secondo i propri termini sul trattamento dei dati per l’API e, per impostazione predefinita, non usa i dati ricevuti via API per addestrare i propri modelli.' },
             { p: '**Anthropic PBC**: tutti gli strumenti Dome. anthropic.com/privacy' },
@@ -855,7 +857,7 @@ export const it: Messages = {
           heading: 'Trasferimenti internazionali',
           blocks: [
             { p: 'Il vostro account e i dati che salvate negli strumenti sono conservati nell’Unione Europea, sull’infrastruttura Supabase di Francoforte. Anche i dati del monitoraggio degli errori sono conservati nell’Unione Europea.' },
-            { p: 'Cloudflare, Vercel, Railway, Resend, Cal.com, Anthropic, OpenAI e Google hanno sede negli Stati Uniti o vi trattano dati. I trasferimenti verso di loro si basano sul Data Privacy Framework UE-USA quando il fornitore vi aderisce e, negli altri casi, sulle clausole contrattuali standard (SCC) ai sensi dell’art. 46 GDPR.' },
+            { p: 'Cloudflare, Vercel, Railway, Resend, Cal.com, Umami, Anthropic, OpenAI e Google hanno sede negli Stati Uniti o vi trattano dati. I trasferimenti verso di loro si basano sul Data Privacy Framework UE-USA quando il fornitore vi aderisce e, negli altri casi, sulle clausole contrattuali standard (SCC) ai sensi dell’art. 46 GDPR.' },
             { p: '**Utenti nel Regno Unito:** i trasferimenti tra Regno Unito e UE sono coperti dalla decisione di adeguatezza UK-UE attualmente in vigore. Gli utenti del Regno Unito possono presentare reclamo all’Information Commissioner’s Office (ico.org.uk).' },
           ],
         },
@@ -872,6 +874,7 @@ export const it: Messages = {
                   ['Metadati del registro di governance', '12 mesi a scorrimento'],
                   ['Messaggi del modulo di contatto e prenotazioni di chiamate', 'Fino a 24 mesi dall’ultimo scambio'],
                   ['Contatore per la limitazione degli invii (indirizzo IP)', '1 minuto, non conservato'],
+                  ['Misurazione del sito (Umami): pagine viste ed eventi, senza indirizzo IP', '6 mesi'],
                   ['Log del server e degli errori', 'Fino a 90 giorni'],
                   ['Registro del consenso al marketing', 'Per la durata dell’account, più 3 anni dalla cancellazione'],
                 ],
@@ -944,7 +947,7 @@ export const it: Messages = {
           heading: 'In sintesi',
           blocks: [
             { p: 'Usiamo tre cookie e alcune voci nella memoria del vostro browser. Sono tutti impostati da noi, sul nostro dominio, per uno di tre motivi: mantenere l’accesso, ricordare una scelta che avete fatto o far funzionare una pagina. Nessuno serve a tracciarvi, a profilarvi o a mostrarvi pubblicità, e nessuno viene condiviso con altri.' },
-            { p: 'Per questo il sito non mostra un banner di consenso. Cookie e memorizzazioni di questo tipo sono tecnici: ai sensi dell’art. 122 del Codice privacy e delle Linee guida cookie del Garante del giugno 2021 non richiedono consenso, ma solo questa informativa.' },
+            { p: 'Per questo il sito non mostra un banner di consenso. Cookie e memorizzazioni di questo tipo sono tecnici: ai sensi dell’art. 122 del Codice privacy e delle Linee guida cookie del Garante del giugno 2021 non richiedono consenso, ma solo questa informativa. La misurazione delle visite (descritta più sotto) non usa né cookie né memoria del browser ed è configurata per rispettare le condizioni alle quali il Garante equipara gli strumenti di analisi ai cookie tecnici.' },
             { p: 'Alla prima visita non viene impostato nulla. Tutto ciò che segue compare solo dopo una vostra azione: l’accesso, il cambio di tema o di lingua, la chiusura dell’avviso sui cookie o l’uso di uno strumento. C’è un’eccezione: se il vostro browser preferisce l’italiano e aprite una pagina in inglese, vi portiamo una sola volta alla versione italiana e impostiamo `dome_locale` per non ripeterlo.' },
           ],
         },
@@ -988,8 +991,9 @@ export const it: Messages = {
         {
           heading: 'Misurazione',
           blocks: [
-            { p: 'Non usiamo strumenti di analisi né sul sito né negli strumenti. Ciò che contiamo lo contiamo sui nostri sistemi: i messaggi inviati dal modulo di contatto, le chiamate prenotate e, per gli utenti registrati, le esecuzioni che ogni strumento registra nel proprio audit trail, come descritto nell’[informativa sulla privacy](privacy).' },
-            { p: 'Se introdurremo una misurazione aggregata senza cookie, questa pagina la descriverà prima che venga attivata.' },
+            { p: 'Misuriamo le visite a domelayer.com in forma aggregata con **Umami** (Umami Software, Inc.), con i dati ospitati nell’Unione europea. Umami non imposta cookie e non salva nulla nel vostro browser. Lo script è servito dal nostro dominio e invia un breve rapporto a ogni pagina vista, e uno quando inviate un messaggio, aprite il calendario di prenotazione, seguite un link per prenotare una chiamata, avviate l’accesso o cambiate lingua.' },
+            { p: 'Il vostro indirizzo IP non viene conservato. Umami lo usa solo per ricavare una posizione approssimativa (paese, regione e città) e per riconoscere le visite dello stesso browser nel corso di un mese, tramite un codice non reversibile che cambia ogni mese. Vediamo solo dati complessivi, mai le singole persone: quante visite, da dove arrivano, quali pagine e servizi interessano, quanti messaggi e prenotazioni ne derivano. Non usiamo questi dati per profilarvi, non li incrociamo con altri dati e non li condividiamo. Umami li conserva per 6 mesi.' },
+            { p: 'Se il vostro browser invia il segnale Do Not Track, non misuriamo nulla. Le pagine di accesso vengono registrate senza i parametri dell’indirizzo. Gli strumenti Dome non sono misurati: lì contiamo soltanto le esecuzioni che ogni strumento registra nel proprio audit trail, come descritto nell’[informativa sulla privacy](privacy).' },
           ],
         },
         {
