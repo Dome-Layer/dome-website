@@ -103,7 +103,7 @@ export interface Messages {
     description: string
     /** Longer llms.txt introduction. */
     llmsIntro: string
-    llmsSections: { pages: string; tools: string; legal: string }
+    llmsSections: { pages: string; tools: string; caseStudies: string; legal: string }
   }
   nav: {
     homeLabel: string
@@ -301,6 +301,7 @@ export interface Messages {
       governanceDashboard: ToolPageText
       agentFlow: {
         phase: string
+        heading: string
         lead: string
         openQueue: string
         bookDemo: string

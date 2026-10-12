@@ -13,7 +13,7 @@ const renderAt = (path: string) =>
 describe('LanguageSwitcher', () => {
   it('links an English page to its Italian counterpart', () => {
     renderAt('/dome/llm-council?utm_source=email')
-    const link = screen.getByRole('link', { name: 'Read this page in Italian' })
+    const link = screen.getByRole('link', { name: 'IT', description: 'Read this page in Italian' })
     expect(link).toHaveAttribute('href', '/it/dome/llm-council?utm_source=email')
     expect(link).toHaveAttribute('hreflang', 'it')
     expect(link).toHaveTextContent('IT')
@@ -21,7 +21,7 @@ describe('LanguageSwitcher', () => {
 
   it('links an Italian page back to English and remembers the choice', () => {
     renderAt('/it/termini')
-    const link = screen.getByRole('link', { name: 'Versione inglese di questa pagina' })
+    const link = screen.getByRole('link', { name: 'EN', description: 'Versione inglese di questa pagina' })
     expect(link).toHaveAttribute('href', '/terms')
     link.addEventListener('click', (e) => e.preventDefault())
     fireEvent.click(link)

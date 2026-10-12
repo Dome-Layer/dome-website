@@ -1,4 +1,4 @@
-import { useRef, useEffect, useState, type ElementType } from 'react'
+import { useMemo, useRef, type ElementType } from 'react'
 import { motion, useInView } from 'framer-motion'
 
 interface TextRevealProps {
@@ -22,16 +22,13 @@ export function TextReveal({
 }: TextRevealProps) {
   const containerRef = useRef<HTMLDivElement>(null)
   const isInView = useInView(containerRef, { once: true, amount: 0.3 })
-  const [units, setUnits] = useState<string[]>([])
-
-  useEffect(() => {
-    if (splitBy === 'char') {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
-      setUnits(children.split(''))
-    } else {
-      setUnits(children.split(/(\s+)/))
-    }
-  }, [children, splitBy])
+  // Split during render, not in an effect: the words must be in the prerendered HTML, or crawlers,
+  // AI assistants and anyone without JavaScript get an empty element (the Agent Flow page had no
+  // heading at all, found in the 2026-10-12 SEO audit).
+  const units = useMemo(
+    () => (splitBy === 'char' ? children.split('') : children.split(/(\s+)/)),
+    [children, splitBy],
+  )
 
   return (
     <Tag ref={containerRef} className={className}>
@@ -50,7 +47,6 @@ export function TextReveal({
               ease: [0.25, 0.1, 0.25, 1],
             }}
             className="inline-block"
-            aria-hidden="true"
           >
             {unit}
           </motion.span>

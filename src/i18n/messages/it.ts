@@ -13,7 +13,7 @@ export const it: Messages = {
       'DOME è una società di consulenza AI e di prodotto per imprese regolamentate, con sede a Firenze e attiva in tutta Europa. Progettiamo software enterprise che le persone usano volentieri e automazioni AI verificabili.',
     llmsIntro:
       'Lavoriamo su tre fronti: automazione dei processi con AI, UX enterprise e prodotto, e gli strumenti DOME. Gli strumenti li sviluppiamo e gestiamo noi (analisi dei processi, intelligenza su documenti e dati, un council multi-modello, un flusso agentico governato e una dashboard di governance): mostrano come realizziamo AI governata e non sono in vendita. Ogni strumento registra le proprie decisioni in un audit trail, e dove la policy lo richiede approva una persona con nome e cognome.',
-    llmsSections: { pages: 'Pagine', tools: 'Strumenti che sviluppiamo e gestiamo', legal: 'Note legali' },
+    llmsSections: { pages: 'Pagine', tools: 'Strumenti che sviluppiamo e gestiamo', caseStudies: 'Casi studio', legal: 'Note legali' },
   },
   nav: {
     homeLabel: 'DOME, home',
@@ -114,7 +114,7 @@ export const it: Messages = {
     },
     processAnalyzer: {
       name: 'Process Analyzer',
-      title: 'Process Analyzer | DOME',
+      title: 'Process Analyzer: mappatura dei processi con l’AI | DOME',
       description:
         'Trasforma la descrizione in linguaggio naturale di un processo aziendale in una mappa strutturata, con analisi di governance e valutazione dell’automazione.',
       ogDescription:
@@ -126,7 +126,7 @@ export const it: Messages = {
     },
     dataIntelligence: {
       name: 'Data Intelligence',
-      title: 'Data Intelligence | DOME',
+      title: 'Data Intelligence: dashboard AI verificabili | DOME',
       description:
         'Caricate un foglio di calcolo e ricevete una dashboard governata: grafici scelti automaticamente e domande in linguaggio naturale.',
       ogDescription:
@@ -138,7 +138,7 @@ export const it: Messages = {
     },
     llmCouncil: {
       name: 'LLM Council',
-      title: 'LLM Council | DOME',
+      title: 'LLM Council: decisioni discusse da più modelli AI | DOME',
       description:
         'Sottoponete una domanda strategica a tre consulenti AI: deliberano separatamente, si confrontano e producono un verdetto governato con audit trail completo.',
       imageAlt: 'DOME LLM Council: deliberazione AI governata',
@@ -146,7 +146,7 @@ export const it: Messages = {
     },
     documentIntelligence: {
       name: 'Document Intelligence',
-      title: 'Document Intelligence | DOME',
+      title: 'Document Intelligence: estrazione dati con audit | DOME',
       description:
         'Estrae dati strutturati da qualsiasi documento: fatture, referti di laboratorio, bollette, contratti. Con validazione di governance e audit trail completo.',
       ogDescription:
@@ -158,9 +158,9 @@ export const it: Messages = {
     },
     governanceDashboard: {
       name: 'Governance Dashboard',
-      title: 'Governance Dashboard | DOME',
+      title: 'Governance Dashboard: audit trail delle decisioni AI | DOME',
       description:
-        'Audit trail in tempo reale, report di conformità ed export PDF sui quattro strumenti DOME: ogni evento, indice di confidenza e decisione umana in un’unica vista.',
+        'Audit trail in tempo reale, report di conformità ed export PDF su tutti gli strumenti DOME: ogni evento, confidenza e decisione umana in un’unica vista.',
       ogDescription:
         'Audit trail, report di conformità ed esportazione in PDF per tutti e quattro gli strumenti AI di DOME. Ogni evento di governance e ogni decisione umana in un unico posto.',
       twitterDescription: 'Audit trail in tempo reale e report di conformità per tutti e quattro gli strumenti AI di DOME.',
@@ -169,9 +169,9 @@ export const it: Messages = {
     },
     agentFlow: {
       name: 'Agent Flow',
-      title: 'Agent Flow | DOME',
+      title: 'Agent Flow: dalla fattura all’approvazione, governata | DOME',
       description:
-        'Dalla fattura all’approvazione, governata: estrazione con Document Intelligence, motore di regole, LLM Council multi-modello e firma di una persona. Ogni passaggio resta agli atti.',
+        'Dalla fattura all’approvazione, governata: estrazione dei dati, regole di policy, council multi-modello e firma di una persona. Ogni passaggio resta agli atti.',
       ogDescription:
         'Un flusso governato dalla fattura all’approvazione tra gli strumenti DOME, con un’approvazione umana e un audit trail completo.',
       twitterDescription: 'Flusso governato dalla fattura all’approvazione, con approvazione umana e audit trail completo.',
@@ -180,7 +180,7 @@ export const it: Messages = {
     },
     about: {
       name: 'Chi siamo',
-      title: 'Chi siamo | DOME, consulenza AI e di prodotto per imprese regolamentate',
+      title: 'Consulenza AI e di prodotto per imprese regolamentate | DOME',
       description:
         'Consulenza AI e di prodotto, con sede a Firenze, al fianco di team acquisti, finance, compliance e supply chain in settori regolamentati in tutta Europa.',
       ogDescription:
@@ -222,7 +222,7 @@ export const it: Messages = {
       name: 'Cookie policy',
       title: 'Cookie policy | DOME',
       description:
-        'Tutti i cookie e le voci di memoria del browser usati da domelayer.com e dagli strumenti DOME: che cosa contengono, quanto durano e perché nessuno richiede consenso.',
+        'I cookie e le voci di memoria del browser usati da domelayer.com e dagli strumenti DOME: che cosa contengono, quanto durano e perché non serve consenso.',
       imageAlt: 'DOME',
     },
   },
@@ -748,6 +748,7 @@ export const it: Messages = {
       },
       agentFlow: {
         phase: 'Execute',
+        heading: 'Agent Flow governato',
         lead: 'Un flusso n8n self-hosted che esegue un vero processo, dalla fattura all’approvazione, attraverso gli strumenti DOME: estrazione, motore di regole di policy, council multi-modello e approvazione umana. Ne risulta un audit trail completo, che la Governance Dashboard ricostruisce.',
         openQueue: 'Apri la coda di approvazione',
         bookDemo: 'Prenotate una demo privata',

@@ -1,7 +1,7 @@
 import { CONTENT_LANGUAGE, type Locale } from '../i18n/locales'
 import { MESSAGES } from '../i18n/messages'
 import { pageMeta } from '../i18n/pageMeta'
-import { TOOL_ROUTE_IDS, localizedHref, type RouteId } from '../i18n/routes'
+import { CASE_STUDY_ROUTE_IDS, PUBLIC_ROUTES, TOOL_ROUTE_IDS, localizedHref, type RouteId } from '../i18n/routes'
 
 export const SITE_URL = 'https://domelayer.com'
 
@@ -12,10 +12,14 @@ export const absoluteUrl = (path: string) => (path === '/' ? `${SITE_URL}/` : `$
 
 type Node = Record<string, unknown>
 
+/** The consulting services, each with its own page. They are described, not offered for sale online. */
+const SERVICE_ROUTE_IDS = ['aiProcessAutomation', 'enterpriseUx'] as const satisfies readonly RouteId[]
+
 /**
  * DOME the company. Deliberately no Product, Offer, OfferCatalog or SoftwareApplication: the tools
- * are capability proof and never for sale. The postal address is added once the legal notice
- * address is settled.
+ * are capability proof and never for sale. The consulting services are named in `knowsAbout` and
+ * described as `Service` nodes on their own pages, which says what DOME does without an offer.
+ * The postal address is added once the legal notice address is settled.
  */
 function organization(locale: Locale): Node {
   return {
@@ -24,12 +28,19 @@ function organization(locale: Locale): Node {
     name: 'DOME',
     legalName: 'Dome di Francesco Prodomo',
     url: `${SITE_URL}/`,
-    logo: `${SITE_URL}/favicon.svg`,
+    logo: `${SITE_URL}/logo-512.png`,
     image: `${SITE_URL}/og-image.png`,
     description: MESSAGES[locale].site.description,
     vatID: 'IT07242670482',
     areaServed: { '@type': 'Place', name: 'European Union' },
     knowsLanguage: ['en', 'it'],
+    knowsAbout: SERVICE_ROUTE_IDS.map((id) => pageMeta(id, locale).name),
+    contactPoint: {
+      '@type': 'ContactPoint',
+      contactType: 'sales',
+      url: absoluteUrl(localizedHref('contact', locale)),
+      availableLanguage: ['English', 'Italian'],
+    },
     founder: {
       '@type': 'Person',
       name: 'Francesco Prodomo',
@@ -82,6 +93,30 @@ export function pageStructuredData(id: RouteId, locale: Locale, locales: Locale[
   }
   if ((TOOL_ROUTE_IDS as readonly RouteId[]).includes(id)) {
     page.about = { '@type': 'Thing', name: t.name, description: t.description }
+  }
+  if ((SERVICE_ROUTE_IDS as readonly RouteId[]).includes(id)) {
+    page.about = {
+      '@type': 'Service',
+      '@id': `${url}#service`,
+      name: t.name,
+      serviceType: t.name,
+      description: t.description,
+      provider: { '@id': ORGANIZATION_ID },
+      areaServed: { '@type': 'Place', name: 'European Union' },
+    }
+  }
+  if (CASE_STUDY_ROUTE_IDS.includes(id)) {
+    graph.push({
+      '@type': 'Article',
+      '@id': `${url}#article`,
+      headline: t.name,
+      description: t.description,
+      inLanguage: CONTENT_LANGUAGE[locale],
+      mainEntityOfPage: { '@id': `${url}#webpage` },
+      author: { '@id': ORGANIZATION_ID },
+      publisher: { '@id': ORGANIZATION_ID },
+      dateModified: PUBLIC_ROUTES[id].updatedAt,
+    })
   }
 
   return { '@context': 'https://schema.org', '@graph': graph }

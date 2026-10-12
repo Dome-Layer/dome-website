@@ -29,4 +29,11 @@ describe('robots.txt and llms.txt', () => {
     expect(txt).toContain('## Italiano')
     expect(txt).toContain('(https://domelayer.com/it/termini)')
   })
+
+  it('lists every sitemap URL, case studies included', () => {
+    const txt = buildLlmsTxt(['en', 'it'])
+    const urls = [...buildSitemap(['en', 'it']).matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1])
+    expect(urls.length).toBeGreaterThan(40)
+    for (const url of urls) expect(txt).toContain(`(${url})`)
+  })
 })

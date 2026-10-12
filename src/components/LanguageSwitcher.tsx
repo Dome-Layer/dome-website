@@ -41,7 +41,9 @@ export function LanguageSwitcher({ className = '' }: LanguageSwitcherProps) {
       href={href}
       hrefLang={target}
       lang={target}
-      aria-label={t.switcher.label}
+      // The accessible name is the visible "IT"/"EN" (WCAG 2.5.3, label in name); the sentence is the
+      // description, read after the name and shown as a tooltip.
+      title={t.switcher.label}
       onClick={() => {
         document.cookie = localeCookie(target)
         track('locale_switch', { to: target })

@@ -36,6 +36,8 @@ export interface CaseStudy {
   /** Sector or capability label above the title. Never a client name. */
   descriptor: Localised;
   title: Localised;
+  /** A shorter title for the browser tab and search results, where the title runs past about 60 characters. */
+  metaTitle?: Partial<Localised>;
   summary: Localised;
   /** Who the work was for, described by sector and function. */
   client: Localised;
@@ -68,6 +70,10 @@ export const CASE_STUDIES: readonly CaseStudy[] = [
     title: {
       en: "Procurement workflow redesign for a European food retailer",
       it: "Acquisti indiretti ridisegnati per un retailer alimentare europeo",
+    },
+    metaTitle: {
+      en: "Procurement redesign for a European food retailer",
+      it: "Acquisti ridisegnati per un retailer alimentare",
     },
     summary: {
       en: "A research-led redesign of non-resale purchasing journeys across five enterprise platforms, rolled out with a standard training programme.",
@@ -576,6 +582,9 @@ export const CASE_STUDIES: readonly CaseStudy[] = [
       en: "Trading app redesign for a digital assets platform",
       it: "App di trading ridisegnata per una piattaforma di asset digitali",
     },
+    metaTitle: {
+      it: "App di trading ridisegnata per asset digitali",
+    },
     summary: {
       en: "A responsive redesign of a trading app for mobile and desktop, built on a modular design framework.",
       it: "Riprogettazione responsive di un’app di trading per mobile e desktop, su un framework di design modulare.",
@@ -767,6 +776,10 @@ export const CASE_STUDIES: readonly CaseStudy[] = [
     title: {
       en: "Training videos at scale for an enterprise system rollout",
       it: "Formazione video su larga scala per un rollout enterprise",
+    },
+    metaTitle: {
+      en: "Training videos at scale for an enterprise rollout",
+      it: "Video formativi in serie per un rollout enterprise",
     },
     summary: {
       en: "A repeatable production process that turned complex system workflows into on-demand training videos with AI presenters.",

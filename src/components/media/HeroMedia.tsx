@@ -71,7 +71,9 @@ export function HeroMedia() {
           loop
           playsInline
           preload="none"
-          poster={poster.jpeg[poster.jpeg.length - 1].src}
+          // The same AVIF the <Picture> underneath loads (15 KB, not the 73 KB JPEG): the poster is the
+          // LCP image, so a second, larger download of the same frame was what Lighthouse waited on.
+          poster={poster.avif[poster.avif.length - 1].src}
           aria-hidden="true"
           tabIndex={-1}
           className="absolute inset-0 h-full w-full object-cover [object-position:center_35%] invert dark:invert-0"

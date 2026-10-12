@@ -1,7 +1,7 @@
 import { DEFAULT_LOCALE, type Locale } from '../i18n/locales'
 import { MESSAGES } from '../i18n/messages'
 import { pageMeta } from '../i18n/pageMeta'
-import { PAGE_IDS, PUBLIC_ROUTES, ROUTE_IDS, TOOL_ROUTE_IDS, localizedHref, type RouteId } from '../i18n/routes'
+import { CASE_STUDY_ROUTE_IDS, PAGE_IDS, PUBLIC_ROUTES, ROUTE_IDS, TOOL_ROUTE_IDS, localizedHref, type RouteId } from '../i18n/routes'
 import { SITE_URL, absoluteUrl } from '../lib/structuredData'
 
 // Crawler-facing files written into build/client at the end of the build (react-router.config.ts).
@@ -61,6 +61,10 @@ function llmsSection(locale: Locale): string[] {
     `## ${t.llmsSections.tools}`,
     '',
     ...linkList(TOOL_ROUTE_IDS, locale),
+    '',
+    `## ${t.llmsSections.caseStudies}`,
+    '',
+    ...linkList(CASE_STUDY_ROUTE_IDS, locale),
     '',
     `## ${t.llmsSections.legal}`,
     '',
