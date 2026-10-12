@@ -70,6 +70,12 @@ describe('worker', () => {
     expect(res.headers.get('x-robots-tag')).toBeNull()
   })
 
+  it('drops a trailing slash with a permanent redirect, keeping the query', async () => {
+    const res = await get('https://domelayer.com/it/chi-siamo/?utm_source=email', { 'accept-language': 'en' })
+    expect(res.status).toBe(308)
+    expect(res.headers.get('location')).toBe('/it/chi-siamo?utm_source=email')
+  })
+
   it('does the first-visit locale redirect the Vercel middleware does', async () => {
     const res = await get('https://domelayer.com/dome/agent-flow?utm_source=email', { 'accept-language': 'it-IT,it;q=0.9' })
     expect(res.status).toBe(307)

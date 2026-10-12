@@ -6,7 +6,7 @@ export const en: Messages = {
       'DOME is an AI and product consultancy for regulated enterprises, based in Florence and working across Europe. We design enterprise software people use and build AI process automation you can audit.',
     llmsIntro:
       'We work in three areas: AI process automation, enterprise UX and product, and DOME capabilities. The capabilities are AI tools we build and operate ourselves (process analysis, document and data intelligence, a multi-model council, a governed agent workflow and a governance dashboard). They show how we deliver governed AI and are not sold as products. Every tool records its decisions in an audit trail, and a named person signs off where a policy requires it.',
-    llmsSections: { pages: 'Pages', tools: 'Tools we build and operate', legal: 'Legal' },
+    llmsSections: { pages: 'Pages', tools: 'Tools we build and operate', caseStudies: 'Case studies', legal: 'Legal' },
   },
   nav: {
     homeLabel: 'DOME home',
@@ -107,7 +107,7 @@ export const en: Messages = {
     },
     processAnalyzer: {
       name: 'Process Analyzer',
-      title: 'Process Analyzer | DOME',
+      title: 'Process Analyzer: AI process mapping with governance | DOME',
       description:
         'Convert a plain-language description of any business process into a structured process map with governance analysis and automation assessment.',
       ogDescription:
@@ -119,7 +119,7 @@ export const en: Messages = {
     },
     dataIntelligence: {
       name: 'Data Intelligence',
-      title: 'Data Intelligence | DOME',
+      title: 'Data Intelligence: AI dashboards you can audit | DOME',
       description:
         'Upload a spreadsheet and receive a governed analytics dashboard with automatic chart selection and a natural language Q&A panel.',
       ogDescription:
@@ -131,15 +131,15 @@ export const en: Messages = {
     },
     llmCouncil: {
       name: 'LLM Council',
-      title: 'LLM Council | DOME',
+      title: 'LLM Council: multi-model AI decision briefs | DOME',
       description:
-        'Pose a strategic question to a panel of three AI advisors. They deliberate independently, cross-examine each other, and produce a governed verdict with full audit trail.',
+        'Put a strategic question to three AI advisers. They deliberate independently, challenge each other and return a governed verdict with a full audit trail.',
       imageAlt: 'DOME LLM Council: governed AI deliberation',
       twitterImageAlt: 'DOME LLM Council',
     },
     documentIntelligence: {
       name: 'Document Intelligence',
-      title: 'Document Intelligence | DOME',
+      title: 'Document Intelligence: audited AI data extraction | DOME',
       description:
         'Extract structured data from any document: invoices, lab reports, utility bills, contracts. Governance validation and full audit trail included.',
       ogDescription:
@@ -151,9 +151,9 @@ export const en: Messages = {
     },
     governanceDashboard: {
       name: 'Governance Dashboard',
-      title: 'Governance Dashboard | DOME',
+      title: 'Governance Dashboard: an audit trail for AI decisions | DOME',
       description:
-        'Real-time audit trail, compliance reporting, and PDF export spanning all four DOME AI tools. Every governance event, confidence score, and human-in-loop decision in one place.',
+        'A live audit trail, compliance reports and PDF export across every DOME tool: each governance event, confidence score and human decision in one place.',
       ogDescription:
         'Audit trail, compliance reporting, and PDF export across all four DOME AI tools. See every governance event, confidence score, and human-in-loop decision in one place.',
       twitterDescription: 'Real-time audit trail and compliance reporting across all four DOME AI tools.',
@@ -162,9 +162,9 @@ export const en: Messages = {
     },
     agentFlow: {
       name: 'Agent Flow',
-      title: 'Agent Flow | DOME',
+      title: 'Agent Flow: governed invoice-to-approval automation | DOME',
       description:
-        'A governed invoice-to-approval workflow: Document Intelligence extraction, a policy rules engine, a multi-model LLM Council, and a human approval gate, with every step audited.',
+        'A governed invoice-to-approval workflow: document extraction, a policy rules engine, a multi-model council and a human approval gate, every step audited.',
       ogDescription:
         'A governed invoice-to-approval workflow across the DOME tools, with a human-in-the-loop gate and a full audit trail.',
       twitterDescription: 'Governed invoice-to-approval workflow with a human-in-the-loop gate and full audit trail.',
@@ -173,9 +173,9 @@ export const en: Messages = {
     },
     about: {
       name: 'About',
-      title: 'About DOME | AI and product consultancy for regulated enterprises',
+      title: 'AI and product consultancy for regulated enterprises | DOME',
       description:
-        'DOME is an AI and product consultancy based in Florence, working across Europe with procurement, finance, compliance and supply chain teams in regulated sectors.',
+        'DOME is an AI and product consultancy in Florence, working across Europe with procurement, finance, compliance and supply chain teams in regulated sectors.',
       ogDescription:
         'One accountable lead, a network of specialists and a delivery partner. How DOME is set up, and what you can expect from an engagement.',
       imageAlt: 'About DOME',
@@ -184,7 +184,7 @@ export const en: Messages = {
       name: 'Contact',
       title: 'Contact DOME | Book a call or send a message',
       description:
-        'Book a 15 or 30 minute call, or send a message about your project. We reply within two working days. Based in Florence, working across Europe in English and Italian.',
+        'Book a 15 or 30 minute call, or send a message about your project. We reply within two working days, in English or Italian.',
       ogDescription: 'Book a call or send a message. We reply within two working days.',
       imageAlt: 'Contact DOME',
     },
@@ -741,6 +741,7 @@ export const en: Messages = {
       },
       agentFlow: {
         phase: 'Execute',
+        heading: 'Governed Agent Flow',
         lead: 'A self-hosted n8n workflow that runs a real invoice-to-approval process across the DOME tools (extraction, a policy rules engine, a multi-model council, and a human approval gate), emitting a full audit trail the Governance Dashboard reconstructs.',
         openQueue: 'Open the approval queue',
         bookDemo: 'Book a private demo',

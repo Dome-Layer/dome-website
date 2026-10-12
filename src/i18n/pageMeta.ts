@@ -19,7 +19,7 @@ export function pageMeta(id: RouteId, locale: Locale): PageMetaText {
     if (!study) throw new Error(`Route "${id}" names case study "${studyId}", which does not exist`)
     return {
       name: study.title[locale],
-      title: `${study.title[locale]} | DOME`,
+      title: `${study.metaTitle?.[locale] ?? study.title[locale]} | DOME`,
       description: study.summary[locale],
       imageAlt: study.title[locale],
     }

@@ -58,6 +58,13 @@ export default {
       );
     }
 
+    // Without this a trailing slash reaches the assets' html_handling, which answers 307 (temporary);
+    // search engines should see a permanent move to the one canonical URL (SEO audit 2026-10-12, L4).
+    if (url.pathname.length > 1 && url.pathname.endsWith('/')) {
+      const location = url.pathname.replace(/\/+$/, '') + url.search;
+      return withSiteHeaders(new Response(null, { status: 308, headers: { Location: location } }), url, env);
+    }
+
     if (url.pathname === '/api/contact') {
       return withSiteHeaders(await handleContact(request, env), url, env);
     }

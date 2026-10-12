@@ -40,7 +40,7 @@ export default function AgentFlowPage() {
               stagger={0.05}
               className="text-h1 sm:text-display font-display font-semibold text-[var(--color-text-primary)]"
             >
-              Governed Agent Flow
+              {text.heading}
             </TextReveal>
             <p className="mt-4 text-body text-[var(--color-text-secondary)] max-w-xl">
               {text.lead}
@@ -100,9 +100,10 @@ export default function AgentFlowPage() {
                 <span className="block text-[13px] font-semibold mb-3" style={{ color: ACCENT }}>
                   {String(i + 1).padStart(2, '0')}
                 </span>
-                <h3 className="text-h3 font-display font-semibold text-[var(--color-text-primary)] mb-2">
+                {/* h2, not h3: the page has no section heading above the steps, so h3 skipped a level. */}
+                <h2 className="text-h3 font-display font-semibold text-[var(--color-text-primary)] mb-2">
                   {s.title}
-                </h3>
+                </h2>
                 <p className="text-body-sm text-[var(--color-text-secondary)] leading-relaxed">{s.body}</p>
               </div>
             ))}
