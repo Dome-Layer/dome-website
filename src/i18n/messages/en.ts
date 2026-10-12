@@ -831,8 +831,8 @@ export const en: Messages = {
           blocks: [
             { p: 'We use the following third-party service providers to operate Dome. Each acts as a data processor under a data processing agreement:' },
             { p: '**Supabase Inc.**: Database and authentication. Data is stored in the European Union (Frankfurt, Germany: eu-central-1). supabase.com/privacy' },
-            { p: '**Cloudflare Inc.**: Hosting of this website, including the contact form and its abuse protection. cloudflare.com/privacypolicy' },
-            { p: '**Vercel Inc.**: Hosting of the Dome tools. vercel.com/legal/privacy-policy' },
+            { p: '**Cloudflare Inc.**: Hosting of this website and of the Dome tools, including the contact form and its abuse protection. cloudflare.com/privacypolicy' },
+            { p: '**Vercel Inc.**: Hosting of the Agent Flow demo interface, which we show privately on request. vercel.com/legal/privacy-policy' },
             { p: '**Railway Corp.**: Hosting of the back-end services behind the Dome tools. railway.com/legal/privacy' },
             { p: '**Resend Inc.**: Transactional email. Used to send magic links, to deliver messages sent through the contact form to us and, with your consent, product communications. resend.com/legal/privacy-policy' },
             { p: '**Functional Software Inc. (Sentry)**: Error monitoring for the website and the tools. Error data is stored in the European Union (Germany). sentry.io/privacy' },
