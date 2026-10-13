@@ -11,7 +11,8 @@ describe('structured data', () => {
   it('names the services and a contact point on the organisation, with a raster logo', () => {
     const org = byType(graph('home'), 'ProfessionalService')!
     expect(org.logo).toBe('https://domelayer.com/logo-512.png')
-    expect(org.knowsAbout).toEqual(['AI process automation', 'Enterprise UX and product'])
+    expect(org.knowsAbout).toEqual(expect.arrayContaining(['AI process automation', 'Business analysis', 'Data visualisation']))
+    expect(byType(graph('home', 'it'), 'ProfessionalService')!.knowsAbout).toContain('Analisi di business')
     expect((org.contactPoint as Node).url).toBe('https://domelayer.com/contact')
     expect(JSON.stringify(graph('home'))).not.toContain('Offer')
   })
