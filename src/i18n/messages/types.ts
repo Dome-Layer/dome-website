@@ -104,6 +104,8 @@ export interface Messages {
     /** Longer llms.txt introduction. */
     llmsIntro: string
     llmsSections: { pages: string; tools: string; caseStudies: string; legal: string }
+    /** What DOME does, named one by one for the Organization's `knowsAbout` in the structured data. */
+    knowsAbout: readonly string[]
   }
   nav: {
     homeLabel: string

@@ -17,7 +17,8 @@ const SERVICE_ROUTE_IDS = ['aiProcessAutomation', 'enterpriseUx'] as const satis
 
 /**
  * DOME the company. Deliberately no Product, Offer, OfferCatalog or SoftwareApplication: the tools
- * are capability proof and never for sale. The consulting services are named in `knowsAbout` and
+ * are capability proof and never for sale. The consulting services are named in `knowsAbout` (from the
+ * catalogue, one entry per service including process mapping, business analysis and data visualisation) and
  * described as `Service` nodes on their own pages, which says what DOME does without an offer.
  * The postal address is added once the legal notice address is settled.
  */
@@ -34,7 +35,7 @@ function organization(locale: Locale): Node {
     vatID: 'IT07242670482',
     areaServed: { '@type': 'Place', name: 'European Union' },
     knowsLanguage: ['en', 'it'],
-    knowsAbout: SERVICE_ROUTE_IDS.map((id) => pageMeta(id, locale).name),
+    knowsAbout: MESSAGES[locale].site.knowsAbout,
     contactPoint: {
       '@type': 'ContactPoint',
       contactType: 'sales',

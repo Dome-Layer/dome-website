@@ -3,10 +3,11 @@ import type { Messages } from './types'
 export const en: Messages = {
   site: {
     description:
-      'DOME is an AI and product consultancy for regulated enterprises, based in Florence and working across Europe. We design enterprise software people use and build AI process automation you can audit.',
+      'DOME is an AI and product consultancy for regulated enterprises, based in Florence and working across Europe. We analyse and automate business processes with AI you can audit, and design the enterprise software, dashboards and data visualisation people use.',
     llmsIntro:
-      'We work in three areas: AI process automation, enterprise UX and product, and DOME capabilities. The capabilities are AI tools we build and operate ourselves (process analysis, document and data intelligence, a multi-model council, a governed agent workflow and a governance dashboard). They show how we deliver governed AI and are not sold as products. Every tool records its decisions in an audit trail, and a named person signs off where a policy requires it.',
+      'We work in three areas: AI process automation (including process mapping and business analysis), enterprise UX and product (including dashboards and data visualisation), and DOME capabilities. The capabilities are AI tools we build and operate ourselves (process analysis, document and data intelligence, a multi-model council, a governed agent workflow and a governance dashboard). They show how we deliver governed AI and are not sold as products. Every tool records its decisions in an audit trail, and a named person signs off where a policy requires it.',
     llmsSections: { pages: 'Pages', tools: 'Tools we build and operate', caseStudies: 'Case studies', legal: 'Legal' },
+    knowsAbout: ['AI process automation', 'Process mapping', 'Business analysis', 'AI governance', 'Enterprise UX', 'Product design', 'Data visualisation', 'Design systems'],
   },
   nav: {
     homeLabel: 'DOME home',
@@ -80,18 +81,18 @@ export const en: Messages = {
     },
     enterpriseUx: {
       name: 'Enterprise UX and product',
-      title: 'Enterprise UX and product consulting | DOME',
+      title: 'Enterprise UX, product and data visualisation | DOME',
       description:
-        'User research, service design and interface design for complex enterprise platforms, delivered with a design system your developers can build from.',
+        'User research, service design, interface and data visualisation design for complex enterprise platforms, with a design system your developers can build from.',
       ogDescription:
         'We untangle complex internal tools and customer platforms: research, service design, interface design and a design system your team can build from.',
       imageAlt: 'DOME enterprise UX and product consulting',
     },
     aiProcessAutomation: {
       name: 'AI process automation',
-      title: 'AI process automation | DOME',
+      title: 'AI process automation and business analysis | DOME',
       description:
-        'We map a business process, automate the parts with clear rules and route the rest to your team with a decision brief and a complete audit trail.',
+        'We map and analyse your business processes, automate the steps with clear rules and route the rest to your team with a decision brief and a full audit trail.',
       ogDescription:
         'Automate a process without losing control of it: clear rules where they apply, a human decision where they do not, and an audit trail throughout.',
       imageAlt: 'DOME AI process automation',
@@ -283,12 +284,12 @@ export const en: Messages = {
         items: [
           {
             title: 'AI process automation',
-            body: 'We map a process, automate the parts with clear rules and route the rest to your team with a decision brief and a complete audit trail.',
+            body: 'We map and analyse a process, automate the parts with clear rules and route the rest to your team with a decision brief and a complete audit trail.',
             cta: 'Explore process automation',
           },
           {
             title: 'Enterprise UX and product',
-            body: 'We untangle complex internal tools and customer platforms: user research, service design, interface design and a design system your developers can build from.',
+            body: 'We untangle complex internal tools and customer platforms: user research, service design, interfaces, dashboards and data visualisation, and a design system your developers can build from.',
             cta: 'Explore UX and product',
           },
           {
@@ -350,7 +351,7 @@ export const en: Messages = {
         hero: {
           eyebrow: 'AI process automation',
           heading: 'Automate the routine. Keep people on the decisions.',
-          lead: 'We automate well-defined steps in finance, procurement and compliance workflows, with rules you can read and a record of every decision.',
+          lead: 'We map and analyse your finance, procurement and compliance workflows, then automate the well-defined steps, with rules you can read and a record of every decision.',
           primary: 'Book an automation review',
           secondary: 'See how it works',
         },
@@ -379,7 +380,7 @@ export const en: Messages = {
           eyebrow: 'How we deliver it',
           heading: 'Four steps, agreed with you before anything runs',
           items: [
-            { title: 'Map the process', body: 'We walk the workflow with the people who run it and mark which steps follow rules, which need judgement and where the risk sits.' },
+            { title: 'Map and analyse the process', body: 'We walk the workflow with the people who run it, analyse its volumes, costs and risks, and mark which steps follow rules, which need judgement and where automation pays off.' },
             { title: 'Design the controls', body: 'Rules, confidence thresholds and approval points are agreed with you before any step is automated.' },
             { title: 'Build and integrate', body: 'We connect to the systems you already use and keep the rules outside the model, so your team can read and change them.' },
             { title: 'Run and measure', body: 'Every decision is logged. We review accuracy with you and adjust thresholds as volumes change.' },
@@ -388,7 +389,7 @@ export const en: Messages = {
         related: 'Automation in practice',
         closing: {
           heading: 'Start with one process.',
-          body: 'In an automation review we map one workflow with your team and tell you what is worth automating, and what is not.',
+          body: 'In an automation review we map one workflow with your team, analyse the business case and tell you what is worth automating, and what is not.',
           primary: 'Book an automation review',
         },
       },
@@ -396,7 +397,7 @@ export const en: Messages = {
         hero: {
           eyebrow: 'Enterprise UX and product',
           heading: 'Internal tools your teams actually want to use.',
-          lead: 'We redesign complex enterprise platforms, from procurement workflows to trading screens, around the people who use them every day.',
+          lead: 'We redesign complex enterprise platforms, from procurement workflows and trading screens to dashboards and data visualisation, around the people who use them every day.',
           primary: 'Book a UX review',
           secondary: 'See how we work',
         },
@@ -414,7 +415,7 @@ export const en: Messages = {
           heading: 'From research to a design system your developers can build from',
           items: [
             { title: 'User research and service design', body: 'Interviews, workflow shadowing and journey maps that show where time and trust are lost.' },
-            { title: 'Interface and interaction design', body: 'Screens designed for the real volume and density of enterprise work, tested with the people who use them.' },
+            { title: 'Interfaces, dashboards and data visualisation', body: 'Screens and dashboards designed for the real volume and density of enterprise work, with charts that put the numbers people decide on first, tested with the people who use them.' },
             { title: 'Design systems', body: 'A component library and guidelines your developers can build from, so consistency survives the next release.' },
             { title: 'Rollout and adoption', body: 'We stay through build and rollout, with training material and measures that show whether people use the new tool.' },
           ],

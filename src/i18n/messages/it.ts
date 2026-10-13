@@ -10,10 +10,11 @@ import type { Messages } from './types'
 export const it: Messages = {
   site: {
     description:
-      'DOME è una società di consulenza AI e di prodotto per imprese regolamentate, con sede a Firenze e attiva in tutta Europa. Progettiamo software enterprise che le persone usano volentieri e automazioni AI verificabili.',
+      'DOME è una società di consulenza AI e di prodotto per imprese regolamentate, con sede a Firenze e attiva in tutta Europa. Analizziamo e automatizziamo i processi con AI verificabile, e progettiamo software enterprise, dashboard e visualizzazioni dei dati che le persone usano volentieri.',
     llmsIntro:
-      'Lavoriamo su tre fronti: automazione dei processi con AI, UX enterprise e prodotto, e gli strumenti DOME. Gli strumenti li sviluppiamo e gestiamo noi (analisi dei processi, intelligenza su documenti e dati, un council multi-modello, un flusso agentico governato e una dashboard di governance): mostrano come realizziamo AI governata e non sono in vendita. Ogni strumento registra le proprie decisioni in un audit trail, e dove la policy lo richiede approva una persona con nome e cognome.',
+      'Lavoriamo su tre fronti: automazione dei processi con AI (compresi mappatura dei processi e analisi di business), UX enterprise e prodotto (comprese dashboard e visualizzazione dei dati), e gli strumenti DOME. Gli strumenti li sviluppiamo e gestiamo noi (analisi dei processi, intelligenza su documenti e dati, un council multi-modello, un flusso agentico governato e una dashboard di governance): mostrano come realizziamo AI governata e non sono in vendita. Ogni strumento registra le proprie decisioni in un audit trail, e dove la policy lo richiede approva una persona con nome e cognome.',
     llmsSections: { pages: 'Pagine', tools: 'Strumenti che sviluppiamo e gestiamo', caseStudies: 'Casi studio', legal: 'Note legali' },
+    knowsAbout: ['Automazione dei processi con AI', 'Mappatura dei processi', 'Analisi di business', 'Governance dell’AI', 'UX enterprise', 'Progettazione di prodotto', 'Visualizzazione dei dati', 'Design system'],
   },
   nav: {
     homeLabel: 'DOME, home',
@@ -87,18 +88,18 @@ export const it: Messages = {
     },
     enterpriseUx: {
       name: 'UX enterprise e prodotto',
-      title: 'Consulenza UX enterprise e prodotto | DOME',
+      title: 'UX enterprise, prodotto e visualizzazione dati | DOME',
       description:
-        'Ricerca utente, service design e progettazione di interfacce per piattaforme enterprise complesse, con un design system pronto per il vostro team di sviluppo.',
+        'Ricerca utente, service design, interfacce e visualizzazione dei dati per piattaforme enterprise complesse, con un design system pronto per lo sviluppo.',
       ogDescription:
         'Semplifichiamo strumenti interni e piattaforme complesse: ricerca, service design, progettazione di interfacce e un design system pronto per lo sviluppo.',
       imageAlt: 'DOME, consulenza UX enterprise e prodotto',
     },
     aiProcessAutomation: {
       name: 'Automazione dei processi con AI',
-      title: 'Automazione dei processi con AI | DOME',
+      title: 'Automazione dei processi con AI e analisi di business | DOME',
       description:
-        'Mappiamo un processo, automatizziamo le parti con regole chiare e portiamo le altre al vostro team con una sintesi decisionale e un audit trail completo.',
+        'Mappiamo e analizziamo i processi, automatizziamo i passaggi con regole chiare e affidiamo il resto al vostro team, con sintesi decisionale e audit trail.',
       ogDescription:
         'Automatizzare un processo senza perderne il controllo: regole chiare dove si applicano, una decisione umana dove non bastano, e un audit trail completo.',
       imageAlt: 'DOME, automazione dei processi con AI',
@@ -291,12 +292,12 @@ export const it: Messages = {
         items: [
           {
             title: 'Automazione dei processi con AI',
-            body: 'Mappiamo un processo, automatizziamo le parti con regole chiare e portiamo le altre al vostro team con una sintesi decisionale e un audit trail completo.',
+            body: 'Mappiamo e analizziamo un processo, automatizziamo le parti con regole chiare e portiamo le altre al vostro team con una sintesi decisionale e un audit trail completo.',
             cta: 'Scoprite l’automazione',
           },
           {
             title: 'UX enterprise e prodotto',
-            body: 'Semplifichiamo strumenti interni e piattaforme complesse: ricerca utente, service design, progettazione di interfacce e un design system pronto per i vostri sviluppatori.',
+            body: 'Semplifichiamo strumenti interni e piattaforme complesse: ricerca utente, service design, interfacce, dashboard e visualizzazione dei dati, e un design system pronto per i vostri sviluppatori.',
             cta: 'Scoprite UX e prodotto',
           },
           {
@@ -357,7 +358,7 @@ export const it: Messages = {
         hero: {
           eyebrow: 'Automazione dei processi con AI',
           heading: 'Automatizzate la routine. Le decisioni restano alle persone.',
-          lead: 'Automatizziamo i passaggi ben definiti nei processi di finance, acquisti e compliance, con regole leggibili e traccia di ogni decisione.',
+          lead: 'Mappiamo e analizziamo i vostri processi di finance, acquisti e compliance, poi automatizziamo i passaggi ben definiti, con regole leggibili e traccia di ogni decisione.',
           primary: 'Prenotate un assessment',
           secondary: 'Come funziona',
         },
@@ -386,7 +387,7 @@ export const it: Messages = {
           eyebrow: 'Come lo facciamo',
           heading: 'Quattro passaggi, concordati prima che parta qualsiasi cosa',
           items: [
-            { title: 'Mappare il processo', body: 'Percorriamo il flusso con chi lo gestisce e segniamo quali passaggi seguono regole, quali richiedono giudizio e dove sta il rischio.' },
+            { title: 'Mappare e analizzare il processo', body: 'Percorriamo il flusso con chi lo gestisce, ne analizziamo volumi, costi e rischi, e segniamo quali passaggi seguono regole, quali richiedono giudizio e dove l’automazione ripaga.' },
             { title: 'Progettare i controlli', body: 'Regole, soglie di confidenza e punti di approvazione si concordano con voi prima di automatizzare qualsiasi passaggio.' },
             { title: 'Costruire e integrare', body: 'Ci colleghiamo ai sistemi che già usate e teniamo le regole fuori dal modello, così il vostro team può leggerle e cambiarle.' },
             { title: 'Far girare e misurare', body: 'Ogni decisione viene registrata. Rivediamo l’accuratezza con voi e aggiustiamo le soglie al variare dei volumi.' },
@@ -395,7 +396,7 @@ export const it: Messages = {
         related: 'Automazione sul campo',
         closing: {
           heading: 'Partite da un processo solo.',
-          body: 'In un assessment mappiamo un flusso con il vostro team e vi diciamo che cosa vale la pena automatizzare, e che cosa no.',
+          body: 'In un assessment mappiamo un flusso con il vostro team, ne analizziamo il valore per il business e vi diciamo che cosa vale la pena automatizzare, e che cosa no.',
           primary: 'Prenotate un assessment',
         },
       },
@@ -403,7 +404,7 @@ export const it: Messages = {
         hero: {
           eyebrow: 'UX enterprise e prodotto',
           heading: 'Strumenti interni che i team usano volentieri.',
-          lead: 'Ridisegniamo piattaforme enterprise complesse, dai flussi di acquisto alle schermate di trading, intorno a chi le usa ogni giorno.',
+          lead: 'Ridisegniamo piattaforme enterprise complesse, dai flussi di acquisto alle schermate di trading, dalle dashboard alla visualizzazione dei dati, intorno a chi le usa ogni giorno.',
           primary: 'Prenotate una UX review',
           secondary: 'Come lavoriamo',
         },
@@ -421,7 +422,7 @@ export const it: Messages = {
           heading: 'Dalla ricerca a un design system pronto per i vostri sviluppatori',
           items: [
             { title: 'Ricerca utente e service design', body: 'Interviste, affiancamento sul flusso e journey map che mostrano dove si perdono tempo e fiducia.' },
-            { title: 'Interfacce e interazione', body: 'Schermate pensate per i volumi e la densità reali del lavoro enterprise, testate con chi le usa.' },
+            { title: 'Interfacce, dashboard e visualizzazione dei dati', body: 'Schermate e dashboard pensate per i volumi e la densità reali del lavoro enterprise, con grafici che mettono in primo piano i numeri su cui si decide, testate con chi le usa.' },
             { title: 'Design system', body: 'Una libreria di componenti e linee guida su cui i vostri sviluppatori possono costruire, così la coerenza sopravvive al rilascio successivo.' },
             { title: 'Rilascio e adozione', body: 'Restiamo durante sviluppo e rilascio, con materiali di formazione e misure che dicono se le persone usano davvero il nuovo strumento.' },
           ],

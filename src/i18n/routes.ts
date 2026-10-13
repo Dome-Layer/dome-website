@@ -22,16 +22,16 @@ interface PublicRoute {
  * to the matcher in middleware.ts (a test checks the last two).
  */
 export const PUBLIC_ROUTES = {
-  home: { file: 'pages/HomePage.tsx', path: { en: '/', it: '/it' }, updatedAt: '2026-09-22' },
+  home: { file: 'pages/HomePage.tsx', path: { en: '/', it: '/it' }, updatedAt: '2026-10-13' },
   aiProcessAutomation: {
     file: 'pages/AiProcessAutomationPage.tsx',
     path: { en: '/services/ai-process-automation', it: '/it/servizi/automazione-processi-ai' },
-    updatedAt: '2026-09-22',
+    updatedAt: '2026-10-13',
   },
   enterpriseUx: {
     file: 'pages/EnterpriseUxPage.tsx',
     path: { en: '/services/enterprise-ux', it: '/it/servizi/ux-enterprise' },
-    updatedAt: '2026-09-22',
+    updatedAt: '2026-10-13',
   },
   dome: { file: 'pages/DomePage.tsx', path: { en: '/dome', it: '/it/dome' }, updatedAt: '2026-09-22' },
   processAnalyzer: {
