@@ -128,7 +128,7 @@ export default function DocumentIntelligencePage() {
                 custom={i}
                 className="flex gap-6 p-6 rounded-xl border border-[var(--color-border-default)] bg-[var(--color-bg-base)]"
               >
-                <span className="text-[13px] font-semibold tabular-nums text-[var(--color-border-strong)] flex-shrink-0 mt-0.5">
+                <span className="text-[13px] font-semibold tabular-nums text-[var(--color-text-tertiary)] flex-shrink-0 mt-0.5">
                   {String(i + 1).padStart(2, '0')}
                 </span>
                 <div>

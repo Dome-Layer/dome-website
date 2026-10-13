@@ -206,7 +206,7 @@ export default function LoginPage() {
                       fontWeight: 600,
                       letterSpacing: "0.18em",
                       textTransform: "uppercase",
-                      color: "var(--color-accent)",
+                      color: "var(--color-text-accent)",
                       marginBottom: "10px",
                     }}
                   >
@@ -304,7 +304,7 @@ export default function LoginPage() {
                           href="/terms"
                           target="_blank"
                           rel="noopener noreferrer"
-                          style={{ color: "var(--color-accent)", textDecoration: "none" }}
+                          style={{ color: "var(--color-text-accent)", textDecoration: "none" }}
                         >
                           Terms of Service
                         </a>{" "}
@@ -313,7 +313,7 @@ export default function LoginPage() {
                           href="/privacy"
                           target="_blank"
                           rel="noopener noreferrer"
-                          style={{ color: "var(--color-accent)", textDecoration: "none" }}
+                          style={{ color: "var(--color-text-accent)", textDecoration: "none" }}
                         >
                           Privacy Policy
                         </a>
@@ -348,7 +348,7 @@ export default function LoginPage() {
                               href="/terms"
                               target="_blank"
                               rel="noopener noreferrer"
-                              style={{ color: "var(--color-accent)", textDecoration: "none" }}
+                              style={{ color: "var(--color-text-accent)", textDecoration: "none" }}
                             >
                               Terms of Service
                             </a>{" "}
@@ -357,7 +357,7 @@ export default function LoginPage() {
                               href="/privacy"
                               target="_blank"
                               rel="noopener noreferrer"
-                              style={{ color: "var(--color-accent)", textDecoration: "none" }}
+                              style={{ color: "var(--color-text-accent)", textDecoration: "none" }}
                             >
                               Privacy Policy
                             </a>
@@ -718,7 +718,7 @@ export default function LoginPage() {
           gap: 4px;
           font-size: 13px;
           font-weight: 600;
-          color: var(--color-accent);
+          color: var(--color-text-accent);
           text-decoration: none;
           letter-spacing: 0.01em;
           transition: opacity 150ms ease;
