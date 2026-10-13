@@ -12,8 +12,11 @@ import { useLocale, useMessages } from '../i18n/useLocale'
 
 export const meta = routeMeta('agentFlow')
 
-const ACCENT = '#EC4899'
-const ACCENT_HOVER = '#F472B6'
+// Fills take the deeper pink so white text keeps 4.5:1 (design system v2.2); the bright pink
+// stays for text on the dark theme, where it passes.
+const ACCENT = '#BE185D'
+const ACCENT_HOVER = '#9D174D'
+const ACCENT_TEXT = 'text-[#BE185D] dark:text-[#EC4899]'
 
 
 export default function AgentFlowPage() {
@@ -31,7 +34,7 @@ export default function AgentFlowPage() {
       <Section id="hero" background="default">
         <Container narrow>
           <motion.div variants={fadeUp} initial="hidden" animate="visible" className="pt-8 pb-4">
-            <p className="text-[11px] font-semibold uppercase tracking-[0.18em] mb-4" style={{ color: ACCENT }}>
+            <p className={`text-[11px] font-semibold uppercase tracking-[0.18em] mb-4 ${ACCENT_TEXT}`}>
               {text.phase}
             </p>
             <TextReveal
@@ -97,7 +100,7 @@ export default function AgentFlowPage() {
                 key={s.title}
                 className="rounded-xl border border-[var(--color-border-default)] bg-[var(--color-bg-base)] p-6"
               >
-                <span className="block text-[13px] font-semibold mb-3" style={{ color: ACCENT }}>
+                <span className={`block text-[13px] font-semibold mb-3 ${ACCENT_TEXT}`}>
                   {String(i + 1).padStart(2, '0')}
                 </span>
                 {/* h2, not h3: the page has no section heading above the steps, so h3 skipped a level. */}

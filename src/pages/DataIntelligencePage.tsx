@@ -44,7 +44,7 @@ export default function DataIntelligencePage() {
                 ← {t.back}
               </button>
               <span className="text-[var(--color-border-default)]">/</span>
-              <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#10B981]">
+              <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#047857] dark:text-[#10B981]">
                 {text.phase}
               </span>
             </div>
@@ -59,7 +59,7 @@ export default function DataIntelligencePage() {
               href={launchHref}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-6 py-3 text-[13px] font-semibold bg-[#10B981] text-white rounded-lg hover:bg-[#34D399] active:bg-[#059669] transition-colors duration-150"
+              className="inline-flex items-center gap-2 px-6 py-3 text-[13px] font-semibold bg-[#047857] text-white rounded-lg hover:bg-[#065F46] active:bg-[#064E3B] transition-colors duration-150"
             >
               {text.open}
               <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
@@ -79,7 +79,7 @@ export default function DataIntelligencePage() {
             whileInView="visible"
             viewport={viewportConfig}
           >
-            <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#10B981] mb-4">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#047857] dark:text-[#10B981] mb-4">
               {t.whatItDoes}
             </p>
             <TextReveal
@@ -104,7 +104,7 @@ export default function DataIntelligencePage() {
             viewport={viewportConfig}
             className="mb-10"
           >
-            <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#10B981] mb-4">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#047857] dark:text-[#10B981] mb-4">
               {t.howItWorks}
             </p>
             <TextReveal
@@ -150,7 +150,7 @@ export default function DataIntelligencePage() {
             whileInView="visible"
             viewport={viewportConfig}
           >
-            <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#10B981] mb-4">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#047857] dark:text-[#10B981] mb-4">
               {t.method}: {text.method.phase}
             </p>
             <TextReveal

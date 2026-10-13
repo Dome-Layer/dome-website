@@ -26,8 +26,10 @@ interface Tool {
   description: string;
   /** Production host. Staging is derived by inserting `.staging` (see toolHref). */
   prodHost: string;
-  /** Per-tool accent (matches the marketing Tools section). */
+  /** Per-tool accent (matches the marketing Tools section): the stripe and border. */
   accent: string;
+  /** The same hue for text, one shade per theme so it keeps 4.5:1 (design system v2.2). */
+  text: { light: string; dark: string };
   /** Details page on the marketing site, used while the tool is not reachable. */
   detailPath?: string;
   /** Not self-serve: the card links to its details page, which offers a private demo. */
@@ -42,6 +44,7 @@ const TOOLS: Tool[] = [
       "Turn a plain-language process description into a structured map with system dependencies, governance gaps, and automation opportunities.",
     prodHost: "analyzer.domelayer.com",
     accent: "#06B6D4",
+    text: { light: "#0E7490", dark: "#06B6D4" },
   },
   {
     phase: "ORCHESTRATE",
@@ -50,6 +53,7 @@ const TOOLS: Tool[] = [
       "Pose a strategic question to three AI advisors who deliberate, cross-examine each other, and return a governed verdict with a full audit trail.",
     prodHost: "llm-council.domelayer.com",
     accent: "#7B5EA7",
+    text: { light: "#7B5EA7", dark: "#9B7EC7" },
   },
   {
     phase: "MODEL",
@@ -58,6 +62,7 @@ const TOOLS: Tool[] = [
       "Upload a spreadsheet and get a governed analytics dashboard — columns auto-classified, chart types chosen by a governance rules engine.",
     prodHost: "data-intelligence.domelayer.com",
     accent: "#10B981",
+    text: { light: "#047857", dark: "#10B981" },
   },
   {
     phase: "MODEL",
@@ -66,6 +71,7 @@ const TOOLS: Tool[] = [
       "Upload any document — invoice, lab report, contract — and extract validated, structured fields under 16 governance rules, ready to export.",
     prodHost: "document-intelligence.domelayer.com",
     accent: "#F59E0B",
+    text: { light: "#92400E", dark: "#F59E0B" },
   },
   {
     phase: "EXECUTE",
@@ -74,6 +80,7 @@ const TOOLS: Tool[] = [
       "Run a governed invoice-to-approval workflow across the tools — extraction, a policy rules engine, a multi-model council, and a human approval gate, every step audited.",
     prodHost: "agent-flow.domelayer.com",
     accent: "#EC4899",
+    text: { light: "#BE185D", dark: "#EC4899" },
     detailPath: "/dome/agent-flow",
     comingSoon: !AGENT_FLOW_LIVE,
   },
@@ -85,6 +92,7 @@ const GOV_TOOL = {
     "Audit trail, compliance reporting, and PDF export across all four DOME AI tools — the observation and compliance layer that spans every tool.",
   prodHost: "governance.domelayer.com",
   accent: "#6366F1",
+    text: { light: "#4F46E5", dark: "#818CF8" },
 };
 
 const ArrowIcon = (
@@ -164,7 +172,7 @@ function ToolsHub() {
               key={tool.name}
               href={tool.comingSoon && tool.detailPath ? tool.detailPath : toolHref(tool.prodHost)}
               className="hub-card"
-              style={{ ["--card-accent" as string]: tool.accent }}
+              style={{ ["--card-accent" as string]: tool.accent, ["--card-text-light" as string]: tool.text.light, ["--card-text-dark" as string]: tool.text.dark }}
             >
               <span className="hub-card-eyebrow">{tool.phase}</span>
               <h2 className="hub-card-title">{tool.name}</h2>
@@ -190,7 +198,7 @@ function ToolsHub() {
           <a
             href={toolHref(GOV_TOOL.prodHost)}
             className="hub-card hub-card--govern"
-            style={{ ["--card-accent" as string]: GOV_TOOL.accent }}
+            style={{ ["--card-accent" as string]: GOV_TOOL.accent, ["--card-text-light" as string]: GOV_TOOL.text.light, ["--card-text-dark" as string]: GOV_TOOL.text.dark }}
           >
             <span className="hub-card-eyebrow">OBSERVE</span>
             <h2 className="hub-card-title">{GOV_TOOL.name}</h2>
@@ -336,7 +344,7 @@ function ToolsHub() {
           font-weight: 600;
           letter-spacing: 0.18em;
           text-transform: uppercase;
-          color: var(--card-accent);
+          color: var(--card-text-light);
           margin-bottom: 14px;
         }
         .hub-card-title {
@@ -359,7 +367,11 @@ function ToolsHub() {
           gap: 6px;
           font-size: 13px;
           font-weight: 600;
-          color: var(--card-accent);
+          color: var(--card-text-light);
+        }
+        [data-theme="dark"] .hub-card-eyebrow,
+        [data-theme="dark"] .hub-card-cta {
+          color: var(--card-text-dark);
         }
         .hub-card-stripe {
           position: absolute;
