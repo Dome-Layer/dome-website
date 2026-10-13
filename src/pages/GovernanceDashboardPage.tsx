@@ -13,8 +13,11 @@ import { useLocale, useMessages } from '../i18n/useLocale'
 
 export const meta = routeMeta('governanceDashboard')
 
-const ACCENT = '#6366F1'
-const ACCENT_HOVER = '#818CF8'
+// Fills take the deeper indigo so white text keeps 4.5:1 (design system v2.2); text uses a shade
+// per theme.
+const ACCENT = '#4F46E5'
+const ACCENT_HOVER = '#4338CA'
+const ACCENT_TEXT = 'text-[#4F46E5] dark:text-[#818CF8]'
 
 
 export default function GovernanceDashboardPage() {
@@ -56,7 +59,7 @@ export default function GovernanceDashboardPage() {
                   ← {t.back}
                 </button>
                 <span className="text-[var(--color-border-default)]">/</span>
-                <span className="text-[11px] font-semibold uppercase tracking-[0.18em]" style={{ color: ACCENT }}>
+                <span className={`text-[11px] font-semibold uppercase tracking-[0.18em] ${ACCENT_TEXT}`}>
                   {text.phase}
                 </span>
               </div>
@@ -95,7 +98,7 @@ export default function GovernanceDashboardPage() {
             whileInView="visible"
             viewport={viewportConfig}
           >
-            <p className="text-[11px] font-semibold uppercase tracking-[0.18em] mb-4" style={{ color: ACCENT }}>
+            <p className={`text-[11px] font-semibold uppercase tracking-[0.18em] mb-4 ${ACCENT_TEXT}`}>
               {t.whatItDoes}
             </p>
             <TextReveal
@@ -120,7 +123,7 @@ export default function GovernanceDashboardPage() {
             viewport={viewportConfig}
             className="mb-10"
           >
-            <p className="text-[11px] font-semibold uppercase tracking-[0.18em] mb-4" style={{ color: ACCENT }}>
+            <p className={`text-[11px] font-semibold uppercase tracking-[0.18em] mb-4 ${ACCENT_TEXT}`}>
               {t.howItWorks}
             </p>
             <TextReveal
@@ -144,7 +147,7 @@ export default function GovernanceDashboardPage() {
                 custom={i}
                 className="flex gap-6 p-6 rounded-xl border border-[var(--color-border-default)] bg-[var(--color-bg-base)]"
               >
-                <span className="text-[13px] font-semibold tabular-nums text-[var(--color-border-strong)] flex-shrink-0 mt-0.5">
+                <span className="text-[13px] font-semibold tabular-nums text-[var(--color-text-tertiary)] flex-shrink-0 mt-0.5">
                   {String(i + 1).padStart(2, '0')}
                 </span>
                 <div>
@@ -166,7 +169,7 @@ export default function GovernanceDashboardPage() {
             whileInView="visible"
             viewport={viewportConfig}
           >
-            <p className="text-[11px] font-semibold uppercase tracking-[0.18em] mb-4" style={{ color: ACCENT }}>
+            <p className={`text-[11px] font-semibold uppercase tracking-[0.18em] mb-4 ${ACCENT_TEXT}`}>
               {t.method}: {text.method.phase}
             </p>
             <TextReveal
