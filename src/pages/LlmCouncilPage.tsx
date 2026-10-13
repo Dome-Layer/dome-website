@@ -44,7 +44,7 @@ export default function LlmCouncilPage() {
                 ← {t.back}
               </button>
               <span className="text-[var(--color-border-default)]">/</span>
-              <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#7B5EA7]">
+              <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#7B5EA7] dark:text-[#9B7EC7]">
                 {text.phase}
               </span>
             </div>
@@ -59,7 +59,7 @@ export default function LlmCouncilPage() {
               href={launchHref}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-6 py-3 text-[13px] font-semibold bg-[#7B5EA7] text-white rounded-lg hover:bg-[#9B7EC7] active:bg-[#5A3E87] transition-colors duration-150"
+              className="inline-flex items-center gap-2 px-6 py-3 text-[13px] font-semibold bg-[#7B5EA7] text-white rounded-lg hover:bg-[#6B4F97] active:bg-[#5B4287] transition-colors duration-150"
             >
               {text.open}
               <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
@@ -79,7 +79,7 @@ export default function LlmCouncilPage() {
             whileInView="visible"
             viewport={viewportConfig}
           >
-            <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#7B5EA7] mb-4">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#7B5EA7] dark:text-[#9B7EC7] mb-4">
               {t.whatItDoes}
             </p>
             <TextReveal
@@ -104,7 +104,7 @@ export default function LlmCouncilPage() {
             viewport={viewportConfig}
             className="mb-10"
           >
-            <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#7B5EA7] mb-4">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#7B5EA7] dark:text-[#9B7EC7] mb-4">
               {t.howItWorks}
             </p>
             <TextReveal
@@ -150,7 +150,7 @@ export default function LlmCouncilPage() {
             whileInView="visible"
             viewport={viewportConfig}
           >
-            <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#7B5EA7] mb-4">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#7B5EA7] dark:text-[#9B7EC7] mb-4">
               {t.method}: {text.method.phase}
             </p>
             <TextReveal

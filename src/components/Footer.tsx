@@ -46,7 +46,7 @@ export function Footer() {
           </nav>
         </div>
 
-        <div className="mt-16 flex flex-col items-start justify-between gap-4 border-t border-dome-dark-edge pt-8 text-caption text-dome-nickel/60 sm:flex-row sm:items-center">
+        <div className="mt-16 flex flex-col items-start justify-between gap-4 border-t border-dome-dark-edge pt-8 text-caption text-dome-nickel/80 sm:flex-row sm:items-center">
           <span>Dome di Francesco Prodomo &middot; P.IVA 07242670482 &middot; Florence, Italy</span>
           <div className="flex items-center gap-3">
             <a href={localizedHref('privacy', locale)} className="transition-colors hover:text-dome-nickel">

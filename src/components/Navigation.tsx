@@ -110,7 +110,7 @@ export function Navigation() {
                     aria-current={location.pathname === item.to ? 'page' : undefined}
                     className={`relative px-3 py-2 rounded-lg text-[13px] font-medium transition-colors duration-150 ${
                       location.pathname === item.to
-                        ? 'text-[#0080FF]'
+                        ? 'text-[var(--color-text-accent)]'
                         : 'text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] hover:bg-[var(--color-bg-muted)]'
                     }`}
                   >
@@ -123,7 +123,7 @@ export function Navigation() {
               <>
                 <a
                   href={HUB_PATH}
-                  className="inline-flex items-center gap-2 px-5 py-2.5 text-[13px] font-semibold bg-[#0080FF] text-white rounded-lg hover:bg-[#40A8FF] active:bg-[#0066CC] transition-colors duration-150"
+                  className="inline-flex items-center gap-2 px-5 py-2.5 text-[13px] font-semibold bg-[var(--color-accent)] text-white rounded-lg hover:bg-[var(--color-accent-hover)] active:bg-[var(--color-accent-active)] transition-colors duration-150"
                 >
                   {UserIcon}
                   {t.yourTools}
@@ -139,7 +139,7 @@ export function Navigation() {
             ) : (
               <a
                 href={loginHref}
-                className="inline-flex items-center gap-2 px-5 py-2.5 text-[13px] font-semibold bg-[#0080FF] text-white rounded-lg hover:bg-[#40A8FF] active:bg-[#0066CC] transition-colors duration-150"
+                className="inline-flex items-center gap-2 px-5 py-2.5 text-[13px] font-semibold bg-[var(--color-accent)] text-white rounded-lg hover:bg-[var(--color-accent-hover)] active:bg-[var(--color-accent-active)] transition-colors duration-150"
               >
                 {UserIcon}
                 {t.signIn}
@@ -202,7 +202,7 @@ export function Navigation() {
                     <Link
                       to={item.to}
                       onClick={() => setMobileOpen(false)}
-                      className="text-2xl font-semibold text-[var(--color-text-primary)] hover:text-[#0080FF] transition-colors tracking-tight"
+                      className="text-2xl font-semibold text-[var(--color-text-primary)] hover:text-[var(--color-text-accent)] transition-colors tracking-tight"
                     >
                       {item.label}
                     </Link>
@@ -223,7 +223,7 @@ export function Navigation() {
                       <a
                         href={HUB_PATH}
                         onClick={() => setMobileOpen(false)}
-                        className="inline-flex items-center gap-2 px-8 py-3.5 text-[13px] font-semibold bg-[#0080FF] text-white rounded-lg"
+                        className="inline-flex items-center gap-2 px-8 py-3.5 text-[13px] font-semibold bg-[var(--color-accent)] text-white rounded-lg hover:bg-[var(--color-accent-hover)] active:bg-[var(--color-accent-active)]"
                       >
                         {UserIcon}
                         {t.yourTools}
@@ -243,7 +243,7 @@ export function Navigation() {
                     <a
                       href={loginHref}
                       onClick={() => setMobileOpen(false)}
-                      className="inline-flex items-center gap-2 px-8 py-3.5 text-[13px] font-semibold bg-[#0080FF] text-white rounded-lg"
+                      className="inline-flex items-center gap-2 px-8 py-3.5 text-[13px] font-semibold bg-[var(--color-accent)] text-white rounded-lg hover:bg-[var(--color-accent-hover)] active:bg-[var(--color-accent-active)]"
                     >
                       {UserIcon}
                       {t.signIn}

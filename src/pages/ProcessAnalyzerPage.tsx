@@ -44,7 +44,7 @@ export default function ProcessAnalyzerPage() {
                 ← {t.back}
               </button>
               <span className="text-[var(--color-border-default)]">/</span>
-              <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#06B6D4]">
+              <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#0E7490] dark:text-[#06B6D4]">
                 {text.phase}
               </span>
             </div>
@@ -59,7 +59,7 @@ export default function ProcessAnalyzerPage() {
               href={launchHref}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-6 py-3 text-[13px] font-semibold bg-[#06B6D4] text-white rounded-lg hover:bg-[#22D3EE] active:bg-[#0891B2] transition-colors duration-150"
+              className="inline-flex items-center gap-2 px-6 py-3 text-[13px] font-semibold bg-[#0E7490] text-white rounded-lg hover:bg-[#155E75] active:bg-[#164E63] transition-colors duration-150"
             >
               {text.open}
               <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
@@ -79,7 +79,7 @@ export default function ProcessAnalyzerPage() {
             whileInView="visible"
             viewport={viewportConfig}
           >
-            <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#06B6D4] mb-4">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#0E7490] dark:text-[#06B6D4] mb-4">
               {t.whatItDoes}
             </p>
             <TextReveal
@@ -104,7 +104,7 @@ export default function ProcessAnalyzerPage() {
             viewport={viewportConfig}
             className="mb-10"
           >
-            <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#06B6D4] mb-4">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#0E7490] dark:text-[#06B6D4] mb-4">
               {t.howItWorks}
             </p>
             <TextReveal
@@ -150,7 +150,7 @@ export default function ProcessAnalyzerPage() {
             whileInView="visible"
             viewport={viewportConfig}
           >
-            <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#06B6D4] mb-4">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#0E7490] dark:text-[#06B6D4] mb-4">
               {t.method}: {text.method.phase}
             </p>
             <TextReveal
