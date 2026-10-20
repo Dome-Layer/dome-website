@@ -10,6 +10,7 @@
     "dev": "react-router dev",
     "build": "tsc -b && react-router build && node scripts/externalize-inline-scripts.mjs",
     "build:cloudflare": "npm run build && node scripts/cloudflare-headers.mjs",
+    "social-images": "node scripts/social-images.mjs",
     "lint": "eslint .",
     "test": "vitest run",
     "preview": "vite preview --outDir build/client"

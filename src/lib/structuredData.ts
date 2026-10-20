@@ -2,11 +2,15 @@ import { CONTENT_LANGUAGE, type Locale } from '../i18n/locales'
 import { MESSAGES } from '../i18n/messages'
 import { pageMeta } from '../i18n/pageMeta'
 import { CASE_STUDY_ROUTE_IDS, PUBLIC_ROUTES, TOOL_ROUTE_IDS, localizedHref, type RouteId } from '../i18n/routes'
+import { socialImagePath } from '../seo/socialImages'
 
 export const SITE_URL = 'https://domelayer.com'
 
 const ORGANIZATION_ID = `${SITE_URL}/#organization`
 const WEBSITE_ID = `${SITE_URL}/#website`
+
+/** DOME's company page on LinkedIn, also linked from the footer. */
+export const LINKEDIN_URL = 'https://www.linkedin.com/company/domelayer/'
 
 export const absoluteUrl = (path: string) => (path === '/' ? `${SITE_URL}/` : `${SITE_URL}${path}`)
 
@@ -30,7 +34,8 @@ function organization(locale: Locale): Node {
     legalName: 'Dome di Francesco Prodomo',
     url: `${SITE_URL}/`,
     logo: `${SITE_URL}/logo-512.png`,
-    image: `${SITE_URL}/og-image.png`,
+    image: absoluteUrl(socialImagePath('home', locale)),
+    sameAs: [LINKEDIN_URL],
     description: MESSAGES[locale].site.description,
     vatID: 'IT07242670482',
     areaServed: { '@type': 'Place', name: 'European Union' },
@@ -112,6 +117,7 @@ export function pageStructuredData(id: RouteId, locale: Locale, locales: Locale[
       '@id': `${url}#article`,
       headline: t.name,
       description: t.description,
+      image: absoluteUrl(socialImagePath(id, locale)),
       inLanguage: CONTENT_LANGUAGE[locale],
       mainEntityOfPage: { '@id': `${url}#webpage` },
       author: { '@id': ORGANIZATION_ID },
