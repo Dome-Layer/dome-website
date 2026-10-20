@@ -32,7 +32,7 @@ export const it: Messages = {
   },
   switcher: { label: 'Versione inglese di questa pagina' },
   footer: {
-    tagline: 'AI operativa, con la governance integrata',
+    tagline: 'Consulenza AI e di prodotto per imprese regolamentate, con la governance integrata.',
     privacy: 'Informativa sulla privacy',
     terms: 'Termini di servizio',
     cookies: 'Cookie policy',
