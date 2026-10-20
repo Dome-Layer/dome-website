@@ -39,7 +39,7 @@ describe('message catalogues', () => {
 
   it('use no em or en dashes (house style)', () => {
     for (const locale of LOCALES) {
-      expect(strings(MESSAGES[locale]).filter((s) => /[–—]/.test(s))).toEqual([])
+      expect(strings(MESSAGES[locale]).filter((s) => /[\u2013\u2014]/.test(s))).toEqual([])
     }
   })
 

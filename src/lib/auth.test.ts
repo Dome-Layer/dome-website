@@ -284,7 +284,7 @@ describe("isAuthenticated", () => {
 });
 
 // ---------------------------------------------------------------------------
-// sanitizeRedirect — open-redirect payload suite
+// sanitizeRedirect: open-redirect payload suite
 // ---------------------------------------------------------------------------
 
 describe("sanitizeRedirect", () => {

@@ -67,7 +67,7 @@ export default function AuthCallbackPage() {
         return;
       }
 
-      // First-time user — look for consent recorded on this device
+      // First-time user: look for consent recorded on this device
       const pendingConsent = readPendingConsent();
       if (pendingConsent) {
         await writeConsentToSupabase(accessToken, pendingConsent);
@@ -84,7 +84,7 @@ export default function AuthCallbackPage() {
     [completeAuth]
   );
 
-  // Runs once — guarded against the StrictMode double-invoke so the single-use
+  // Runs once, guarded against the StrictMode double-invoke so the single-use
   // OAuth authorization code is never exchanged twice.
   const handledRef = useRef(false);
   useEffect(() => {

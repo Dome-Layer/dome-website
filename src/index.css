@@ -14,7 +14,7 @@
 @theme {
   /* ── v2.0 Colour Ramps ── */
 
-  /* Electric Blue — single brand accent */
+  /* Electric Blue: single brand accent */
   --color-accent-50:   #E8F3FF;
   --color-accent-100:  #C5DFFF;
   --color-accent-200:  #99CCFF;
@@ -47,7 +47,7 @@
   --color-dome-onyx:     #111111;
   --color-dome-graphite: #1A1A1A;
 
-  /* Text — dark sections */
+  /* Text: dark sections */
   --color-dome-warm-white: #F5F5F5;
   --color-dome-off-white:  #FFFFFF;
   --color-dome-nickel:     #A3A3A3;
@@ -65,7 +65,7 @@
   --color-dome-status-warning: #D97706;
   --color-dome-status-error:   #DC2626;
 
-  /* Status — dark-section variants (used in footer success/error states) */
+  /* Status: dark-section variants (used in footer success/error states) */
   --color-dome-success-bg:     #052E16;
   --color-dome-success-border: #166534;
   --color-dome-success-text:   #22C55E;
@@ -102,7 +102,7 @@
   --text-label:   0.8125rem;
 }
 
-/* ── Semantic CSS custom properties — light theme (default) ── */
+/* ── Semantic CSS custom properties: light theme (default) ── */
 @layer base {
   :root {
     --color-bg-base:          #FFFFFF;
@@ -202,7 +202,7 @@
   }
 }
 
-/* ── Dot grid — subtle texture (dark sections only) ── */
+/* ── Dot grid: subtle texture (dark sections only) ── */
 .dome-dot-grid {
   background-image: radial-gradient(circle, rgba(255, 255, 255, 0.07) 1px, transparent 1px);
   background-size: 24px 24px;

@@ -38,7 +38,7 @@ function renderHub() {
   );
 }
 
-/** Hrefs of all tool shortcut cards — P1–P4 + governance (excludes wordmark "/" link). */
+/** Hrefs of all tool shortcut cards: P1 to P4 + governance (excludes wordmark "/" link). */
 function toolHrefs(): string[] {
   return screen
     .getAllByRole("link")
@@ -56,7 +56,7 @@ beforeEach(() => {
 // Auth gating
 // ---------------------------------------------------------------------------
 
-describe("ToolsHubPage — auth gating", () => {
+describe("ToolsHubPage: auth gating", () => {
   it("redirects signed-out visitors to /login (carrying redirect=/app)", () => {
     vi.mocked(isAuthenticated).mockReturnValue(false);
     renderHub();
@@ -76,7 +76,7 @@ describe("ToolsHubPage — auth gating", () => {
 // Tool cards
 // ---------------------------------------------------------------------------
 
-describe("ToolsHubPage — tool cards", () => {
+describe("ToolsHubPage: tool cards", () => {
   it("renders one card per tool", () => {
     renderHub();
     expect(screen.getByText("Process Analyzer")).toBeInTheDocument();
@@ -94,7 +94,7 @@ describe("ToolsHubPage — tool cards", () => {
 // Host-aware links
 // ---------------------------------------------------------------------------
 
-describe("ToolsHubPage — host-aware tool links", () => {
+describe("ToolsHubPage: host-aware tool links", () => {
   it("points at production *.domelayer.com on a non-staging host", () => {
     setHostname("domelayer.com");
     renderHub();

@@ -41,7 +41,7 @@ export default function LoginPage() {
 
   // Persist a genuine tool redirect (dome-ui AuthGuard → /login?redirect=<tool>) so the
   // callback can return the user there. When there's no valid tool redirect this visit,
-  // drop any value left from a prior, abandoned tool-initiated login — otherwise that
+  // drop any value left from a prior, abandoned tool-initiated login; otherwise that
   // stale entry would silently bounce a fresh, direct sign-in to the old tool.
   if (redirect !== "/") {
     sessionStorage.setItem("dome_auth_redirect", redirect);
@@ -152,7 +152,7 @@ export default function LoginPage() {
               Governance-driven AI for regulated enterprises.
             </h2>
             <p className="login-brand-text">
-              Auditable analysis, documents, and decisioning — one secure sign-in
+              Auditable analysis, documents and decisioning, with one secure sign-in
               across every Dome tool.
             </p>
           </div>
@@ -223,7 +223,7 @@ export default function LoginPage() {
                     <strong style={{ color: "var(--color-text-primary)", fontWeight: 500 }}>
                       {email}
                     </strong>
-                    . Click it to continue — it expires in 60 minutes.
+                    . Click it to continue. It expires in 60 minutes.
                   </p>
                 </div>
               ) : (
@@ -571,7 +571,7 @@ export default function LoginPage() {
 
         /* ════════════════════════════════════════════════════════════════
            Large screens (>= 1024px / lg, matching the nav's desktop switch):
-           70%-width split card — image LEFT (60%), form RIGHT (40%) — rounded +
+           70%-width split card (image LEFT 60%, form RIGHT 40%), rounded +
            elevated, on a dotted-grid backdrop. Tablet + mobile stay single-column
            (the split felt cramped on tablets).
            ════════════════════════════════════════════════════════════════ */
@@ -621,7 +621,7 @@ export default function LoginPage() {
             background-position: center;
           }
 
-          /* Form RIGHT, 40% — centers when short, scrolls when tall */
+          /* Form RIGHT, 40%: centers when short, scrolls when tall */
           .login-form-pane {
             flex: 0 0 40%;
             flex-direction: column;
@@ -636,13 +636,13 @@ export default function LoginPage() {
             max-width: 360px;
             align-items: flex-start; /* left-align the logo with the form below (desktop) */
           }
-          /* The post-send "check your inbox" card is centered — center the logo to
+          /* The post-send "check your inbox" card is centered, so center the logo to
              match it (overrides the left-align above; only on this state). */
           .login-form-stack--center {
             align-items: center;
           }
 
-          /* Inside the split card, the container IS the card — strip inner chrome */
+          /* Inside the split card, the container IS the card: strip inner chrome */
           .login-card,
           [data-theme="dark"] .login-card {
             background: transparent;

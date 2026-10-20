@@ -96,7 +96,7 @@ beforeEach(() => {
 // Error states
 // ---------------------------------------------------------------------------
 
-describe("AuthCallbackPage — error states", () => {
+describe("AuthCallbackPage: error states", () => {
   it("shows error when query params contain error", async () => {
     setLocation({ search: "?error=access_denied" });
     renderCallback();
@@ -145,10 +145,10 @@ describe("AuthCallbackPage — error states", () => {
 });
 
 // ---------------------------------------------------------------------------
-// Happy path — Supabase not configured (local dev)
+// Happy path: Supabase not configured (local dev)
 // ---------------------------------------------------------------------------
 
-describe("AuthCallbackPage — Supabase not configured", () => {
+describe("AuthCallbackPage: Supabase not configured", () => {
   it("completes auth immediately when Supabase is not configured", async () => {
     vi.mocked(isSupabaseConfigured).mockReturnValue(false);
     renderCallback();
@@ -160,10 +160,10 @@ describe("AuthCallbackPage — Supabase not configured", () => {
 });
 
 // ---------------------------------------------------------------------------
-// Happy path — returning user (already consented)
+// Happy path: returning user (already consented)
 // ---------------------------------------------------------------------------
 
-describe("AuthCallbackPage — returning user", () => {
+describe("AuthCallbackPage: returning user", () => {
   it("completes auth without consent screen for returning user", async () => {
     vi.mocked(isSupabaseConfigured).mockReturnValue(true);
     vi.mocked(getUserConsentStatus).mockResolvedValue({ hasConsented: true });
@@ -177,10 +177,10 @@ describe("AuthCallbackPage — returning user", () => {
 });
 
 // ---------------------------------------------------------------------------
-// Happy path — pending consent in localStorage
+// Happy path: pending consent in localStorage
 // ---------------------------------------------------------------------------
 
-describe("AuthCallbackPage — pending consent in localStorage", () => {
+describe("AuthCallbackPage: pending consent in localStorage", () => {
   it("writes pending consent to Supabase and completes auth", async () => {
     vi.mocked(isSupabaseConfigured).mockReturnValue(true);
     vi.mocked(getUserConsentStatus).mockResolvedValue({ hasConsented: false });
@@ -202,10 +202,10 @@ describe("AuthCallbackPage — pending consent in localStorage", () => {
 });
 
 // ---------------------------------------------------------------------------
-// Consent interstitial — cross-device first-time user
+// Consent interstitial: cross-device first-time user
 // ---------------------------------------------------------------------------
 
-describe("AuthCallbackPage — consent interstitial", () => {
+describe("AuthCallbackPage: consent interstitial", () => {
   beforeEach(() => {
     vi.mocked(isSupabaseConfigured).mockReturnValue(true);
     vi.mocked(getUserConsentStatus).mockResolvedValue({ hasConsented: false });
@@ -327,7 +327,7 @@ describe("AuthCallbackPage — consent interstitial", () => {
 // Redirect handling
 // ---------------------------------------------------------------------------
 
-describe("AuthCallbackPage — redirect after auth", () => {
+describe("AuthCallbackPage: redirect after auth", () => {
   it("returns the user to a genuine stored tool redirect (preserved)", async () => {
     vi.mocked(isSupabaseConfigured).mockReturnValue(false);
     sessionStorage.setItem("dome_auth_redirect", "/tools?tab=analyzer");
@@ -376,7 +376,7 @@ describe("AuthCallbackPage — redirect after auth", () => {
 // OAuth (PKCE / ?code=) path
 // ---------------------------------------------------------------------------
 
-describe("AuthCallbackPage — OAuth code path", () => {
+describe("AuthCallbackPage: OAuth code path", () => {
   it("exchanges the code and completes auth (Supabase not configured)", async () => {
     setLocation({ search: "?code=oauth-code-123" });
     vi.mocked(isSupabaseConfigured).mockReturnValue(false);
