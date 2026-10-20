@@ -20,6 +20,11 @@ describe('buildMeta', () => {
     expect(meta).toContainEqual({ property: 'og:locale:alternate', content: 'en_GB' })
   })
 
+  it('gives each page the social image of its own language', () => {
+    expect(buildMeta('enterpriseUx', 'it')).toContainEqual({ property: 'og:image', content: 'https://domelayer.com/social/enterprise-ux-it.jpg' })
+    expect(buildMeta('llmCouncil', 'en')).toContainEqual({ name: 'twitter:image', content: 'https://domelayer.com/social/dome-en.jpg' })
+  })
+
   it('points only at English while Italian is dormant', () => {
     const meta = buildMeta('home', 'en', ['en'])
     expect(links(meta, 'alternate').map((l) => l.href)).toEqual(['https://domelayer.com/', 'https://domelayer.com/'])

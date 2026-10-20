@@ -17,6 +17,12 @@ describe('structured data', () => {
     expect(JSON.stringify(graph('home'))).not.toContain('Offer')
   })
 
+  it('links the LinkedIn company page and uses the social image of the language', () => {
+    const org = byType(graph('home', 'it'), 'ProfessionalService')!
+    expect(org.sameAs).toEqual(['https://www.linkedin.com/company/domelayer/'])
+    expect(org.image).toBe('https://domelayer.com/social/home-it.jpg')
+  })
+
   it('describes a service page as a Service provided by DOME', () => {
     const page = byType(graph('aiProcessAutomation', 'it'), 'WebPage')!
     const service = page.about as Node
@@ -28,6 +34,7 @@ describe('structured data', () => {
     for (const id of CASE_STUDY_ROUTE_IDS) {
       const article = byType(graph(id), 'Article')!
       expect(article.headline).toBeTruthy()
+      expect(article.image).toMatch(/^https:\/\/domelayer\.com\/social\/case-[a-z-]+-en\.jpg$/)
       expect(article.dateModified).toMatch(/^\d{4}-\d{2}-\d{2}$/)
     }
   })

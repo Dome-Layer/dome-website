@@ -1,6 +1,7 @@
 import { DomeLogo } from './DomeLogo'
 import { Container } from './Container'
 import { localizedHref } from '../i18n/routes'
+import { LINKEDIN_URL } from '../lib/structuredData'
 import { useLocale, useMessages } from '../i18n/useLocale'
 
 /**
@@ -26,6 +27,7 @@ export function Footer() {
     { href: localizedHref('caseStudies', locale), label: messages.nav.caseStudies },
     { href: localizedHref('about', locale), label: messages.nav.about },
     { href: localizedHref('contact', locale), label: messages.nav.contact },
+    { href: LINKEDIN_URL, label: 'LinkedIn' },
   ]
 
   return (

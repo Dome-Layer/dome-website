@@ -3,11 +3,10 @@ import { DEFAULT_LOCALE, OG_LOCALE, type Locale } from '../i18n/locales'
 import { PUBLISHED_LOCALES } from '../i18n/published'
 import { pageMeta } from '../i18n/pageMeta'
 import { localeFromPath, localizedHref, routeIdFromPath, type RouteId } from '../i18n/routes'
+import { socialImagePath } from '../seo/socialImages'
 import { SITE_URL, absoluteUrl, pageStructuredData } from './structuredData'
 
 export { SITE_URL }
-
-const DEFAULT_OG_IMAGE = `${SITE_URL}/og-image.png`
 
 /**
  * Full head metadata for a public page in one locale: title, description, canonical, hreflang
@@ -17,6 +16,7 @@ const DEFAULT_OG_IMAGE = `${SITE_URL}/og-image.png`
 export function buildMeta(id: RouteId, locale: Locale, locales: Locale[] = PUBLISHED_LOCALES): MetaDescriptor[] {
   const page = pageMeta(id, locale)
   const url = absoluteUrl(localizedHref(id, locale))
+  const image = absoluteUrl(socialImagePath(id, locale))
   return [
     { title: page.title },
     { name: 'description', content: page.description },
@@ -29,7 +29,8 @@ export function buildMeta(id: RouteId, locale: Locale, locales: Locale[] = PUBLI
     { property: 'og:url', content: url },
     { property: 'og:title', content: page.title },
     { property: 'og:description', content: page.ogDescription ?? page.description },
-    { property: 'og:image', content: DEFAULT_OG_IMAGE },
+    { property: 'og:image', content: image },
+    { property: 'og:image:type', content: 'image/jpeg' },
     { property: 'og:image:width', content: '1200' },
     { property: 'og:image:height', content: '630' },
     { property: 'og:image:alt', content: page.imageAlt },
@@ -39,7 +40,7 @@ export function buildMeta(id: RouteId, locale: Locale, locales: Locale[] = PUBLI
     { name: 'twitter:site', content: '@domelayer' },
     { name: 'twitter:title', content: page.title },
     { name: 'twitter:description', content: page.twitterDescription ?? page.description },
-    { name: 'twitter:image', content: DEFAULT_OG_IMAGE },
+    { name: 'twitter:image', content: image },
     { name: 'twitter:image:alt', content: page.twitterImageAlt ?? page.imageAlt },
     { 'script:ld+json': pageStructuredData(id, locale, locales) },
   ]
