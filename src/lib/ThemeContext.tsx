@@ -13,7 +13,7 @@ const ThemeContext = createContext<ThemeContextValue | null>(null)
 const COOKIE_NAME = 'dome-theme'
 const COOKIE_MAX_AGE = 60 * 60 * 24 * 365 // 1 year
 
-// Host/cookie-domain helpers come from dome-ui (cookieDomain, isHttpsHost) — see imports.
+// Host/cookie-domain helpers come from dome-ui (cookieDomain, isHttpsHost); see imports.
 
 function readThemeCookie(): Theme | null {
   const match = document.cookie.split('; ').find(r => r.startsWith(`${COOKIE_NAME}=`))

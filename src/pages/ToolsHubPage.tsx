@@ -8,11 +8,11 @@ import { HUB_PATH } from "../lib/routes";
 import { AGENT_FLOW_LIVE, toolHref } from "../lib/tools";
 
 /**
- * Logged-in landing page ("tools hub") — the default post-login destination for a
+ * Logged-in landing page ("tools hub"): the default post-login destination for a
  * user who did not arrive from a specific tool. Shortcut cards link out to every
  * Dome tool. Auth-gated: signed-out visitors are bounced to /login?redirect=/app.
  *
- * Standalone (no marketing nav/footer), mirroring LoginPage / AuthCallbackPage —
+ * Standalone (no marketing nav/footer), mirroring LoginPage / AuthCallbackPage:
  * the chrome is just the wordmark + a sign-out control. Light/dark is driven by the
  * shared `[data-theme]` attribute + design tokens, so it tracks the site-wide theme
  * cookie without its own toggle.
@@ -59,7 +59,7 @@ const TOOLS: Tool[] = [
     phase: "MODEL",
     name: "Data Intelligence",
     description:
-      "Upload a spreadsheet and get a governed analytics dashboard — columns auto-classified, chart types chosen by a governance rules engine.",
+      "Upload a spreadsheet and get a governed analytics dashboard. Columns are classified automatically and a governance rules engine picks the chart types.",
     prodHost: "data-intelligence.domelayer.com",
     accent: "#10B981",
     text: { light: "#047857", dark: "#10B981" },
@@ -68,7 +68,7 @@ const TOOLS: Tool[] = [
     phase: "MODEL",
     name: "Document Intelligence",
     description:
-      "Upload any document — invoice, lab report, contract — and extract validated, structured fields under 16 governance rules, ready to export.",
+      "Upload any document (an invoice, a lab report, a contract) and extract validated, structured fields under 16 governance rules, ready to export.",
     prodHost: "document-intelligence.domelayer.com",
     accent: "#F59E0B",
     text: { light: "#92400E", dark: "#F59E0B" },
@@ -77,7 +77,7 @@ const TOOLS: Tool[] = [
     phase: "EXECUTE",
     name: "Agent Flow",
     description:
-      "Run a governed invoice-to-approval workflow across the tools — extraction, a policy rules engine, a multi-model council, and a human approval gate, every step audited.",
+      "Run a governed invoice-to-approval workflow across the tools: extraction, a policy rules engine, a multi-model council and a human approval gate, with every step audited.",
     prodHost: "agent-flow.domelayer.com",
     accent: "#EC4899",
     text: { light: "#BE185D", dark: "#EC4899" },
@@ -89,7 +89,7 @@ const TOOLS: Tool[] = [
 const GOV_TOOL = {
   name: "Governance Dashboard",
   description:
-    "Audit trail, compliance reporting, and PDF export across all four DOME AI tools — the observation and compliance layer that spans every tool.",
+    "Audit trail, compliance reporting, and PDF export across all four DOME AI tools: the observation and compliance layer that spans every tool.",
   prodHost: "governance.domelayer.com",
   accent: "#6366F1",
     text: { light: "#4F46E5", dark: "#818CF8" },
@@ -146,7 +146,7 @@ function ToolsHub() {
       <div className="hub-shell">
         {/* Header: wordmark (→ marketing home) + sign out */}
         <header className="hub-header">
-          <a href="/" aria-label="Dome — home" className="hub-logo-link">
+          <a href="/" aria-label="Dome home" className="hub-logo-link">
             <DomeLogo size="md" />
           </a>
           <button type="button" onClick={handleSignOut} className="hub-signout">
@@ -160,8 +160,8 @@ function ToolsHub() {
           <p className="hub-eyebrow">Your tools</p>
           <h1 className="hub-title">Welcome to Dome</h1>
           <p className="hub-subtitle">
-            One secure sign-in across every Dome tool. Pick up where you left off —
-            choose a tool to get started.
+            One secure sign-in across every Dome tool. Pick up where you left off,
+            or choose a tool to get started.
           </p>
         </div>
 
@@ -192,7 +192,7 @@ function ToolsHub() {
           ))}
         </div>
 
-        {/* Governance layer — separate section, visually distinct from P1–P4 */}
+        {/* Governance layer: separate section, visually distinct from P1 to P4 */}
         <div className="hub-govern">
           <p className="hub-govern-label">Governance &amp; compliance layer</p>
           <a

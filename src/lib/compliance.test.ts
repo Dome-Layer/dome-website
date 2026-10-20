@@ -50,7 +50,7 @@ describe("pending consent localStorage round-trip", () => {
 
   it("handles corrupted localStorage data gracefully", () => {
     localStorage.setItem("dome_pending_consent", "not-valid-json");
-    // Should not throw — returns null on parse failure
+    // Should not throw: returns null on parse failure
     expect(readPendingConsent()).toBeNull();
   });
 });

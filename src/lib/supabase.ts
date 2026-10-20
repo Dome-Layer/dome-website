@@ -73,7 +73,7 @@ type ExchangeResult =
  * Complete the OAuth (PKCE) flow on the callback page: exchange the `?code=` for a
  * session, capture the access token + expiry, then purge the Supabase session so the
  * `.domelayer.com` cookie is the single source of truth. A local-scope signOut only
- * clears client storage — it does not revoke the token, which stays valid for the cookie.
+ * clears client storage; it does not revoke the token, which stays valid for the cookie.
  */
 export async function exchangeOAuthCode(): Promise<ExchangeResult> {
   const client = getClient();

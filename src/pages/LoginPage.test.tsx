@@ -5,7 +5,7 @@ import { MemoryRouter } from "react-router-dom";
 import LoginPage from "./LoginPage";
 
 // ---------------------------------------------------------------------------
-// Mocks — mirror the relative specifiers LoginPage imports
+// Mocks: mirror the relative specifiers LoginPage imports
 // ---------------------------------------------------------------------------
 
 vi.mock("../lib/supabase", () => ({
@@ -36,10 +36,10 @@ beforeEach(() => {
 });
 
 // ---------------------------------------------------------------------------
-// First-time user — consent gates every sign-in action (compliance control)
+// First-time user: consent gates every sign-in action (compliance control)
 // ---------------------------------------------------------------------------
 
-describe("LoginPage — provider buttons (first-time user)", () => {
+describe("LoginPage: provider buttons (first-time user)", () => {
   it("renders GitHub and Google buttons", () => {
     renderLogin();
     expect(
@@ -93,10 +93,10 @@ describe("LoginPage — provider buttons (first-time user)", () => {
 });
 
 // ---------------------------------------------------------------------------
-// Returning user — frictionless (no checkboxes, providers enabled)
+// Returning user: frictionless (no checkboxes, providers enabled)
 // ---------------------------------------------------------------------------
 
-describe("LoginPage — returning user", () => {
+describe("LoginPage: returning user", () => {
   beforeEach(() => {
     vi.mocked(hasLocalConsent).mockReturnValue(true);
   });
@@ -111,10 +111,10 @@ describe("LoginPage — returning user", () => {
 });
 
 // ---------------------------------------------------------------------------
-// Magic link — unchanged gating, still posts to the auth backend
+// Magic link: unchanged gating, still posts to the auth backend
 // ---------------------------------------------------------------------------
 
-describe("LoginPage — magic link", () => {
+describe("LoginPage: magic link", () => {
   it("send button gates on email + Terms, then POSTs the magic-link request", async () => {
     const user = userEvent.setup();
     const fetchMock = vi
@@ -151,11 +151,11 @@ describe("LoginPage — magic link", () => {
 });
 
 // ---------------------------------------------------------------------------
-// Stored redirect — preserve genuine tool returns, clear stale ones
+// Stored redirect: preserve genuine tool returns, clear stale ones
 // (the "landed on Process Analyzer after a direct sign-in" bug)
 // ---------------------------------------------------------------------------
 
-describe("LoginPage — stored redirect handling", () => {
+describe("LoginPage: stored redirect handling", () => {
   function renderAt(entry: string) {
     return render(
       <MemoryRouter initialEntries={[entry]}>
