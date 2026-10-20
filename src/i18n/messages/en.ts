@@ -25,7 +25,7 @@ export const en: Messages = {
   },
   switcher: { label: 'Read this page in Italian' },
   footer: {
-    tagline: 'Governance-Driven Operational AI',
+    tagline: 'AI and product consulting for regulated enterprises, with governance built in.',
     privacy: 'Privacy policy',
     terms: 'Terms of service',
     cookies: 'Cookie policy',
