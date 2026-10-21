@@ -841,7 +841,6 @@ export const it: Messages = {
             { p: 'Per gestire Dome ci avvaliamo dei seguenti fornitori terzi. Ciascuno opera come responsabile del trattamento in base a un accordo sul trattamento dei dati:' },
             { p: '**Supabase Inc.**: database e autenticazione. I dati sono conservati nell’Unione Europea (Francoforte, Germania: eu-central-1). supabase.com/privacy' },
             { p: '**Cloudflare Inc.**: hosting di questo sito e degli strumenti Dome, compresi il modulo di contatto e la sua protezione dagli abusi. cloudflare.com/privacypolicy' },
-            { p: '**Vercel Inc.**: hosting dell’interfaccia della demo Agent Flow, che mostriamo in privato su richiesta. vercel.com/legal/privacy-policy' },
             { p: '**Railway Corp.**: hosting dei servizi back-end degli strumenti Dome. railway.com/legal/privacy' },
             { p: '**Resend Inc.**: email transazionali. Usato per inviare i magic link, per recapitarci i messaggi inviati tramite il modulo di contatto e, con il vostro consenso, comunicazioni sui prodotti. resend.com/legal/privacy-policy' },
             { p: '**Functional Software Inc. (Sentry)**: monitoraggio degli errori del sito e degli strumenti. I dati sugli errori sono conservati nell’Unione Europea (Germania). sentry.io/privacy' },
@@ -859,7 +858,7 @@ export const it: Messages = {
           heading: 'Trasferimenti internazionali',
           blocks: [
             { p: 'Il vostro account e i dati che salvate negli strumenti sono conservati nell’Unione Europea, sull’infrastruttura Supabase di Francoforte. Anche i dati del monitoraggio degli errori sono conservati nell’Unione Europea.' },
-            { p: 'Cloudflare, Vercel, Railway, Resend, Cal.com, Umami, Anthropic, OpenAI e Google hanno sede negli Stati Uniti o vi trattano dati. I trasferimenti verso di loro si basano sul Data Privacy Framework UE-USA quando il fornitore vi aderisce e, negli altri casi, sulle clausole contrattuali standard (SCC) ai sensi dell’art. 46 GDPR.' },
+            { p: 'Cloudflare, Railway, Resend, Cal.com, Umami, Anthropic, OpenAI e Google hanno sede negli Stati Uniti o vi trattano dati. I trasferimenti verso di loro si basano sul Data Privacy Framework UE-USA quando il fornitore vi aderisce e, negli altri casi, sulle clausole contrattuali standard (SCC) ai sensi dell’art. 46 GDPR.' },
             { p: '**Utenti nel Regno Unito:** i trasferimenti tra Regno Unito e UE sono coperti dalla decisione di adeguatezza UK-UE attualmente in vigore. Gli utenti del Regno Unito possono presentare reclamo all’Information Commissioner’s Office (ico.org.uk).' },
           ],
         },
