@@ -835,7 +835,7 @@ export const en: Messages = {
             { p: '**Supabase Inc.**: Database and authentication. Data is stored in the European Union (Frankfurt, Germany: eu-central-1). supabase.com/privacy' },
             { p: '**Cloudflare Inc.**: Hosting of this website and of the Dome tools, including the contact form and its abuse protection. cloudflare.com/privacypolicy' },
             { p: '**Railway Corp.**: Hosting of the back-end services behind the Dome tools. railway.com/legal/privacy' },
-            { p: '**Resend Inc.**: Transactional email. Used to send magic links, to deliver messages sent through the contact form to us and, with your consent, product communications. resend.com/legal/privacy-policy' },
+            { p: '**Resend Inc.**: Transactional email. Used to send magic links, to deliver messages sent through the contact form to us, to send our replies to the messages you write to us and, with your consent, product communications. resend.com/legal/privacy-policy' },
             { p: '**Functional Software Inc. (Sentry)**: Error monitoring for the website and the tools. Error data is stored in the European Union (Germany). sentry.io/privacy' },
             { p: '**Cal.com Inc.**: Call booking, only when you choose to book a call. cal.com/privacy' },
             { p: '**Umami Software, Inc.**: Aggregate measurement of visits to this website, without cookies. Data hosted in the European Union (Germany). umami.is/privacy' },

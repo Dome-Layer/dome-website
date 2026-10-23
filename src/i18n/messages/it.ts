@@ -842,7 +842,7 @@ export const it: Messages = {
             { p: '**Supabase Inc.**: database e autenticazione. I dati sono conservati nell’Unione Europea (Francoforte, Germania: eu-central-1). supabase.com/privacy' },
             { p: '**Cloudflare Inc.**: hosting di questo sito e degli strumenti Dome, compresi il modulo di contatto e la sua protezione dagli abusi. cloudflare.com/privacypolicy' },
             { p: '**Railway Corp.**: hosting dei servizi back-end degli strumenti Dome. railway.com/legal/privacy' },
-            { p: '**Resend Inc.**: email transazionali. Usato per inviare i magic link, per recapitarci i messaggi inviati tramite il modulo di contatto e, con il vostro consenso, comunicazioni sui prodotti. resend.com/legal/privacy-policy' },
+            { p: '**Resend Inc.**: email transazionali. Usato per inviare i magic link, per recapitarci i messaggi inviati tramite il modulo di contatto, per recapitarvi le nostre risposte ai messaggi che ci scrivete e, con il vostro consenso, comunicazioni sui prodotti. resend.com/legal/privacy-policy' },
             { p: '**Functional Software Inc. (Sentry)**: monitoraggio degli errori del sito e degli strumenti. I dati sugli errori sono conservati nell’Unione Europea (Germania). sentry.io/privacy' },
             { p: '**Cal.com Inc.**: prenotazione di chiamate, solo quando scegliete di prenotarne una. cal.com/privacy' },
             { p: '**Umami Software, Inc.**: misurazione aggregata delle visite a questo sito, senza cookie. Dati ospitati nell’Unione europea (Germania). umami.is/privacy' },
