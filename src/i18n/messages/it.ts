@@ -275,6 +275,7 @@ export const it: Messages = {
         lead: 'Aiutiamo le imprese regolamentate a ridisegnare processi complessi e ad automatizzarli con AI governata, misurabile e spiegabile.',
         primary: 'Prenotate una prima call',
         secondary: 'I nostri progetti',
+        scrollCue: 'Scorri',
       },
       sectors: {
         eyebrow: 'Settori in cui lavoriamo',
