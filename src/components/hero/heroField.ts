@@ -18,6 +18,7 @@ import {
   DOME_PITCH,
   DOME_YAW,
   SEED,
+  domeFit,
   domeLattice,
   projectDome,
   seeded,
@@ -56,6 +57,8 @@ export interface HeroFieldOptions {
   height: number
   /** The copy block, in the hero's coordinates, so particles can dim behind it. */
   copy: Rect | null
+  /** How far down the hero the top of the dome may reach: the bottom of the top bar plus a gap. */
+  clearTop: number
   palette: HeroPalette
 }
 
@@ -186,6 +189,7 @@ export class HeroField {
       prev.layout !== next.layout ||
       prev.width !== next.width ||
       prev.height !== next.height ||
+      prev.clearTop !== next.clearTop ||
       (next.scene === 'signal' && prev.copy?.y !== next.copy?.y) ||
       (next.scene === 'signal' && prev.copy?.h !== next.copy?.h)
     if (geometryChanged) this.build()
@@ -252,7 +256,7 @@ export class HeroField {
     if (o.scene === 'dome') {
       this.signal = null
       const wide = o.layout === 'wide'
-      const r = Math.min(wide ? o.width * 0.3 : o.width * 0.5, o.height * 0.6)
+      const { r, baseY } = domeFit(wide, o.width, o.height, o.clearTop)
       const points = domeLattice(r, wide ? 15 : 13, wide ? 0.12 : 0.2, rand)
       const dust: Dust[] = []
       const count = wide ? 70 : 45
@@ -272,7 +276,7 @@ export class HeroField {
       this.dome = {
         r,
         cx: wide ? o.width * 0.7 : o.width * 0.5,
-        baseY: o.height * (wide ? 0.97 : 0.99) - r * Math.sin(DOME_PITCH),
+        baseY,
         points,
         dust,
       }
