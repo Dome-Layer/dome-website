@@ -1,5 +1,5 @@
 import type { CSSProperties } from 'react'
-import { DOME_CLEARANCE, DOME_MERIDIANS, DOME_PITCH, DOME_RINGS, DOME_RISE, DOME_YAW, SEED, projectDome, seeded, signalField } from './heroGeometry'
+import { DOME_CLEARANCE, DOME_PITCH, DOME_RISE, SEED, domePaths, seeded, signalField } from './heroGeometry'
 import { easeOutCubic } from './heroMotion'
 
 /**
@@ -20,51 +20,6 @@ import { easeOutCubic } from './heroMotion'
  */
 
 const round = (v: number) => Math.round(v * 10) / 10
-
-/** Front and back dotted paths for a dome of radius `r` around the centre of its base, and their box. */
-function domePaths(r: number) {
-  let front = ''
-  let back = ''
-  const box = { minX: 0, minY: 0, maxX: 0, maxY: 0 }
-  const curve = (pts: [number, number, number][]) => {
-    let run: 'front' | 'back' | null = null
-    for (const [x, y, z] of pts) {
-      const p = projectDome(x, y, z, r, DOME_YAW, DOME_PITCH)
-      const side = p.depth < 0.5 ? 'front' : 'back'
-      box.minX = Math.min(box.minX, p.sx)
-      box.minY = Math.min(box.minY, p.sy)
-      box.maxX = Math.max(box.maxX, p.sx)
-      box.maxY = Math.max(box.maxY, p.sy)
-      const seg = `${side === run ? 'L' : 'M'}${round(p.sx)} ${round(p.sy)}`
-      if (side === 'front') front += seg
-      else back += seg
-      run = side
-    }
-  }
-  for (const deg of DOME_RINGS) {
-    const phi = (deg * Math.PI) / 180
-    const rr = r * Math.cos(phi)
-    const pts: [number, number, number][] = []
-    for (let i = 0; i <= 72; i++) {
-      const th = (i / 72) * Math.PI * 2
-      pts.push([rr * Math.cos(th), r * Math.sin(phi), rr * Math.sin(th)])
-    }
-    curve(pts)
-  }
-  for (let m = 0; m < DOME_MERIDIANS; m++) {
-    const th = (m / DOME_MERIDIANS) * Math.PI * 2
-    const pts: [number, number, number][] = []
-    for (let i = 0; i <= 20; i++) {
-      const phi = (i / 20) * (Math.PI / 2)
-      pts.push([r * Math.cos(phi) * Math.cos(th), r * Math.sin(phi), r * Math.cos(phi) * Math.sin(th)])
-    }
-    curve(pts)
-  }
-  // A little room for the round caps of the dots.
-  const pad = 4
-  const viewBox = [box.minX - pad, box.minY - pad, box.maxX - box.minX + pad * 2, box.maxY - box.minY + pad * 2]
-  return { front, back, viewBox: viewBox.map(round).join(' '), r, origin: { x: viewBox[0], y: viewBox[1] }, size: { w: viewBox[2], h: viewBox[3] } }
-}
 
 type Dome = ReturnType<typeof domePaths>
 

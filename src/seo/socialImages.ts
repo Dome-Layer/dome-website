@@ -7,7 +7,9 @@ import { ROUTE_IDS, TOOL_ROUTE_IDS, caseStudyIdFor, type RouteId } from '../i18n
 /**
  * The social images: the Open Graph and Twitter card for every page, 1200x630 JPEG in
  * public/social/, one per page group and locale (SEO audit M1, 2026-10-20). Each shows the page's
- * hero eyebrow and heading over its hero image, so a shared link reads like the page it opens.
+ * hero eyebrow and heading over its hero image, so a shared link reads like the page it opens. The
+ * home card, which legal pages share, sits on the home hero's blue surface with the globe instead
+ * (DESIGN_SYSTEM v2.4 and v2.5), like the page it opens.
  *
  * `npm run social-images` renders them from this file. Rerun it after changing a hero eyebrow or
  * heading, a case study title or descriptor, a hero image, or after adding a locale; the test in
@@ -36,15 +38,16 @@ export function socialImagePath(id: RouteId, locale: Locale): string {
 export interface SocialImageSpec {
   eyebrow: string
   heading: string
-  /** Site-relative path of the background photograph. */
-  background: string
+  /** Site-relative path of the background photograph; absent on the home card. */
+  background?: string
+  /** The home card: the hero's blue surface and the dotted globe instead of a photograph. */
+  surface?: boolean
   /** The AI-generated label, set when the background is an AI image the site labels too. */
   aiLabel?: string
 }
 
-/** Background of each page with its own hero. The home page uses the video's poster frame (own footage). */
+/** Background photograph of each page with its own hero, except home (see `socialImageSpec`). */
 const HERO_MEDIA = {
-  home: 'homeHeroPoster',
   aiProcessAutomation: 'aiProcessAutomationHero',
   enterpriseUx: 'enterpriseUxHero',
   dome: 'capabilitiesHero',
@@ -85,6 +88,10 @@ export function socialImageSpec(id: RouteId, locale: Locale): SocialImageSpec {
     // The DOME capability study shows a tablet mockup on its page; its card uses the capabilities hero.
     const media = study.media === 'tabletMockup' ? 'capabilitiesHero' : study.media
     return spec(study.descriptor[locale], study.title[locale], media, locale)
+  }
+  if (id === 'home') {
+    const { eyebrow, heading } = MESSAGES[locale].pages.home.hero
+    return { eyebrow, heading, surface: true }
   }
   if (!(id in HERO_MEDIA)) throw new Error(`Route "${id}" has no social image of its own`)
   const heroId = id as keyof typeof HERO_MEDIA
