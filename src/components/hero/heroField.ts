@@ -121,11 +121,11 @@ const PAGE_LOOK: Record<'dark' | 'light', Look> = {
   light: { blend: 'source-over', rawBlend: 'source-over', core: 0.85, glow: 0.22, line: 0.8, ring: 0.45 },
 }
 
-/** On the hero surface the dots are white light, additive in both themes; rings are white. */
-const SURFACE_LOOK: Record<'dark' | 'light', Look> = {
-  dark: { blend: 'lighter', rawBlend: 'source-over', core: 0.95, glow: 0.5, line: 0.9, ring: 0.55 },
-  light: { blend: 'lighter', rawBlend: 'source-over', core: 0.95, glow: 0.4, line: 0.85, ring: 0.6 },
-}
+/**
+ * On the hero surface the dots are white light, additive; rings are white. The surface is the same
+ * #0070E0 in both themes (v2.5), so is the look.
+ */
+const SURFACE_LOOK: Look = { blend: 'lighter', rawBlend: 'source-over', core: 0.95, glow: 0.4, line: 0.85, ring: 0.6 }
 
 /**
  * The home hero scene: a Canvas 2D particle engine with two scenes, the dome (768px and up) and
@@ -204,7 +204,7 @@ export class HeroField {
     if (!prev || !this.inks || paletteKey(p) !== paletteKey(prev.palette)) {
       const theme = p.dark ? 'dark' : 'light'
       this.inks = {
-        surface: { sprites: makeSprites(p.surface), look: SURFACE_LOOK[theme], rgb: p.surface.particle },
+        surface: { sprites: makeSprites(p.surface), look: SURFACE_LOOK, rgb: p.surface.particle },
         page: { sprites: makeSprites(p), look: PAGE_LOOK[theme], rgb: p.particle },
       }
     }

@@ -141,16 +141,17 @@
     --color-hero-glow:        #0070E0;
     --color-hero-raw:         #6E6E6E;
 
-    /* Home hero surface (v2.4): the one place the primary is a surface, the home hero only. The
-       scene on it has its own colours (on-*): white governed dots, a light glow, darker raw specks.
-       The logo token lets the top bar turn the wordmark white over the surface. */
+    /* The primary as a surface (v2.4, v2.5): the home hero and the top bar on every page, the same
+       #0070E0 in both themes. Only the outer edge of the hero's glow differs, deeper in dark so the
+       blue meets the black page softly. The scene on it has its own colours (on-*): white governed
+       dots, a light glow, darker raw specks. The logo token turns the wordmark white on it. */
     --color-hero-surface:      #0070E0;
     --color-hero-surface-glow: #4A9DFF;
     --color-hero-surface-deep: #005AB5;
     --color-hero-ink:          #0066CC;
     --color-hero-scrim:        rgba(0, 112, 224, 0.55);
     --color-hero-scrim-strong: rgba(0, 112, 224, 0.88);
-    --color-hero-bar:          rgba(0, 112, 224, 0.9);
+    --color-bar:               #0070E0;
     --color-hero-on-particle:  #FFFFFF;
     --color-hero-on-glow:      #8CC8FF;
     --color-hero-on-raw:       #002D6E;
@@ -188,22 +189,13 @@
     --color-hero-glow:        #0080FF;
     --color-hero-raw:         #858585;
 
-    --color-hero-surface:      #004D99;
-    --color-hero-surface-glow: #0A6CD0;
-    --color-hero-surface-deep: #002E5C;
-    --color-hero-ink:          #004D99;
-    --color-hero-scrim:        rgba(0, 77, 153, 0.55);
-    --color-hero-scrim-strong: rgba(0, 77, 153, 0.88);
-    --color-hero-bar:          rgba(0, 77, 153, 0.9);
-    --color-hero-on-particle:  #DCEEFF;
-    --color-hero-on-glow:      #40A8FF;
-    --color-hero-on-raw:       #96AFD2;
+    --color-hero-surface-deep: #003D7A;
   }
 
-  /* Content on the home hero surface: the existing tokens, re-pointed for the subtree, so the
-     copy, both buttons, the eyebrow, the toggles and the top bar turn white and inverse without a
-     variant per component. Only pure white passes on #0070E0 (4.78:1), so nothing here is faded
-     in the light theme. */
+  /* Content on the primary surface (the home hero copy and the top bar): the existing tokens,
+     re-pointed for the subtree, so text, buttons, the eyebrow and the toggles turn white and
+     inverse without a variant per component. Only pure white passes on #0070E0 (4.78:1), so nothing
+     here is faded, in either theme. */
   .on-hero-surface {
     --color-text-primary:   #FFFFFF;
     --color-text-secondary: #FFFFFF;
@@ -219,10 +211,6 @@
     --color-scrim:          transparent;
     --color-focus-ring:     rgba(255, 255, 255, 0.7);
     --color-logo:           #FFFFFF;
-  }
-
-  [data-theme="dark"] .on-hero-surface {
-    --color-text-secondary: rgba(255, 255, 255, 0.86);
   }
 
   html {
