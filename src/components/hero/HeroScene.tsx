@@ -2,7 +2,7 @@ import { useEffect, useRef, useState, useSyncExternalStore, type RefObject } fro
 import { useMessages } from '../../i18n/useLocale'
 import { useMediaQuery } from '../../lib/useMediaQuery'
 import { HeroField, type HeroPalette } from './heroField'
-import { heroProgress, layoutForWidth, sceneForWidth } from './heroMotion'
+import { heroProgress, layoutForWidth, sceneForWidth, toRgb } from './heroMotion'
 import { HeroStatic } from './HeroStatic'
 
 /**
@@ -13,11 +13,6 @@ import { HeroStatic } from './HeroStatic'
 const noSubscribe = () => () => {}
 const readSaveData = () =>
   Boolean((navigator as { connection?: { saveData?: boolean } }).connection?.saveData)
-
-const toRgb = (value: string, fallback: string) => {
-  const m = /^#([0-9a-f]{2})([0-9a-f]{2})([0-9a-f]{2})$/i.exec(value.trim())
-  return m ? `${parseInt(m[1], 16)},${parseInt(m[2], 16)},${parseInt(m[3], 16)}` : fallback
-}
 
 /** The scene's colours come from the theme tokens, so the toggle re-tints it without a reload. */
 function readPalette(): HeroPalette {

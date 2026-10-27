@@ -10,6 +10,7 @@ import {
   sceneForWidth,
   signalOrder,
   signalSplit,
+  toRgb,
 } from './heroMotion'
 import { domeLattice, seeded, signalField } from './heroGeometry'
 
@@ -72,6 +73,18 @@ describe('particles behind the copy', () => {
     expect(copyFade(0, 'narrow')).toBeCloseTo(0.42)
     expect(copyFade(48, 'wide')).toBe(1)
     expect(copyFade(24, 'wide')).toBeGreaterThan(0.22)
+  })
+})
+
+// The build minifies `#0066CC` to `#06c`; reading only the long form left light mode drawing in
+// the dark theme's blue on staging.
+describe('theme colours', () => {
+  it('read in both hex forms the build can ship', () => {
+    expect(toRgb('#06c', 'x')).toBe('0,102,204')
+    expect(toRgb(' #0066CC ', 'x')).toBe('0,102,204')
+    expect(toRgb('#40a8ff', 'x')).toBe('64,168,255')
+    expect(toRgb('', 'x')).toBe('x')
+    expect(toRgb('rgb(0 0 0)', 'x')).toBe('x')
   })
 })
 
