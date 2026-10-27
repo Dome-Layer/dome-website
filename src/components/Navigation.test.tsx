@@ -13,10 +13,11 @@ const bar = (path: string) =>
     </ThemeProvider>,
   )
 
-// The prerendered bar must already match the page under it: on the home page it starts blended
-// into the hero surface (DESIGN_SYSTEM v2.4), so hydration never flashes the normal bar over blue.
-describe('top bar over the home hero surface', () => {
-  it('starts transparent over the surface on the home page, in both languages', () => {
+// The bar sits on the primary on every page (DESIGN_SYSTEM v2.5). The prerendered bar must already
+// match: transparent at the top of the home page so the hero shows through, solid everywhere else,
+// so hydration never flashes the wrong one.
+describe('top bar on the primary', () => {
+  it('starts transparent over the hero on the home page, in both languages', () => {
     for (const path of ['/', '/it', '/it/']) {
       const html = bar(path)
       expect(html).toContain('data-surface="top"')
@@ -24,11 +25,12 @@ describe('top bar over the home hero surface', () => {
     }
   })
 
-  it('is the normal bar on every other page', () => {
+  it('is the solid blue bar on every other page, with the current page underlined', () => {
     for (const path of ['/about', '/it/chi-siamo', '/dome']) {
       const html = bar(path)
-      expect(html).not.toContain('data-surface')
-      expect(html).not.toContain('on-hero-surface')
+      expect(html).toContain('data-surface="bar"')
+      expect(html).toContain('bg-[var(--color-bar)]')
     }
+    expect(bar('/about')).toMatch(/aria-current="page"[^>]*underline|underline[^>]*aria-current="page"/)
   })
 })

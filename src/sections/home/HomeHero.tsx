@@ -17,14 +17,11 @@ export function HomeHero() {
     // when there is one) and the hero grows instead. The 200px bottom padding is the band the scene
     // lives in under the buttons. From `md` up the fixed height has room to spare.
     //
-    // The hero sits on the primary colour (v2.4, `.hero-surface`), and the copy re-points the
+    // The hero sits on the primary colour (v2.4, the same #0070E0 in both themes since v2.5,
+    // `.hero-surface`), and the copy re-points the
     // colour tokens for its subtree (`.on-hero-surface`) so the eyebrow, heading, lead and both
-    // buttons turn white and inverse. `data-nav-surface` lets the top bar blend in while the surface
-    // is under it; on phones the surface ends where its fade into the page begins, 200px earlier.
-    <section
-      data-nav-surface=""
-      className="hero-surface relative flex min-h-[560px] flex-col overflow-hidden [--nav-surface-inset:200px] md:h-[780px] md:[--nav-surface-inset:0px]"
-    >
+    // buttons turn white and inverse. The top bar is transparent over it at the top of the page.
+    <section className="hero-surface relative flex min-h-[560px] flex-col overflow-hidden md:h-[780px]">
       <HeroScene copyRef={copyRef} />
       <div className="on-hero-surface relative mx-auto flex w-full max-w-[1280px] flex-1 flex-col justify-center px-6 pb-[200px] pt-[calc(7rem+var(--dome-banner-h,0px))] md:px-12 md:py-0">
         <div ref={copyRef} className="flex max-w-[20rem] flex-col gap-6 sm:max-w-[30rem] md:max-w-[640px] md:pt-10">
