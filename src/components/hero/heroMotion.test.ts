@@ -10,6 +10,8 @@ import {
   sceneForWidth,
   signalOrder,
   signalSplit,
+  surfaceMix,
+  toRgb,
 } from './heroMotion'
 import { domeLattice, seeded, signalField } from './heroGeometry'
 
@@ -68,10 +70,32 @@ describe('timed parts keep the design system ceiling', () => {
 
 describe('particles behind the copy', () => {
   it('dim to a floor inside the copy block and recover over 48px', () => {
-    expect(copyFade(0, 'wide')).toBeCloseTo(0.22)
-    expect(copyFade(0, 'narrow')).toBeCloseTo(0.42)
+    expect(copyFade(0, 'wide')).toBeCloseTo(0.1)
+    expect(copyFade(0, 'narrow')).toBeCloseTo(0.25)
     expect(copyFade(48, 'wide')).toBe(1)
-    expect(copyFade(24, 'wide')).toBeGreaterThan(0.22)
+    expect(copyFade(24, 'wide')).toBeGreaterThan(0.1)
+  })
+})
+
+// On phones the surface fades into the page across the bottom 200px; the dots follow it.
+describe('surface to page on phones', () => {
+  it('keeps the surface palette above the band and the page palette at the bottom', () => {
+    expect(surfaceMix(0, 800)).toBe(0)
+    expect(surfaceMix(600, 800)).toBe(0)
+    expect(surfaceMix(700, 800)).toBeCloseTo(0.5)
+    expect(surfaceMix(800, 800)).toBe(1)
+  })
+})
+
+// The build minifies `#0066CC` to `#06c`; reading only the long form left light mode drawing in
+// the dark theme's blue on staging.
+describe('theme colours', () => {
+  it('read in both hex forms the build can ship', () => {
+    expect(toRgb('#06c', 'x')).toBe('0,102,204')
+    expect(toRgb(' #0066CC ', 'x')).toBe('0,102,204')
+    expect(toRgb('#40a8ff', 'x')).toBe('64,168,255')
+    expect(toRgb('', 'x')).toBe('x')
+    expect(toRgb('rgb(0 0 0)', 'x')).toBe('x')
   })
 })
 

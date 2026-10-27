@@ -1,6 +1,6 @@
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation } from 'react-router'
 import { DomeLogo } from './DomeLogo'
 import { ThemeToggle } from './ThemeToggle'
 import { isAuthenticated, clearToken } from '../lib/auth'
@@ -81,6 +81,39 @@ export function Navigation() {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
+  // The home hero sits on the primary colour (DESIGN_SYSTEM v2.4). While that surface is under the
+  // bar, the bar blends into it: transparent at the top of the page, a frosted surface once the
+  // page scrolls, and the normal bar once the surface has passed. The hero marks itself with
+  // `data-nav-surface`; on phones its surface ends where its fade begins (`--nav-surface-inset`).
+  // The first render is derived from the path alone, so the prerendered home page already has the
+  // blended bar and hydration does not flash a white or black one.
+  const headerRef = useRef<HTMLElement>(null)
+  const homePath = location.pathname.length > 1 ? location.pathname.replace(/\/+$/, '') : location.pathname
+  const onHome = homePath === homeHref
+  const [pastSurface, setPastSurface] = useState(false)
+
+  useEffect(() => {
+    if (!onHome) return
+    const check = () => {
+      const surface = document.querySelector<HTMLElement>('[data-nav-surface]')
+      const header = headerRef.current
+      if (!surface || !header) return
+      const inset = parseFloat(getComputedStyle(surface).getPropertyValue('--nav-surface-inset')) || 0
+      setPastSurface(surface.getBoundingClientRect().bottom - inset <= header.getBoundingClientRect().bottom)
+    }
+    check()
+    window.addEventListener('scroll', check, { passive: true })
+    window.addEventListener('resize', check)
+    return () => {
+      window.removeEventListener('scroll', check)
+      window.removeEventListener('resize', check)
+      setPastSurface(false)
+    }
+  }, [onHome])
+
+  // The phone menu is the same page-colour menu on every page, so the bar inside it is the normal one.
+  const surface = onHome && !mobileOpen && !pastSurface ? (scrolled ? 'under' : 'top') : null
+
   useEffect(() => {
     document.body.style.overflow = mobileOpen ? 'hidden' : ''
     return () => { document.body.style.overflow = '' }
@@ -89,15 +122,21 @@ export function Navigation() {
   return (
     <>
       <header
-        className={`fixed top-[var(--dome-banner-h,0px)] left-0 right-0 z-50 h-16 bg-[var(--color-bg-base)] transition-[border-color,box-shadow,background-color] duration-300 ${
-          scrolled
-            ? 'border-b border-[var(--color-border-subtle)] shadow-[0_1px_3px_rgba(0,0,0,0.04)]'
-            : 'border-b border-transparent'
+        ref={headerRef}
+        data-surface={surface ?? undefined}
+        className={`fixed top-[var(--dome-banner-h,0px)] left-0 right-0 z-50 h-16 transition-[border-color,box-shadow,background-color] duration-300 ${
+          surface === 'top'
+            ? 'on-hero-surface border-b border-transparent bg-transparent'
+            : surface === 'under'
+              ? 'on-hero-surface border-b border-[var(--color-border-subtle)] bg-[var(--color-hero-bar)] backdrop-blur-md'
+              : scrolled
+                ? 'border-b border-[var(--color-border-subtle)] bg-[var(--color-bg-base)] shadow-[0_1px_3px_rgba(0,0,0,0.04)]'
+                : 'border-b border-transparent bg-[var(--color-bg-base)]'
         }`}
       >
         <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 sm:px-8 lg:px-12 h-16">
           <a href={homeHref} className="relative z-10 flex-shrink-0" aria-label={t.homeLabel}>
-            <DomeLogo size="md" />
+            <DomeLogo size="md" color="currentColor" className="text-[var(--color-logo)] transition-colors duration-300" />
           </a>
 
           {/* Desktop nav */}
@@ -123,7 +162,7 @@ export function Navigation() {
               <>
                 <a
                   href={HUB_PATH}
-                  className="inline-flex items-center gap-2 px-5 py-2.5 text-[13px] font-semibold bg-[var(--color-accent)] text-white rounded-lg hover:bg-[var(--color-accent-hover)] active:bg-[var(--color-accent-active)] transition-colors duration-150"
+                  className="inline-flex items-center gap-2 px-5 py-2.5 text-[13px] font-semibold bg-[var(--color-accent)] text-[var(--color-text-on-accent)] rounded-lg hover:bg-[var(--color-accent-hover)] active:bg-[var(--color-accent-active)] transition-colors duration-150"
                 >
                   {UserIcon}
                   {t.yourTools}
@@ -139,7 +178,7 @@ export function Navigation() {
             ) : (
               <a
                 href={loginHref}
-                className="inline-flex items-center gap-2 px-5 py-2.5 text-[13px] font-semibold bg-[var(--color-accent)] text-white rounded-lg hover:bg-[var(--color-accent-hover)] active:bg-[var(--color-accent-active)] transition-colors duration-150"
+                className="inline-flex items-center gap-2 px-5 py-2.5 text-[13px] font-semibold bg-[var(--color-accent)] text-[var(--color-text-on-accent)] rounded-lg hover:bg-[var(--color-accent-hover)] active:bg-[var(--color-accent-active)] transition-colors duration-150"
               >
                 {UserIcon}
                 {t.signIn}
@@ -223,7 +262,7 @@ export function Navigation() {
                       <a
                         href={HUB_PATH}
                         onClick={() => setMobileOpen(false)}
-                        className="inline-flex items-center gap-2 px-8 py-3.5 text-[13px] font-semibold bg-[var(--color-accent)] text-white rounded-lg hover:bg-[var(--color-accent-hover)] active:bg-[var(--color-accent-active)]"
+                        className="inline-flex items-center gap-2 px-8 py-3.5 text-[13px] font-semibold bg-[var(--color-accent)] text-[var(--color-text-on-accent)] rounded-lg hover:bg-[var(--color-accent-hover)] active:bg-[var(--color-accent-active)]"
                       >
                         {UserIcon}
                         {t.yourTools}
@@ -243,7 +282,7 @@ export function Navigation() {
                     <a
                       href={loginHref}
                       onClick={() => setMobileOpen(false)}
-                      className="inline-flex items-center gap-2 px-8 py-3.5 text-[13px] font-semibold bg-[var(--color-accent)] text-white rounded-lg hover:bg-[var(--color-accent-hover)] active:bg-[var(--color-accent-active)]"
+                      className="inline-flex items-center gap-2 px-8 py-3.5 text-[13px] font-semibold bg-[var(--color-accent)] text-[var(--color-text-on-accent)] rounded-lg hover:bg-[var(--color-accent-hover)] active:bg-[var(--color-accent-active)]"
                     >
                       {UserIcon}
                       {t.signIn}

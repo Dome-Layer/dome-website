@@ -9,6 +9,9 @@ import { easeOutCubic } from './heroMotion'
  * the live scene, at its resting state, so the hand-over is a crossfade rather than a jump. The
  * dome's rings and meridians are dotted strokes (a zero-length dash with round caps), which keeps
  * the markup to a few paths instead of a thousand circles.
+ *
+ * Both sit on the hero surface (v2.4): the dome in its white dots; the phone band in colours that
+ * run from the surface palette to the page palette down the band, as the surface fades under it.
  */
 
 const round = (v: number) => Math.round(v * 10) / 10
@@ -76,8 +79,20 @@ const SIGNAL = signalStill()
 
 const dots = {
   fill: 'none',
-  stroke: 'var(--color-hero-particle)',
+  stroke: 'var(--color-hero-on-particle)',
   strokeLinecap: 'round' as const,
+}
+
+/** A top to bottom blend over the 200px band, matching the surface fading into the page. */
+function BandGradient({ id, from, to }: { id: string; from: string; to: string }) {
+  return (
+    <linearGradient id={id} x1="0" y1="0" x2="0" y2="200" gradientUnits="userSpaceOnUse">
+      <stop offset="0" style={{ stopColor: from }} />
+      <stop offset="0.3" style={{ stopColor: from }} />
+      <stop offset="0.7" style={{ stopColor: to }} />
+      <stop offset="1" style={{ stopColor: to }} />
+    </linearGradient>
+  )
 }
 
 export function HeroStatic({ hidden }: { hidden: boolean }) {
@@ -95,12 +110,16 @@ export function HeroStatic({ hidden }: { hidden: boolean }) {
         <path d={MEDIUM.front} {...dots} strokeWidth={2.2} strokeDasharray="0 13" opacity={0.75} />
       </svg>
       <svg className="absolute inset-x-0 bottom-0 h-[200px] w-full md:hidden" viewBox="0 0 390 200" preserveAspectRatio="xMidYMax meet">
-        <path d={SIGNAL.links} fill="none" stroke="var(--color-hero-particle)" strokeWidth={1} opacity={0.35} />
+        <defs>
+          <BandGradient id="hero-band-dot" from="var(--color-hero-on-particle)" to="var(--color-hero-particle)" />
+          <BandGradient id="hero-band-raw" from="var(--color-hero-on-raw)" to="var(--color-hero-raw)" />
+        </defs>
+        <path d={SIGNAL.links} fill="none" stroke="url(#hero-band-dot)" strokeWidth={1} opacity={0.35} />
         {SIGNAL.raw.map((p, i) => (
-          <circle key={`r${i}`} cx={p.x} cy={p.y} r={1.6} fill="var(--color-hero-raw)" opacity={0.8} />
+          <circle key={`r${i}`} cx={p.x} cy={p.y} r={1.6} fill="url(#hero-band-raw)" opacity={0.8} />
         ))}
         {SIGNAL.ordered.map((p, i) => (
-          <circle key={`o${i}`} cx={p.x} cy={p.y} r={1.8} fill="var(--color-hero-particle)" />
+          <circle key={`o${i}`} cx={p.x} cy={p.y} r={1.8} fill="url(#hero-band-dot)" />
         ))}
       </svg>
     </div>
