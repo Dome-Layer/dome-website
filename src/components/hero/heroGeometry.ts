@@ -104,6 +104,39 @@ export function projectDome(
   return { sx: x1 * scale, sy: -y2 * scale, scale, depth: Math.min(1, Math.max(0, (z2 / r + 1) / 2)) }
 }
 
+/**
+ * How far the top of the dome rises above the centre of its base, per px of radius, at the resting
+ * yaw and pitch. The perspective scales with the radius, so this is one number for every size.
+ */
+export const DOME_RISE = (() => {
+  let top = 0
+  for (let phi = 0; phi <= 90; phi += 1) {
+    for (let th = 0; th < 360; th += 2) {
+      const p = (phi * Math.PI) / 180
+      const t = (th * Math.PI) / 180
+      top = Math.min(top, projectDome(Math.cos(p) * Math.cos(t), Math.sin(p), Math.cos(p) * Math.sin(t), 1, DOME_YAW, DOME_PITCH).sy)
+    }
+  }
+  return -top
+})()
+
+/** Space between the top of the dome and the bottom of the top bar. */
+export const DOME_CLEARANCE = 40
+
+/**
+ * The dome's radius and the line its base sits on, for a hero `width` by `height` px. Its natural
+ * size is a share of the width (30% on a desktop, 50% on a tablet), up to 60% of the height; on
+ * wide screens it is also kept `clearTop` px below the top of the hero, which is the bottom of the
+ * top bar plus `DOME_CLEARANCE`. The live scene and the still frames both size the dome with this.
+ */
+export function domeFit(wide: boolean, width: number, height: number, clearTop: number): { r: number; baseY: number } {
+  const base = height * (wide ? 0.97 : 0.99)
+  const natural = Math.min(width * (wide ? 0.3 : 0.5), height * 0.6)
+  const fit = (base - clearTop) / (Math.sin(DOME_PITCH) + DOME_RISE)
+  const r = Math.max(0, Math.min(natural, fit))
+  return { r, baseY: base - r * Math.sin(DOME_PITCH) }
+}
+
 export interface SignalPoint {
   /** Its cell on the record grid. */
   gx: number

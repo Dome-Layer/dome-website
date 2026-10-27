@@ -2,6 +2,7 @@ import { useEffect, useRef, useState, useSyncExternalStore, type RefObject } fro
 import { useMessages } from '../../i18n/useLocale'
 import { useMediaQuery } from '../../lib/useMediaQuery'
 import { HeroField, type HeroPalette } from './heroField'
+import { DOME_CLEARANCE } from './heroGeometry'
 import { heroProgress, layoutForWidth, sceneForWidth, toRgb } from './heroMotion'
 import { HeroStatic } from './HeroStatic'
 
@@ -80,12 +81,16 @@ export function HeroScene({ copyRef }: { copyRef: RefObject<HTMLElement | null> 
       const copy = copyRef.current?.getBoundingClientRect()
       // The scene follows the same viewport width the CSS breakpoints use, scrollbar included.
       const viewport = window.innerWidth
+      // The fixed top bar's bottom edge (64px, plus the staging banner when there is one), in the
+      // hero's own coordinates whatever the scroll position: the dome keeps its distance from it.
+      const bar = document.querySelector('header')?.getBoundingClientRect().bottom ?? 64
       field.configure({
         scene: sceneForWidth(viewport),
         layout: layoutForWidth(viewport),
         width: box.width,
         height: box.height,
         copy: copy ? { x: copy.left - box.left - 16, y: copy.top - box.top - 16, w: copy.width + 32, h: copy.height + 32 } : null,
+        clearTop: bar - (box.top + window.scrollY) + DOME_CLEARANCE,
         palette: readPalette(),
       })
     }

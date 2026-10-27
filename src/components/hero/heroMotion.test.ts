@@ -13,7 +13,7 @@ import {
   surfaceMix,
   toRgb,
 } from './heroMotion'
-import { domeLattice, seeded, signalField } from './heroGeometry'
+import { DOME_CLEARANCE, DOME_PITCH, DOME_RISE, domeFit, domeLattice, seeded, signalField } from './heroGeometry'
 
 describe('scene and layout by width', () => {
   it('shows the dome from 768px and signal to record below', () => {
@@ -96,6 +96,39 @@ describe('theme colours', () => {
     expect(toRgb('#40a8ff', 'x')).toBe('64,168,255')
     expect(toRgb('', 'x')).toBe('x')
     expect(toRgb('rgb(0 0 0)', 'x')).toBe('x')
+  })
+})
+
+// On wide screens the dome stopped growing at 60% of the hero's height and its top came within a
+// few px of the top bar (3px on staging, under the banner). It now keeps a 40px clearance.
+describe('dome size and the top bar', () => {
+  const top = (wide: boolean, w: number, clear: number) => {
+    const { r, baseY } = domeFit(wide, w, 780, clear)
+    return baseY - r * DOME_RISE
+  }
+
+  it('keeps the top of the dome 40px below the bar at every desktop width, banner or not', () => {
+    for (const bar of [64, 96]) {
+      const clear = bar + DOME_CLEARANCE
+      for (let w = 1024; w <= 3840; w += 16) expect(top(true, w, clear)).toBeGreaterThanOrEqual(clear - 0.01)
+      for (let w = 768; w < 1024; w += 16) expect(top(false, w, clear)).toBeGreaterThanOrEqual(clear - 0.01)
+    }
+  })
+
+  it('leaves the signed-off size alone where there was room', () => {
+    expect(domeFit(true, 1440, 780, 104).r).toBeCloseTo(432)
+    expect(domeFit(true, 1280, 780, 104).r).toBeCloseTo(384)
+    expect(domeFit(false, 768, 780, 104).r).toBeCloseTo(384)
+    expect(domeFit(true, 1440, 780, 104).baseY).toBeCloseTo(780 * 0.97 - 432 * Math.sin(DOME_PITCH))
+  })
+
+  it('never shrinks as the screen gets wider', () => {
+    let last = 0
+    for (let w = 1024; w <= 3840; w += 16) {
+      const { r } = domeFit(true, w, 780, 104)
+      expect(r).toBeGreaterThanOrEqual(last - 1e-9)
+      last = r
+    }
   })
 })
 
