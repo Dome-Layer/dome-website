@@ -14,14 +14,23 @@ const noSubscribe = () => () => {}
 const readSaveData = () =>
   Boolean((navigator as { connection?: { saveData?: boolean } }).connection?.saveData)
 
-/** The scene's colours come from the theme tokens, so the toggle re-tints it without a reload. */
+/**
+ * The scene's colours come from the theme tokens, so the toggle re-tints it without a reload: the
+ * page palette, and the palette on the hero surface (v2.4).
+ */
 function readPalette(): HeroPalette {
   const root = document.documentElement
   const css = getComputedStyle(root)
+  const token = (name: string, fallback: string) => toRgb(css.getPropertyValue(name), fallback)
   return {
-    particle: toRgb(css.getPropertyValue('--color-hero-particle'), '64,168,255'),
-    glow: toRgb(css.getPropertyValue('--color-hero-glow'), '0,128,255'),
-    raw: toRgb(css.getPropertyValue('--color-hero-raw'), '133,133,133'),
+    particle: token('--color-hero-particle', '64,168,255'),
+    glow: token('--color-hero-glow', '0,128,255'),
+    raw: token('--color-hero-raw', '133,133,133'),
+    surface: {
+      particle: token('--color-hero-on-particle', '255,255,255'),
+      glow: token('--color-hero-on-glow', '140,200,255'),
+      raw: token('--color-hero-on-raw', '0,45,110'),
+    },
     dark: root.getAttribute('data-theme') === 'dark',
   }
 }
@@ -136,31 +145,29 @@ export function HeroScene({ copyRef }: { copyRef: RefObject<HTMLElement | null> 
       {animate && <canvas ref={canvasRef} aria-hidden="true" className="pointer-events-none absolute inset-0 block h-full w-full" />}
 
       {/*
-        Scrims, all theme-keyed. From `lg` the copy sits on the left and the dome on the right, so
-        the scrim runs sideways. Below `lg` the copy spans the width and the scene lives in the band
-        under the buttons, so the scrim runs top to bottom and clears before that band.
+        Scrims, tinted with the hero surface (v2.4), never white or black. From `lg` the copy sits
+        on the left and the dome on the right, so the scrim runs sideways. Below `lg` the copy spans
+        the width and the scene lives in the band under the buttons, so the scrim runs top to bottom
+        and clears before that band. The surface itself (`.hero-surface` on the section) does the
+        fade into the page on phones; from `md` the hero ends on a clean edge.
       */}
       <div
         aria-hidden="true"
-        className="absolute inset-0 md:hidden bg-[linear-gradient(180deg,var(--color-scrim-strong)_0%,var(--color-scrim-strong)_30%,var(--color-scrim)_54%,transparent_72%)]"
+        className="absolute inset-0 md:hidden bg-[linear-gradient(180deg,var(--color-hero-scrim-strong)_0%,var(--color-hero-scrim-strong)_30%,var(--color-hero-scrim)_54%,transparent_72%)]"
       />
       <div
         aria-hidden="true"
-        className="absolute inset-0 hidden md:block lg:hidden bg-[linear-gradient(180deg,var(--color-scrim-strong)_0%,var(--color-scrim-strong)_22%,var(--color-scrim)_50%,transparent_70%)]"
+        className="absolute inset-0 hidden md:block lg:hidden bg-[linear-gradient(180deg,var(--color-hero-scrim-strong)_0%,var(--color-hero-scrim-strong)_22%,var(--color-hero-scrim)_50%,transparent_70%)]"
       />
       <div
         aria-hidden="true"
-        className="absolute inset-0 hidden lg:block bg-[linear-gradient(90deg,var(--color-scrim-strong)_0%,var(--color-scrim)_48%,transparent_80%)]"
-      />
-      <div
-        aria-hidden="true"
-        className="absolute inset-0 bg-[linear-gradient(180deg,transparent_86%,var(--color-media-fade)_100%)] lg:bg-[linear-gradient(180deg,transparent_72%,var(--color-media-fade)_100%)]"
+        className="absolute inset-0 hidden lg:block bg-[linear-gradient(90deg,var(--color-hero-scrim-strong)_0%,var(--color-hero-scrim)_42%,transparent_72%)]"
       />
 
       <div
         ref={cueRef}
         aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 bottom-6 z-[1] flex flex-col items-center gap-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-[var(--color-text-tertiary)] transition-opacity duration-[250ms] data-[hidden]:opacity-0"
+        className="pointer-events-none absolute inset-x-0 bottom-6 z-[1] flex flex-col items-center gap-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-[var(--color-text-tertiary)] md:text-white/80 transition-opacity duration-[250ms] data-[hidden]:opacity-0"
       >
         <span>{t.scrollCue}</span>
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">

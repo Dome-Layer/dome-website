@@ -140,6 +140,21 @@
     --color-hero-particle:    #0066CC;
     --color-hero-glow:        #0070E0;
     --color-hero-raw:         #6E6E6E;
+
+    /* Home hero surface (v2.4): the one place the primary is a surface, the home hero only. The
+       scene on it has its own colours (on-*): white governed dots, a light glow, darker raw specks.
+       The logo token lets the top bar turn the wordmark white over the surface. */
+    --color-hero-surface:      #0070E0;
+    --color-hero-surface-glow: #4A9DFF;
+    --color-hero-surface-deep: #005AB5;
+    --color-hero-ink:          #0066CC;
+    --color-hero-scrim:        rgba(0, 112, 224, 0.55);
+    --color-hero-scrim-strong: rgba(0, 112, 224, 0.88);
+    --color-hero-bar:          rgba(0, 112, 224, 0.9);
+    --color-hero-on-particle:  #FFFFFF;
+    --color-hero-on-glow:      #8CC8FF;
+    --color-hero-on-raw:       #002D6E;
+    --color-logo:              #0080FF;
   }
 
   [data-theme="dark"] {
@@ -172,6 +187,42 @@
     --color-hero-particle:    #40A8FF;
     --color-hero-glow:        #0080FF;
     --color-hero-raw:         #858585;
+
+    --color-hero-surface:      #004D99;
+    --color-hero-surface-glow: #0A6CD0;
+    --color-hero-surface-deep: #002E5C;
+    --color-hero-ink:          #004D99;
+    --color-hero-scrim:        rgba(0, 77, 153, 0.55);
+    --color-hero-scrim-strong: rgba(0, 77, 153, 0.88);
+    --color-hero-bar:          rgba(0, 77, 153, 0.9);
+    --color-hero-on-particle:  #DCEEFF;
+    --color-hero-on-glow:      #40A8FF;
+    --color-hero-on-raw:       #96AFD2;
+  }
+
+  /* Content on the home hero surface: the existing tokens, re-pointed for the subtree, so the
+     copy, both buttons, the eyebrow, the toggles and the top bar turn white and inverse without a
+     variant per component. Only pure white passes on #0070E0 (4.78:1), so nothing here is faded
+     in the light theme. */
+  .on-hero-surface {
+    --color-text-primary:   #FFFFFF;
+    --color-text-secondary: #FFFFFF;
+    --color-text-accent:    #FFFFFF;
+    --color-text-on-accent: var(--color-hero-ink);
+    --color-accent:         #FFFFFF;
+    --color-accent-hover:   #E8F3FF;
+    --color-accent-active:  #C5DFFF;
+    --color-border-subtle:  rgba(255, 255, 255, 0.16);
+    --color-border-default: rgba(255, 255, 255, 0.5);
+    --color-border-strong:  rgba(255, 255, 255, 0.72);
+    --color-bg-muted:       rgba(255, 255, 255, 0.12);
+    --color-scrim:          transparent;
+    --color-focus-ring:     rgba(255, 255, 255, 0.7);
+    --color-logo:           #FFFFFF;
+  }
+
+  [data-theme="dark"] .on-hero-surface {
+    --color-text-secondary: rgba(255, 255, 255, 0.86);
   }
 
   html {
@@ -209,6 +260,27 @@
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+}
+
+/* ── Home hero surface (v2.4) ──
+   The fill follows the scene, at the same breakpoints. Phones: the surface holds behind the copy
+   and fades into the page across the 200px scene band. From 768px: a radial glow under the dome,
+   sized so the copy always sits on the surface colour or deeper (white text at least 5.17:1 on a
+   tablet, 5.26:1 on a desktop, before the scrim). Moving the glow means re-checking that. */
+.hero-surface {
+  background: linear-gradient(180deg, var(--color-hero-surface) 0, var(--color-hero-surface) calc(100% - 200px), var(--color-bg-base) 100%);
+}
+
+@media (min-width: 768px) {
+  .hero-surface {
+    background: radial-gradient(ellipse 60% 42% at 50% 102%, var(--color-hero-surface-glow) 0%, var(--color-hero-surface) 40%, var(--color-hero-surface-deep) 100%);
+  }
+}
+
+@media (min-width: 1024px) {
+  .hero-surface {
+    background: radial-gradient(ellipse 60% 70% at 72% 92%, var(--color-hero-surface-glow) 0%, var(--color-hero-surface) 40%, var(--color-hero-surface-deep) 100%);
   }
 }
 

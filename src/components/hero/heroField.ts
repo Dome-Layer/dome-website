@@ -10,6 +10,7 @@ import {
   signalOrder,
   signalSplit,
   smoothstep,
+  surfaceMix,
   type HeroLayout,
   type HeroScene,
 } from './heroMotion'
@@ -25,11 +26,19 @@ import {
   type SignalField,
 } from './heroGeometry'
 
-/** Colours as `r,g,b`, read from the theme tokens, plus which theme they belong to. */
-export interface HeroPalette {
+/** Dot, glow and raw-particle colours as `r,g,b`, read from the theme tokens. */
+export interface HeroColours {
   particle: string
   glow: string
   raw: string
+}
+
+/**
+ * The page palette, the palette on the hero surface (v2.4), and which theme they belong to. The
+ * dome always sits on the surface; signal to record crosses onto the page where the surface fades.
+ */
+export interface HeroPalette extends HeroColours {
+  surface: HeroColours
   dark: boolean
 }
 
@@ -86,10 +95,33 @@ interface Sprites {
   glow: HTMLCanvasElement
 }
 
-/** Per-theme blending. Additive glow vanishes on white, so the light theme blends normally. */
-const LOOK = {
-  dark: { blend: 'lighter' as GlobalCompositeOperation, core: 0.9, glow: 0.5, line: 1, ring: 0.45 },
-  light: { blend: 'source-over' as GlobalCompositeOperation, core: 0.85, glow: 0.22, line: 0.8, ring: 0.45 },
+interface Look {
+  blend: GlobalCompositeOperation
+  /** Raw particles on the surface are darker specks, so they blend normally even where dots add. */
+  rawBlend: GlobalCompositeOperation
+  core: number
+  glow: number
+  line: number
+  ring: number
+}
+
+/** One palette ready to draw: its sprites, how it blends, and the colour of lines and rings. */
+interface Ink {
+  sprites: Sprites
+  look: Look
+  rgb: string
+}
+
+/** On the page: additive glow vanishes on white, so the light theme blends normally. */
+const PAGE_LOOK: Record<'dark' | 'light', Look> = {
+  dark: { blend: 'lighter', rawBlend: 'lighter', core: 0.9, glow: 0.5, line: 1, ring: 0.45 },
+  light: { blend: 'source-over', rawBlend: 'source-over', core: 0.85, glow: 0.22, line: 0.8, ring: 0.45 },
+}
+
+/** On the hero surface the dots are white light, additive in both themes; rings are white. */
+const SURFACE_LOOK: Record<'dark' | 'light', Look> = {
+  dark: { blend: 'lighter', rawBlend: 'source-over', core: 0.95, glow: 0.5, line: 0.9, ring: 0.55 },
+  light: { blend: 'lighter', rawBlend: 'source-over', core: 0.95, glow: 0.4, line: 0.85, ring: 0.6 },
 }
 
 /**
@@ -112,7 +144,7 @@ export class HeroField {
   private options: HeroFieldOptions | null = null
   private dome: Dome | null = null
   private signal: Signal | null = null
-  private sprites: Sprites | null = null
+  private inks: { surface: Ink; page: Ink } | null = null
   private builtAt = 0
   private introMs = INTRO_MS
   private raf = 0
@@ -165,8 +197,12 @@ export class HeroField {
       this.introMs = SWAP_MS
     }
     const p = next.palette
-    if (!prev || !this.sprites || p.particle !== prev.palette.particle || p.glow !== prev.palette.glow || p.raw !== prev.palette.raw) {
-      this.sprites = makeSprites(p)
+    if (!prev || !this.inks || paletteKey(p) !== paletteKey(prev.palette)) {
+      const theme = p.dark ? 'dark' : 'light'
+      this.inks = {
+        surface: { sprites: makeSprites(p.surface), look: SURFACE_LOOK[theme], rgb: p.surface.particle },
+        page: { sprites: makeSprites(p), look: PAGE_LOOK[theme], rgb: p.particle },
+      }
     }
     if (!this.raf) this.draw(performance.now())
   }
@@ -281,10 +317,37 @@ export class HeroField {
     return g
   }
 
+  /** 0 where a point sits on the hero surface, 1 on the page. Only phones (signal) have both. */
+  private pageAt(y: number): number {
+    const o = this.options as HeroFieldOptions
+    return o.scene === 'signal' ? surfaceMix(y, o.height) : 0
+  }
+
+  private inkAt(y: number): Ink {
+    const inks = this.inks as { surface: Ink; page: Ink }
+    return this.pageAt(y) > 0.5 ? inks.page : inks.surface
+  }
+
+  /** Draws one sprite, split between the two palettes where the surface fades into the page. */
+  private put(kind: keyof Sprites, x: number, y: number, r: number, alpha: (look: Look) => number): void {
+    const inks = this.inks as { surface: Ink; page: Ink }
+    const m = this.pageAt(y)
+    if (m < 1) this.blit(inks.surface, kind, x, y, r, alpha(inks.surface.look) * (1 - m))
+    if (m > 0) this.blit(inks.page, kind, x, y, r, alpha(inks.page.look) * m)
+  }
+
+  private blit(ink: Ink, kind: keyof Sprites, x: number, y: number, r: number, a: number): void {
+    if (a <= 0.004) return
+    const ctx = this.ctx
+    ctx.globalCompositeOperation = kind === 'raw' ? ink.look.rawBlend : ink.look.blend
+    ctx.globalAlpha = clamp01(a)
+    ctx.drawImage(ink.sprites[kind], x - r, y - r, r * 2, r * 2)
+  }
+
   private draw(t: number): void {
     const o = this.options
-    const sprites = this.sprites
-    if (!o || !sprites) return
+    const inks = this.inks
+    if (!o || !inks) return
     const dt = Math.min(50, Math.max(0, t - this.last))
     this.last = t
     const still = this.raf === 0
@@ -297,20 +360,20 @@ export class HeroField {
     }
     this.pulses = this.pulses.filter((p) => t - p.t0 < PULSE_MS)
     const progress = this.progressSource()
-    const look = o.palette.dark ? LOOK.dark : LOOK.light
     const ctx = this.ctx
     ctx.globalCompositeOperation = 'source-over'
     ctx.globalAlpha = 1
     ctx.clearRect(0, 0, o.width, o.height)
     const entrance = intro(t - this.builtAt, this.introMs)
-    if (this.dome) this.drawDome(t, dt, progress, entrance, look, sprites)
-    else if (this.signal) this.drawSignal(t, progress, entrance, look, sprites)
+    if (this.dome) this.drawDome(t, dt, progress, entrance, inks.surface)
+    else if (this.signal) this.drawSignal(t, progress, entrance)
 
     ctx.globalCompositeOperation = 'source-over'
-    ctx.strokeStyle = `rgba(${o.palette.particle},${look.ring})`
     ctx.lineWidth = 1
     for (const p of this.pulses) {
       const age = (t - p.t0) / PULSE_MS
+      const ink = this.inkAt(p.y)
+      ctx.strokeStyle = `rgba(${ink.rgb},${ink.look.ring})`
       ctx.globalAlpha = (1 - age) * 0.6
       ctx.beginPath()
       ctx.arc(p.x, p.y, 18 + age * 150, 0, Math.PI * 2)
@@ -320,7 +383,8 @@ export class HeroField {
     this.onFrame?.(progress)
   }
 
-  private drawDome(t: number, dt: number, progress: number, entrance: number, look: typeof LOOK.dark, sprites: Sprites): void {
+  /** The dome sits on the hero surface at every width it is shown at, so it uses one ink. */
+  private drawDome(t: number, dt: number, progress: number, entrance: number, ink: Ink): void {
     const o = this.options as HeroFieldOptions
     const d = this.dome as Dome
     const ctx = this.ctx
@@ -334,7 +398,7 @@ export class HeroField {
     const ambient = this.raf ? Math.sin(t / 9000) * 0.05 : 0
     const yaw = DOME_YAW + ambient + (q.on > 0 ? (q.ex / o.width - 0.5) * 0.24 * q.on : 0)
     const pitch = DOME_PITCH + (q.on > 0 ? (q.ey / o.height - 0.5) * 0.1 * q.on : 0)
-    ctx.globalCompositeOperation = look.blend
+    const look = ink.look
 
     for (const p of d.points) {
       const pr = projectDome(p.x, p.y, p.z, d.r, yaw, pitch)
@@ -368,14 +432,8 @@ export class HeroField {
       a *= fade
       g *= fade * (1 - 0.6 * split)
       if (a <= 0.01) continue
-      if (g > 0.05) {
-        ctx.globalAlpha = clamp01(g * look.glow * glowGain) * a
-        const r = (12 + 10 * Math.min(1, g)) * size
-        ctx.drawImage(sprites.glow, x - r, y - r, r * 2, r * 2)
-      }
-      ctx.globalAlpha = clamp01(a * look.core * (0.5 + 0.5 * Math.min(1, g + 0.2)))
-      const r = (0.9 + 0.8 * Math.min(1, g)) * pr.scale * size
-      ctx.drawImage(sprites.core, x - r, y - r, r * 2, r * 2)
+      if (g > 0.05) this.blit(ink, 'glow', x, y, (12 + 10 * Math.min(1, g)) * size, clamp01(g * look.glow * glowGain) * a)
+      this.blit(ink, 'core', x, y, (0.9 + 0.8 * Math.min(1, g)) * pr.scale * size, a * look.core * (0.5 + 0.5 * Math.min(1, g + 0.2)))
     }
 
     for (const p of d.dust) {
@@ -406,22 +464,22 @@ export class HeroField {
       const x = p.x + p.ox
       const y = p.y + p.oy + split * 40 * p.seed
       g += this.pulseAt(x, y, t)
-      const a = p.alpha * entrance * (1 - 0.7 * split) * this.fadeAt(x, y)
+      // Dimmed behind the copy twice, like the dome's dots: on the surface a lit halo is white
+      // light under white text.
+      const fade = this.fadeAt(x, y)
+      g *= fade
+      const a = p.alpha * entrance * (1 - 0.7 * split) * fade
       if (a <= 0.01) continue
-      if (g > 0.05) {
-        ctx.globalAlpha = clamp01(g * look.glow * glowGain) * a
-        const r = (9 + 8 * Math.min(1, g)) * size
-        ctx.drawImage(sprites.glow, x - r, y - r, r * 2, r * 2)
-      }
-      ctx.globalAlpha = clamp01(a * look.core)
-      const r = (0.8 + 0.6 * Math.min(1, g)) * size
-      ctx.drawImage(sprites.core, x - r, y - r, r * 2, r * 2)
+      if (g > 0.05) this.blit(ink, 'glow', x, y, (9 + 8 * Math.min(1, g)) * size, clamp01(g * look.glow * glowGain) * a)
+      this.blit(ink, 'core', x, y, (0.8 + 0.6 * Math.min(1, g)) * size, a * look.core)
     }
 
     if (q.on > 0.02) {
+      // The ring fades out over the copy, so a pointer resting on the text never draws a white
+      // ring through it.
       ctx.globalCompositeOperation = 'source-over'
-      ctx.globalAlpha = q.on * (1 - split)
-      ctx.strokeStyle = `rgba(${o.palette.particle},${look.ring})`
+      ctx.globalAlpha = q.on * (1 - split) * this.fadeAt(q.ex, q.ey) ** 2
+      ctx.strokeStyle = `rgba(${ink.rgb},${look.ring})`
       ctx.lineWidth = 1
       ctx.beginPath()
       ctx.arc(q.ex, q.ey, 22, 0, Math.PI * 2)
@@ -429,7 +487,8 @@ export class HeroField {
     }
   }
 
-  private drawSignal(t: number, progress: number, entrance: number, look: typeof LOOK.dark, sprites: Sprites): void {
+  /** Signal to record runs on phones, where the surface fades into the page across its band. */
+  private drawSignal(t: number, progress: number, entrance: number): void {
     const o = this.options as HeroFieldOptions
     const s = this.signal as Signal
     const ctx = this.ctx
@@ -464,8 +523,10 @@ export class HeroField {
       s.alpha[i] = entrance * (1 - 0.75 * split) * this.fadeAt(x, y)
     })
 
-    // The record: ordered neighbours on the grid link into a thin ledger.
-    const buckets: number[][] = [[], [], [], []]
+    // The record: ordered neighbours on the grid link into a thin ledger, in the palette of the
+    // background under each link (buckets 0 to 3 on the surface, 4 to 7 on the page).
+    const inks = this.inks as { surface: Ink; page: Ink }
+    const buckets: number[][] = [[], [], [], [], [], [], [], []]
     field.points.forEach((p, i) => {
       if (s.eased[i] < 0.55 || s.alpha[i] < 0.05) return
       const idx = p.row * field.cols + p.col
@@ -473,16 +534,18 @@ export class HeroField {
       for (const j of next) {
         if (j < 0 || s.eased[j] < 0.55 || s.side[j] !== s.side[i]) continue
         const v = Math.min(s.eased[i], s.eased[j]) * Math.min(s.alpha[i], s.alpha[j])
-        buckets[Math.min(3, Math.floor(v * 4))].push(s.x[i], s.y[i], s.x[j], s.y[j])
+        const onPage = this.pageAt((s.y[i] + s.y[j]) / 2) > 0.5 ? 4 : 0
+        buckets[Math.min(3, Math.floor(v * 4)) + onPage].push(s.x[i], s.y[i], s.x[j], s.y[j])
       }
     })
     const lineAlpha = [0.08, 0.16, 0.24, 0.34]
-    ctx.globalCompositeOperation = look.blend
-    ctx.strokeStyle = `rgb(${o.palette.particle})`
     ctx.lineWidth = 1
     buckets.forEach((segments, b) => {
       if (!segments.length) return
-      ctx.globalAlpha = clamp01(lineAlpha[b] * look.line * 1.35)
+      const ink = b < 4 ? inks.surface : inks.page
+      ctx.globalCompositeOperation = ink.look.blend
+      ctx.strokeStyle = `rgb(${ink.rgb})`
+      ctx.globalAlpha = clamp01(lineAlpha[b % 4] * ink.look.line * 1.35)
       ctx.beginPath()
       for (let k = 0; k < segments.length; k += 4) {
         ctx.moveTo(segments[k], segments[k + 1])
@@ -497,26 +560,17 @@ export class HeroField {
       const e = s.eased[i]
       const x = s.x[i]
       const y = s.y[i]
-      if (e > 0.6) {
-        ctx.globalAlpha = clamp01(((e - 0.6) / 0.4) * look.glow * 1.35 * 0.9) * a
-        const r = 11 * 1.05
-        ctx.drawImage(sprites.glow, x - r, y - r, r * 2, r * 2)
-      }
+      if (e > 0.6) this.put('glow', x, y, 11 * 1.05, (look) => clamp01(((e - 0.6) / 0.4) * look.glow * 1.35 * 0.9) * a)
       const r = (1.1 + 0.5 * e) * 1.05
-      if (e < 0.98) {
-        ctx.globalAlpha = (1 - e) * 0.8 * a
-        ctx.drawImage(sprites.raw, x - r, y - r, r * 2, r * 2)
-      }
-      if (e > 0.02) {
-        ctx.globalAlpha = clamp01(e * look.core * a)
-        ctx.drawImage(sprites.core, x - r, y - r, r * 2, r * 2)
-      }
+      if (e < 0.98) this.put('raw', x, y, r, () => (1 - e) * 0.8 * a)
+      if (e > 0.02) this.put('core', x, y, r, (look) => e * look.core * a)
     }
 
     if (q.on > 0.02 && split < 1) {
       ctx.globalCompositeOperation = 'source-over'
       ctx.globalAlpha = 0.6 * q.on * (1 - split)
-      ctx.strokeStyle = `rgba(${o.palette.particle},${look.ring})`
+      const ink = this.inkAt(q.ey)
+      ctx.strokeStyle = `rgba(${ink.rgb},${ink.look.ring})`
       ctx.setLineDash([2, 5])
       ctx.beginPath()
       ctx.arc(q.ex, q.ey, lens * 0.72, 0, Math.PI * 2)
@@ -526,7 +580,11 @@ export class HeroField {
   }
 }
 
-function makeSprites(p: HeroPalette): Sprites {
+function paletteKey(p: HeroPalette): string {
+  return [p.dark, p.particle, p.glow, p.raw, p.surface.particle, p.surface.glow, p.surface.raw].join('|')
+}
+
+function makeSprites(p: HeroColours): Sprites {
   const sprite = (size: number, rgb: string, stops: [number, number][]) => {
     const c = document.createElement('canvas')
     c.width = size
