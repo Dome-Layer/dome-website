@@ -104,6 +104,57 @@ export function projectDome(
   return { sx: x1 * scale, sy: -y2 * scale, scale, depth: Math.min(1, Math.max(0, (z2 / r + 1) / 2)) }
 }
 
+const round = (v: number) => Math.round(v * 10) / 10
+
+/**
+ * Front and back dotted paths for a dome of radius `r` around the centre of its base, and their box:
+ * the rings and meridians as polylines, drawn as dots with a zero-length dash. Used by the still
+ * frames and the social cards.
+ */
+export function domePaths(r: number) {
+  let front = ''
+  let back = ''
+  const box = { minX: 0, minY: 0, maxX: 0, maxY: 0 }
+  const curve = (pts: [number, number, number][]) => {
+    let run: 'front' | 'back' | null = null
+    for (const [x, y, z] of pts) {
+      const p = projectDome(x, y, z, r, DOME_YAW, DOME_PITCH)
+      const side = p.depth < 0.5 ? 'front' : 'back'
+      box.minX = Math.min(box.minX, p.sx)
+      box.minY = Math.min(box.minY, p.sy)
+      box.maxX = Math.max(box.maxX, p.sx)
+      box.maxY = Math.max(box.maxY, p.sy)
+      const seg = `${side === run ? 'L' : 'M'}${round(p.sx)} ${round(p.sy)}`
+      if (side === 'front') front += seg
+      else back += seg
+      run = side
+    }
+  }
+  for (const deg of DOME_RINGS) {
+    const phi = (deg * Math.PI) / 180
+    const rr = r * Math.cos(phi)
+    const pts: [number, number, number][] = []
+    for (let i = 0; i <= 72; i++) {
+      const th = (i / 72) * Math.PI * 2
+      pts.push([rr * Math.cos(th), r * Math.sin(phi), rr * Math.sin(th)])
+    }
+    curve(pts)
+  }
+  for (let m = 0; m < DOME_MERIDIANS; m++) {
+    const th = (m / DOME_MERIDIANS) * Math.PI * 2
+    const pts: [number, number, number][] = []
+    for (let i = 0; i <= 20; i++) {
+      const phi = (i / 20) * (Math.PI / 2)
+      pts.push([r * Math.cos(phi) * Math.cos(th), r * Math.sin(phi), r * Math.cos(phi) * Math.sin(th)])
+    }
+    curve(pts)
+  }
+  // A little room for the round caps of the dots.
+  const pad = 4
+  const viewBox = [box.minX - pad, box.minY - pad, box.maxX - box.minX + pad * 2, box.maxY - box.minY + pad * 2]
+  return { front, back, viewBox: viewBox.map(round).join(' '), r, origin: { x: viewBox[0], y: viewBox[1] }, size: { w: viewBox[2], h: viewBox[3] } }
+}
+
 /**
  * How far the top of the dome rises above the centre of its base, per px of radius, at the resting
  * yaw and pitch. The perspective scales with the radius, so this is one number for every size.

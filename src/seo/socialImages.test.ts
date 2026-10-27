@@ -44,9 +44,20 @@ describe('social images', () => {
       for (const locale of LOCALES) {
         const s = socialImageSpec(id, locale)
         expect(s.eyebrow.trim() && s.heading.trim(), `${id} ${locale}`).toBeTruthy()
-        expect(existsSync(join(PUBLIC, s.background)), s.background).toBe(true)
+        if (s.surface) continue
+        expect(s.background && existsSync(join(PUBLIC, s.background)), `${id} ${locale}: ${s.background}`).toBe(true)
       }
     }
+  })
+
+  // The home card (also used by the legal pages) matches the home hero: the blue surface and the globe.
+  it('put the home card on the hero surface, with no photograph', () => {
+    for (const locale of LOCALES) {
+      const s = socialImageSpec('home', locale)
+      expect(s.surface).toBe(true)
+      expect(s.background).toBeUndefined()
+    }
+    expect(socialImageSpec('about', 'en').surface).toBeUndefined()
   })
 
   it('label AI backgrounds as the site does, and not the home poster', () => {
