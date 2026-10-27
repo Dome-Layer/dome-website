@@ -134,6 +134,12 @@
     --color-scrim:            rgba(255, 255, 255, 0.72);
     --color-scrim-strong:     rgba(255, 255, 255, 0.88);
     --color-media-fade:       #FFFFFF;
+
+    /* Home hero scene (v2.3). Accent graphics only: the dots, their glow and the grey of raw,
+       not yet ordered particles. Read by the canvas engine, so they follow the theme toggle. */
+    --color-hero-particle:    #0066CC;
+    --color-hero-glow:        #0070E0;
+    --color-hero-raw:         #6E6E6E;
   }
 
   [data-theme="dark"] {
@@ -162,6 +168,10 @@
     --color-scrim:            rgba(10, 10, 10, 0.64);
     --color-scrim-strong:     rgba(10, 10, 10, 0.84);
     --color-media-fade:       #0A0A0A;
+
+    --color-hero-particle:    #40A8FF;
+    --color-hero-glow:        #0080FF;
+    --color-hero-raw:         #858585;
   }
 
   html {

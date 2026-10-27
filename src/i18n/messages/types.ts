@@ -206,7 +206,8 @@ export interface Messages {
    */
   pages: {
     home: {
-      hero: HeroText
+      /** `scrollCue` is the small label under the home hero's scene; it is decorative, never read out. */
+      hero: HeroText & { scrollCue: string }
       sectors: { eyebrow: string; items: readonly string[] }
       services: SectionText & { items: readonly (ItemText & { cta: string })[] }
       howWeWork: SectionText & {

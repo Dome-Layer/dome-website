@@ -267,6 +267,7 @@ export const en: Messages = {
         lead: 'We help regulated enterprises redesign complex workflows and automate them with AI that stays governed, measurable and explainable.',
         primary: 'Book an introductory call',
         secondary: 'See our work',
+        scrollCue: 'Scroll',
       },
       sectors: {
         eyebrow: 'Sectors we work in',
