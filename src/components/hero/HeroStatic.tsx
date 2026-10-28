@@ -1,5 +1,5 @@
 import type { CSSProperties } from 'react'
-import { DOME_CLEARANCE, DOME_PITCH, DOME_RISE, SEED, domePaths, seeded, signalField } from './heroGeometry'
+import { DOME_CLEARANCE, DOME_PITCH, DOME_RISE, SEED, RECORD_LINK, domePaths, nextInRow, seeded, signalField } from './heroGeometry'
 import { easeOutCubic } from './heroMotion'
 
 /**
@@ -60,12 +60,10 @@ function signalStill() {
     return { x: round(p.nx + (p.gx - p.nx) * e), y: round(p.ny + (p.gy - p.ny) * e), e }
   })
   let links = ''
-  field.points.forEach((p, i) => {
-    if (at[i].e < 0.55) return
-    const idx = p.row * field.cols + p.col
-    for (const j of [p.col < field.cols - 1 ? field.cells[idx + 1] : -1, p.row < field.rows - 1 ? field.cells[idx + field.cols] : -1]) {
-      if (j >= 0 && at[j].e >= 0.55) links += `M${at[i].x} ${at[i].y}L${at[j].x} ${at[j].y}`
-    }
+  field.points.forEach((_, i) => {
+    if (at[i].e < RECORD_LINK) return
+    const j = nextInRow(field, i)
+    if (j >= 0 && at[j].e >= RECORD_LINK) links += `M${at[i].x} ${at[i].y}L${at[j].x} ${at[j].y}`
   })
   return { raw: at.filter((p) => p.e < 0.55), ordered: at.filter((p) => p.e >= 0.55), links }
 }

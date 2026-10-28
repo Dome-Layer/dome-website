@@ -13,7 +13,7 @@ import {
   surfaceMix,
   toRgb,
 } from './heroMotion'
-import { DOME_CLEARANCE, DOME_PITCH, DOME_RISE, domeFit, domeLattice, seeded, signalField } from './heroGeometry'
+import { DOME_CLEARANCE, DOME_PITCH, DOME_RISE, domeFit, domeLattice, nextInRow, seeded, signalField } from './heroGeometry'
 
 describe('scene and layout by width', () => {
   it('shows the dome from 768px and signal to record below', () => {
@@ -154,5 +154,23 @@ describe('geometry', () => {
       expect(p.gy).toBeLessThanOrEqual(780)
       expect(field.cells[p.row * field.cols + p.col]).toBeGreaterThanOrEqual(0)
     }
+  })
+
+  it('links the record only along its rows, to the next point in the row', () => {
+    const field = signalField(390, 600, 780, 22, 0.58, seeded(7))
+    let links = 0
+    field.points.forEach((p, i) => {
+      const j = nextInRow(field, i)
+      if (j < 0) {
+        for (let col = p.col + 1; col < field.cols; col++) expect(field.cells[p.row * field.cols + col]).toBe(-1)
+        return
+      }
+      links++
+      const q = field.points[j]
+      expect(q.row).toBe(p.row)
+      expect(q.col).toBeGreaterThan(p.col)
+      for (let col = p.col + 1; col < q.col; col++) expect(field.cells[p.row * field.cols + col]).toBe(-1)
+    })
+    expect(links).toBeGreaterThan(10)
   })
 })
