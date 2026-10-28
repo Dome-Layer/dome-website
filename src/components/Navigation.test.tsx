@@ -82,3 +82,13 @@ describe('the logo', () => {
     expect(header().dataset.surface).toBe('bar')
   })
 })
+
+// The theme toggle read English on Italian pages until 2026-10-28.
+describe('the theme toggle', () => {
+  it('is labelled in the language of the page', () => {
+    expect(bar('/about')).toMatch(/aria-label="Switch to (light|dark) mode"/)
+    const italian = bar('/it/chi-siamo')
+    expect(italian).toMatch(/aria-label="Passa al tema (chiaro|scuro)"/)
+    expect(italian).not.toContain('Switch to')
+  })
+})
