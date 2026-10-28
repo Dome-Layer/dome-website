@@ -3,7 +3,8 @@
  * Renders the social images (Open Graph and Twitter cards) into public/social/, one 1200x630 JPEG
  * per page group and locale, from src/seo/socialImages.ts (SEO audit M1, 2026-10-20).
  *
- *   npm run social-images
+ *   npm run social-images            every card
+ *   npm run social-images -- home    only the cards of the routes named (here the home card)
  *
  * The images are committed, not built in CI: rerun this after changing a hero eyebrow or heading,
  * a case study title or descriptor, a hero image, or after adding a locale. It drives a local
@@ -33,9 +34,56 @@ const escape = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/
 
 const FONT = dataUrl(join(ROOT, 'node_modules/@fontsource-variable/inter/files/inter-latin-wght-normal.woff2'), 'font/woff2')
 const LOGO = renderToStaticMarkup(createElement(DomeLogo, { size: 'xl', color: '#0080FF' }))
+const LOGO_WHITE = renderToStaticMarkup(createElement(DomeLogo, { size: 'xl', color: '#FFFFFF' }))
+/** Route ids given on the command line; none means every card. */
+const ONLY = process.argv.slice(2)
 
-/** The card. Colours are design system v2.2 dark-theme tokens. */
-function page({ eyebrow, heading, background, aiLabel }) {
+/**
+ * The dotted globe from the home hero (shared geometry, so it is the same mark), white on the
+ * surface, with its base near the bottom edge and its top well clear of the logo.
+ */
+function globe({ domePaths, DOME_PITCH }) {
+  const r = 290
+  const cx = WIDTH * 0.8
+  const baseY = HEIGHT * 0.97 - r * Math.sin(DOME_PITCH)
+  const d = domePaths(r)
+  const dots = 'fill="none" stroke="#FFFFFF" stroke-linecap="round" stroke-dasharray="0 14"'
+  return `<svg class="globe" viewBox="${d.viewBox}" style="left: ${cx + d.origin.x}px; top: ${baseY + d.origin.y}px; width: ${d.size.w}px; height: ${d.size.h}px">
+<path d="${d.back}" ${dots} stroke-width="2.2" opacity="0.3"/><path d="${d.front}" ${dots} stroke-width="2.6" opacity="0.85"/></svg>`
+}
+let GLOBE = ''
+
+/**
+ * The home card (DESIGN_SYSTEM v2.4 and v2.5): the hero's blue surface with its radial glow under
+ * the globe, a surface-tinted scrim behind the text, white type and wordmark.
+ */
+function surfacePage({ eyebrow, heading }) {
+  return `<!doctype html><html><head><meta charset="utf-8"><style>
+@font-face { font-family: 'Inter'; src: url(${FONT}) format('woff2'); font-weight: 100 900; }
+* { margin: 0; box-sizing: border-box; }
+html, body { width: ${WIDTH}px; height: ${HEIGHT}px; overflow: hidden; }
+body { position: relative; font-family: 'Inter', sans-serif; color: #FFFFFF; -webkit-font-smoothing: antialiased;
+  background: radial-gradient(ellipse 60% 75% at 80% 96%, #4A9DFF 0%, #0070E0 40%, #005AB5 100%); }
+.globe { position: absolute; }
+.scrim { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(0,112,224,0.9) 0%, rgba(0,112,224,0.6) 42%, rgba(0,112,224,0) 70%); }
+.logo { position: absolute; left: 72px; top: 64px; }
+.logo svg { width: auto; height: 40px; display: block; }
+.text { position: absolute; left: 72px; bottom: 132px; width: 580px; }
+.eyebrow { font-size: 18px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: #FFFFFF; margin-bottom: 22px; }
+h1 { font-size: 64px; font-weight: 600; line-height: 1.07; letter-spacing: -0.025em; max-height: 260px; overflow: hidden; text-wrap: balance; }
+.foot { position: absolute; left: 72px; bottom: 60px; }
+.domain { font-size: 22px; font-weight: 500; color: #FFFFFF; }
+</style></head><body>
+${GLOBE}<div class="scrim"></div>
+<div class="logo">${LOGO_WHITE}</div>
+<div class="text"><p class="eyebrow">${escape(eyebrow)}</p><h1 id="h">${escape(heading)}</h1></div>
+<div class="foot"><span class="domain">domelayer.com</span></div>
+</body></html>`
+}
+
+/** A card over a page's hero photograph. Colours are design system v2.2 dark-theme tokens. */
+function page({ eyebrow, heading, background, aiLabel, surface }) {
+  if (surface) return surfacePage({ eyebrow, heading })
   return `<!doctype html><html><head><meta charset="utf-8"><style>
 @font-face { font-family: 'Inter'; src: url(${FONT}) format('woff2'); font-weight: 100 900; }
 * { margin: 0; box-sizing: border-box; }
@@ -118,6 +166,7 @@ async function launchChrome() {
 const vite = await createServer({ root: ROOT, configFile: false, logLevel: 'error', appType: 'custom', server: { middlewareMode: true } })
 const { SOCIAL_IMAGE_ROUTE_IDS, socialImagePath, socialImageSpec } = await vite.ssrLoadModule('/src/seo/socialImages.ts')
 const { LOCALES } = await vite.ssrLoadModule('/src/i18n/locales.ts')
+GLOBE = globe(await vite.ssrLoadModule('/src/components/hero/heroGeometry.ts'))
 await vite.close()
 
 mkdirSync(OUT, { recursive: true })
@@ -126,7 +175,7 @@ try {
   await cdp.send('Page.enable')
   await cdp.send('Emulation.setDeviceMetricsOverride', { width: WIDTH, height: HEIGHT, deviceScaleFactor: 1, mobile: false })
   const { frameTree } = await cdp.send('Page.getFrameTree')
-  for (const id of SOCIAL_IMAGE_ROUTE_IDS) {
+  for (const id of SOCIAL_IMAGE_ROUTE_IDS.filter((r) => !ONLY.length || ONLY.includes(r))) {
     for (const locale of LOCALES) {
       await cdp.send('Page.setDocumentContent', { frameId: frameTree.frame.id, html: page(socialImageSpec(id, locale)) })
       const { result } = await cdp.send('Runtime.evaluate', { expression: SETTLE, awaitPromise: true, returnByValue: true })

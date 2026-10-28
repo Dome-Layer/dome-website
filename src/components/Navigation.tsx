@@ -1,6 +1,6 @@
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, type MouseEvent } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation } from 'react-router'
 import { DomeLogo } from './DomeLogo'
 import { ThemeToggle } from './ThemeToggle'
 import { isAuthenticated, clearToken } from '../lib/auth'
@@ -77,9 +77,32 @@ export function Navigation() {
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40)
+    // The page can open part way down (a reload, Back, or ScrollRestoration putting a same-URL load
+    // back where it was) before this listener exists, so read the position once now as well.
+    onScroll()
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
+
+  // The bar sits on the primary on every page (DESIGN_SYSTEM v2.5), so its content uses the
+  // re-pointed tokens of `.on-hero-surface`: white wordmark, links and icons, the inverse Sign in.
+  // At the top of the home page it is transparent and the hero's surface shows through; everywhere
+  // else, and once the page scrolls, it is solid. With the phone menu open it stays solid over the
+  // page-colour menu. The first render is derived from the path alone, so the prerendered home page
+  // already has the transparent bar and hydration does not flash a solid one.
+  const homePath = location.pathname.length > 1 ? location.pathname.replace(/\/+$/, '') : location.pathname
+  const onHome = homePath === homeHref
+  const surface = onHome && !scrolled && !mobileOpen ? 'top' : 'bar'
+
+  // The logo is a client-side link, so another page opens home at the top. On home itself it scrolls
+  // back to the hero instead: a same-URL load would put the page back where it was.
+  const goHome = (event: MouseEvent<HTMLAnchorElement>) => {
+    setMobileOpen(false)
+    if (!onHome) return
+    event.preventDefault()
+    const still = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches
+    window.scrollTo({ top: 0, behavior: still ? 'auto' : 'smooth' })
+  }
 
   useEffect(() => {
     document.body.style.overflow = mobileOpen ? 'hidden' : ''
@@ -89,16 +112,17 @@ export function Navigation() {
   return (
     <>
       <header
-        className={`fixed top-[var(--dome-banner-h,0px)] left-0 right-0 z-50 h-16 bg-[var(--color-bg-base)] transition-[border-color,box-shadow,background-color] duration-300 ${
-          scrolled
-            ? 'border-b border-[var(--color-border-subtle)] shadow-[0_1px_3px_rgba(0,0,0,0.04)]'
-            : 'border-b border-transparent'
+        data-surface={surface}
+        className={`on-hero-surface fixed top-[var(--dome-banner-h,0px)] left-0 right-0 z-50 h-16 border-b border-transparent transition-[box-shadow,background-color] duration-300 ${
+          surface === 'top'
+            ? 'bg-transparent'
+            : `bg-[var(--color-bar)] ${scrolled ? 'shadow-[0_1px_3px_rgba(0,0,0,0.12)]' : ''}`
         }`}
       >
         <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 sm:px-8 lg:px-12 h-16">
-          <a href={homeHref} className="relative z-10 flex-shrink-0" aria-label={t.homeLabel}>
-            <DomeLogo size="md" />
-          </a>
+          <Link to={homeHref} onClick={goHome} className="relative z-10 flex-shrink-0" aria-label={t.homeLabel}>
+            <DomeLogo size="md" color="currentColor" className="text-[var(--color-logo)] transition-colors duration-300" />
+          </Link>
 
           {/* Desktop nav */}
           <div className="hidden lg:flex items-center gap-4">
@@ -109,8 +133,9 @@ export function Navigation() {
                     to={item.to}
                     aria-current={location.pathname === item.to ? 'page' : undefined}
                     className={`relative px-3 py-2 rounded-lg text-[13px] font-medium transition-colors duration-150 ${
+                      // On blue the current page cannot be marked in accent text, so it is underlined.
                       location.pathname === item.to
-                        ? 'text-[var(--color-text-accent)]'
+                        ? 'text-[var(--color-text-primary)] underline decoration-2 underline-offset-8'
                         : 'text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] hover:bg-[var(--color-bg-muted)]'
                     }`}
                   >
@@ -123,7 +148,7 @@ export function Navigation() {
               <>
                 <a
                   href={HUB_PATH}
-                  className="inline-flex items-center gap-2 px-5 py-2.5 text-[13px] font-semibold bg-[var(--color-accent)] text-white rounded-lg hover:bg-[var(--color-accent-hover)] active:bg-[var(--color-accent-active)] transition-colors duration-150"
+                  className="inline-flex items-center gap-2 px-5 py-2.5 text-[13px] font-semibold bg-[var(--color-accent)] text-[var(--color-text-on-accent)] rounded-lg hover:bg-[var(--color-accent-hover)] active:bg-[var(--color-accent-active)] transition-colors duration-150"
                 >
                   {UserIcon}
                   {t.yourTools}
@@ -139,7 +164,7 @@ export function Navigation() {
             ) : (
               <a
                 href={loginHref}
-                className="inline-flex items-center gap-2 px-5 py-2.5 text-[13px] font-semibold bg-[var(--color-accent)] text-white rounded-lg hover:bg-[var(--color-accent-hover)] active:bg-[var(--color-accent-active)] transition-colors duration-150"
+                className="inline-flex items-center gap-2 px-5 py-2.5 text-[13px] font-semibold bg-[var(--color-accent)] text-[var(--color-text-on-accent)] rounded-lg hover:bg-[var(--color-accent-hover)] active:bg-[var(--color-accent-active)] transition-colors duration-150"
               >
                 {UserIcon}
                 {t.signIn}
@@ -223,7 +248,7 @@ export function Navigation() {
                       <a
                         href={HUB_PATH}
                         onClick={() => setMobileOpen(false)}
-                        className="inline-flex items-center gap-2 px-8 py-3.5 text-[13px] font-semibold bg-[var(--color-accent)] text-white rounded-lg hover:bg-[var(--color-accent-hover)] active:bg-[var(--color-accent-active)]"
+                        className="inline-flex items-center gap-2 px-8 py-3.5 text-[13px] font-semibold bg-[var(--color-accent)] text-[var(--color-text-on-accent)] rounded-lg hover:bg-[var(--color-accent-hover)] active:bg-[var(--color-accent-active)]"
                       >
                         {UserIcon}
                         {t.yourTools}
@@ -243,7 +268,7 @@ export function Navigation() {
                     <a
                       href={loginHref}
                       onClick={() => setMobileOpen(false)}
-                      className="inline-flex items-center gap-2 px-8 py-3.5 text-[13px] font-semibold bg-[var(--color-accent)] text-white rounded-lg hover:bg-[var(--color-accent-hover)] active:bg-[var(--color-accent-active)]"
+                      className="inline-flex items-center gap-2 px-8 py-3.5 text-[13px] font-semibold bg-[var(--color-accent)] text-[var(--color-text-on-accent)] rounded-lg hover:bg-[var(--color-accent-hover)] active:bg-[var(--color-accent-active)]"
                     >
                       {UserIcon}
                       {t.signIn}
