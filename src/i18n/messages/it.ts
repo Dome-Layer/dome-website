@@ -29,6 +29,8 @@ export const it: Messages = {
     yourTools: 'I vostri strumenti',
     openMenu: 'Apri il menu',
     closeMenu: 'Chiudi il menu',
+    switchToLight: 'Passa al tema chiaro',
+    switchToDark: 'Passa al tema scuro',
   },
   switcher: { label: 'Versione inglese di questa pagina' },
   footer: {
