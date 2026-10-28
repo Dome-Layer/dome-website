@@ -2,7 +2,7 @@ import { writeFileSync } from 'node:fs'
 import { join } from 'node:path'
 import type { Config } from '@react-router/dev/config'
 import { isItalianPublished, publishedLocales } from './src/i18n/locales'
-import { CLIENT_ONLY_PATHS, localeFromPath } from './src/i18n/routes'
+import { CLIENT_ONLY_PATHS, NOT_FOUND_PATHS, localeFromPath } from './src/i18n/routes'
 import { buildLlmsTxt, buildRobots, buildSitemap } from './src/seo/files'
 
 const LOCALES = publishedLocales(isItalianPublished(process.env))
@@ -15,7 +15,10 @@ export default {
   ssr: false,
   async prerender({ getStaticPaths }) {
     // Auth routes are served from the SPA fallback (vercel.json); unpublished locales not at all.
-    return getStaticPaths().filter((path) => !CLIENT_ONLY.has(path) && LOCALES.includes(localeFromPath(path)))
+    // The 404 page is prerendered once per published locale (/404, /it/404); the Worker serves it
+    // with the 404 status for any address the site does not have.
+    const pages = getStaticPaths().filter((path) => !CLIENT_ONLY.has(path) && LOCALES.includes(localeFromPath(path)))
+    return [...pages, ...NOT_FOUND_PATHS.filter((path) => LOCALES.includes(localeFromPath(path)))]
   },
   async buildEnd({ reactRouterConfig }) {
     const client = join(reactRouterConfig.buildDirectory, 'client')

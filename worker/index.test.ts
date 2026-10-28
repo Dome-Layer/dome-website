@@ -89,6 +89,32 @@ describe('worker', () => {
     expect((await get('https://domelayer.com/', { 'accept-language': 'it-IT' }, unpublished)).status).toBe(200)
   })
 
+  it('answers an unknown address with the 404 page and the 404 status', async () => {
+    // Assets that exist answer 200; anything else 404, as the assets binding does.
+    const pages = new Set(['/about', '/404', '/it/404'])
+    const ASSETS = {
+      fetch: vi.fn(async (input: Request | string) => {
+        const { pathname } = new URL(typeof input === 'string' ? input : input.url)
+        return pages.has(pathname)
+          ? new Response(`asset:${pathname}`, { status: 200, headers: { 'Content-Type': 'text/html' } })
+          : new Response(null, { status: 404 })
+      }),
+    }
+    const env = makeEnv({ ASSETS } as unknown as Partial<Env>)
+    const en = await get('https://domelayer.com/nope', { 'accept-language': 'en' }, env)
+    expect(en.status).toBe(404)
+    expect(await en.text()).toBe('asset:/404')
+    expect(en.headers.get('content-security-policy')).toContain("frame-ancestors 'none'")
+    const it = await get('https://domelayer.com/it/nulla', { 'accept-language': 'en' }, env)
+    expect(it.status).toBe(404)
+    expect(await it.text()).toBe('asset:/it/404')
+    const direct = await get('https://domelayer.com/404', { 'accept-language': 'en' }, env)
+    expect(direct.status).toBe(404)
+    expect((await get('https://domelayer.com/about', { 'accept-language': 'en' }, env)).status).toBe(200)
+    const unpublished = makeEnv({ ASSETS, DOME_PUBLISH_IT: 'false' } as unknown as Partial<Env>)
+    expect(await (await get('https://domelayer.com/it/nulla', {}, unpublished)).text()).toBe('asset:/404')
+  })
+
   it('serves /login from the SPA fallback', async () => {
     expect(await (await get('https://domelayer.com/login')).text()).toBe('asset:/__spa-fallback')
   })

@@ -4,8 +4,8 @@ import * as Sentry from '@sentry/react'
 import { StagingBanner } from '@dome-layer/dome-ui'
 import { ErrorBoundary as RenderErrorBoundary } from './components/ErrorBoundary'
 import { ThemeProvider } from './lib/ThemeContext'
-import { localizedHref } from './i18n/routes'
-import { useLocale, useMessages } from './i18n/useLocale'
+import { ErrorPage } from './components/errors/ErrorPage'
+import { useLocale } from './i18n/useLocale'
 import './index.css'
 
 /**
@@ -66,21 +66,11 @@ export function HydrateFallback() {
 export function ErrorBoundary({ error }: { error: unknown }) {
   const notFound = isRouteErrorResponse(error) && error.status === 404
   if (!notFound) Sentry.captureException(error)
-  const t = useMessages().errors
 
+  // Rendered instead of the app shell, so it brings its own theme provider (Sprint LX).
   return (
-    <main className="min-h-screen flex items-center justify-center bg-[var(--color-bg-base)] px-6">
-      <div className="text-center">
-        <h1 className="text-h2 font-display font-semibold text-[var(--color-text-primary)] mb-3">
-          {notFound ? t.notFoundTitle : t.errorTitle}
-        </h1>
-        <p className="text-body-sm text-[var(--color-text-secondary)] mb-6">
-          {notFound ? t.notFoundBody : t.errorBody}
-        </p>
-        <a href={localizedHref('home', useLocale())} className="text-[13px] font-semibold text-[var(--color-text-accent)]">
-          {t.homeLink}
-        </a>
-      </div>
-    </main>
+    <ThemeProvider>
+      <ErrorPage kind={notFound ? 'notFound' : 'error'} />
+    </ThemeProvider>
   )
 }

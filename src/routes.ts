@@ -19,4 +19,6 @@ export default [
   route('auth/callback', 'pages/AuthCallbackPage.tsx'),
   // Keep in sync with HUB_PATH in src/lib/routes.ts.
   route('app', 'pages/ToolsHubPage.tsx'),
+  // Any other address: the 404 page (prerendered as /404 and /it/404 for the Worker to serve).
+  route('*', 'pages/NotFoundPage.tsx'),
 ] satisfies RouteConfig

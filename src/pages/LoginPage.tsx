@@ -2,7 +2,9 @@
 
 import { useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import { DomeLogo } from "../components/DomeLogo";
+import { SignInSurface } from "../components/auth/SignInSurface";
+import { ThemeToggle } from "../components/ThemeToggle";
+import { useOptionalTheme } from "../lib/ThemeContext";
 import { sanitizeRedirect } from "../lib/auth";
 import { storePendingConsent, hasLocalConsent } from "../lib/compliance";
 import { signInWithProvider, type OAuthProvider } from "../lib/supabase";
@@ -27,6 +29,12 @@ const GoogleIcon = (
     <path fill="#EA4335" d="M9 3.58c1.32 0 2.5.45 3.44 1.35l2.58-2.58C13.46.89 11.43 0 9 0A9 9 0 00.96 4.94l3.01 2.34C4.68 5.16 6.66 3.58 9 3.58z" />
   </svg>
 );
+
+// The page's own theme switch. Outside the app shell (the page rendered on its own, as in its
+// tests) there is no theme provider and nothing to switch, so it is left out.
+function LoginThemeToggle() {
+  return useOptionalTheme() ? <ThemeToggle className="login-theme" /> : null;
+}
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -141,532 +149,418 @@ export default function LoginPage() {
     </button>
   );
 
+  // Layout and look follow the home hero (Sprint LX, DESIGN_SYSTEM v2.6): the hero surface on one
+  // side or across the top, the form on the page colour, no top bar. Only the presentation is
+  // here; every handler, state and request above is unchanged.
   return (
     <div className="login-page">
-      <div className="login-container">
-        {/* ── Left: branded panel (hidden on mobile) ── */}
-        <div className="login-brand-pane" aria-hidden="true">
-          <div className="login-brand-content">
-            <p className="login-brand-eyebrow">Dome</p>
-            <h2 className="login-brand-title">
-              Governance-driven AI for regulated enterprises.
-            </h2>
-            <p className="login-brand-text">
-              Auditable analysis, documents and decisioning, with one secure sign-in
-              across every Dome tool.
-            </p>
-          </div>
-        </div>
+      <SignInSurface />
+      <LoginThemeToggle />
 
-        {/* ── Right: sign-in form ── */}
-        <div className="login-form-pane">
-          <div
-            className={
-              status === "sent"
-                ? "login-form-stack login-form-stack--center"
-                : "login-form-stack"
-            }
-          >
-            <div style={{ marginBottom: "32px" }}>
-              <DomeLogo size="md" />
-            </div>
-
-            <div className="login-card">
-              {status === "sent" ? (
-                <div style={{ textAlign: "center" }}>
-                  <div style={{ marginBottom: "20px" }}>
-                    <svg
-                      width="44"
-                      height="44"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      style={{ margin: "0 auto", display: "block" }}
-                    >
-                      <rect
-                        x="2"
-                        y="4"
-                        width="20"
-                        height="16"
-                        rx="3"
-                        stroke="#0080FF"
-                        strokeWidth="1.5"
-                      />
-                      <path
-                        d="M2 8l10 6 10-6"
-                        stroke="#0080FF"
-                        strokeWidth="1.5"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                  </div>
-                  <p
-                    style={{
-                      fontSize: "11px",
-                      fontWeight: 600,
-                      letterSpacing: "0.18em",
-                      textTransform: "uppercase",
-                      color: "var(--color-text-accent)",
-                      marginBottom: "10px",
-                    }}
-                  >
-                    Check your inbox
-                  </p>
-                  <p
-                    style={{
-                      fontSize: "14px",
-                      color: "var(--color-text-secondary)",
-                      lineHeight: 1.65,
-                    }}
-                  >
-                    We sent a sign-in link to{" "}
-                    <strong style={{ color: "var(--color-text-primary)", fontWeight: 500 }}>
-                      {email}
-                    </strong>
-                    . Click it to continue. It expires in 60 minutes.
-                  </p>
+      <main className="login-main">
+        <div className="login-stack">
+          <div className="login-card">
+            {status === "sent" ? (
+              <div className="login-sent">
+                <div className="login-sent-icon" aria-hidden="true">
+                  <svg width="30" height="30" viewBox="0 0 24 24" fill="none">
+                    <rect x="2" y="4" width="20" height="16" rx="3" stroke="currentColor" strokeWidth="1.5" />
+                    <path d="M2 8l10 6 10-6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
                 </div>
-              ) : (
-                <>
-                  <h1
-                    style={{
-                      fontSize: "20px",
-                      fontWeight: 700,
-                      letterSpacing: "-0.02em",
-                      color: "var(--color-text-primary)",
-                      marginBottom: "8px",
-                    }}
-                  >
-                    Sign in
-                  </h1>
-                  <p
-                    style={{
-                      fontSize: "14px",
-                      color: "var(--color-text-secondary)",
-                      marginBottom: "32px",
-                      lineHeight: 1.6,
-                    }}
-                  >
-                    Continue with your email or a provider to access the Dome AI tools.
+                <p className="login-eyebrow">Check your inbox</p>
+                <p className="login-sent-text">
+                  We sent a sign-in link to <strong>{email}</strong>. Click it to continue. It expires in 60 minutes.
+                </p>
+              </div>
+            ) : (
+              <>
+                <h1 className="login-title">Sign in</h1>
+                <p className="login-lead">
+                  Continue with your email or a provider to access the Dome AI tools.
+                </p>
+
+                <label htmlFor="login-email" className="login-label">
+                  Email address
+                </label>
+                <input
+                  id="login-email"
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  onKeyDown={handleKeyDown}
+                  placeholder="you@company.com"
+                  autoFocus
+                  aria-invalid={errorMsg ? true : undefined}
+                  aria-describedby={errorMsg ? "login-error" : undefined}
+                  className={errorMsg ? "login-input login-input--error" : "login-input"}
+                />
+
+                {errorMsg && (
+                  <p id="login-error" className="login-error">
+                    {errorMsg}
                   </p>
+                )}
 
-                  <label
-                    style={{
-                      display: "block",
-                      fontSize: "13px",
-                      fontWeight: 500,
-                      color: "var(--color-text-secondary)",
-                      marginBottom: "8px",
-                    }}
-                  >
-                    Email address
-                  </label>
-                  <input
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    onKeyDown={handleKeyDown}
-                    placeholder="you@company.com"
-                    autoFocus
-                    className="login-input"
-                    style={{
-                      display: "block",
-                      width: "100%",
-                      fontSize: "14px",
-                      color: "var(--color-text-primary)",
-                      borderRadius: "8px",
-                      padding: "10px 14px",
-                      marginBottom: errorMsg ? "8px" : "24px",
-                      outline: "none",
-                      boxSizing: "border-box",
-                      transition: "border-color 150ms ease, box-shadow 150ms ease",
-                    }}
-                  />
-
-                  {errorMsg && (
-                    <p
-                      style={{
-                        fontSize: "12px",
-                        color: "var(--color-dome-status-error)",
-                        marginBottom: "16px",
-                      }}
-                    >
-                      {errorMsg}
+                {/* Consent */}
+                <div className="login-consent">
+                  {returningUser ? (
+                    <p className="login-terms-note">
+                      By signing in, you agree to our{" "}
+                      <a href="/terms" target="_blank" rel="noopener noreferrer">
+                        Terms of Service
+                      </a>{" "}
+                      and{" "}
+                      <a href="/privacy" target="_blank" rel="noopener noreferrer">
+                        Privacy Policy
+                      </a>
+                      .
                     </p>
-                  )}
-
-                  {/* Consent */}
-                  <div style={{ display: "flex", flexDirection: "column", gap: "12px", marginBottom: "24px" }}>
-                    {returningUser ? (
-                      <p style={{ fontSize: "12px", color: "var(--color-text-tertiary)", lineHeight: 1.55 }}>
-                        By signing in, you agree to our{" "}
-                        <a
-                          href="/terms"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          style={{ color: "var(--color-text-accent)", textDecoration: "none" }}
-                        >
-                          Terms of Service
-                        </a>{" "}
-                        and{" "}
-                        <a
-                          href="/privacy"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          style={{ color: "var(--color-text-accent)", textDecoration: "none" }}
-                        >
-                          Privacy Policy
-                        </a>
-                        .
-                      </p>
-                    ) : (
-                      <>
-                        <label
-                          style={{
-                            display: "flex",
-                            alignItems: "flex-start",
-                            gap: "10px",
-                            cursor: "pointer",
-                          }}
-                        >
-                          <input
-                            type="checkbox"
-                            checked={termsAccepted}
-                            onChange={(e) => setTermsAccepted(e.target.checked)}
-                            style={{
-                              marginTop: "2px",
-                              width: "15px",
-                              height: "15px",
-                              accentColor: "var(--color-accent)",
-                              flexShrink: 0,
-                              cursor: "pointer",
-                            }}
-                          />
-                          <span style={{ fontSize: "12px", color: "var(--color-text-secondary)", lineHeight: 1.55 }}>
-                            I have read and agree to the{" "}
-                            <a
-                              href="/terms"
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              style={{ color: "var(--color-text-accent)", textDecoration: "none" }}
-                            >
-                              Terms of Service
-                            </a>{" "}
-                            and{" "}
-                            <a
-                              href="/privacy"
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              style={{ color: "var(--color-text-accent)", textDecoration: "none" }}
-                            >
-                              Privacy Policy
-                            </a>
-                            .
-                          </span>
-                        </label>
-
-                        <label
-                          style={{
-                            display: "flex",
-                            alignItems: "flex-start",
-                            gap: "10px",
-                            cursor: "pointer",
-                          }}
-                        >
-                          <input
-                            type="checkbox"
-                            checked={marketingConsent}
-                            onChange={(e) => setMarketingConsent(e.target.checked)}
-                            style={{
-                              marginTop: "2px",
-                              width: "15px",
-                              height: "15px",
-                              accentColor: "var(--color-accent)",
-                              flexShrink: 0,
-                              cursor: "pointer",
-                            }}
-                          />
-                          <span style={{ fontSize: "12px", color: "var(--color-text-secondary)", lineHeight: 1.55 }}>
-                            Keep me updated on Dome products and AI governance insights. Unsubscribe any time.
-                          </span>
-                        </label>
-                      </>
-                    )}
-                  </div>
-
-                  <button
-                    onClick={handleSubmit}
-                    disabled={busy || !email.trim() || consentBlocked}
-                    style={{
-                      width: "100%",
-                      background: "var(--color-accent)",
-                      color: "#FFFFFF",
-                      border: "none",
-                      borderRadius: "8px",
-                      padding: "11px 24px",
-                      fontSize: "13px",
-                      fontWeight: 600,
-                      letterSpacing: "0.01em",
-                      cursor: busy || !email.trim() || consentBlocked ? "not-allowed" : "pointer",
-                      opacity: busy || !email.trim() || consentBlocked ? 0.45 : 1,
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      gap: "8px",
-                      transition: "opacity 150ms ease",
-                    }}
-                  >
-                    {status === "loading" ? (
-                      <>
-                        <span
-                          style={{
-                            width: "14px",
-                            height: "14px",
-                            border: "1.5px solid rgba(255,255,255,0.35)",
-                            borderTopColor: "#FFFFFF",
-                            borderRadius: "50%",
-                            display: "inline-block",
-                            animation: "spin 600ms linear infinite",
-                            flexShrink: 0,
-                          }}
+                  ) : (
+                    <>
+                      <label className="login-check">
+                        <input
+                          type="checkbox"
+                          checked={termsAccepted}
+                          onChange={(e) => setTermsAccepted(e.target.checked)}
                         />
-                        Sending…
-                      </>
-                    ) : (
-                      "Send sign-in link"
-                    )}
-                  </button>
+                        <span>
+                          I have read and agree to the{" "}
+                          <a href="/terms" target="_blank" rel="noopener noreferrer">
+                            Terms of Service
+                          </a>{" "}
+                          and{" "}
+                          <a href="/privacy" target="_blank" rel="noopener noreferrer">
+                            Privacy Policy
+                          </a>
+                          .
+                        </span>
+                      </label>
 
-                  {/* Divider */}
-                  <div className="login-divider">
-                    <span>or continue with</span>
-                  </div>
+                      <label className="login-check">
+                        <input
+                          type="checkbox"
+                          checked={marketingConsent}
+                          onChange={(e) => setMarketingConsent(e.target.checked)}
+                        />
+                        <span>
+                          Keep me updated on Dome products and AI governance insights. Unsubscribe any time.
+                        </span>
+                      </label>
+                    </>
+                  )}
+                </div>
 
-                  {/* Provider sign-in */}
-                  <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
-                    {providerButton("github", "GitHub", GitHubIcon)}
-                    {providerButton("google", "Google", GoogleIcon)}
-                  </div>
-                </>
-              )}
-            </div>
+                <button
+                  onClick={handleSubmit}
+                  disabled={busy || !email.trim() || consentBlocked}
+                  className="login-primary"
+                >
+                  {status === "loading" ? (
+                    <>
+                      <span className="login-spinner" />
+                      Sending…
+                    </>
+                  ) : (
+                    "Send sign-in link"
+                  )}
+                </button>
 
-            {/* CTA below card */}
-            <div
-              style={{
-                marginTop: "32px",
-                textAlign: "center",
-                width: "100%",
-              }}
+                {/* Divider */}
+                <div className="login-divider">
+                  <span>or continue with</span>
+                </div>
+
+                {/* Provider sign-in */}
+                <div className="login-providers">
+                  {providerButton("github", "GitHub", GitHubIcon)}
+                  {providerButton("google", "Google", GoogleIcon)}
+                </div>
+              </>
+            )}
+          </div>
+
+          {/* CTA below the form */}
+          <div className="login-cta">
+            <p>Discover how Dome architects governance-driven AI for regulated enterprises.</p>
+            <a
+              href="https://domelayer.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="login-cta-link"
             >
-              <p
-                style={{
-                  fontSize: "13px",
-                  color: "var(--color-text-tertiary)",
-                  marginBottom: "12px",
-                  lineHeight: 1.6,
-                }}
-              >
-                Discover how Dome architects governance-driven AI for regulated enterprises.
-              </p>
-              <a
-                href="https://domelayer.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="login-cta-link"
-              >
-                Explore Dome →
-              </a>
-            </div>
+              Explore Dome →
+            </a>
           </div>
         </div>
-      </div>
+      </main>
 
       <style>{`
         @keyframes spin { to { transform: rotate(360deg); } }
 
         /* ════════════════════════════════════════════════════════════════
-           Mobile-first (< 768px): single-column form, unchanged from before.
-           The container is full-bleed; the form sits in a bordered card on the
-           page backdrop. The split-card layout is applied only at >= 768px.
+           The page colour behind the form, and the colour the blue fades into.
+           Light tablets sit on the muted grey so the form card stands out.
            ════════════════════════════════════════════════════════════════ */
         .login-page {
-          min-height: 100vh;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          padding: 24px;
-          font-family: var(--font-sans);
-          background-color: var(--color-bg-muted); /* light: #F5F5F5 */
-        }
-        [data-theme="dark"] .login-page {
-          background-color: var(--color-bg-base); /* #0A0A0A */
-          background-image: radial-gradient(circle, rgba(255, 255, 255, 0.07) 1px, transparent 1px);
-          background-size: 24px 24px;
-        }
-
-        .login-container {
-          width: 100%;
-          display: flex;
-          flex-direction: column;
-        }
-
-        /* Branded panel hidden on mobile */
-        .login-brand-pane { display: none; }
-        .login-brand-content {
+          --login-page: var(--color-bg-base);
           position: relative;
-          z-index: 1;
-          max-width: 440px;
-          color: #FFFFFF;
-          text-shadow: 0 1px 16px rgba(0, 0, 0, 0.45);
+          min-height: 100vh;
+          background: var(--login-page);
+          font-family: var(--font-sans);
+          color: var(--color-text-primary);
         }
-        .login-brand-eyebrow {
-          font-size: 11px; font-weight: 600; letter-spacing: 0.18em;
-          text-transform: uppercase; color: rgba(255, 255, 255, 0.7); margin-bottom: 16px;
-        }
-        .login-brand-title {
-          color: #FFFFFF; /* override the global h1-h6 color rule (index.css) */
-          font-size: 30px; font-weight: 700; letter-spacing: -0.02em;
-          line-height: 1.2; margin-bottom: 16px;
-        }
-        .login-brand-text { font-size: 15px; line-height: 1.6; color: rgba(255, 255, 255, 0.85); }
 
-        .login-form-pane {
-          flex: 1 1 auto;
+        /* ── The blue side: phones (< 768px), a band with the record ── */
+        .login-surface {
+          position: relative;
+          height: 220px;
+          overflow: hidden;
+          background: linear-gradient(180deg, var(--color-hero-surface) 0, var(--color-hero-surface) 96px, var(--login-page) 220px);
+        }
+        .login-home {
+          position: absolute;
+          z-index: 2;
+          top: 16px;
+          left: 24px;
           display: flex;
           align-items: center;
-          justify-content: center;
+          height: 32px;
+          color: #FFFFFF;
+          border-radius: 6px;
         }
-        .login-form-stack {
+        .login-home:focus-visible { outline: none; box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.7); }
+        .login-brand { display: none; }
+        .login-dome { display: none; }
+        .login-record {
+          position: absolute;
+          top: 46px;
+          left: 50%;
+          width: 390px;
+          height: 200px;
+          transform: translateX(-50%);
+        }
+
+        /* The theme switch sits on the blue at the top right below 1024px. */
+        .login-page .login-theme {
+          position: absolute;
+          z-index: 2;
+          top: 12px;
+          right: 16px;
+          width: 40px;
+          height: 40px;
+          color: #FFFFFF !important;
+        }
+        .login-page .login-theme:hover { background: rgba(255, 255, 255, 0.14) !important; }
+        .login-page .login-theme:focus-visible { outline: none; box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.7); }
+
+        .login-main { padding: 8px 24px 40px; }
+        .login-stack {
           width: 100%;
           max-width: 400px;
+          margin: 0 auto;
           display: flex;
           flex-direction: column;
-          align-items: center;
+          gap: 32px;
         }
 
-        /* Card (mobile = bordered card on the backdrop) */
-        .login-card {
-          width: 100%;
-          border-radius: var(--radius-lg);
-          padding: 40px 32px;
-          background-color: var(--color-bg-base); /* #FFFFFF */
-          border: 1px solid var(--color-border-default);
-          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
-        }
-        [data-theme="dark"] .login-card {
-          background-color: var(--color-bg-subtle); /* #111111 */
-          border-color: var(--color-border-default); /* #262626 */
-          box-shadow: 0 0 0 1px rgba(0, 128, 255, 0.07), 0 8px 40px rgba(0, 0, 0, 0.5);
-        }
-
-        .login-input {
-          background-color: var(--color-bg-subtle); /* #FAFAFA */
-          border: 1px solid var(--color-border-default);
-        }
-        [data-theme="dark"] .login-input {
-          background-color: var(--color-bg-base); /* #0A0A0A */
-          border-color: var(--color-border-strong); /* #404040 */
-        }
-
-        /* ════════════════════════════════════════════════════════════════
-           Large screens (>= 1024px / lg, matching the nav's desktop switch):
-           70%-width split card (image LEFT 60%, form RIGHT 40%), rounded +
-           elevated, on a dotted-grid backdrop. Tablet + mobile stay single-column
-           (the split felt cramped on tablets).
-           ════════════════════════════════════════════════════════════════ */
-        @media (min-width: 1024px) {
-          /* Dotted grid behind the container in BOTH themes */
-          .login-page {
-            background-image: radial-gradient(circle, rgba(0, 0, 0, 0.06) 1px, transparent 1px);
-            background-size: 24px 24px;
+        /* ── Tablet (768 to 1023px): the dome band, the form in a card under it ── */
+        @media (min-width: 768px) and (max-width: 1023px) {
+          [data-theme="light"] .login-page { --login-page: var(--color-bg-muted); }
+          .login-surface {
+            height: 380px;
+            background:
+              linear-gradient(180deg, transparent 0%, transparent 66%, var(--login-page) 100%),
+              radial-gradient(ellipse 58% 64% at 50% 100%, var(--color-hero-surface-glow) 0%, var(--color-hero-surface) 44%, var(--color-hero-surface-deep) 100%);
           }
-          [data-theme="dark"] .login-page {
-            background-image: radial-gradient(circle, rgba(255, 255, 255, 0.07) 1px, transparent 1px);
-            background-size: 24px 24px;
+          .login-home { left: 48px; }
+          .login-page .login-theme { right: 40px; }
+          .login-record { display: none; }
+          .login-dome {
+            display: block;
+            position: absolute;
+            top: 92px;
+            left: calc(50% - 190.5px);
+            width: 382px;
+            height: 284px;
           }
-
-          .login-container {
-            flex-direction: row;
-            width: min(70vw, 1120px);
-            min-height: min(70vh, 720px);
-            max-height: 92vh;
-            border-radius: var(--radius-xl); /* 16px */
-            overflow: hidden;
-            background-color: var(--color-bg-base);
+          .login-main { margin-top: -64px; padding: 0 24px 48px; position: relative; }
+          .login-stack { max-width: 440px; }
+          .login-card {
+            padding: 40px 36px;
+            border-radius: var(--radius-lg);
+            background: var(--color-bg-base);
             border: 1px solid var(--color-border-default);
             box-shadow: 0 12px 48px rgba(0, 0, 0, 0.12);
           }
-          [data-theme="dark"] .login-container {
-            background-color: var(--color-bg-subtle);
-            border-color: var(--color-border-default);
+          [data-theme="dark"] .login-card {
+            background: var(--color-bg-subtle);
             box-shadow: 0 0 0 1px rgba(0, 128, 255, 0.08), 0 24px 64px rgba(0, 0, 0, 0.6);
           }
-
-          /* Image LEFT, 60%. The photo lives in public/dome-login.png; the bottom-
-             weighted gradient over it keeps the white brand text legible. To swap the
-             image, replace the url(...) below (keep the gradient layer first). */
-          .login-brand-pane {
-            display: flex;
-            flex: 0 0 60%;
-            position: relative;
-            align-items: flex-end;
-            padding: 48px;
-            overflow: hidden;
-            background-color: #0A0F1E; /* fallback while the image loads */
-            background-image:
-              linear-gradient(to top, rgba(8, 12, 24, 0.95) 0%, rgba(8, 12, 24, 0.78) 30%, rgba(8, 12, 24, 0.32) 62%, rgba(8, 12, 24, 0.12) 100%),
-              url("/dome-login.png");
-            background-size: cover;
-            background-position: center;
-          }
-
-          /* Form RIGHT, 40%: centers when short, scrolls when tall */
-          .login-form-pane {
-            flex: 0 0 40%;
-            flex-direction: column;
-            align-items: center;
-            justify-content: flex-start;
-            padding: 48px 40px;
-            overflow-y: auto;
-            background-color: transparent;
-          }
-          .login-form-stack {
-            margin: auto 0;
-            max-width: 360px;
-            align-items: flex-start; /* left-align the logo with the form below (desktop) */
-          }
-          /* The post-send "check your inbox" card is centered, so center the logo to
-             match it (overrides the left-align above; only on this state). */
-          .login-form-stack--center {
-            align-items: center;
-          }
-
-          /* Inside the split card, the container IS the card: strip inner chrome */
-          .login-card,
-          [data-theme="dark"] .login-card {
-            background: transparent;
-            border: none;
-            box-shadow: none;
-            border-radius: 0;
-            padding: 0;
-          }
         }
 
-        /* ── Divider ── */
-        .login-divider {
+        /* ── From 1024px: the full-bleed split, no top bar ──
+           The blue side is 58% of the width, at most 1000px, and the full height of the window.
+           The dome is sized to that side (cqw, cqh) and keeps 40px clear of the brand line. */
+        @media (min-width: 1024px) {
+          .login-page { display: flex; }
+          .login-surface {
+            flex: 0 0 min(58%, 1000px);
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            container-type: size;
+            background: radial-gradient(ellipse 62% 62% at 60% 100%, var(--color-hero-surface-glow) 0%, var(--color-hero-surface) 46%, var(--color-hero-surface-deep) 100%);
+          }
+          .login-home { top: 40px; left: 64px; }
+          .login-brand {
+            display: block;
+            position: relative;
+            z-index: 1;
+            max-width: 480px;
+            padding: 136px 64px 0;
+            color: #FFFFFF;
+          }
+          .login-brand-title {
+            margin: 0 0 18px;
+            color: #FFFFFF; /* over the global heading colour */
+            font-size: 38px;
+            line-height: 1.15;
+            font-weight: 700;
+            letter-spacing: -0.025em;
+          }
+          .login-brand-text { margin: 0; max-width: 420px; font-size: 17px; line-height: 1.6; color: #FFFFFF; }
+          .login-record { display: none; }
+          .login-dome {
+            --dome-w: max(0px, min(84cqw, calc((100cqh - 430px) * 1.5)));
+            display: block;
+            position: absolute;
+            width: var(--dome-w);
+            height: calc(var(--dome-w) * 0.742);
+            left: calc(60cqw - var(--dome-w) * 0.4988);
+            bottom: calc(24px - var(--dome-w) * 0.0746);
+          }
+
+          .login-page .login-theme {
+            top: 28px;
+            right: 32px;
+            color: var(--color-text-secondary) !important;
+          }
+          .login-page .login-theme:hover { background: var(--color-bg-muted) !important; color: var(--color-text-primary) !important; }
+          .login-page .login-theme:focus-visible { box-shadow: 0 0 0 3px var(--color-focus-ring); }
+
+          .login-main {
+            flex: 1 1 auto;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 72px 48px;
+            box-sizing: border-box;
+          }
+          .login-stack { max-width: 360px; gap: 40px; }
+        }
+        @media (min-width: 1600px) {
+          .login-home { left: 80px; }
+          .login-brand { padding: 144px 80px 0; }
+          .login-brand-title { font-size: 44px; }
+          .login-dome { --dome-w: max(0px, min(84cqw, calc((100cqh - 470px) * 1.5))); }
+        }
+
+        /* ════════════════════════════════════════════════════════════════
+           The form (every width)
+           ════════════════════════════════════════════════════════════════ */
+        .login-title {
+          margin: 0 0 8px;
+          font-size: 24px;
+          font-weight: 700;
+          letter-spacing: -0.02em;
+          color: var(--color-text-primary);
+        }
+        .login-lead { margin: 0 0 28px; font-size: 14px; line-height: 1.6; color: var(--color-text-secondary); }
+        .login-label {
+          display: block;
+          margin-bottom: 8px;
+          font-size: 13px;
+          font-weight: 500;
+          color: var(--color-text-secondary);
+        }
+        .login-input {
+          display: block;
+          width: 100%;
+          height: 44px;
+          box-sizing: border-box;
+          margin-bottom: 24px;
+          padding: 0 14px;
+          border-radius: 8px;
+          font-family: inherit;
+          font-size: 15px;
+          color: var(--color-text-primary);
+          background: var(--color-bg-subtle);
+          border: 1px solid var(--color-border-strong);
+          outline: none;
+          transition: border-color 150ms ease, box-shadow 150ms ease;
+        }
+        [data-theme="dark"] .login-input { background: var(--color-bg-base); }
+        .login-input::placeholder { color: var(--color-text-tertiary); }
+        .login-input:focus { border-color: var(--color-accent); box-shadow: 0 0 0 3px var(--color-focus-ring); }
+        .login-input--error { margin-bottom: 8px; border-color: var(--login-error); }
+
+        /* #DC2626 is 3.9:1 on the dark page, so dark uses a lighter red (6.9:1). */
+        .login-page { --login-error: var(--color-dome-status-error); }
+        [data-theme="dark"] .login-page { --login-error: #F87171; }
+        .login-error { margin: 0 0 20px; font-size: 13px; line-height: 1.5; color: var(--login-error); }
+
+        .login-consent { display: flex; flex-direction: column; gap: 12px; margin-bottom: 24px; }
+        .login-terms-note { margin: 0; font-size: 12px; line-height: 1.55; color: var(--color-text-tertiary); }
+        .login-check { display: flex; align-items: flex-start; gap: 10px; cursor: pointer; }
+        .login-check input {
+          flex-shrink: 0;
+          width: 16px;
+          height: 16px;
+          margin: 2px 0 0;
+          accent-color: var(--color-accent);
+          cursor: pointer;
+        }
+        .login-check span { font-size: 12px; line-height: 1.55; color: var(--color-text-secondary); }
+        .login-consent a { color: var(--color-text-accent); text-decoration: none; }
+        .login-consent a:hover { text-decoration: underline; }
+
+        .login-primary {
+          width: 100%;
+          height: 44px;
           display: flex;
           align-items: center;
-          gap: 12px;
-          margin: 20px 0;
+          justify-content: center;
+          gap: 8px;
+          border: none;
+          border-radius: 8px;
+          background: var(--color-accent);
+          color: #FFFFFF;
+          font-family: inherit;
+          font-size: 14px;
+          font-weight: 600;
+          letter-spacing: 0.01em;
+          cursor: pointer;
+          transition: background-color 150ms ease, opacity 150ms ease;
         }
+        .login-primary:hover:not(:disabled) { background: var(--color-accent-hover); }
+        .login-primary:disabled { opacity: 0.45; cursor: not-allowed; }
+        .login-primary:focus-visible { outline: none; box-shadow: 0 0 0 3px var(--color-focus-ring); }
+        .login-spinner {
+          width: 14px;
+          height: 14px;
+          flex-shrink: 0;
+          display: inline-block;
+          border: 1.5px solid rgba(255, 255, 255, 0.35);
+          border-top-color: #FFFFFF;
+          border-radius: 50%;
+          animation: spin 600ms linear infinite;
+        }
+
+        .login-divider { display: flex; align-items: center; gap: 12px; margin: 20px 0; }
         .login-divider::before,
-        .login-divider::after {
-          content: "";
-          flex: 1;
-          height: 1px;
-          background: var(--color-border-default);
-        }
+        .login-divider::after { content: ""; flex: 1; height: 1px; background: var(--color-border-default); }
         .login-divider span {
           font-size: 11px;
           font-weight: 500;
@@ -675,43 +569,56 @@ export default function LoginPage() {
           color: var(--color-text-tertiary);
         }
 
-        /* ── Provider buttons ── */
+        .login-providers { display: flex; flex-direction: column; gap: 10px; }
         .login-provider-btn {
           width: 100%;
+          height: 44px;
           display: flex;
           align-items: center;
           justify-content: center;
           gap: 10px;
-          background-color: var(--color-bg-base);
-          color: var(--color-text-primary);
-          border: 1px solid var(--color-border-default);
           border-radius: 8px;
-          padding: 10px 16px;
-          font-size: 13px;
-          font-weight: 600;
+          border: 1px solid var(--color-border-strong);
+          background: var(--color-bg-base);
+          color: var(--color-text-primary);
           font-family: var(--font-sans);
+          font-size: 14px;
+          font-weight: 600;
           cursor: pointer;
           transition: background-color 150ms ease, border-color 150ms ease, opacity 150ms ease;
         }
-        .login-provider-btn:hover:not(:disabled) {
-          background-color: var(--color-bg-subtle);
-          border-color: var(--color-border-strong);
-        }
-        .login-provider-btn:disabled {
-          opacity: 0.45;
-          cursor: not-allowed;
-        }
-        .login-provider-btn:focus-visible {
-          outline: none;
-          border-color: var(--color-accent);
-          box-shadow: 0 0 0 3px var(--color-focus-ring);
-        }
-        [data-theme="dark"] .login-provider-btn {
-          background-color: var(--color-bg-base);
-          border-color: var(--color-border-strong);
-        }
+        .login-provider-btn:hover:not(:disabled) { background: var(--color-bg-muted); }
+        .login-provider-btn:disabled { opacity: 0.45; cursor: not-allowed; }
+        .login-provider-btn:focus-visible { outline: none; border-color: var(--color-accent); box-shadow: 0 0 0 3px var(--color-focus-ring); }
 
-        /* ── Shared ── */
+        /* ── Link sent ── */
+        .login-sent { display: flex; flex-direction: column; align-items: center; text-align: center; }
+        .login-sent-icon {
+          width: 64px;
+          height: 64px;
+          margin-bottom: 24px;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background: var(--color-accent-subtle);
+          color: var(--color-accent);
+        }
+        [data-theme="dark"] .login-sent-icon { color: var(--color-text-accent); }
+        .login-eyebrow {
+          margin: 0 0 12px;
+          font-size: 11px;
+          font-weight: 600;
+          letter-spacing: 0.18em;
+          text-transform: uppercase;
+          color: var(--color-text-accent);
+        }
+        .login-sent-text { margin: 0; max-width: 320px; font-size: 15px; line-height: 1.65; color: var(--color-text-secondary); }
+        .login-sent-text strong { color: var(--color-text-primary); font-weight: 600; }
+
+        /* ── Under the form ── */
+        .login-cta { text-align: center; }
+        .login-cta p { margin: 0 0 10px; font-size: 13px; line-height: 1.6; color: var(--color-text-tertiary); }
         .login-cta-link {
           display: inline-flex;
           align-items: center;
@@ -724,12 +631,6 @@ export default function LoginPage() {
           transition: opacity 150ms ease;
         }
         .login-cta-link:hover { opacity: 0.75; }
-
-        .login-input::placeholder { color: var(--color-text-tertiary); }
-        .login-input:focus {
-          border-color: var(--color-accent) !important;
-          box-shadow: 0 0 0 3px var(--color-focus-ring) !important;
-        }
       `}</style>
     </div>
   );

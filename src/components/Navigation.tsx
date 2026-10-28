@@ -39,7 +39,11 @@ const SignOutIcon = (
   </svg>
 )
 
-export function Navigation() {
+/**
+ * `overSurface`: the page opens on the hero surface (the 404), so the bar starts transparent over it,
+ * as at the top of the home page.
+ */
+export function Navigation({ overSurface = false }: { overSurface?: boolean } = {}) {
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
   const location = useLocation()
@@ -92,7 +96,7 @@ export function Navigation() {
   // already has the transparent bar and hydration does not flash a solid one.
   const homePath = location.pathname.length > 1 ? location.pathname.replace(/\/+$/, '') : location.pathname
   const onHome = homePath === homeHref
-  const surface = onHome && !scrolled && !mobileOpen ? 'top' : 'bar'
+  const surface = (onHome || overSurface) && !scrolled && !mobileOpen ? 'top' : 'bar'
 
   // The logo is a client-side link, so another page opens home at the top. On home itself it scrolls
   // back to the hero instead: a same-URL load would put the page back where it was.
