@@ -273,3 +273,24 @@ export function signalField(
   }
   return field
 }
+
+/**
+ * The record's one link from a point: the next point along its row, empty cells skipped, or -1.
+ * Rows alone read as the lines of a register, and with no vertical links the record can never
+ * form hooked or crossed shapes (2026-10-28).
+ */
+/**
+ * How far both ends of a row link must have travelled onto the grid before it is drawn, so a link
+ * only appears once it is nearly level and never as a slanting line across the field.
+ */
+export const RECORD_LINK = 0.92
+
+export function nextInRow(field: SignalField, i: number): number {
+  const p = field.points[i]
+  const start = p.row * field.cols
+  for (let col = p.col + 1; col < field.cols; col++) {
+    const j = field.cells[start + col]
+    if (j >= 0) return j
+  }
+  return -1
+}

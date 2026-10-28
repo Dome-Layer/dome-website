@@ -22,6 +22,8 @@ import {
   domeLattice,
   projectDome,
   seeded,
+  RECORD_LINK,
+  nextInRow,
   signalField,
   type DomePoint,
   type SignalField,
@@ -527,20 +529,20 @@ export class HeroField {
       s.alpha[i] = entrance * (1 - 0.75 * split) * this.fadeAt(x, y)
     })
 
-    // The record: ordered neighbours on the grid link into a thin ledger, in the palette of the
-    // background under each link (buckets 0 to 3 on the surface, 4 to 7 on the page).
+    // The record: ordered points link along their rows into a thin ledger (never down, see
+    // `nextInRow`), in the palette of the background under each link (buckets 0 to 3 on the
+    // surface, 4 to 7 on the page).
     const inks = this.inks as { surface: Ink; page: Ink }
     const buckets: number[][] = [[], [], [], [], [], [], [], []]
-    field.points.forEach((p, i) => {
-      if (s.eased[i] < 0.55 || s.alpha[i] < 0.05) return
-      const idx = p.row * field.cols + p.col
-      const next = [p.col < field.cols - 1 ? field.cells[idx + 1] : -1, p.row < field.rows - 1 ? field.cells[idx + field.cols] : -1]
-      for (const j of next) {
-        if (j < 0 || s.eased[j] < 0.55 || s.side[j] !== s.side[i]) continue
-        const v = Math.min(s.eased[i], s.eased[j]) * Math.min(s.alpha[i], s.alpha[j])
-        const onPage = this.pageAt((s.y[i] + s.y[j]) / 2) > 0.5 ? 4 : 0
-        buckets[Math.min(3, Math.floor(v * 4)) + onPage].push(s.x[i], s.y[i], s.x[j], s.y[j])
-      }
+    field.points.forEach((_, i) => {
+      if (s.eased[i] < RECORD_LINK || s.alpha[i] < 0.05) return
+      const j = nextInRow(field, i)
+      if (j < 0 || s.eased[j] < RECORD_LINK || s.side[j] !== s.side[i]) return
+      // Fades in over the last stretch of the travel instead of popping on at the threshold.
+      const settle = clamp01((Math.min(s.eased[i], s.eased[j]) - RECORD_LINK) / (1 - RECORD_LINK))
+      const v = (0.3 + 0.7 * settle) * Math.min(s.alpha[i], s.alpha[j])
+      const onPage = this.pageAt((s.y[i] + s.y[j]) / 2) > 0.5 ? 4 : 0
+      buckets[Math.min(3, Math.floor(v * 4)) + onPage].push(s.x[i], s.y[i], s.x[j], s.y[j])
     })
     const lineAlpha = [0.08, 0.16, 0.24, 0.34]
     ctx.lineWidth = 1
