@@ -1,6 +1,6 @@
 import type { CSSProperties } from 'react'
-import { DOME_CLEARANCE, DOME_PITCH, DOME_RISE, SEED, RECORD_LINK, domePaths, nextInRow, seeded, signalField } from './heroGeometry'
-import { easeOutCubic } from './heroMotion'
+import { DOME_CLEARANCE, DOME_PITCH, DOME_RISE, domePaths } from './heroGeometry'
+import { recordStill } from './heroStill'
 
 /**
  * The still frames of the home hero scene, one per scene, as SVG in the prerendered HTML.
@@ -18,8 +18,6 @@ import { easeOutCubic } from './heroMotion'
  * Both sit on the hero surface (v2.4): the dome in its white dots; the phone band in colours that
  * run from the surface palette to the page palette down the band, as the surface fades under it.
  */
-
-const round = (v: number) => Math.round(v * 10) / 10
 
 type Dome = ReturnType<typeof domePaths>
 
@@ -52,23 +50,7 @@ const MEDIUM = domePaths(384)
 const WIDE_STYLE = domeStyle(WIDE, 0.3, 0.7, 0.97)
 const MEDIUM_STYLE = domeStyle(MEDIUM, 0.5, 0.5, 0.99)
 
-/** Signal to record at rest on a phone: raw on the left, the right third already a record. */
-function signalStill() {
-  const field = signalField(390, 20, 192, 22, 0.58, seeded(SEED))
-  const at = field.points.map((p) => {
-    const e = easeOutCubic(p.still)
-    return { x: round(p.nx + (p.gx - p.nx) * e), y: round(p.ny + (p.gy - p.ny) * e), e }
-  })
-  let links = ''
-  field.points.forEach((_, i) => {
-    if (at[i].e < RECORD_LINK) return
-    const j = nextInRow(field, i)
-    if (j >= 0 && at[j].e >= RECORD_LINK) links += `M${at[i].x} ${at[i].y}L${at[j].x} ${at[j].y}`
-  })
-  return { raw: at.filter((p) => p.e < 0.55), ordered: at.filter((p) => p.e >= 0.55), links }
-}
-
-const SIGNAL = signalStill()
+const SIGNAL = recordStill()
 
 const dots = {
   fill: 'none',

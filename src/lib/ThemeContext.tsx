@@ -96,6 +96,12 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
   )
 }
 
+/** The theme, or null outside a ThemeProvider (a component rendered on its own, as in a test). */
+// eslint-disable-next-line react-refresh/only-export-components
+export function useOptionalTheme(): ThemeContextValue | null {
+  return useContext(ThemeContext)
+}
+
 // eslint-disable-next-line react-refresh/only-export-components
 export function useTheme(): ThemeContextValue {
   const ctx = useContext(ThemeContext)

@@ -168,6 +168,14 @@ export const TOOL_ROUTE_IDS = [
  */
 export const CLIENT_ONLY_PATHS = ['/login', '/auth/callback', '/app'] as const
 
+/** The prerendered 404 page, one per locale; the Worker serves it for unknown addresses. */
+export const NOT_FOUND_PATHS = ['/404', '/it/404'] as const
+
+/** The 404 page for an unknown address: the Italian one under /it while Italian is published. */
+export function notFoundPath(pathname: string, italianPublished: boolean): string {
+  return italianPublished && (pathname === '/it' || pathname.startsWith('/it/')) ? '/it/404' : '/404'
+}
+
 export function localizedHref(id: RouteId, locale: Locale): string {
   return PUBLIC_ROUTES[id].path[locale]
 }

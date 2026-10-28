@@ -2,6 +2,7 @@ import siteConfig from '../vercel.json';
 import { localeCookie } from '../src/i18n/cookie';
 import { localeRedirectTarget } from '../src/i18n/detect';
 import { isItalianPublished } from '../src/i18n/locales';
+import { NOT_FOUND_PATHS, notFoundPath } from '../src/i18n/routes';
 import { handleContact, type ContactEnv } from './contact';
 import {
   findRedirect,
@@ -99,6 +100,20 @@ export default {
     // to an .html file must ask for the extensionless path or the visitor gets that redirect.
     const rewrite = findRewrite(rewrites, url)?.replace(/\.html$/, '');
     const assetRequest = rewrite ? new Request(new URL(rewrite, url), request) : request;
-    return withSiteHeaders(await env.ASSETS.fetch(assetRequest), url, env);
+    const asset = await env.ASSETS.fetch(assetRequest);
+
+    // An address the site does not have gets the prerendered 404 page (Italian under /it) with the
+    // 404 status, rather than an empty response. The 404 pages themselves answer 404 too.
+    const isNotFoundPage = (NOT_FOUND_PATHS as readonly string[]).includes(url.pathname);
+    if (asset.status === 404 || isNotFoundPage) {
+      const italianPublished = isItalianPublished({ DOME_PUBLISH_IT: env.DOME_PUBLISH_IT });
+      const page = isNotFoundPage
+        ? asset
+        : await env.ASSETS.fetch(new Request(new URL(notFoundPath(url.pathname, italianPublished), url), request));
+      if (page.ok) {
+        return withSiteHeaders(new Response(page.body, { status: 404, headers: page.headers }), url, env);
+      }
+    }
+    return withSiteHeaders(asset, url, env);
   },
 } satisfies ExportedHandler<Env>;
