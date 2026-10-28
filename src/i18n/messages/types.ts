@@ -120,6 +120,8 @@ export interface Messages {
     yourTools: string
     openMenu: string
     closeMenu: string
+    switchToLight: string
+    switchToDark: string
   }
   switcher: {
     /** Accessible name of the switcher link, in the current page's language. */

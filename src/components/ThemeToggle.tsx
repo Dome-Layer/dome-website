@@ -1,4 +1,5 @@
 import { useTheme } from '../lib/ThemeContext'
+import { useMessages } from '../i18n/useLocale'
 
 interface ThemeToggleProps {
   className?: string
@@ -7,11 +8,12 @@ interface ThemeToggleProps {
 export function ThemeToggle({ className = '' }: ThemeToggleProps) {
   const { theme, toggleTheme } = useTheme()
   const isDark = theme === 'dark'
+  const t = useMessages().nav
 
   return (
     <button
       onClick={toggleTheme}
-      aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
+      aria-label={isDark ? t.switchToLight : t.switchToDark}
       className={`w-9 h-9 rounded-lg flex items-center justify-center transition-colors duration-150 text-[var(--color-text-secondary)] hover:bg-[var(--color-bg-muted)] hover:text-[var(--color-text-primary)] ${className}`}
     >
       {isDark ? (

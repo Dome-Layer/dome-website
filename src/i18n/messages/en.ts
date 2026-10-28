@@ -22,6 +22,8 @@ export const en: Messages = {
     yourTools: 'Your tools',
     openMenu: 'Open menu',
     closeMenu: 'Close menu',
+    switchToLight: 'Switch to light mode',
+    switchToDark: 'Switch to dark mode',
   },
   switcher: { label: 'Read this page in Italian' },
   footer: {
