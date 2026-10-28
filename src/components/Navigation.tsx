@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, type MouseEvent } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Link, useLocation } from 'react-router'
 import { DomeLogo } from './DomeLogo'
@@ -77,6 +77,9 @@ export function Navigation() {
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40)
+    // The page can open part way down (a reload, Back, or ScrollRestoration putting a same-URL load
+    // back where it was) before this listener exists, so read the position once now as well.
+    onScroll()
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
@@ -88,7 +91,18 @@ export function Navigation() {
   // page-colour menu. The first render is derived from the path alone, so the prerendered home page
   // already has the transparent bar and hydration does not flash a solid one.
   const homePath = location.pathname.length > 1 ? location.pathname.replace(/\/+$/, '') : location.pathname
-  const surface = homePath === homeHref && !scrolled && !mobileOpen ? 'top' : 'bar'
+  const onHome = homePath === homeHref
+  const surface = onHome && !scrolled && !mobileOpen ? 'top' : 'bar'
+
+  // The logo is a client-side link, so another page opens home at the top. On home itself it scrolls
+  // back to the hero instead: a same-URL load would put the page back where it was.
+  const goHome = (event: MouseEvent<HTMLAnchorElement>) => {
+    setMobileOpen(false)
+    if (!onHome) return
+    event.preventDefault()
+    const still = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches
+    window.scrollTo({ top: 0, behavior: still ? 'auto' : 'smooth' })
+  }
 
   useEffect(() => {
     document.body.style.overflow = mobileOpen ? 'hidden' : ''
@@ -106,9 +120,9 @@ export function Navigation() {
         }`}
       >
         <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 sm:px-8 lg:px-12 h-16">
-          <a href={homeHref} className="relative z-10 flex-shrink-0" aria-label={t.homeLabel}>
+          <Link to={homeHref} onClick={goHome} className="relative z-10 flex-shrink-0" aria-label={t.homeLabel}>
             <DomeLogo size="md" color="currentColor" className="text-[var(--color-logo)] transition-colors duration-300" />
-          </a>
+          </Link>
 
           {/* Desktop nav */}
           <div className="hidden lg:flex items-center gap-4">
