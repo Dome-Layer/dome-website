@@ -318,10 +318,11 @@ export default function LoginPage() {
           overflow: hidden;
           background: linear-gradient(180deg, var(--color-hero-surface) 0, var(--color-hero-surface) 96px, var(--login-page) 220px);
         }
+        /* --dome-banner-h: the staging banner's height (0 in production), so nothing sits under it. */
         .login-home {
           position: absolute;
           z-index: 2;
-          top: 16px;
+          top: calc(16px + var(--dome-banner-h, 0px));
           left: 24px;
           display: flex;
           align-items: center;
@@ -334,7 +335,7 @@ export default function LoginPage() {
         .login-dome { display: none; }
         .login-record {
           position: absolute;
-          top: 46px;
+          top: calc(46px + var(--dome-banner-h, 0px));
           left: 50%;
           width: 390px;
           height: 200px;
@@ -345,7 +346,7 @@ export default function LoginPage() {
         .login-page .login-theme {
           position: absolute;
           z-index: 2;
-          top: 12px;
+          top: calc(12px + var(--dome-banner-h, 0px));
           right: 16px;
           width: 40px;
           height: 40px;
@@ -412,7 +413,7 @@ export default function LoginPage() {
             container-type: size;
             background: radial-gradient(ellipse 62% 62% at 60% 100%, var(--color-hero-surface-glow) 0%, var(--color-hero-surface) 46%, var(--color-hero-surface-deep) 100%);
           }
-          .login-home { top: 40px; left: 64px; }
+          .login-home { top: calc(40px + var(--dome-banner-h, 0px)); left: 64px; }
           .login-brand {
             display: block;
             position: relative;
@@ -442,7 +443,7 @@ export default function LoginPage() {
           }
 
           .login-page .login-theme {
-            top: 28px;
+            top: calc(28px + var(--dome-banner-h, 0px));
             right: 32px;
             color: var(--color-text-secondary) !important;
           }
