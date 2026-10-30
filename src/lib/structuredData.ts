@@ -56,7 +56,7 @@ function organization(locale: Locale): Node {
   }
 }
 
-function website(locales: Locale[]): Node {
+function website(locales: readonly Locale[]): Node {
   return {
     '@type': 'WebSite',
     '@id': WEBSITE_ID,
@@ -68,7 +68,7 @@ function website(locales: Locale[]): Node {
 }
 
 /** The JSON-LD graph for a public page: organisation, website, the page itself and, below home, a breadcrumb. */
-export function pageStructuredData(id: RouteId, locale: Locale, locales: Locale[]): Node {
+export function pageStructuredData(id: RouteId, locale: Locale, locales: readonly Locale[]): Node {
   const t = pageMeta(id, locale)
   const url = absoluteUrl(localizedHref(id, locale))
   const page: Node = {

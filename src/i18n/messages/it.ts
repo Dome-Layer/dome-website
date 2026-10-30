@@ -32,7 +32,15 @@ export const it: Messages = {
     switchToLight: 'Passa al tema chiaro',
     switchToDark: 'Passa al tema scuro',
   },
-  switcher: { label: 'Versione inglese di questa pagina' },
+  switcher: {
+    language: 'Lingua',
+    readIn: {
+      en: 'Versione inglese di questa pagina',
+      it: 'Versione italiana di questa pagina',
+      nl: 'Versione olandese di questa pagina',
+      de: 'Versione tedesca di questa pagina',
+    },
+  },
   footer: {
     tagline: 'Consulenza AI e di prodotto per imprese regolamentate, con la governance integrata.',
     privacy: 'Informativa sulla privacy',
@@ -954,7 +962,7 @@ export const it: Messages = {
           blocks: [
             { p: 'Usiamo tre cookie e alcune voci nella memoria del vostro browser. Sono tutti impostati da noi, sul nostro dominio, per uno di tre motivi: mantenere l’accesso, ricordare una scelta che avete fatto o far funzionare una pagina. Nessuno serve a tracciarvi, a profilarvi o a mostrarvi pubblicità, e nessuno viene condiviso con altri.' },
             { p: 'Per questo il sito non mostra un banner di consenso. Cookie e memorizzazioni di questo tipo sono tecnici: ai sensi dell’art. 122 del Codice privacy e delle Linee guida cookie del Garante del giugno 2021 non richiedono consenso, ma solo questa informativa. La misurazione delle visite (descritta più sotto) non usa né cookie né memoria del browser ed è configurata per rispettare le condizioni alle quali il Garante equipara gli strumenti di analisi ai cookie tecnici.' },
-            { p: 'Alla prima visita non viene impostato nulla. Tutto ciò che segue compare solo dopo una vostra azione: l’accesso, il cambio di tema o di lingua, la chiusura dell’avviso sui cookie o l’uso di uno strumento. C’è un’eccezione: se il vostro browser preferisce l’italiano e aprite una pagina in inglese, vi portiamo una sola volta alla versione italiana e impostiamo `dome_locale` per non ripeterlo.' },
+            { p: 'Alla prima visita non viene impostato nulla. Tutto ciò che segue compare solo dopo una vostra azione: l’accesso, il cambio di tema o di lingua, la chiusura dell’avviso sui cookie o l’uso di uno strumento. C’è un’eccezione: se il vostro browser preferisce un’altra lingua in cui il sito è pubblicato e aprite una pagina in inglese, vi portiamo una sola volta alla pagina in quella lingua e impostiamo `dome_locale` per non ripeterlo.' },
           ],
         },
         {
@@ -966,7 +974,7 @@ export const it: Messages = {
                 rows: [
                   ['`dome_auth_token`', 'Mantiene l’accesso attivo su domelayer.com e negli strumenti Dome. Impostato al momento dell’accesso, per tutti i sottodomini di domelayer.com.', 'Fino alla scadenza dell’accesso, al massimo 8 ore', 'Strettamente necessario'],
                   ['`dome-theme`', 'Ricorda se avete scelto il tema chiaro o scuro, sul sito e negli strumenti. Impostato quando cambiate tema.', '1 anno', 'Funzionale: una preferenza vostra'],
-                  ['`dome_locale`', 'Ricorda la lingua. Impostato quando cambiate lingua, oppure una sola volta quando portiamo un browser in italiano alla versione italiana. Solo su domelayer.com.', '1 anno', 'Funzionale: una preferenza vostra'],
+                  ['`dome_locale`', 'Ricorda la lingua. Impostato quando cambiate lingua, oppure una sola volta quando portiamo un browser che preferisce un’altra lingua del sito alla versione in quella lingua. Solo su domelayer.com.', '1 anno', 'Funzionale: una preferenza vostra'],
                 ],
               },
             },

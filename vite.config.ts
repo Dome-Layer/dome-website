@@ -2,7 +2,7 @@ import { defineConfig } from 'vite'
 import { reactRouter } from '@react-router/dev/vite'
 import tailwindcss from '@tailwindcss/vite'
 import { resolve } from 'node:path'
-import { isItalianPublished } from './src/i18n/locales'
+import { publishedLocales } from './src/i18n/locales'
 
 export default defineConfig({
   plugins: [
@@ -10,8 +10,8 @@ export default defineConfig({
     reactRouter(),
   ],
   define: {
-    // Read by src/i18n/published.ts. Italian is dormant in production until it is translated.
-    __DOME_IT_PUBLISHED__: JSON.stringify(isItalianPublished(process.env)),
+    // Read by src/i18n/published.ts. A locale stays dormant until its DOME_PUBLISH_<LOCALE> flag says so.
+    __DOME_PUBLISHED_LOCALES__: JSON.stringify(publishedLocales(process.env)),
   },
   resolve: {
     alias: {

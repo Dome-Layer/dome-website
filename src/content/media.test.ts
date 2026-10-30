@@ -1,8 +1,9 @@
 import { existsSync, readFileSync, readdirSync } from 'node:fs'
 import { join, resolve } from 'node:path'
 import { describe, expect, it } from 'vitest'
+import { LOCALES } from '../i18n/locales'
+import { MESSAGES } from '../i18n/messages'
 import { en } from '../i18n/messages/en'
-import { it as itMessages } from '../i18n/messages/it'
 import {
   DESCRIBED_MEDIA_IDS,
   MEDIA,
@@ -63,10 +64,11 @@ describe('alt text', () => {
     expect([...DESCRIBED_MEDIA_IDS].sort()).toEqual(shouldBeDescribed)
   })
 
-  it('is present and non-empty in both locales', () => {
+  it('is present and non-empty in every locale', () => {
     for (const id of DESCRIBED_MEDIA_IDS) {
-      expect(en.media[id].trim().length, `en alt for ${id}`).toBeGreaterThan(0)
-      expect(itMessages.media[id].trim().length, `it alt for ${id}`).toBeGreaterThan(0)
+      for (const locale of LOCALES) {
+        expect(MESSAGES[locale].media[id].trim().length, `${locale} alt for ${id}`).toBeGreaterThan(0)
+      }
     }
   })
 
@@ -75,7 +77,9 @@ describe('alt text', () => {
     const properNouns: MediaId[] = ['francescoProdomo', 'ionitaLogo']
     for (const id of DESCRIBED_MEDIA_IDS) {
       if (properNouns.includes(id)) continue
-      expect(itMessages.media[id], `it alt for ${id}`).not.toBe(en.media[id])
+      for (const locale of LOCALES.filter((l) => l !== 'en')) {
+        expect(MESSAGES[locale].media[id], `${locale} alt for ${id}`).not.toBe(en.media[id])
+      }
     }
   })
 })
@@ -87,9 +91,12 @@ describe('provenance', () => {
     }
   })
 
-  it('has a visible label string in both locales', () => {
+  it('has a visible label string in every locale', () => {
     expect(en.aiGeneratedLabel).toBe('AI-generated image')
-    expect(itMessages.aiGeneratedLabel.length).toBeGreaterThan(0)
+    for (const locale of LOCALES.filter((l) => l !== 'en')) {
+      expect(MESSAGES[locale].aiGeneratedLabel, locale).not.toBe(en.aiGeneratedLabel)
+      expect(MESSAGES[locale].aiGeneratedLabel.length).toBeGreaterThan(0)
+    }
   })
 
   it('names a licence for anything we did not make ourselves', () => {

@@ -52,7 +52,11 @@ jobs:
           VITE_SENTRY_ENVIRONMENT: ${{ vars.VITE_SENTRY_ENVIRONMENT }}
           # Umami (Sprint C item 3). Public id; the tracker only reports from domelayer.com.
           VITE_UMAMI_WEBSITE_ID: ${{ vars.VITE_UMAMI_WEBSITE_ID }}
+          # One flag per locale; keep in step with the Worker's vars in wrangler.jsonc. Dutch and German
+          # are published on staging only until a native reader has reviewed them.
           DOME_PUBLISH_IT: 'true'
+          DOME_PUBLISH_NL: ${{ github.ref_name == 'main' && 'false' || 'true' }}
+          DOME_PUBLISH_DE: ${{ github.ref_name == 'main' && 'false' || 'true' }}
           DOME_NOINDEX: ${{ github.ref_name == 'main' && 'false' || 'true' }}
         run: |
           for name in VITE_SUPABASE_URL VITE_SUPABASE_ANON_KEY VITE_AUTH_BACKEND; do
@@ -81,6 +85,14 @@ jobs:
           sleep 5
           check / 200
           check /it 200
+          # Dutch and German: live on staging, absent from production (no page, so the 404).
+          if [ "$IS_PRODUCTION" = "true" ]; then want=404; else want=200; fi
+          check /nl $want
+          check /de/ueber-uns $want
+          sitemap=$(curl -s "$host/sitemap.xml?deploy=${GITHUB_SHA::7}")
+          if [ "$IS_PRODUCTION" = "true" ] && echo "$sitemap" | grep -qE 'domelayer\.com/(nl|de)(/|<)'; then
+            echo "::error::production sitemap lists an unpublished locale"; fail=1
+          fi
           check /login 200
           check /privacy 200
           check /tools/llm-council 308

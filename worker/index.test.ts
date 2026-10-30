@@ -83,6 +83,27 @@ describe('worker', () => {
     expect(res.headers.get('set-cookie')).toMatch(/^dome_locale=it; Path=\/; Max-Age=31536000; SameSite=Lax; Secure$/)
   })
 
+  it('sends Dutch and German browsers to their language once those are published', async () => {
+    const staging = makeEnv({ DOME_PUBLISH_NL: 'true', DOME_PUBLISH_DE: 'true' })
+    const nl = await get('https://domelayer.com/about?utm_source=email', { 'accept-language': 'nl-NL,nl;q=0.9,en;q=0.8' }, staging)
+    expect(nl.status).toBe(307)
+    expect(nl.headers.get('location')).toBe('/nl/over-ons?utm_source=email')
+    expect(nl.headers.get('set-cookie')).toMatch(/^dome_locale=nl;/)
+    const de = await get('https://domelayer.com/case-studies', { 'accept-language': 'de-AT,de;q=0.9' }, staging)
+    expect(de.headers.get('location')).toBe('/de/fallstudien')
+    expect(de.headers.get('set-cookie')).toMatch(/^dome_locale=de;/)
+  })
+
+  it('never sends anyone to an unpublished locale, flag unset or false', async () => {
+    for (const env of [makeEnv(), makeEnv({ DOME_PUBLISH_NL: 'false', DOME_PUBLISH_DE: 'false' })]) {
+      for (const language of ['nl-NL,nl;q=0.9', 'de-DE,de;q=0.9']) {
+        const res = await get('https://domelayer.com/about', { 'accept-language': language }, env)
+        expect(res.status).toBe(200)
+        expect(res.headers.get('set-cookie')).toBeNull()
+      }
+    }
+  })
+
   it('leaves the page alone once a language is chosen, or while Italian is unpublished', async () => {
     expect((await get('https://domelayer.com/', { 'accept-language': 'it-IT', cookie: 'dome_locale=en' })).status).toBe(200)
     const unpublished = makeEnv({ DOME_PUBLISH_IT: 'false' })
@@ -113,6 +134,30 @@ describe('worker', () => {
     expect((await get('https://domelayer.com/about', { 'accept-language': 'en' }, env)).status).toBe(200)
     const unpublished = makeEnv({ ASSETS, DOME_PUBLISH_IT: 'false' } as unknown as Partial<Env>)
     expect(await (await get('https://domelayer.com/it/nulla', {}, unpublished)).text()).toBe('asset:/404')
+  })
+
+  it('answers under /nl and /de with their own 404 only while they are published', async () => {
+    // Production: the Dutch and German pages and 404s are not in the build, so /nl and /de are unknown.
+    const production = new Set(['/404', '/it/404'])
+    const staging = new Set([...production, '/nl/404', '/de/404', '/nl/over-ons'])
+    const assets = (pages: Set<string>) => ({
+      fetch: vi.fn(async (input: Request | string) => {
+        const { pathname } = new URL(typeof input === 'string' ? input : input.url)
+        return pages.has(pathname) ? new Response(`asset:${pathname}`, { status: 200 }) : new Response(null, { status: 404 })
+      }),
+    })
+    const prod = makeEnv({ ASSETS: assets(production), DOME_PUBLISH_NL: 'false', DOME_PUBLISH_DE: 'false' } as unknown as Partial<Env>)
+    for (const path of ['/nl', '/nl/over-ons', '/de/kontakt']) {
+      const res = await get(`https://domelayer.com${path}`, { 'accept-language': 'en' }, prod)
+      expect(res.status).toBe(404)
+      expect(await res.text()).toBe('asset:/404')
+    }
+    const stag = makeEnv({ ASSETS: assets(staging), DOME_PUBLISH_NL: 'true', DOME_PUBLISH_DE: 'true' } as unknown as Partial<Env>)
+    expect(await (await get('https://domelayer.com/nl/over-ons', {}, stag)).text()).toBe('asset:/nl/over-ons')
+    const nl = await get('https://domelayer.com/nl/bestaat-niet', {}, stag)
+    expect(nl.status).toBe(404)
+    expect(await nl.text()).toBe('asset:/nl/404')
+    expect(await (await get('https://domelayer.com/de/gibt-es-nicht', {}, stag)).text()).toBe('asset:/de/404')
   })
 
   it('serves /login from the SPA fallback', async () => {

@@ -1,4 +1,4 @@
-import { DEFAULT_LOCALE, type Locale } from '../i18n/locales'
+import { DEFAULT_LOCALE, LOCALE_NAMES, type Locale } from '../i18n/locales'
 import { MESSAGES } from '../i18n/messages'
 import { pageMeta } from '../i18n/pageMeta'
 import { CASE_STUDY_ROUTE_IDS, PAGE_IDS, PUBLIC_ROUTES, ROUTE_IDS, TOOL_ROUTE_IDS, localizedHref, type RouteId } from '../i18n/routes'
@@ -10,7 +10,7 @@ const escapeXml = (value: string) =>
   value.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;')
 
 /** Every published page in every published locale, each with its hreflang alternates and x-default. */
-export function buildSitemap(locales: Locale[]): string {
+export function buildSitemap(locales: readonly Locale[]): string {
   const urls = ROUTE_IDS.flatMap((id) =>
     locales.map((locale) => {
       const alternates = [
@@ -73,12 +73,12 @@ function llmsSection(locale: Locale): string[] {
 }
 
 /** llms.txt (https://llmstxt.org): an English summary with curated links, then one section per other locale. */
-export function buildLlmsTxt(locales: Locale[]): string {
+export function buildLlmsTxt(locales: readonly Locale[]): string {
   const en = MESSAGES.en.site
   const lines = ['# DOME', '', `> ${en.description}`, '', en.llmsIntro, '', ...llmsSection('en')]
   for (const locale of locales.filter((l) => l !== DEFAULT_LOCALE)) {
     const t = MESSAGES[locale].site
-    lines.push('', `## ${locale === 'it' ? 'Italiano' : locale}`, '', t.description, '', t.llmsIntro, '', ...llmsSection(locale).map((l) => (l.startsWith('## ') ? `#${l}` : l)))
+    lines.push('', `## ${LOCALE_NAMES[locale]}`, '', t.description, '', t.llmsIntro, '', ...llmsSection(locale).map((l) => (l.startsWith('## ') ? `#${l}` : l)))
   }
   return lines.join('\n') + '\n'
 }

@@ -13,7 +13,7 @@ export { SITE_URL }
  * alternates (one per published locale plus x-default), Open Graph, Twitter and JSON-LD. React
  * Router uses only the deepest matching route's meta, so every page returns the complete set.
  */
-export function buildMeta(id: RouteId, locale: Locale, locales: Locale[] = PUBLISHED_LOCALES): MetaDescriptor[] {
+export function buildMeta(id: RouteId, locale: Locale, locales: readonly Locale[] = PUBLISHED_LOCALES): MetaDescriptor[] {
   const page = pageMeta(id, locale)
   const url = absoluteUrl(localizedHref(id, locale))
   const image = absoluteUrl(socialImagePath(id, locale))

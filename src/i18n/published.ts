@@ -1,6 +1,11 @@
-import { publishedLocales } from './locales'
+import { DEFAULT_LOCALE, type Locale } from './locales'
 
-/** Resolved at build time in vite.config.ts from isItalianPublished(process.env). */
-export const IT_PUBLISHED: boolean = __DOME_IT_PUBLISHED__
+/**
+ * The locales published in this build, English first. Resolved at build time in vite.config.ts
+ * from publishedLocales(process.env); see isLocalePublished in locales.ts.
+ */
+export const PUBLISHED_LOCALES: readonly Locale[] = __DOME_PUBLISHED_LOCALES__
 
-export const PUBLISHED_LOCALES = publishedLocales(IT_PUBLISHED)
+export function isPublished(locale: Locale): boolean {
+  return locale === DEFAULT_LOCALE || PUBLISHED_LOCALES.includes(locale)
+}
