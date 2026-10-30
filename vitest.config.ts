@@ -19,9 +19,10 @@ const nodeStorageFix =
   nodeMajor >= 22 ? { execArgv: ["--no-experimental-webstorage"] } : {};
 
 export default defineConfig({
-  // Tests run with Italian published, as in CI builds (see src/i18n/locales.ts).
+  // Tests run with every locale published, so every catalogue and route is exercised (see
+  // src/i18n/locales.ts). Tests of an unpublished locale pass the locale list explicitly.
   define: {
-    __DOME_IT_PUBLISHED__: "true",
+    __DOME_PUBLISHED_LOCALES__: JSON.stringify(["en", "it", "nl", "de"]),
   },
   resolve: {
     alias: {

@@ -1,4 +1,5 @@
 import type { DescribedMediaId } from '../../content/media'
+import type { Locale } from '../locales'
 import type { StaticRouteId } from '../routes'
 
 export interface PageMetaText {
@@ -92,6 +93,11 @@ export interface LegalDocumentText {
   updated: string
   title: string
   appliesTo: string
+  /**
+   * Says that the English version is the binding one, under the title, followed by a link to it.
+   * Set on the Dutch and German documents; unset in English, which is that version, and in Italian.
+   */
+  binding?: { note: string; link: string }
   sections: readonly { heading: string; blocks: readonly LegalBlock[] }[]
   /** Link to the sibling document at the foot of the page. */
   sibling: string
@@ -124,8 +130,13 @@ export interface Messages {
     switchToDark: string
   }
   switcher: {
-    /** Accessible name of the switcher link, in the current page's language. */
-    label: string
+    /** "Language": names the language menu (three or more published languages) and its list. */
+    language: string
+    /**
+     * Description of the two-language toggle, by the language it leads to ("Read this page in
+     * Italian"), in the current page's language. The entry for the page's own language is unused.
+     */
+    readIn: Record<Locale, string>
   }
   footer: {
     tagline: string

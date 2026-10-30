@@ -21,9 +21,14 @@
   // Contact form: 3 submissions per minute per IP, counted per Cloudflare location, nothing stored.
   // Bindings are not inherited by environments, so staging repeats it with its own namespace.
   "ratelimits": [{ "name": "CONTACT_RATE_LIMITER", "namespace_id": "1001", "simple": { "limit": 3, "period": 60 } }],
+  // One flag per locale, read at runtime by the Worker (the first-visit redirect and the 404 per
+  // locale). They must match the build's flags in .github/workflows/deploy-cloudflare.yml. Dutch and
+  // German stay unpublished in production until a native reader has reviewed them.
   "vars": {
     "ENVIRONMENT": "production",
     "DOME_PUBLISH_IT": "true",
+    "DOME_PUBLISH_NL": "false",
+    "DOME_PUBLISH_DE": "false",
     "CONTACT_EMAIL": "hello@domelayer.com"
   },
   "observability": { "enabled": true },
@@ -34,6 +39,8 @@
       "vars": {
         "ENVIRONMENT": "staging",
         "DOME_PUBLISH_IT": "true",
+        "DOME_PUBLISH_NL": "true",
+        "DOME_PUBLISH_DE": "true",
         "DOME_NOINDEX": "true",
         "CONTACT_EMAIL": "hello@domelayer.com"
       }

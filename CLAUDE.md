@@ -35,8 +35,8 @@ session the signed-in pages can be built and unit-tested but not used; the maint
 
 React 19, React Router 7 in framework mode with a static prerender (`react-router.config.ts`), TypeScript,
 Tailwind CSS 4, Framer Motion. `worker/` is the Cloudflare Worker: it serves the prerendered pages, the real 404
-(`/404`, `/it/404`), the contact form (Resend, a rate-limit binding) and security headers. `wrangler.jsonc` holds
-the Worker config and the per-environment vars.
+(`/404`, `/it/404` and one per other published locale), the contact form (Resend, a rate-limit binding) and
+security headers. `wrangler.jsonc` holds the Worker config and the per-environment vars.
 
 ## House rules
 
@@ -55,13 +55,21 @@ the Worker config and the per-environment vars.
 
 ## Languages
 
-- `src/i18n/locales.ts`: `LOCALES` (today `en`, `it`). English sits at the root and is the x-default; every other
-  locale lives under `/<locale>/`, with its own slugs in `src/i18n/routes.ts` (`PUBLIC_ROUTES`).
+- `src/i18n/locales.ts`: `LOCALES` (`en`, `it`, `nl`, `de`). English sits at the root and is the x-default; every
+  other locale lives under `/<locale>/`, with its own slugs in `src/i18n/routes.ts` (`PUBLIC_ROUTES`) and its own
+  catalogue in `src/i18n/messages/`. Case studies carry their copy per locale in `src/content/caseStudies.ts`.
 - `src/routes.ts` registers every public page once per locale. A locale that is not published is registered but
-  not prerendered, so it 404s. `DOME_PUBLISH_IT` (in `wrangler.jsonc` and the deploy workflow) publishes Italian;
-  Italian has been live in production since 2026-09-28.
-- hreflang, the sitemap, the language switcher, `Content-Language`, `og:locale` and the `dome_locale` cookie all
-  follow `LOCALES` and the publish flags. `src/i18n/routes.test.ts` checks the catalogues and slugs.
+  not prerendered, so it 404s. Each locale has its own flag, `DOME_PUBLISH_<LOCALE>` (`true` or `false`), set
+  for the build in the deploy workflow and for the Worker in `wrangler.jsonc`; the two must agree (a test checks).
+  Italian is published by default and has been live in production since 2026-09-28. Dutch and German are
+  unpublished unless their flag is `true`: staging publishes them, production does not until a native reader
+  has reviewed them. To see them locally: `DOME_PUBLISH_NL=true DOME_PUBLISH_DE=true npm run dev`.
+- hreflang, the sitemap, llms.txt, the language switcher, `Content-Language` (`inLanguage`), `og:locale`, the
+  first-visit redirect, the 404 per locale and the `dome_locale` cookie all follow `LOCALES` and the publish
+  flags; an unpublished locale leaves no trace in them, and its social images are left out of the build.
+- The switcher is a one-click toggle while two languages are published and a small menu from three.
+- Dutch addresses the reader as "u", German as "Sie". Their legal pages say near the top that the English
+  version is binding. `src/i18n/routes.test.ts` checks the catalogues, slugs and register.
 - Auth pages (`/login`, `/auth/callback`, `/app`) are English only today.
 
 ## Design

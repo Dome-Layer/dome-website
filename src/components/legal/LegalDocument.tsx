@@ -189,6 +189,14 @@ export function LegalDocument({
           {doc.title}
         </h1>
         <p style={{ ...s.p, marginBottom: "0" }}>{doc.appliesTo}</p>
+        {doc.binding && (
+          <p data-binding style={{ ...s.p, marginTop: "16px", marginBottom: "0" }}>
+            {doc.binding.note}{" "}
+            <a href={localizedHref(routeId, "en")} hrefLang="en" style={{ ...s.link, textDecoration: "underline", textUnderlineOffset: "2px" }}>
+              {doc.binding.link}
+            </a>
+          </p>
+        )}
 
         {doc.sections.map((section) => (
           <section key={section.heading}>

@@ -2,7 +2,7 @@ import type { Locale } from "../i18n/locales";
 import type { MediaId } from "./media";
 
 /**
- * The case studies, in both locales.
+ * The case studies, in every locale.
  *
  * Generated once from `_design/domelayer-redesign/content/cases.py`, the drafting source, and
  * maintained here from now on. **All anonymised**: sector descriptors only, never a client or firm
@@ -18,6 +18,10 @@ import type { MediaId } from "./media";
  * uses ("acquisti indiretti" for non-resale purchasing, "filiera" for supply chain, "esperienza
  * d'acquisto" for shopper experience) rather than a dictionary rendering, and address the reader
  * as "voi", never "tu".
+ *
+ * The Dutch and German follow the same approach: Netherlands Dutch addressing the reader as "u",
+ * Germany German as "Sie", in the register of an IT director or compliance lead. German writes
+ * "KI" for AI, as German enterprise readers do; Dutch keeps "AI". Tool names stay English.
  */
 export type Segment = "ux" | "automation" | "dome";
 
@@ -61,31 +65,45 @@ export const CASE_STUDIES: readonly CaseStudy[] = [
     slug: {
       en: "procurement-workflow-redesign",
       it: "riprogettazione-acquisti",
+      nl: "herontwerp-inkoopproces",
+      de: "neugestaltung-einkaufsprozesse",
     },
     segment: "ux",
     descriptor: {
       en: "Retail procurement",
       it: "Acquisti nel retail",
+      nl: "Inkoop in de retail",
+      de: "Einkauf im Handel",
     },
     title: {
       en: "Procurement workflow redesign for a European food retailer",
       it: "Acquisti indiretti ridisegnati per un retailer alimentare europeo",
+      nl: "Inkoopproces herontworpen voor een Europese levensmiddelenretailer",
+      de: "Einkaufsprozesse neu gestaltet für einen europäischen Lebensmittelhändler",
     },
     metaTitle: {
       en: "Procurement redesign for a European food retailer",
       it: "Acquisti ridisegnati per un retailer alimentare",
+      nl: "Inkoopproces herontworpen voor een levensmiddelenretailer",
+      de: "Einkauf neu gestaltet für einen Lebensmittelhändler",
     },
     summary: {
       en: "A research-led redesign of non-resale purchasing journeys across five enterprise platforms, rolled out with a standard training programme.",
       it: "Percorsi di acquisto indiretto ridisegnati su cinque piattaforme enterprise, con ricerca sul campo e un programma di formazione standard.",
+      nl: "Onderzoeksgedreven herontwerp van de indirecte inkoop op vijf enterpriseplatforms, ingevoerd met een standaard trainingsprogramma.",
+      de: "Indirekter Einkauf auf fünf Enterprise-Plattformen neu gestaltet, auf Basis von Nutzerforschung und mit einem einheitlichen Schulungsprogramm.",
     },
     client: {
       en: "European food retailer, head-office procurement",
       it: "Retailer alimentare europeo, acquisti di sede",
+      nl: "Europese levensmiddelenretailer, inkoop op het hoofdkantoor",
+      de: "Europäischer Lebensmittelhändler, Einkauf der Zentrale",
     },
     role: {
       en: "Journey mapping, content design, onboarding programme",
       it: "Journey mapping, content design, programma di onboarding",
+      nl: "Journey mapping, contentontwerp, onboardingprogramma",
+      de: "Journey Mapping, Content Design, Onboarding-Programm",
     },
     challenge: {
       en: [
@@ -95,6 +113,14 @@ export const CASE_STUDIES: readonly CaseStudy[] = [
       it: [
         "Beni e servizi che un retailer acquista per uso interno, dalla cancelleria alla consulenza, seguono un processo di acquisto separato. In questo caso il processo coinvolgeva cinque piattaforme enterprise per richieste, sourcing, spese, pianificazione e gestione dei costi.",
         "Chi acquista solo occasionalmente faticava a trovare il percorso giusto, e il team acquisti rispondeva di continuo alle stesse domande. Ogni modifica doveva inoltre rispettare le policy di acquisto aziendali.",
+      ],
+      nl: [
+        "Goederen en diensten die een retailer voor eigen gebruik koopt, van kantoorartikelen tot advies, lopen via een apart inkoopproces. Hier besloeg dat proces vijf enterpriseplatforms voor aanvragen, sourcing, declaraties, planning en kostenbeheer.",
+        "Medewerkers die maar af en toe iets inkopen, vonden moeilijk de juiste route, en het inkoopteam beantwoordde steeds weer dezelfde vragen. Elke wijziging moest bovendien binnen het inkoopbeleid van het bedrijf blijven.",
+      ],
+      de: [
+        "Waren und Dienstleistungen, die ein Händler für den Eigenbedarf kauft, von Büromaterial bis Beratung, laufen über einen eigenen Beschaffungsprozess. Hier erstreckte er sich über fünf Enterprise-Plattformen für Bedarfsmeldung, Sourcing, Spesen, Planung und Kostenmanagement.",
+        "Wer nur gelegentlich bestellt, fand den richtigen Weg oft nicht, und das Einkaufsteam beantwortete immer wieder dieselben Fragen. Jede Änderung musste zudem die Einkaufsrichtlinien des Unternehmens einhalten.",
       ],
     },
     steps: {
@@ -134,6 +160,42 @@ export const CASE_STUDIES: readonly CaseStudy[] = [
           body: "Abbiamo guidato la progettazione didattica e prodotto brevi video di onboarding per ciascun percorso.",
         },
       ],
+      nl: [
+        {
+          title: "De routes in kaart brengen",
+          body: "We volgden aanvragen van indiening tot inkooporder op alle vijf platforms en legden vast waar mensen aarzelden, terugkeerden of om hulp vroegen.",
+        },
+        {
+          title: "Van aanvraag tot bestelling",
+          body: "We deelden de ingangen in naar wat mensen kopen, zodat elke aanvraag op de juiste route begint en niet op de meest vertrouwde.",
+        },
+        {
+          title: "Teksten afstemmen op het beleid",
+          body: "We herschreven instructies en labels in lijn met het inkoopbeleid, zodat de keuze die aan de regels voldoet ook de voor de hand liggende is.",
+        },
+        {
+          title: "Het onboardingprogramma opzetten",
+          body: "We leidden het didactisch ontwerp en maakten korte onboardingvideo’s voor elke route.",
+        },
+      ],
+      de: [
+        {
+          title: "Die Wege erfassen",
+          body: "Wir haben Anfragen von der Bedarfsmeldung bis zur Bestellung über alle fünf Plattformen verfolgt und festgehalten, wo Menschen zögerten, zurückgingen oder um Hilfe baten.",
+        },
+        {
+          title: "Von der Anfrage zur Bestellung",
+          body: "Wir haben die Einstiegspunkte nach dem gegliedert, was gekauft wird, damit jede Anfrage auf dem richtigen Weg beginnt und nicht auf dem gewohnten.",
+        },
+        {
+          title: "Inhalte an den Richtlinien ausrichten",
+          body: "Wir haben Hinweise und Beschriftungen im Einklang mit den Einkaufsrichtlinien neu geschrieben, damit die regelkonforme Wahl auch die naheliegende ist.",
+        },
+        {
+          title: "Das Onboarding-Programm aufbauen",
+          body: "Wir haben das didaktische Konzept verantwortet und kurze Onboarding-Videos für jeden Weg produziert.",
+        },
+      ],
     },
     outcomes: {
       en: [
@@ -145,6 +207,16 @@ export const CASE_STUDIES: readonly CaseStudy[] = [
         "Percorsi più chiari e maggiore adozione delle piattaforme di acquisto",
         "Meno attriti tra richiesta e ordine di acquisto",
         "Contenuti di onboarding adottati come formazione standard del team acquisti",
+      ],
+      nl: [
+        "Duidelijkere routes en meer gebruik van de inkoopplatforms",
+        "Minder frictie tussen aanvraag en inkooporder",
+        "Het onboardingmateriaal is de standaardtraining van het inkoopteam geworden",
+      ],
+      de: [
+        "Klarere Wege und eine stärkere Nutzung der Einkaufsplattformen",
+        "Weniger Reibung zwischen Anfrage und Bestellung",
+        "Die Onboarding-Inhalte sind die Standardschulung des Einkaufsteams geworden",
       ],
     },
     capabilities: {
@@ -160,6 +232,18 @@ export const CASE_STUDIES: readonly CaseStudy[] = [
         "Content design",
         "Progettazione didattica",
       ],
+      nl: [
+        "Gebruikersonderzoek",
+        "Journey mapping",
+        "Contentontwerp",
+        "Didactisch ontwerp",
+      ],
+      de: [
+        "Nutzerforschung",
+        "Journey Mapping",
+        "Content Design",
+        "Didaktisches Design",
+      ],
     },
     related: ["platform", "training"],
     media: "caseProcurementWorkflowRedesign",
@@ -169,27 +253,39 @@ export const CASE_STUDIES: readonly CaseStudy[] = [
     slug: {
       en: "ai-compliance-assessments",
       it: "valutazioni-conformita-ai",
+      nl: "ai-compliancebeoordelingen",
+      de: "ki-compliance-bewertungen",
     },
     segment: "automation",
     descriptor: {
       en: "Compliance",
       it: "Compliance",
+      nl: "Compliance",
+      de: "Compliance",
     },
     title: {
       en: "AI-assisted compliance assessments",
       it: "Valutazioni di conformità con AI",
+      nl: "Compliancebeoordelingen met AI-ondersteuning",
+      de: "KI-gestützte Compliance-Bewertungen",
     },
     summary: {
       en: "A regulatory library and assessment tools that help compliance teams find gaps faster, with an assistant that explains each finding.",
       it: "Una libreria normativa e strumenti di valutazione che aiutano i team compliance a trovare prima le lacune, con un assistente che spiega ogni rilievo.",
+      nl: "Een bibliotheek met regelgeving en beoordelingstools waarmee complianceteams sneller hiaten vinden, met een assistent die elke bevinding toelicht.",
+      de: "Eine Bibliothek der Regelwerke und Bewertungswerkzeuge, mit denen Compliance-Teams Lücken schneller finden, samt Assistent, der jeden Befund erklärt.",
     },
     client: {
       en: "Risk and compliance platform",
       it: "Piattaforma risk e compliance",
+      nl: "Platform voor risico en compliance",
+      de: "Plattform für Risiko und Compliance",
     },
     role: {
       en: "Discovery, prototyping, AI assessment design",
       it: "Discovery, prototipazione, design delle valutazioni AI",
+      nl: "Discovery, prototyping, ontwerp van de AI-beoordeling",
+      de: "Discovery, Prototyping, Konzeption der KI-Bewertung",
     },
     challenge: {
       en: [
@@ -199,6 +295,14 @@ export const CASE_STUDIES: readonly CaseStudy[] = [
       it: [
         "Compliance manager, uffici legali e responsabili di business svolgono valutazioni su rischio, ESG, etica e normativa. Gran parte del lavoro consisteva nel confrontare le norme con le policy interne e nel compilare i report a mano.",
         "Le valutazioni richiedevano settimane, i progetti di remediation partivano in ritardo e i risultati erano difficili da confrontare tra una valutazione e l’altra.",
+      ],
+      nl: [
+        "Compliancemanagers, juridische teams en business owners voeren beoordelingen uit op het gebied van risico, ESG, ethiek en regelgeving. Veel van dat werk bestond uit het naast elkaar lezen van regelgeving en intern beleid en het handmatig samenstellen van rapporten.",
+        "Beoordelingen duurden weken, herstelprojecten begonnen laat en de resultaten waren van beoordeling tot beoordeling moeilijk te vergelijken.",
+      ],
+      de: [
+        "Compliance-Verantwortliche, Rechtsabteilungen und Fachbereiche führen Bewertungen zu Risiko, ESG, Ethik und Regulierung durch. Ein großer Teil davon bestand darin, Vorschriften und interne Richtlinien nebeneinander zu lesen und Berichte von Hand zusammenzustellen.",
+        "Bewertungen dauerten Wochen, Maßnahmenprojekte begannen spät, und die Ergebnisse ließen sich von einer Bewertung zur nächsten kaum vergleichen.",
       ],
     },
     steps: {
@@ -238,6 +342,42 @@ export const CASE_STUDIES: readonly CaseStudy[] = [
           body: "Abbiamo aggiunto un assistente AI che spiega perché una lacuna è segnalata e rimanda al testo di origine, verificabile da chi revisiona.",
         },
       ],
+      nl: [
+        {
+          title: "Discovery",
+          body: "Met gebruikers uit compliance en juridische zaken brachten we in kaart hoe beoordelingen nu verlopen en waar de tijd naartoe gaat.",
+        },
+        {
+          title: "Bibliotheek met regelgeving",
+          body: "We structureerden de relevante regelgeving in een doorzoekbare bibliotheek waar beoordelingen direct naar kunnen verwijzen.",
+        },
+        {
+          title: "Beoordelingstools",
+          body: "We ontwierpen analysetools die een organisatie toetsen aan de bibliotheek en de hiaten in één overzicht tonen.",
+        },
+        {
+          title: "Een assistent bij elke bevinding",
+          body: "We voegden een AI-assistent toe die uitlegt waarom een hiaat is gesignaleerd en naar de brontekst verwijst, zodat beoordelaars het kunnen nagaan.",
+        },
+      ],
+      de: [
+        {
+          title: "Discovery",
+          body: "Gemeinsam mit Nutzern aus Compliance und Recht haben wir erfasst, wie Bewertungen heute ablaufen und wo die Zeit verloren geht.",
+        },
+        {
+          title: "Bibliothek der Regelwerke",
+          body: "Wir haben die relevanten Vorschriften in einer durchsuchbaren Bibliothek strukturiert, auf die sich Bewertungen direkt beziehen können.",
+        },
+        {
+          title: "Bewertungswerkzeuge",
+          body: "Wir haben Analysewerkzeuge entworfen, die eine Organisation an der Bibliothek messen und Lücken in einer Ansicht zeigen.",
+        },
+        {
+          title: "Ein Assistent für jeden Befund",
+          body: "Wir haben einen KI-Assistenten ergänzt, der erklärt, warum eine Lücke markiert wurde, und auf den Quelltext verweist, damit Prüfende ihn nachvollziehen können.",
+        },
+      ],
     },
     outcomes: {
       en: [
@@ -249,6 +389,16 @@ export const CASE_STUDIES: readonly CaseStudy[] = [
         "Un prototipo funzionante che copre l’intero ciclo, dalla norma al report di valutazione",
         "Ogni rilievo collegato al testo di origine su cui si basa",
         "Una base validata per sviluppare la piattaforma in produzione",
+      ],
+      nl: [
+        "Een werkend prototype voor de hele cyclus, van regelgeving tot beoordelingsrapport",
+        "Elke bevinding gekoppeld aan de brontekst waarop ze berust",
+        "Een gevalideerde basis voor de bouw van het productieplatform",
+      ],
+      de: [
+        "Ein funktionsfähiger Prototyp für den gesamten Zyklus, von der Vorschrift bis zum Bewertungsbericht",
+        "Jeder Befund mit dem Quelltext verknüpft, auf dem er beruht",
+        "Eine validierte Grundlage für den Aufbau der Produktivplattform",
       ],
     },
     capabilities: {
@@ -264,6 +414,18 @@ export const CASE_STUDIES: readonly CaseStudy[] = [
         "Ricerca sulle norme",
         "AI spiegabile",
       ],
+      nl: [
+        "Discovery",
+        "Prototyping",
+        "Zoeken in regelgeving",
+        "Uitlegbare AI",
+      ],
+      de: [
+        "Discovery",
+        "Prototyping",
+        "Suche in Regelwerken",
+        "Erklärbare KI",
+      ],
     },
     related: ["invoice", "platform"],
     media: "caseAiComplianceAssessments",
@@ -273,27 +435,39 @@ export const CASE_STUDIES: readonly CaseStudy[] = [
     slug: {
       en: "governed-invoice-approval",
       it: "approvazione-fatture-governata",
+      nl: "factuurgoedkeuring-met-governance",
+      de: "rechnungsfreigabe-mit-governance",
     },
     segment: "dome",
     descriptor: {
       en: "Finance operations",
       it: "Operazioni finanziarie",
+      nl: "Financiële processen",
+      de: "Finanzprozesse",
     },
     title: {
       en: "A governed invoice-to-approval workflow",
       it: "Flusso governato dalla fattura all’approvazione",
+      nl: "Van factuur tot goedkeuring, met governance ingebouwd",
+      de: "Von der Rechnung zur Freigabe, mit eingebauter Governance",
     },
     summary: {
       en: "Extraction, policy rules, a multi-model review and a named approver, recorded as one audit trail you can reconstruct step by step.",
       it: "Estrazione, regole di policy, revisione multi-modello e un approvatore nominativo, in un unico audit trail ricostruibile passo per passo.",
+      nl: "Extractie, beleidsregels, een beoordeling door meerdere modellen en een goedkeurder met naam, vastgelegd in één audittrail die u stap voor stap kunt reconstrueren.",
+      de: "Extraktion, Richtlinienregeln, eine Prüfung durch mehrere Modelle und eine namentliche Freigabe, in einem Audit-Trail, den Sie Schritt für Schritt nachvollziehen.",
     },
     client: {
       en: "DOME reference build, no client data",
       it: "Progetto di riferimento DOME, nessun dato di clienti",
+      nl: "DOME-referentiebouw, geen klantgegevens",
+      de: "DOME-Referenzumsetzung, keine Kundendaten",
     },
     role: {
       en: "Design, build and operation",
       it: "Progettazione, sviluppo e gestione",
+      nl: "Ontwerp, bouw en beheer",
+      de: "Konzeption, Entwicklung und Betrieb",
     },
     challenge: {
       en: [
@@ -303,6 +477,14 @@ export const CASE_STUDIES: readonly CaseStudy[] = [
       it: [
         "I team finance vogliono affidare all’AI la gestione delle fatture, ma i revisori devono sapere chi ha approvato cosa, su quali evidenze e secondo quale regola. Gran parte dell’automazione mantiene la velocità e perde questa traccia.",
         "Abbiamo costruito questo flusso per dimostrare che automazione e audit trail completo possono nascere dallo stesso sistema.",
+      ],
+      nl: [
+        "Financeteams willen dat AI de verwerking van facturen overneemt, maar auditors moeten weten wie wat heeft goedgekeurd, op basis van welk bewijs en volgens welke regel. De meeste automatisering wint snelheid en verliest dat spoor.",
+        "We bouwden deze workflow om te laten zien dat automatisering en een volledige audittrail uit hetzelfde systeem kunnen komen.",
+      ],
+      de: [
+        "Finanzteams möchten, dass KI die Rechnungsbearbeitung übernimmt, doch Prüfer müssen wissen, wer was auf welcher Grundlage und nach welcher Regel freigegeben hat. Die meisten Automatisierungen gewinnen Tempo und verlieren diesen Nachweis.",
+        "Wir haben diesen Workflow gebaut, um zu zeigen, dass Automatisierung und ein vollständiger Audit-Trail aus demselben System kommen können.",
       ],
     },
     steps: {
@@ -342,6 +524,42 @@ export const CASE_STUDIES: readonly CaseStudy[] = [
           body: "Un approvatore nominativo prende la decisione finale. Il Governance Dashboard mostra ogni passaggio che la precede.",
         },
       ],
+      nl: [
+        {
+          title: "Extraheren",
+          body: "Document Intelligence leest elke factuur en levert gestructureerde velden op, met een betrouwbaarheidsscore voor elke waarde.",
+        },
+        {
+          title: "Beleid toepassen",
+          body: "Regels controleren bedragen, leveranciers en dubbele facturen, en sturen alles wat buiten het beleid valt door voor beoordeling.",
+        },
+        {
+          title: "Beoordelen met meerdere modellen",
+          body: "LLM Council laat uitzonderingen door meer dan één model beoordelen en legt vast waar ze het eens zijn en waar niet.",
+        },
+        {
+          title: "Goedkeuren op naam",
+          body: "Een goedkeurder met naam neemt de eindbeslissing. Het Governance Dashboard toont elke stap die eraan voorafging.",
+        },
+      ],
+      de: [
+        {
+          title: "Extrahieren",
+          body: "Document Intelligence liest jede Rechnung und liefert strukturierte Felder mit einem Konfidenzwert für jeden Wert.",
+        },
+        {
+          title: "Richtlinien anwenden",
+          body: "Regeln prüfen Beträge, Lieferanten und Dubletten und leiten alles, was außerhalb der Richtlinie liegt, zur Prüfung weiter.",
+        },
+        {
+          title: "Mit mehreren Modellen prüfen",
+          body: "LLM Council lässt Ausnahmen von mehr als einem Modell bewerten und hält fest, wo sie übereinstimmen und wo nicht.",
+        },
+        {
+          title: "Namentlich freigeben",
+          body: "Eine namentlich benannte Person trifft die endgültige Entscheidung. Das Governance Dashboard zeigt jeden Schritt, der dazu geführt hat.",
+        },
+      ],
     },
     outcomes: {
       en: [
@@ -353,6 +571,16 @@ export const CASE_STUDIES: readonly CaseStudy[] = [
         "Ogni decisione riconducibile al dato di partenza, alle regole applicate, alle valutazioni dei modelli e all’approvatore",
         "Approvazione umana mantenuta per ogni eccezione, per progettazione",
         "In fase di rilascio come Agent Flow, che i potenziali clienti possono provare",
+      ],
+      nl: [
+        "Elke beslissing herleidbaar tot de invoer, de toegepaste regels, de modelbeoordelingen en de goedkeurder",
+        "Menselijke goedkeuring voor elke uitzondering, zo ontworpen",
+        "Wordt nu uitgerold als Agent Flow, dat potentiële klanten kunnen uitproberen",
+      ],
+      de: [
+        "Jede Entscheidung rückverfolgbar bis zur Eingabe, den angewandten Regeln, den Modellbewertungen und der freigebenden Person",
+        "Menschliche Freigabe für jede Ausnahme, von Anfang an so angelegt",
+        "Wird jetzt als Agent Flow eingeführt, den Interessenten ausprobieren können",
       ],
     },
     capabilities: {
@@ -368,6 +596,18 @@ export const CASE_STUDIES: readonly CaseStudy[] = [
         "Agent Flow",
         "Governance Dashboard",
       ],
+      nl: [
+        "Document Intelligence",
+        "LLM Council",
+        "Agent Flow",
+        "Governance Dashboard",
+      ],
+      de: [
+        "Document Intelligence",
+        "LLM Council",
+        "Agent Flow",
+        "Governance Dashboard",
+      ],
     },
     related: ["compliance", "metals"],
     media: "tabletMockup",
@@ -377,27 +617,39 @@ export const CASE_STUDIES: readonly CaseStudy[] = [
     slug: {
       en: "metals-trading-platform",
       it: "piattaforma-trading-metalli",
+      nl: "handelsplatform-metalen",
+      de: "handelsplattform-metalle",
     },
     segment: "automation",
     descriptor: {
       en: "Trade finance",
       it: "Trade finance",
+      nl: "Handelsfinanciering",
+      de: "Handelsfinanzierung",
     },
     title: {
       en: "A trading platform for a metals consortium",
       it: "Piattaforma di trading per un consorzio metalli",
+      nl: "Een handelsplatform voor een metaalconsortium",
+      de: "Eine Handelsplattform für ein Metallkonsortium",
     },
     summary: {
       en: "Automated settlement, stock monitoring and compliance alerts replaced paper-based steps shared by traders, financiers and insurers.",
       it: "Regolamento automatico, monitoraggio scorte e alert di conformità al posto di passaggi cartacei condivisi tra trader, finanziatori e assicuratori.",
+      nl: "Geautomatiseerde afwikkeling, voorraadbewaking en compliancemeldingen vervingen papieren stappen die handelaren, financiers en verzekeraars deelden.",
+      de: "Automatisierte Abwicklung, Bestandsüberwachung und Compliance-Warnungen ersetzten Papierschritte, die Händler, Finanzierer und Versicherer teilten.",
     },
     client: {
       en: "Consortium of traders, financiers, insurers and logistics firms",
       it: "Consorzio di trader, finanziatori, assicuratori e operatori logistici",
+      nl: "Consortium van handelaren, financiers, verzekeraars en logistieke bedrijven",
+      de: "Konsortium aus Händlern, Finanzierern, Versicherern und Logistikunternehmen",
     },
     role: {
       en: "Study, platform concept, desktop and mobile applications",
       it: "Studio, concept di piattaforma, applicazioni desktop e mobile",
+      nl: "Studie, platformconcept, desktop- en mobiele applicaties",
+      de: "Studie, Plattformkonzept, Desktop- und Mobilanwendungen",
     },
     challenge: {
       en: [
@@ -407,6 +659,14 @@ export const CASE_STUDIES: readonly CaseStudy[] = [
       it: [
         "Il trading di metalli richiede che molte parti concordino sugli stessi fatti: prezzo, proprietà, ubicazione del materiale e rispetto delle regole di conformità. In questo consorzio gran parte di queste informazioni viaggiava ancora su carta.",
         "Negoziazione, copertura, regolamento e controllo delle scorte avvenivano in luoghi diversi, e riconciliarli era lento e soggetto a errori.",
+      ],
+      nl: [
+        "Metaalhandel hangt ervan af dat veel partijen het over dezelfde feiten eens zijn: de prijs, het eigendom, waar het materiaal ligt en of het aan de complianceregels voldoet. In dit consortium ging het meeste daarvan nog op papier.",
+        "Onderhandeling, hedging, afwikkeling en voorraadcontroles vonden elk op een andere plek plaats, dus het afstemmen ervan was traag en foutgevoelig.",
+      ],
+      de: [
+        "Der Metallhandel hängt davon ab, dass sich viele Parteien auf dieselben Fakten einigen: Preis, Eigentum, Lagerort des Materials und ob es die Compliance-Regeln erfüllt. In diesem Konsortium lief das meiste davon noch auf Papier.",
+        "Verhandlung, Absicherung, Abwicklung und Bestandsprüfung fanden jeweils an einem anderen Ort statt, der Abgleich war daher langsam und fehleranfällig.",
       ],
     },
     steps: {
@@ -446,6 +706,42 @@ export const CASE_STUDIES: readonly CaseStudy[] = [
           body: "Le regole verificano proprietà, provenienza e conformità, e avvisano la parte interessata quando qualcosa non torna.",
         },
       ],
+      nl: [
+        {
+          title: "Gedeeld handelsnetwerk",
+          body: "We ontwierpen een besloten netwerk waarin elk lid vanuit hetzelfde handelsdossier werkt.",
+        },
+        {
+          title: "Geautomatiseerde afwikkeling",
+          body: "Koppelingen verzorgen hedging en de afwikkeling aan het eind van de dag, zonder handmatig overtypen.",
+        },
+        {
+          title: "Voorraadbewaking",
+          body: "Magazijnvoorraden worden automatisch bewaakt en afgestemd, met dynamische prijzen voor opslag en verzekering.",
+        },
+        {
+          title: "Compliancemeldingen",
+          body: "Regels controleren eigendom, herkomst en compliance, en waarschuwen de juiste partij als iets niet klopt.",
+        },
+      ],
+      de: [
+        {
+          title: "Gemeinsames Handelsnetzwerk",
+          body: "Wir haben ein geschlossenes Netzwerk entworfen, in dem jedes Mitglied mit demselben Handelsdatensatz arbeitet.",
+        },
+        {
+          title: "Automatisierte Abwicklung",
+          body: "Schnittstellen übernehmen Absicherung und Tagesendabrechnung, ohne dass jemand Daten von Hand überträgt.",
+        },
+        {
+          title: "Bestandsüberwachung",
+          body: "Lagerbestände werden automatisch überwacht und abgeglichen, mit dynamischen Preisen für Lagerung und Versicherung.",
+        },
+        {
+          title: "Compliance-Warnungen",
+          body: "Regeln prüfen Eigentum, Herkunft und Compliance und warnen die zuständige Partei, wenn etwas nicht übereinstimmt.",
+        },
+      ],
     },
     outcomes: {
       en: [
@@ -457,6 +753,16 @@ export const CASE_STUDIES: readonly CaseStudy[] = [
         "Passaggi cartacei sostituiti da un unico registro digitale condiviso",
         "Applicazioni desktop e mobile per esecuzione, posizioni e reportistica",
         "I membri del consorzio hanno integrato quanto appreso nelle attività quotidiane",
+      ],
+      nl: [
+        "Papieren stappen vervangen door één gedeeld digitaal dossier",
+        "Desktop- en mobiele applicaties voor handelsuitvoering, posities en rapportage",
+        "Consortiumleden hebben de lessen overgenomen in hun dagelijkse werk",
+      ],
+      de: [
+        "Papierbasierte Schritte durch einen gemeinsamen digitalen Datensatz ersetzt",
+        "Desktop- und Mobilanwendungen für Handelsausführung, Positionen und Reporting",
+        "Die Mitglieder des Konsortiums haben die Erkenntnisse in ihren Arbeitsalltag übernommen",
       ],
     },
     capabilities: {
@@ -472,6 +778,18 @@ export const CASE_STUDIES: readonly CaseStudy[] = [
         "Regole e alert",
         "Design mobile",
       ],
+      nl: [
+        "Procesverkenning",
+        "Workflowautomatisering",
+        "Regels en meldingen",
+        "Mobiel ontwerp",
+      ],
+      de: [
+        "Prozessanalyse",
+        "Workflow-Automatisierung",
+        "Regeln und Warnungen",
+        "Mobile Design",
+      ],
     },
     related: ["invoice", "traceability"],
     media: "caseMetalsTradingPlatform",
@@ -481,27 +799,39 @@ export const CASE_STUDIES: readonly CaseStudy[] = [
     slug: {
       en: "food-traceability-platform",
       it: "piattaforma-tracciabilita-alimentare",
+      nl: "traceerbaarheid-voedselketen",
+      de: "rueckverfolgbarkeit-lebensmittel",
     },
     segment: "ux",
     descriptor: {
       en: "Food supply chain",
       it: "Filiera alimentare",
+      nl: "Voedselketen",
+      de: "Lebensmittelkette",
     },
     title: {
       en: "Traceability platform for a food retailer",
       it: "Tracciabilità di filiera per un retailer alimentare",
+      nl: "Traceerbaarheidsplatform voor een levensmiddelenretailer",
+      de: "Plattform zur Rückverfolgbarkeit für einen Lebensmittelhändler",
     },
     summary: {
       en: "UX lead and design system for a platform that traces products from supplier to shelf, rolled out across stores.",
       it: "Guida UX e design system per una piattaforma che traccia i prodotti dal fornitore allo scaffale, poi estesa ai punti vendita.",
+      nl: "UX-leiding en designsystem voor een platform dat producten van leverancier tot schap volgt, uitgerold in de winkels.",
+      de: "UX-Leitung und Designsystem für eine Plattform, die Produkte vom Lieferanten bis ins Regal verfolgt, eingeführt in den Filialen.",
     },
     client: {
       en: "Food retailer and its supply chain partners",
       it: "Retailer alimentare e i suoi partner di filiera",
+      nl: "Levensmiddelenretailer en zijn ketenpartners",
+      de: "Lebensmittelhändler und seine Partner in der Lieferkette",
     },
     role: {
       en: "UX lead, interface design, design system",
       it: "Guida UX, interface design, design system",
+      nl: "UX-lead, interfaceontwerp, designsystem",
+      de: "UX-Leitung, Interface Design, Designsystem",
     },
     challenge: {
       en: [
@@ -511,6 +841,14 @@ export const CASE_STUDIES: readonly CaseStudy[] = [
       it: [
         "I consumatori vogliono sempre più sapere da dove arriva il cibo, e i retailer vogliono che l’informazione sia affidabile. Produttori, trasformatori e certificatori detenevano ciascuno una parte della storia.",
         "La piattaforma richiedeva due interfacce molto diverse: uno strumento di lavoro per i fornitori che inseriscono i dati di produzione e una vista semplice per chi scansiona un prodotto in negozio.",
+      ],
+      nl: [
+        "Consumenten willen steeds vaker weten waar hun eten vandaan komt, en retailers willen dat die informatie betrouwbaar is. Producenten, verwerkers en certificeerders kenden elk een deel van het verhaal.",
+        "Het platform had twee heel verschillende interfaces nodig: een werktool voor leveranciers die productiegegevens invoeren, en een eenvoudige weergave voor consumenten die in de winkel een product scannen.",
+      ],
+      de: [
+        "Kundinnen und Kunden wollen zunehmend wissen, woher ihre Lebensmittel kommen, und Händler wollen, dass diese Angaben verlässlich sind. Erzeuger, Verarbeiter und Prüfstellen kannten jeweils einen Teil der Geschichte.",
+        "Die Plattform brauchte zwei sehr unterschiedliche Oberflächen: ein Arbeitswerkzeug für Lieferanten, die Produktionsdaten erfassen, und eine einfache Ansicht für Kunden, die im Markt ein Produkt scannen.",
       ],
     },
     steps: {
@@ -542,6 +880,34 @@ export const CASE_STUDIES: readonly CaseStudy[] = [
           body: "Abbiamo creato un design system condiviso dalle due interfacce, così nuovi prodotti e partner si possono aggiungere in modo coerente.",
         },
       ],
+      nl: [
+        {
+          title: "Werkstromen voor leveranciers",
+          body: "We legden vast hoe elke partner productiegegevens invoert, en hielden de invoer snel voor mensen die het naast hun eigenlijke werk doen.",
+        },
+        {
+          title: "De ervaring voor consumenten",
+          body: "We ontwierpen de QR-scan zo dat de reis van een product op een telefoon binnen enkele seconden duidelijk te lezen is.",
+        },
+        {
+          title: "Designsystem",
+          body: "We bouwden een designsystem dat beide interfaces delen, zodat nieuwe producten en partners consistent konden worden toegevoegd.",
+        },
+      ],
+      de: [
+        {
+          title: "Abläufe für Lieferanten",
+          body: "Wir haben festgelegt, wie jeder Partner Produktionsdaten erfasst, und die Eingabe schnell gehalten für Menschen, die sie neben ihrer eigentlichen Arbeit erledigen.",
+        },
+        {
+          title: "Das Einkaufserlebnis",
+          body: "Wir haben den QR-Scan so gestaltet, dass der Weg eines Produkts auf dem Smartphone in wenigen Sekunden klar lesbar ist.",
+        },
+        {
+          title: "Designsystem",
+          body: "Wir haben ein Designsystem für beide Oberflächen aufgebaut, damit neue Produkte und Partner einheitlich hinzukommen konnten.",
+        },
+      ],
     },
     outcomes: {
       en: [
@@ -554,6 +920,16 @@ export const CASE_STUDIES: readonly CaseStudy[] = [
         "I consumatori vedono il percorso del prodotto dal fornitore allo scaffale",
         "Un design system riutilizzabile e un riconoscimento interno con un premio",
       ],
+      nl: [
+        "Platform gelanceerd en in gebruik in de winkels",
+        "Consumenten zien de reis van een product van leverancier tot schap",
+        "Een herbruikbaar designsystem, en interne erkenning met een prijs",
+      ],
+      de: [
+        "Plattform gestartet und in den Filialen im Einsatz",
+        "Kunden sehen den Weg eines Produkts vom Lieferanten bis ins Regal",
+        "Ein wiederverwendbares Designsystem und eine interne Auszeichnung",
+      ],
     },
     capabilities: {
       en: [
@@ -563,6 +939,18 @@ export const CASE_STUDIES: readonly CaseStudy[] = [
         "Mobile design",
       ],
       it: ["Guida UX", "Interface design", "Design system", "Design mobile"],
+      nl: [
+        "UX-leiding",
+        "Interfaceontwerp",
+        "Designsystems",
+        "Mobiel ontwerp",
+      ],
+      de: [
+        "UX-Leitung",
+        "Interface Design",
+        "Designsysteme",
+        "Mobile Design",
+      ],
     },
     related: ["procurement", "trading"],
     media: "caseFoodTraceabilityPlatform",
@@ -572,30 +960,44 @@ export const CASE_STUDIES: readonly CaseStudy[] = [
     slug: {
       en: "trading-app-redesign",
       it: "riprogettazione-app-trading",
+      nl: "herontwerp-trading-app",
+      de: "neugestaltung-trading-app",
     },
     segment: "ux",
     descriptor: {
       en: "Digital assets",
       it: "Asset digitali",
+      nl: "Digitale activa",
+      de: "Digitale Vermögenswerte",
     },
     title: {
       en: "Trading app redesign for a digital assets platform",
       it: "App di trading ridisegnata per una piattaforma di asset digitali",
+      nl: "Trading-app herontworpen voor een platform voor digitale activa",
+      de: "Neugestaltung einer Trading-App für eine Plattform für digitale Vermögenswerte",
     },
     metaTitle: {
       it: "App di trading ridisegnata per asset digitali",
+      nl: "Trading-app herontworpen voor digitale activa",
+      de: "Trading-App neu gestaltet für digitale Vermögenswerte",
     },
     summary: {
       en: "A responsive redesign of a trading app for mobile and desktop, built on a modular design framework.",
       it: "Riprogettazione responsive di un’app di trading per mobile e desktop, su un framework di design modulare.",
+      nl: "Een responsief herontwerp van een trading-app voor mobiel en desktop, gebouwd op een modulair ontwerpframework.",
+      de: "Eine responsive Neugestaltung einer Trading-App für Smartphone und Desktop, aufgebaut auf einem modularen Design-Framework.",
     },
     client: {
       en: "Digital assets trading platform",
       it: "Piattaforma di trading di asset digitali",
+      nl: "Handelsplatform voor digitale activa",
+      de: "Handelsplattform für digitale Vermögenswerte",
     },
     role: {
       en: "UX and UI redesign, front-end framework",
       it: "Riprogettazione UX e UI, framework front-end",
+      nl: "Herontwerp van UX en UI, front-endframework",
+      de: "UX- und UI-Neugestaltung, Frontend-Framework",
     },
     challenge: {
       en: [
@@ -605,6 +1007,14 @@ export const CASE_STUDIES: readonly CaseStudy[] = [
       it: [
         "L’app esistente era cresciuta una funzione alla volta ed era pensata soprattutto per un solo formato di schermo. I trader passavano da smartphone a desktop durante la giornata e trovavano un’esperienza diversa su ciascuno.",
         "Ogni nuova funzione richiedeva più tempo della precedente.",
+      ],
+      nl: [
+        "De bestaande app was functie voor functie gegroeid en vooral voor één schermformaat gebouwd. Traders wisselden overdag tussen telefoon en desktop en kregen op elk een andere ervaring.",
+        "Elke nieuwe functie kostte meer tijd om toe te voegen dan de vorige.",
+      ],
+      de: [
+        "Die bestehende App war Funktion für Funktion gewachsen und vor allem für eine Bildschirmgröße gebaut. Trader wechselten im Lauf des Tages zwischen Smartphone und Desktop und fanden auf jedem eine andere Oberfläche vor.",
+        "Jede neue Funktion brauchte länger als die vorherige.",
       ],
     },
     steps: {
@@ -636,6 +1046,34 @@ export const CASE_STUDIES: readonly CaseStudy[] = [
           body: "Abbiamo introdotto pratiche di test per rilasciare modifiche senza compromettere ciò che già funziona.",
         },
       ],
+      nl: [
+        {
+          title: "De ervaring opnieuw opbouwen",
+          body: "We ontwierpen de app vanaf de basis opnieuw voor mobiel en desktop, rond de taken die traders het vaakst herhalen.",
+        },
+        {
+          title: "Modulair framework",
+          body: "We deelden de interface op in modules die kunnen worden hergebruikt en herschikt naarmate het product groeit.",
+        },
+        {
+          title: "Een testpraktijk",
+          body: "We voerden testpraktijken in, zodat wijzigingen live kunnen gaan zonder te breken wat al werkt.",
+        },
+      ],
+      de: [
+        {
+          title: "Die Oberfläche neu aufbauen",
+          body: "Wir haben die App von Grund auf für Smartphone und Desktop neu gestaltet, rund um die Aufgaben, die Trader am häufigsten wiederholen.",
+        },
+        {
+          title: "Modulares Framework",
+          body: "Wir haben die Oberfläche in Module gegliedert, die sich wiederverwenden und neu anordnen lassen, wenn das Produkt wächst.",
+        },
+        {
+          title: "Testpraxis",
+          body: "Wir haben Testverfahren eingeführt, damit Änderungen live gehen können, ohne Bestehendes zu beschädigen.",
+        },
+      ],
     },
     outcomes: {
       en: [
@@ -647,6 +1085,16 @@ export const CASE_STUDIES: readonly CaseStudy[] = [
         "Un’esperienza coerente tra mobile e desktop",
         "Un framework modulare che accelera lo sviluppo di nuove funzioni",
         "Una base riutilizzabile anche oltre il prodotto di asset digitali",
+      ],
+      nl: [
+        "Eén consistente ervaring op mobiel en desktop",
+        "Een modulair framework waarmee nieuwe functies sneller klaar zijn",
+        "Een basis die ook buiten het product voor digitale activa herbruikbaar is",
+      ],
+      de: [
+        "Eine einheitliche Oberfläche auf Smartphone und Desktop",
+        "Ein modulares Framework, das neue Funktionen beschleunigt",
+        "Eine Grundlage, die auch über das Produkt für digitale Vermögenswerte hinaus wiederverwendbar ist",
       ],
     },
     capabilities: {
@@ -662,6 +1110,18 @@ export const CASE_STUDIES: readonly CaseStudy[] = [
         "Design system",
         "Architettura front-end",
       ],
+      nl: [
+        "Interfaceontwerp",
+        "Responsive design",
+        "Designsystems",
+        "Front-endarchitectuur",
+      ],
+      de: [
+        "Interface Design",
+        "Responsive Design",
+        "Designsysteme",
+        "Frontend-Architektur",
+      ],
     },
     related: ["traceability", "procurement"],
     media: "caseTradingAppRedesign",
@@ -671,27 +1131,39 @@ export const CASE_STUDIES: readonly CaseStudy[] = [
     slug: {
       en: "ai-procurement-platform",
       it: "piattaforma-acquisti-ai",
+      nl: "ai-inkoopplatform",
+      de: "ki-einkaufsplattform",
     },
     segment: "automation",
     descriptor: {
       en: "Procurement",
       it: "Acquisti",
+      nl: "Inkoop",
+      de: "Einkauf",
     },
     title: {
       en: "AI-assisted procurement platform",
       it: "Piattaforma acquisti assistita dall’AI",
+      nl: "Inkoopplatform met AI-ondersteuning",
+      de: "KI-gestützte Einkaufsplattform",
     },
     summary: {
       en: "A proof of concept that brings requests, risk checks, contracts and suppliers into one flow, with machine learning taking on the manual steps.",
       it: "Un proof of concept che riunisce richieste, controlli di rischio, contratti e fornitori in un solo flusso, con il machine learning sui passaggi manuali.",
+      nl: "Een proof of concept dat aanvragen, risicocontroles, contracten en leveranciers in één stroom samenbrengt, met machine learning voor de handmatige stappen.",
+      de: "Ein Proof of Concept, der Anfragen, Risikoprüfungen, Verträge und Lieferanten in einem Ablauf vereint; Machine Learning übernimmt die manuellen Schritte.",
     },
     client: {
       en: "Global procurement organisation",
       it: "Organizzazione acquisti globale",
+      nl: "Wereldwijde inkooporganisatie",
+      de: "Globale Einkaufsorganisation",
     },
     role: {
       en: "Proof of concept: UX, software and machine learning",
       it: "Proof of concept: UX, software e machine learning",
+      nl: "Proof of concept: UX, software en machine learning",
+      de: "Proof of Concept: UX, Software und Machine Learning",
     },
     challenge: {
       en: [
@@ -701,6 +1173,14 @@ export const CASE_STUDIES: readonly CaseStudy[] = [
       it: [
         "Richiedenti, risk manager, contract manager e fornitori vedevano ciascuno solo la propria parte di un acquisto. Nessuno aveva una visione chiara dalla richiesta alla consegna, compresa la spesa.",
         "Gran parte del coordinamento era manuale, con più carico di lavoro e rischi che emergevano tardi.",
+      ],
+      nl: [
+        "Aanvragers, risicomanagers, contractmanagers en leveranciers zagen elk alleen hun eigen deel van een aankoop. Niemand had een helder beeld van aanvraag tot levering, de uitgaven inbegrepen.",
+        "Veel van de afstemming tussen hen was handwerk, wat de werkdruk verhoogde en risico’s pas laat zichtbaar maakte.",
+      ],
+      de: [
+        "Anfragende, Risikomanager, Vertragsmanager und Lieferanten sahen jeweils nur ihren Teil eines Einkaufs. Niemand hatte einen klaren Blick von der Anfrage bis zur Lieferung, einschließlich der Ausgaben.",
+        "Ein großer Teil der Abstimmung zwischen ihnen lief manuell, was die Arbeitslast erhöhte und Risiken erst spät sichtbar machte.",
       ],
     },
     steps: {
@@ -732,6 +1212,34 @@ export const CASE_STUDIES: readonly CaseStudy[] = [
           body: "Segnali di rischio e spesa restano visibili lungo tutto l’acquisto, non solo alla fine.",
         },
       ],
+      nl: [
+        {
+          title: "Eén stroom voor elke rol",
+          body: "We ontwierpen één traject waarin elke rol bij de eigen stap instapt, met het volledige beeld beschikbaar wanneer dat nodig is.",
+        },
+        {
+          title: "Machine learning voor handmatige stappen",
+          body: "Modellen nemen classificaties en controles over die mensen vroeger met de hand deden.",
+        },
+        {
+          title: "Risico en uitgaven in beeld",
+          body: "Risicosignalen en uitgaven zijn tijdens de hele aankoop zichtbaar, niet alleen aan het eind.",
+        },
+      ],
+      de: [
+        {
+          title: "Ein Ablauf für jede Rolle",
+          body: "Wir haben einen durchgängigen Ablauf entworfen, in den jede Rolle bei ihrem Schritt einsteigt, mit dem Gesamtbild, wenn es gebraucht wird.",
+        },
+        {
+          title: "Machine Learning für manuelle Schritte",
+          body: "Modelle übernehmen Klassifizierungen und Prüfungen, die zuvor von Hand erledigt wurden.",
+        },
+        {
+          title: "Risiko und Ausgaben im Blick",
+          body: "Risikosignale und Ausgaben sind während des gesamten Einkaufs sichtbar, nicht erst am Ende.",
+        },
+      ],
     },
     outcomes: {
       en: [
@@ -743,6 +1251,16 @@ export const CASE_STUDIES: readonly CaseStudy[] = [
         "Visibilità completa dalla richiesta alla consegna, compresa la spesa",
         "Meno lavoro manuale per ogni gruppo coinvolto",
         "Il proof of concept ha mostrato miglioramenti lungo tutto il processo di acquisto",
+      ],
+      nl: [
+        "Zicht van aanvraag tot levering, de uitgaven inbegrepen",
+        "Minder handwerk voor elke groep betrokkenen",
+        "Het proof of concept liet verbeteringen zien in het hele inkoopproces",
+      ],
+      de: [
+        "Durchgängige Transparenz von der Anfrage bis zur Lieferung, einschließlich der Ausgaben",
+        "Weniger manuelle Arbeit für jede beteiligte Gruppe",
+        "Der Proof of Concept zeigte Verbesserungen im gesamten Einkaufsprozess",
       ],
     },
     capabilities: {
@@ -758,6 +1276,18 @@ export const CASE_STUDIES: readonly CaseStudy[] = [
         "Visibilità del rischio",
         "Proof of concept",
       ],
+      nl: [
+        "Service design",
+        "Machine learning",
+        "Zicht op risico",
+        "Proof of concept",
+      ],
+      de: [
+        "Service Design",
+        "Machine Learning",
+        "Risikotransparenz",
+        "Proof of Concept",
+      ],
     },
     related: ["procurement", "compliance"],
     media: "caseAiProcurementPlatform",
@@ -767,31 +1297,45 @@ export const CASE_STUDIES: readonly CaseStudy[] = [
     slug: {
       en: "ai-training-videos",
       it: "video-formativi-ai",
+      nl: "ai-trainingsvideos",
+      de: "ki-schulungsvideos",
     },
     segment: "automation",
     descriptor: {
       en: "Enterprise training",
       it: "Formazione aziendale",
+      nl: "Training in organisaties",
+      de: "Unternehmensschulung",
     },
     title: {
       en: "Training videos at scale for an enterprise system rollout",
       it: "Formazione video su larga scala per un rollout enterprise",
+      nl: "Trainingsvideo’s op schaal voor de invoering van een enterprisesysteem",
+      de: "Schulungsvideos in großem Umfang für die Einführung eines Unternehmenssystems",
     },
     metaTitle: {
       en: "Training videos at scale for an enterprise rollout",
       it: "Video formativi in serie per un rollout enterprise",
+      nl: "Trainingsvideo’s op schaal voor een systeeminvoering",
+      de: "Schulungsvideos in Serie für eine Systemeinführung",
     },
     summary: {
       en: "A repeatable production process that turned complex system workflows into on-demand training videos with AI presenters.",
       it: "Un processo ripetibile che trasforma flussi di sistema complessi in video formativi on demand con presentatori AI.",
+      nl: "Een herhaalbaar productieproces dat complexe systeemprocessen omzette in trainingsvideo’s op aanvraag, met AI-presentatoren.",
+      de: "Ein wiederholbarer Produktionsprozess, der komplexe Systemabläufe in Schulungsvideos auf Abruf mit KI-Moderatoren verwandelte.",
     },
     client: {
       en: "Enterprise organisation, internal systems",
       it: "Organizzazione enterprise, sistemi interni",
+      nl: "Grote organisatie, interne systemen",
+      de: "Großunternehmen, interne Systeme",
     },
     role: {
       en: "Scripting, production framework, delivery",
       it: "Sceneggiatura, framework di produzione, consegna",
+      nl: "Scripts, productieframework, oplevering",
+      de: "Drehbücher, Produktions-Framework, Bereitstellung",
     },
     challenge: {
       en: [
@@ -801,6 +1345,14 @@ export const CASE_STUDIES: readonly CaseStudy[] = [
       it: [
         "Formare le persone una alla volta su un sistema complesso non è scalabile, e ogni formatore lo spiega in modo leggermente diverso. La documentazione scritta era corretta ma poco letta.",
         "Nuovi assunti e utenti esistenti in diverse regioni avevano bisogno delle stesse conoscenze, nel momento in cui servivano.",
+      ],
+      nl: [
+        "Mensen één op één trainen op een complex systeem schaalt niet, en elke trainer legt het net iets anders uit. De schriftelijke documentatie klopte, maar werd zelden gelezen.",
+        "Nieuwe medewerkers en bestaande gebruikers in meerdere regio’s hadden dezelfde kennis nodig, op het moment dat ze die nodig hadden.",
+      ],
+      de: [
+        "Menschen einzeln an einem komplexen System zu schulen, lässt sich nicht skalieren, und jeder Trainer erklärt es etwas anders. Die schriftliche Dokumentation war korrekt, wurde aber selten gelesen.",
+        "Neue und bestehende Nutzer in mehreren Regionen brauchten dasselbe Wissen, und zwar in dem Moment, in dem sie es brauchten.",
       ],
     },
     steps: {
@@ -840,6 +1392,42 @@ export const CASE_STUDIES: readonly CaseStudy[] = [
           body: "I video sono organizzati in brevi moduli, per l’onboarding e per i ripassi successivi.",
         },
       ],
+      nl: [
+        {
+          title: "De inhoud valideren",
+          body: "We lieten elk proces bevestigen door de systeemeigenaren voordat we één woord schreven.",
+        },
+        {
+          title: "Schrijven voor het scherm",
+          body: "We schreven technische scripts die aansluiten op schermopnames van de echte bedrijfslogica.",
+        },
+        {
+          title: "Produceren met AI-presentatoren",
+          body: "We namen gedetailleerde walkthroughs op en voegden AI-presentatoren met een professionele voice-over toe.",
+        },
+        {
+          title: "Opleveren als modulaire bibliotheek",
+          body: "De video’s werden ingedeeld in korte modules, voor onboarding en om later kennis op te frissen.",
+        },
+      ],
+      de: [
+        {
+          title: "Inhalte validieren",
+          body: "Wir haben jeden Ablauf mit den Systemverantwortlichen bestätigt, bevor wir ein Wort geschrieben haben.",
+        },
+        {
+          title: "Für den Bildschirm schreiben",
+          body: "Wir haben technische Drehbücher geschrieben, abgestimmt auf Bildschirmaufnahmen der tatsächlichen Geschäftslogik.",
+        },
+        {
+          title: "Mit KI-Moderatoren produzieren",
+          body: "Wir haben detailgetreue Walkthroughs aufgezeichnet und KI-Moderatoren mit professioneller Sprecherstimme ergänzt.",
+        },
+        {
+          title: "Als modulare Bibliothek bereitstellen",
+          body: "Die Videos wurden in kurze Module gegliedert, für das Onboarding und für spätere Auffrischungen.",
+        },
+      ],
     },
     outcomes: {
       en: [
@@ -851,6 +1439,16 @@ export const CASE_STUDIES: readonly CaseStudy[] = [
         "Un processo ripetibile: circa un’ora di produzione per ogni minuto di video finito",
         "Formazione coerente tra le regioni, disponibile on demand",
         "Meno tempo degli esperti speso a ripetere le stesse sessioni",
+      ],
+      nl: [
+        "Een herhaalbaar proces: ongeveer een uur productie per minuut video",
+        "Consistente training in alle regio’s, op aanvraag beschikbaar",
+        "Experts besteden minder tijd aan het herhalen van dezelfde sessies",
+      ],
+      de: [
+        "Ein wiederholbarer Prozess: etwa eine Stunde Produktion pro fertiger Videominute",
+        "Einheitliche Schulung in allen Regionen, jederzeit abrufbar",
+        "Fachleute verbringen weniger Zeit damit, dieselben Sitzungen zu wiederholen",
       ],
     },
     capabilities: {
@@ -866,6 +1464,18 @@ export const CASE_STUDIES: readonly CaseStudy[] = [
         "Produzione video con AI",
         "Trasferimento di conoscenze",
       ],
+      nl: [
+        "Didactisch ontwerp",
+        "Scripts schrijven",
+        "AI-videoproductie",
+        "Kennisoverdracht",
+      ],
+      de: [
+        "Didaktisches Design",
+        "Drehbücher",
+        "KI-Videoproduktion",
+        "Wissenstransfer",
+      ],
     },
     related: ["procurement", "platform"],
     media: "caseAiTrainingVideos",
@@ -879,8 +1489,8 @@ export function caseStudy(id: string): CaseStudy | undefined {
 }
 
 export function caseStudyBySlug(slug: string): CaseStudy | undefined {
-  return CASE_STUDIES.find(
-    (study) => study.slug.en === slug || study.slug.it === slug,
+  return CASE_STUDIES.find((study) =>
+    Object.values(study.slug).includes(slug),
   );
 }
 

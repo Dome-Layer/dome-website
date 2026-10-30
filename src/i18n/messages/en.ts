@@ -25,7 +25,10 @@ export const en: Messages = {
     switchToLight: 'Switch to light mode',
     switchToDark: 'Switch to dark mode',
   },
-  switcher: { label: 'Read this page in Italian' },
+  switcher: {
+    language: 'Language',
+    readIn: { en: 'Read this page in English', it: 'Read this page in Italian', nl: 'Read this page in Dutch', de: 'Read this page in German' },
+  },
   footer: {
     tagline: 'AI and product consulting for regulated enterprises, with governance built in.',
     privacy: 'Privacy policy',
@@ -947,7 +950,7 @@ export const en: Messages = {
           blocks: [
             { p: 'We use three cookies and a few entries in your browser’s storage. All of them are set by us, on our own domain, for one of three reasons: to keep you signed in, to remember a choice you made, or to make a page work. None of them is used to track you, to build a profile of you or to advertise to you, and none is shared with anyone else.' },
             { p: 'That is why this site has no consent banner. Cookies and storage of this kind are technical: under Article 122 of the Italian Privacy Code and the Garante’s cookie guidelines of June 2021 they need no consent, only this information. Our measurement of visits (below) uses neither cookies nor browser storage and is set up to meet the conditions under which the Garante treats analytics like technical cookies.' },
-            { p: 'A first visit sets nothing. Everything below appears only after you do something: sign in, switch theme or language, close the cookie notice, or use a tool. There is one exception: if your browser prefers Italian and you open an English page, we take you to the Italian version once and set `dome_locale` so that we do not do it again.' },
+            { p: 'A first visit sets nothing. Everything below appears only after you do something: sign in, switch theme or language, close the cookie notice, or use a tool. There is one exception: if your browser prefers another language this site is published in and you open an English page, we take you to the page in that language once and set `dome_locale` so that we do not do it again.' },
           ],
         },
         {
@@ -959,7 +962,7 @@ export const en: Messages = {
                 rows: [
                   ['`dome_auth_token`', 'Keeps you signed in on domelayer.com and in the Dome tools. Set when you sign in, for every domelayer.com subdomain.', 'Until your sign-in expires, at most 8 hours', 'Strictly necessary'],
                   ['`dome-theme`', 'Remembers whether you chose the light or the dark theme, on the site and in the tools. Set when you switch theme.', '1 year', 'Functional: a preference you set'],
-                  ['`dome_locale`', 'Remembers your language. Set when you switch language, or once when we take an Italian-language browser to the Italian site. domelayer.com only.', '1 year', 'Functional: a preference you set'],
+                  ['`dome_locale`', 'Remembers your language. Set when you switch language, or once when we take a browser that prefers another of the site’s languages to that version. domelayer.com only.', '1 year', 'Functional: a preference you set'],
                 ],
               },
             },

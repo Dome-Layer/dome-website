@@ -2,6 +2,7 @@ import { describe, it, expect } from "vitest";
 import { render, screen, within } from "@testing-library/react";
 import { MemoryRouter } from "react-router";
 import { renderInline } from "./inline";
+import CookiesPage from "../../pages/CookiesPage";
 import PrivacyPage from "../../pages/PrivacyPage";
 import TermsPage from "../../pages/TermsPage";
 
@@ -64,5 +65,40 @@ describe("legal pages by locale", () => {
     const privacyLinks = within(main).getAllByRole("link", { name: /Informativa sulla privacy/ });
     expect(privacyLinks.length).toBeGreaterThan(0);
     for (const a of privacyLinks) expect(a).toHaveAttribute("href", "/it/privacy");
+  });
+
+  it("renders the Dutch and German documents with their own links", () => {
+    renderAt("/nl/voorwaarden", <TermsPage />);
+    expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent("Gebruiksvoorwaarden");
+    for (const a of within(screen.getByRole("main")).getAllByRole("link", { name: /privacybeleid/i })) {
+      expect(a).toHaveAttribute("href", "/nl/privacy");
+    }
+  });
+
+  it("says under the title of a Dutch or German document that the English one binds, and links to it", () => {
+    const cases = [
+      ["/nl/privacy", <PrivacyPage />, /Engelse versie van dit privacybeleid/, "/privacy"],
+      ["/nl/cookies", <CookiesPage />, /Engelse versie van dit cookiebeleid/, "/cookies"],
+      ["/de/nutzungsbedingungen", <TermsPage />, /englische Fassung dieser Nutzungsbedingungen/, "/terms"],
+      ["/de/datenschutz", <PrivacyPage />, /englische Fassung dieser Datenschutzerklärung/, "/privacy"],
+    ] as const;
+    for (const [path, page, note, english] of cases) {
+      const { container, unmount } = renderAt(path, page);
+      const binding = container.querySelector("[data-binding]")!;
+      expect(binding).toHaveTextContent(note);
+      // Right under the title and its scope line, before the first section.
+      expect(binding.compareDocumentPosition(container.querySelector("h2")!) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+      expect(binding.querySelector("a")).toHaveAttribute("href", english);
+      expect(binding.querySelector("a")).toHaveAttribute("hreflang", "en");
+      unmount();
+    }
+  });
+
+  it("has no binding note in English or Italian", () => {
+    for (const path of ["/privacy", "/it/privacy"]) {
+      const { container, unmount } = renderAt(path, <PrivacyPage />);
+      expect(container.querySelector("[data-binding]")).toBeNull();
+      unmount();
+    }
   });
 });

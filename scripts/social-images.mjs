@@ -5,6 +5,7 @@
  *
  *   npm run social-images            every card
  *   npm run social-images -- home    only the cards of the routes named (here the home card)
+ *   npm run social-images -- nl de   only the cards of the locales named (route ids and locales combine)
  *
  * The images are committed, not built in CI: rerun this after changing a hero eyebrow or heading,
  * a case study title or descriptor, a hero image, or after adding a locale. It drives a local
@@ -35,8 +36,8 @@ const escape = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/
 const FONT = dataUrl(join(ROOT, 'node_modules/@fontsource-variable/inter/files/inter-latin-wght-normal.woff2'), 'font/woff2')
 const LOGO = renderToStaticMarkup(createElement(DomeLogo, { size: 'xl', color: '#0080FF' }))
 const LOGO_WHITE = renderToStaticMarkup(createElement(DomeLogo, { size: 'xl', color: '#FFFFFF' }))
-/** Route ids given on the command line; none means every card. */
-const ONLY = process.argv.slice(2)
+/** Route ids and locales given on the command line; none of either means all of them. */
+const ARGS = process.argv.slice(2)
 
 /**
  * The dotted globe from the home hero (shared geometry, so it is the same mark), white on the
@@ -146,7 +147,9 @@ async function connect(url) {
 async function launchChrome() {
   const profile = mkdtempSync(join(tmpdir(), 'dome-social-'))
   const chrome = spawn(CHROME, ['--headless=new', '--remote-debugging-port=0', `--user-data-dir=${profile}`,
-    '--hide-scrollbars', '--no-first-run', '--no-default-browser-check', 'about:blank'], { stdio: 'ignore' })
+    '--hide-scrollbars', '--no-first-run', '--no-default-browser-check',
+    // Chrome refuses to start as root without it (a container or a cloud session).
+    ...(process.getuid?.() === 0 ? ['--no-sandbox'] : []), 'about:blank'], { stdio: 'ignore' })
   let port
   for (let i = 0; i < 100 && !port; i++) {
     try { port = readFileSync(join(profile, 'DevToolsActivePort'), 'utf8').split('\n')[0] } catch { await sleep(100) }
@@ -166,6 +169,8 @@ async function launchChrome() {
 const vite = await createServer({ root: ROOT, configFile: false, logLevel: 'error', appType: 'custom', server: { middlewareMode: true } })
 const { SOCIAL_IMAGE_ROUTE_IDS, socialImagePath, socialImageSpec } = await vite.ssrLoadModule('/src/seo/socialImages.ts')
 const { LOCALES } = await vite.ssrLoadModule('/src/i18n/locales.ts')
+const ONLY_LOCALES = ARGS.filter((arg) => LOCALES.includes(arg))
+const ONLY = ARGS.filter((arg) => !LOCALES.includes(arg))
 GLOBE = globe(await vite.ssrLoadModule('/src/components/hero/heroGeometry.ts'))
 await vite.close()
 
@@ -176,7 +181,7 @@ try {
   await cdp.send('Emulation.setDeviceMetricsOverride', { width: WIDTH, height: HEIGHT, deviceScaleFactor: 1, mobile: false })
   const { frameTree } = await cdp.send('Page.getFrameTree')
   for (const id of SOCIAL_IMAGE_ROUTE_IDS.filter((r) => !ONLY.length || ONLY.includes(r))) {
-    for (const locale of LOCALES) {
+    for (const locale of LOCALES.filter((l) => !ONLY_LOCALES.length || ONLY_LOCALES.includes(l))) {
       await cdp.send('Page.setDocumentContent', { frameId: frameTree.frame.id, html: page(socialImageSpec(id, locale)) })
       const { result } = await cdp.send('Runtime.evaluate', { expression: SETTLE, awaitPromise: true, returnByValue: true })
       const file = join(ROOT, 'public', socialImagePath(id, locale))

@@ -1,4 +1,5 @@
 import { readLocaleCookie } from './cookie'
+import { DEFAULT_LOCALE, type Locale } from './locales'
 import { localeFromPath, localizedHref, routeIdFromPath } from './routes'
 
 /**
@@ -33,21 +34,31 @@ export interface LocaleRedirectInput {
   cookie: string | null
   acceptLanguage: string | null
   userAgent: string | null
-  italianPublished: boolean
+  /** The locales published where the request is served (see publishedLocales in locales.ts). */
+  published: readonly Locale[]
+}
+
+export interface LocaleRedirect {
+  locale: Locale
+  /** Path of the counterpart page in that locale, without the query string. */
+  path: string
 }
 
 /**
- * Where a first-time Italian visitor should be sent, or undefined to serve the page as asked.
- * Only an unprefixed public page, requested with GET by a browser that has no language cookie
- * and whose top preference is Italian, is redirected. A manual choice (the cookie) always wins,
- * and a locale deep link such as /it/... is never touched.
+ * Where a first-time visitor whose browser prefers another published language should be sent,
+ * or undefined to serve the page as asked. Only an unprefixed public page, requested with GET by
+ * a browser that has no language cookie and whose top preference is a published locale other than
+ * English, is redirected. A manual choice (the cookie) always wins, and a locale deep link such as
+ * /it/... is never touched. Regional variants count as the language: de-AT and de-CH go to German.
  */
-export function localeRedirectTarget(input: LocaleRedirectInput): string | undefined {
-  if (!input.italianPublished || input.method !== 'GET') return undefined
+export function localeRedirectTarget(input: LocaleRedirectInput): LocaleRedirect | undefined {
+  if (input.method !== 'GET') return undefined
   if (readLocaleCookie(input.cookie)) return undefined
   if (isBot(input.userAgent)) return undefined
-  if (preferredLanguage(input.acceptLanguage) !== 'it') return undefined
+  const preferred = preferredLanguage(input.acceptLanguage)
+  const locale = input.published.find((l) => l !== DEFAULT_LOCALE && l === preferred)
+  if (!locale) return undefined
   const id = routeIdFromPath(input.pathname)
-  if (!id || localeFromPath(input.pathname) !== 'en') return undefined
-  return localizedHref(id, 'it')
+  if (!id || localeFromPath(input.pathname) !== DEFAULT_LOCALE) return undefined
+  return { locale, path: localizedHref(id, locale) }
 }

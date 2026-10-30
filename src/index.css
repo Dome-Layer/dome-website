@@ -213,6 +213,45 @@
     --color-logo:           #FFFFFF;
   }
 
+  /* The page's own values of the tokens .on-hero-surface re-points, captured on the root (custom
+     properties inherit as computed values, so these keep the page colours of the current theme).
+     .on-page-surface puts them back for a panel that opens from the bar onto the page colour,
+     such as the language menu, without restating a single colour. */
+  :root {
+    --page-text-primary:   var(--color-text-primary);
+    --page-text-secondary: var(--color-text-secondary);
+    --page-text-accent:    var(--color-text-accent);
+    --page-text-on-accent: var(--color-text-on-accent);
+    --page-accent:         var(--color-accent);
+    --page-accent-hover:   var(--color-accent-hover);
+    --page-accent-active:  var(--color-accent-active);
+    --page-border-subtle:  var(--color-border-subtle);
+    --page-border-default: var(--color-border-default);
+    --page-border-strong:  var(--color-border-strong);
+    --page-bg-muted:       var(--color-bg-muted);
+    --page-scrim:          var(--color-scrim);
+    --page-focus-ring:     var(--color-focus-ring);
+    --page-logo:           var(--color-logo);
+  }
+
+  .on-page-surface {
+    --color-text-primary:   var(--page-text-primary);
+    --color-text-secondary: var(--page-text-secondary);
+    --color-text-accent:    var(--page-text-accent);
+    --color-text-on-accent: var(--page-text-on-accent);
+    --color-accent:         var(--page-accent);
+    --color-accent-hover:   var(--page-accent-hover);
+    --color-accent-active:  var(--page-accent-active);
+    --color-border-subtle:  var(--page-border-subtle);
+    --color-border-default: var(--page-border-default);
+    --color-border-strong:  var(--page-border-strong);
+    --color-bg-muted:       var(--page-bg-muted);
+    --color-scrim:          var(--page-scrim);
+    --color-focus-ring:     var(--page-focus-ring);
+    --color-logo:           var(--page-logo);
+    color: var(--color-text-primary);
+  }
+
   html {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
