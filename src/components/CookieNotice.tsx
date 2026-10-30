@@ -67,10 +67,9 @@ export function CookieNotice() {
           href={localizedHref("cookies", locale)}
           style={{
             color: "var(--color-text-accent)",
-            textDecoration: "none",
+            textDecoration: "underline",
+            textUnderlineOffset: "2px",
           }}
-          onMouseEnter={(e) => ((e.target as HTMLAnchorElement).style.textDecoration = "underline")}
-          onMouseLeave={(e) => ((e.target as HTMLAnchorElement).style.textDecoration = "none")}
         >
           {t.link}
         </a>

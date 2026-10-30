@@ -381,6 +381,16 @@
   }
 }
 
+/* TextReveal's word fade is set inline by framer-motion, so the override needs !important. CSS, not
+   a hook, so the prerendered words are readable before hydration too (2026-10-30 axe re-audit). */
+@media (prefers-reduced-motion: reduce) {
+  .text-reveal-word {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after {

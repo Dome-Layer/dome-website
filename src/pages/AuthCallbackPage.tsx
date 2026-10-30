@@ -199,8 +199,9 @@ export default function AuthCallbackPage() {
   };
 
   const linkStyle: React.CSSProperties = {
-    color: "var(--color-accent)",
-    textDecoration: "none",
+    color: "var(--color-text-accent)",
+    textDecoration: "underline",
+    textUnderlineOffset: "2px",
   };
 
   return (
@@ -398,7 +399,7 @@ export default function AuthCallbackPage() {
             style={{
               fontSize: "13px",
               fontWeight: 600,
-              color: "var(--color-accent)",
+              color: "var(--color-text-accent)",
               textDecoration: "none",
             }}
           >

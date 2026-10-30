@@ -12,7 +12,8 @@ const s = {
     borderRadius: "3px",
     color: "var(--color-text-primary)",
   } as CSSProperties,
-  link: { color: "var(--color-text-accent)", textDecoration: "none" } as CSSProperties,
+  // Underlined: a link inside running text must not rely on colour alone (WCAG 1.4.1).
+  link: { color: "var(--color-text-accent)", textDecoration: "underline", textUnderlineOffset: "2px" } as CSSProperties,
 }
 
 const INLINE = /(\*\*[^*]+\*\*|`[^`]+`|\[[^\]]+\]\([^)\s]+\))/g
