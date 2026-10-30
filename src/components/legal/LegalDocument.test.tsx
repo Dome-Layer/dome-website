@@ -27,6 +27,10 @@ describe("renderInline", () => {
     expect(inline("[Privacy](privacy)", "it").querySelector("a")).toHaveAttribute("href", "/it/privacy");
   });
 
+  it("underlines links, so they do not rely on colour alone (WCAG 1.4.1)", () => {
+    expect(inline("[Privacy](privacy)").querySelector("a")).toHaveStyle({ textDecoration: "underline" });
+  });
+
   it("fails loudly on an unknown link target instead of rendering a dead link", () => {
     expect(() => inline("[x](not-a-route)")).toThrow(/Unknown link target/);
   });

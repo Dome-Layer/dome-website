@@ -524,8 +524,7 @@ export default function LoginPage() {
           cursor: pointer;
         }
         .login-check span { font-size: 12px; line-height: 1.55; color: var(--color-text-secondary); }
-        .login-consent a { color: var(--color-text-accent); text-decoration: none; }
-        .login-consent a:hover { text-decoration: underline; }
+        .login-consent a { color: var(--color-text-accent); text-decoration: underline; text-underline-offset: 2px; }
 
         .login-primary {
           width: 100%;

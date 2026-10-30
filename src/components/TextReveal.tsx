@@ -46,7 +46,7 @@ export function TextReveal({
               delay: i * stagger,
               ease: [0.25, 0.1, 0.25, 1],
             }}
-            className="inline-block"
+            className="text-reveal-word inline-block"
           >
             {unit}
           </motion.span>

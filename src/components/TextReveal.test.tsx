@@ -15,4 +15,10 @@ describe('TextReveal', () => {
     const html = renderToString(<TextReveal>Every decision is recorded</TextReveal>)
     expect(html).not.toContain('aria-hidden')
   })
+
+  // index.css shows these words at once under prefers-reduced-motion; it finds them by this class.
+  it('marks every word for the reduced-motion override', () => {
+    const html = renderToString(<TextReveal>Every decision is recorded</TextReveal>)
+    expect(html.match(/text-reveal-word/g)).toHaveLength(4)
+  })
 })
