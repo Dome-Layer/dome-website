@@ -44,7 +44,7 @@ describe('LanguageSwitcher with two published languages', () => {
 
   it('works for any pair, for example English and German', () => {
     renderAt('/de/kontakt', ['en', 'de'])
-    expect(screen.getByRole('link', { name: 'EN', description: 'Diese Seite auf Englisch' })).toHaveAttribute('href', '/contact')
+    expect(screen.getByRole('link', { name: 'EN', description: 'Diese Seite auf Englisch lesen' })).toHaveAttribute('href', '/contact')
   })
 })
 
