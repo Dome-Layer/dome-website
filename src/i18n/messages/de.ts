@@ -93,138 +93,136 @@ export const de: Messages = {
   meta: {
     home: {
       name: 'Startseite',
-      title: 'DOME | KI mit Governance für regulierte Unternehmen',
+      title: 'DOME | Nachvollziehbare KI für regulierte Unternehmen',
       description:
-        'DOME hilft regulierten Unternehmen, KI mit eingebauter Governance in den Betrieb zu bringen, von der Prozessautomatisierung bis zu Tools, die wir selbst entwickeln und betreiben.',
+        'DOME hilft regulierten Unternehmen, KI mit eingebauter Governance in Betrieb zu nehmen, von der Prozessautomatisierung bis zu eigenen Tools.',
       ogDescription:
-        'Vom ersten Tag an für den Betrieb konzipiert. Wir helfen regulierten Unternehmen, KI mit Governance, menschlicher Aufsicht und vollständigem Audit-Trail einzusetzen.',
+        'Vom ersten Tag an für den Betrieb gebaut: KI mit Governance, menschlicher Aufsicht und lückenlosem Audit-Trail für regulierte Unternehmen.',
       twitterDescription: 'Betriebsreife KI mit eingebauter Governance, für regulierte Unternehmen.',
-      imageAlt: 'DOME: KI mit Governance für regulierte Unternehmen',
+      imageAlt: 'DOME: nachvollziehbare KI für regulierte Unternehmen',
     },
     enterpriseUx: {
       name: 'Enterprise UX und Produkt',
       title: 'Enterprise UX, Produkt und Datenvisualisierung | DOME',
       description:
-        'Nutzerforschung, Service Design, Interface Design und Datenvisualisierung für komplexe Unternehmensplattformen, mit einem Designsystem, mit dem Ihre Entwickler arbeiten können.',
+        'Nutzerforschung, Service Design, Oberflächen und Datenvisualisierung für komplexe Plattformen, mit einem Designsystem für Ihre Entwickler.',
       ogDescription:
-        'Wir entwirren komplexe interne Tools und Kundenplattformen: Forschung, Service Design, Interface Design und ein Designsystem, mit dem Ihr Team weiterarbeiten kann.',
+        'Wir bringen Ordnung in interne Tools und Kundenplattformen: Forschung, Service Design, Oberflächen und ein Designsystem für Ihr Team.',
       imageAlt: 'DOME, Beratung für Enterprise UX und Produkt',
     },
     aiProcessAutomation: {
       name: 'KI-Prozessautomatisierung',
       title: 'KI-Prozessautomatisierung und Geschäftsanalyse | DOME',
       description:
-        'Wir erfassen und analysieren Ihre Geschäftsprozesse, automatisieren die Schritte mit klaren Regeln und übergeben den Rest Ihrem Team, mit Entscheidungsvorlage und vollständigem Audit-Trail.',
+        'Wir erfassen Ihre Prozesse, automatisieren, was klaren Regeln folgt, und übergeben den Rest Ihrem Team, mit Entscheidungsvorlage und Audit-Trail.',
       ogDescription:
-        'Einen Prozess automatisieren, ohne die Kontrolle abzugeben: klare Regeln, wo sie gelten, eine menschliche Entscheidung, wo nicht, und ein Audit-Trail durchgehend.',
+        'Prozesse automatisieren, ohne die Kontrolle abzugeben: Regeln, wo sie gelten, menschliche Entscheidungen, wo nicht, und ein durchgehender Audit-Trail.',
       imageAlt: 'DOME KI-Prozessautomatisierung',
     },
     dome: {
       name: 'DOME-Tools',
-      title: 'DOME-Tools: die Tools, die wir entwickeln und betreiben | DOME',
+      title: 'DOME-Tools: was wir entwickeln und betreiben | DOME',
       description:
-        'Sechs funktionierende Tools für den Weg von der Prozessaufnahme bis zur geprüften Ausführung. Sie belegen, wie wir KI mit Governance bauen, und sind keine Produkte zum Verkauf.',
+        'Sechs funktionierende Tools von der Prozessaufnahme bis zur geprüften Ausführung. Sie zeigen, wie wir nachvollziehbare KI bauen, und sind nicht käuflich.',
       ogDescription:
-        'Prozessanalyse, Dokumenten- und Datenanalyse, ein Council aus mehreren Modellen, ein Agenten-Workflow mit Governance und ein Governance-Dashboard. Von uns entwickelt und betrieben.',
+        'Prozessanalyse, Dokumenten- und Datenanalyse, ein Gremium aus KI-Modellen, ein kontrollierter Agenten-Workflow und ein Governance-Dashboard.',
       imageAlt: 'DOME-Tools: Tools, die wir entwickeln und betreiben',
     },
     processAnalyzer: {
       name: 'Process Analyzer',
-      title: 'Process Analyzer: KI-Prozessaufnahme mit Governance | DOME',
+      title: 'Process Analyzer: Prozessaufnahme mit KI | DOME',
       description:
-        'Wandeln Sie die Beschreibung eines Geschäftsprozesses in Alltagssprache in eine strukturierte Prozesslandkarte um, mit Governance-Analyse und Bewertung des Automatisierungspotenzials.',
+        'Beschreiben Sie einen Geschäftsprozess in eigenen Worten und erhalten Sie eine Prozesslandkarte, eine Governance-Analyse und das Automatisierungspotenzial.',
       ogDescription:
-        'Beschreiben Sie einen Geschäftsprozess in Alltagssprache. Sie erhalten eine strukturierte Prozesslandkarte, eine Analyse der Governance-Lücken und eine Bewertung des KI-Automatisierungspotenzials.',
-      twitterDescription:
-        'Beschreiben Sie einen Geschäftsprozess in Alltagssprache und erhalten Sie eine strukturierte Landkarte, Governance-Lücken und Automatisierungschancen.',
+        'Beschreiben Sie einen Prozess in eigenen Worten. Sie erhalten eine strukturierte Landkarte, Governance-Lücken und Ansatzpunkte für Automatisierung.',
+      twitterDescription: 'Von der Prozessbeschreibung zur Prozesslandkarte, mit Governance-Lücken und Automatisierungspotenzial.',
       imageAlt: 'DOME Process Analyzer: Prozessaufnahme mit Governance',
       twitterImageAlt: 'DOME Process Analyzer',
     },
     dataIntelligence: {
       name: 'Data Intelligence',
-      title: 'Data Intelligence: KI-Dashboards, die Sie prüfen können | DOME',
+      title: 'Data Intelligence: nachvollziehbare KI-Dashboards | DOME',
       description:
-        'Laden Sie eine Tabelle hoch und erhalten Sie ein Analyse-Dashboard mit Governance, automatischer Diagrammauswahl und einem Bereich für Fragen in Alltagssprache.',
+        'Laden Sie eine Tabelle hoch und erhalten Sie ein kontrolliertes Dashboard mit automatisch gewählten Diagrammen und Fragen in eigenen Worten.',
       ogDescription:
-        'Laden Sie eine Tabelle hoch. Sie erhalten ein Analyse-Dashboard mit Governance, deterministischer Diagrammauswahl und einem Bereich für Fragen in Alltagssprache, ganz ohne manuelle Konfiguration.',
-      twitterDescription:
-        'Laden Sie eine Tabelle hoch und erhalten Sie ein Dashboard mit Governance, automatischer Diagrammauswahl und Fragen in Alltagssprache, ohne Konfiguration.',
-      imageAlt: 'DOME Data Intelligence: Analyse-Dashboard mit Governance',
+        'Tabelle hochladen, kontrolliertes Dashboard erhalten: deterministische Diagrammauswahl und Fragen in eigenen Worten, ohne Konfiguration.',
+      twitterDescription: 'Von der Tabelle zum kontrollierten Dashboard, mit Fragen in eigenen Worten und ohne Konfiguration.',
+      imageAlt: 'DOME Data Intelligence: kontrolliertes Analyse-Dashboard',
       twitterImageAlt: 'DOME Data Intelligence',
     },
     llmCouncil: {
       name: 'LLM Council',
-      title: 'LLM Council: Entscheidungsvorlagen aus mehreren KI-Modellen | DOME',
+      title: 'LLM Council: Abwägung durch drei KI-Modelle | DOME',
       description:
-        'Legen Sie eine strategische Frage drei KI-Beratern vor. Sie beraten unabhängig, hinterfragen sich gegenseitig und liefern ein begründetes Urteil mit vollständigem Audit-Trail.',
-      imageAlt: 'DOME LLM Council: KI-Beratung mit Governance',
+        'Legen Sie eine strategische Frage drei KI-Beratern vor. Sie urteilen unabhängig, prüfen sich gegenseitig und liefern ein begründetes Urteil.',
+      imageAlt: 'DOME LLM Council: KI-Abwägung mit Governance',
       twitterImageAlt: 'DOME LLM Council',
     },
     documentIntelligence: {
       name: 'Document Intelligence',
       title: 'Document Intelligence: prüfbare Datenextraktion mit KI | DOME',
       description:
-        'Extrahieren Sie strukturierte Daten aus jedem Dokument: Rechnungen, Laborberichte, Versorgerrechnungen, Verträge. Mit Governance-Prüfung und vollständigem Audit-Trail.',
+        'Strukturierte Daten aus Rechnungen, Berichten und Verträgen, geprüft gegen Governance-Regeln und mit lückenlosem Audit-Trail.',
       ogDescription:
-        'Laden Sie ein Dokument hoch und erhalten Sie in Sekunden eine strukturierte Extraktion mit Governance: Feldwerte, Konfidenzwerte und einen Bericht zu 16 Governance-Regeln.',
-      twitterDescription:
-        'Strukturierte Daten aus jedem Dokument. Governance-Prüfung, Konfidenzwerte und vollständiger Audit-Trail, ohne Vorlagen.',
+        'Dokument hochladen und in Sekunden Feldwerte, Konfidenzwerte und einen Bericht zu 16 Governance-Regeln erhalten.',
+      twitterDescription: 'Strukturierte Daten aus jedem Dokument, mit Governance-Prüfung, Konfidenzwerten und Audit-Trail.',
       imageAlt: 'DOME Document Intelligence: Dokumentenextraktion mit Governance',
       twitterImageAlt: 'DOME Document Intelligence',
     },
     governanceDashboard: {
       name: 'Governance Dashboard',
-      title: 'Governance Dashboard: ein Audit-Trail für KI-Entscheidungen | DOME',
+      title: 'Governance Dashboard: Audit-Trail für KI-Entscheidungen | DOME',
       description:
-        'Ein laufender Audit-Trail, Compliance-Berichte und PDF-Export für alle DOME-Tools: jedes Governance-Ereignis, jeder Konfidenzwert und jede menschliche Entscheidung an einem Ort.',
+        'Ein Audit-Trail für alle DOME-Tools: jedes Ereignis, jeder Konfidenzwert und jede menschliche Entscheidung an einem Ort, mit PDF-Berichten.',
       ogDescription:
-        'Audit-Trail, Compliance-Reporting und PDF-Export für alle vier KI-Tools von DOME. Jedes Governance-Ereignis, jeder Konfidenzwert und jede menschliche Entscheidung an einem Ort.',
-      twitterDescription: 'Audit-Trail und Compliance-Reporting in Echtzeit für alle vier KI-Tools von DOME.',
+        'Audit-Trail, Compliance-Reporting und PDF-Export für alle vier KI-Tools von DOME, mit jeder menschlichen Entscheidung an einem Ort.',
+      twitterDescription: 'Laufender Audit-Trail und Compliance-Reporting für alle KI-Tools von DOME.',
       imageAlt: 'DOME Governance Dashboard: toolübergreifender Audit-Trail und Compliance-Reporting',
       twitterImageAlt: 'DOME Governance Dashboard',
     },
     agentFlow: {
       name: 'Agent Flow',
-      title: 'Agent Flow: von der Rechnung zur Freigabe, mit Governance | DOME',
+      title: 'Agent Flow: von der Rechnung zur Freigabe | DOME',
       description:
-        'Ein Workflow von der Rechnung bis zur Freigabe mit Governance: Dokumentenextraktion, Regel-Engine für Richtlinien, ein Council aus mehreren Modellen und eine menschliche Freigabe, jeder Schritt protokolliert.',
+        'Von der Rechnung zur Freigabe: Extraktion, Richtlinienregeln, ein Gremium aus KI-Modellen und eine menschliche Freigabe, jeder Schritt dokumentiert.',
       ogDescription:
-        'Ein Workflow von der Rechnung bis zur Freigabe über die DOME-Tools hinweg, mit einer menschlichen Freigabestufe und vollständigem Audit-Trail.',
-      twitterDescription: 'Von der Rechnung zur Freigabe, mit menschlicher Freigabestufe und vollständigem Audit-Trail.',
-      imageAlt: 'DOME Agent Flow: Workflow von der Rechnung bis zur Freigabe mit Governance',
+        'Ein kontrollierter Workflow von der Rechnung bis zur Freigabe über die DOME-Tools hinweg, mit menschlicher Freigabe und lückenlosem Audit-Trail.',
+      twitterDescription: 'Von der Rechnung zur Freigabe, mit menschlicher Freigabe und lückenlosem Audit-Trail.',
+      imageAlt: 'DOME Agent Flow: kontrollierter Workflow von der Rechnung bis zur Freigabe',
       twitterImageAlt: 'DOME Agent Flow',
     },
     about: {
       name: 'Über uns',
-      title: 'Beratung für KI und Produkt für regulierte Unternehmen | DOME',
+      title: 'KI- und Produktberatung für regulierte Unternehmen | DOME',
       description:
-        'DOME ist eine Beratung für KI und Produkt in Florenz und arbeitet europaweit mit Teams aus Einkauf, Finanzen, Compliance und Lieferkette in regulierten Branchen.',
+        'DOME ist eine KI- und Produktberatung in Florenz für Teams aus Einkauf, Finanzen, Compliance und Lieferkette in regulierten Branchen.',
       ogDescription:
-        'Eine verantwortliche Projektleitung, ein Netzwerk von Fachleuten und ein Umsetzungspartner. Wie DOME aufgestellt ist und was Sie von einem Projekt erwarten können.',
+        'Eine verantwortliche Leitung, ein Netzwerk von Fachleuten und ein Umsetzungspartner: So ist DOME aufgestellt, und das können Sie erwarten.',
       imageAlt: 'Über DOME',
     },
     contact: {
       name: 'Kontakt',
-      title: 'DOME kontaktieren | Gespräch vereinbaren oder Nachricht senden',
+      title: 'DOME kontaktieren | Gespräch vereinbaren oder schreiben',
       description:
-        'Vereinbaren Sie ein Gespräch von 15 oder 30 Minuten oder schreiben Sie uns zu Ihrem Projekt. Wir antworten innerhalb von zwei Werktagen, auf Englisch oder Italienisch.',
-      ogDescription: 'Gespräch vereinbaren oder Nachricht senden. Wir antworten innerhalb von zwei Werktagen.',
+        'Gespräch von 15 oder 30 Minuten vereinbaren oder Nachricht senden. Antwort innerhalb von zwei Werktagen, auf Englisch oder Italienisch.',
+      ogDescription:
+        'Gespräch vereinbaren oder Nachricht senden. Sie hören innerhalb von zwei Werktagen von uns.',
       imageAlt: 'DOME kontaktieren',
     },
     caseStudies: {
       name: 'Fallstudien',
       title: 'Fallstudien | DOME',
       description:
-        'Anonymisierte Berichte über Projekte in Enterprise UX und KI-Automatisierung, aus Handelseinkauf, Handelsfinanzierung, Lebensmittelketten, Compliance und digitalen Vermögenswerten.',
+        'Anonymisierte Fallstudien zu Enterprise UX und KI-Automatisierung aus Handelseinkauf, Handelsfinanzierung, Lebensmittelketten und Compliance.',
       ogDescription:
-        'Was wir gebaut haben und was sich dadurch verändert hat. Kundenangaben sind durchgehend anonymisiert.',
+        'Was wir gebaut haben und was es bewirkt hat. Kundenangaben sind durchgehend anonymisiert.',
       imageAlt: 'Fallstudien von DOME',
     },
     privacy: {
       name: 'Datenschutzerklärung',
       title: 'Datenschutzerklärung | DOME',
       description:
-        'Wie DOME personenbezogene Daten von Websitebesuchern und registrierten Nutzern der Tools erhebt, verwendet und schützt, und wie Sie Ihre Rechte nach der DSGVO wahrnehmen.',
+        'Wie DOME personenbezogene Daten von Besuchern und Nutzern der Tools erhebt, verwendet und schützt, und wie Sie Ihre Rechte nach der DSGVO wahrnehmen.',
       imageAlt: 'DOME',
     },
     terms: {
@@ -238,7 +236,7 @@ export const de: Messages = {
       name: 'Cookie-Richtlinie',
       title: 'Cookie-Richtlinie | DOME',
       description:
-        'Jedes Cookie und jeder Eintrag im Browserspeicher von domelayer.com und den DOME-Tools: was gespeichert wird, wie lange, und warum keiner davon eine Einwilligung braucht.',
+        'Jedes Cookie und jeder Speichereintrag von domelayer.com und den DOME-Tools: Inhalt, Dauer und warum keiner davon eine Einwilligung braucht.',
       imageAlt: 'DOME',
     },
   },

@@ -451,6 +451,10 @@ export const CASE_STUDIES: readonly CaseStudy[] = [
       nl: "Een gecontroleerde workflow van factuur tot goedkeuring",
       de: "Ein kontrollierter Workflow von der Rechnung bis zur Freigabe",
     },
+    metaTitle: {
+      nl: "Een gecontroleerde workflow van factuur tot goedkeuring",
+      de: "Kontrollierter Workflow von der Rechnung zur Freigabe",
+    },
     summary: {
       en: "Extraction, policy rules, a multi-model review and a named approver, recorded as one audit trail you can reconstruct step by step.",
       it: "Estrazione, regole di policy, revisione multi-modello e un approvatore nominativo, in un unico audit trail ricostruibile passo per passo.",
@@ -632,6 +636,10 @@ export const CASE_STUDIES: readonly CaseStudy[] = [
       it: "Piattaforma di trading per un consorzio metalli",
       nl: "Een handelsplatform voor een consortium in de metaalhandel",
       de: "Eine Handelsplattform für ein Konsortium im Metallhandel",
+    },
+    metaTitle: {
+      nl: "Handelsplatform voor een metaalconsortium",
+      de: "Handelsplattform für ein Metallkonsortium",
     },
     summary: {
       en: "Automated settlement, stock monitoring and compliance alerts replaced paper-based steps shared by traders, financiers and insurers.",
@@ -815,6 +823,10 @@ export const CASE_STUDIES: readonly CaseStudy[] = [
       nl: "Een traceerbaarheidsplatform voor een foodretailer",
       de: "Eine Plattform zur Rückverfolgung für einen Lebensmittelhändler",
     },
+    metaTitle: {
+      nl: "Traceerbaarheidsplatform voor een foodretailer",
+      de: "Plattform zur Rückverfolgung im Lebensmittelhandel",
+    },
     summary: {
       en: "UX lead and design system for a platform that traces products from supplier to shelf, rolled out across stores.",
       it: "Guida UX e design system per una piattaforma che traccia i prodotti dal fornitore allo scaffale, poi estesa ai punti vendita.",
@@ -978,7 +990,7 @@ export const CASE_STUDIES: readonly CaseStudy[] = [
     },
     metaTitle: {
       it: "App di trading ridisegnata per asset digitali",
-      nl: "Nieuwe trading-app voor een platform voor digitale activa",
+      nl: "Nieuwe trading-app voor digitale activa",
       de: "Neue Trading-App für digitale Vermögenswerte",
     },
     summary: {

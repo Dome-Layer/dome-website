@@ -59,7 +59,7 @@ describe('buildMeta', () => {
     expect(nl).toContainEqual({ property: 'og:locale', content: 'nl_NL' })
     expect(nl).toContainEqual({ property: 'og:image', content: 'https://domelayer.com/social/about-nl.jpg' })
     const de = buildMeta('caseInvoice', 'de', [...LOCALES])
-    expect(de[0]).toEqual({ title: 'Ein kontrollierter Workflow von der Rechnung bis zur Freigabe | DOME' })
+    expect(de[0]).toEqual({ title: 'Kontrollierter Workflow von der Rechnung zur Freigabe | DOME' })
     expect(links(de, 'canonical')[0].href).toBe('https://domelayer.com/de/fallstudien/rechnungsfreigabe-mit-governance')
   })
 

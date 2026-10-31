@@ -91,152 +91,150 @@ export const nl: Messages = {
   meta: {
     home: {
       name: 'Home',
-      title: 'DOME | AI met governance voor gereguleerde organisaties',
+      title: 'DOME | Controleerbare AI voor gereguleerde organisaties',
       description:
-        'DOME helpt organisaties in gereguleerde sectoren AI in productie te nemen met governance ingebouwd, van procesautomatisering tot tools die we zelf bouwen en beheren.',
+        'DOME helpt gereguleerde organisaties AI in productie te nemen met governance ingebouwd, van procesautomatisering tot tools die we zelf beheren.',
       ogDescription:
-        'Vanaf de eerste dag ontworpen voor productie. We helpen gereguleerde organisaties AI te gebruiken met governance, menselijk toezicht en een volledige audittrail.',
-      twitterDescription: 'AI die klaar is voor productie, met governance ingebouwd, voor gereguleerde organisaties.',
-      imageAlt: 'DOME: AI met governance voor gereguleerde organisaties',
+        'Vanaf dag één gebouwd voor productie: AI met governance, menselijk toezicht en een volledige audittrail, voor organisaties in gereguleerde sectoren.',
+      twitterDescription: 'Productieklare AI met ingebouwde governance, voor gereguleerde organisaties.',
+      imageAlt: 'DOME: controleerbare AI voor gereguleerde organisaties',
     },
     enterpriseUx: {
       name: 'Enterprise UX en product',
       title: 'Enterprise UX, product en datavisualisatie | DOME',
       description:
-        'Gebruikersonderzoek, service design, interface-ontwerp en datavisualisatie voor complexe enterpriseplatforms, met een designsystem waarmee uw ontwikkelaars kunnen bouwen.',
+        'Gebruikersonderzoek, service design, interfaces en datavisualisatie voor complexe bedrijfsplatforms, met een designsystem voor uw ontwikkelaars.',
       ogDescription:
-        'We ontwarren complexe interne tools en klantplatforms: onderzoek, service design, interface-ontwerp en een designsystem waarmee uw team verder kan.',
+        'We maken complexe interne tools en klantplatforms overzichtelijk: onderzoek, service design, interfaces en een designsystem voor uw team.',
       imageAlt: 'DOME, advies over enterprise UX en product',
     },
     aiProcessAutomation: {
       name: 'AI-procesautomatisering',
       title: 'AI-procesautomatisering en bedrijfsanalyse | DOME',
       description:
-        'We brengen uw bedrijfsprocessen in kaart en analyseren ze, automatiseren de stappen met duidelijke regels en leggen de rest bij uw team, met een beslisnotitie en een volledige audittrail.',
+        'We brengen uw processen in kaart, automatiseren wat vaste regels volgt en leggen de rest bij uw team, met een beslisnotitie en volledige audittrail.',
       ogDescription:
-        'Automatiseer een proces zonder de controle te verliezen: duidelijke regels waar ze gelden, een menselijke beslissing waar ze niet gelden, en een audittrail van begin tot eind.',
+        'Automatiseer een proces zonder de controle te verliezen: regels waar ze gelden, een menselijke beslissing waar niet, en een audittrail van begin tot eind.',
       imageAlt: 'DOME AI-procesautomatisering',
     },
     dome: {
       name: 'DOME-tools',
       title: 'DOME-tools: de tools die we bouwen en beheren | DOME',
       description:
-        'Zes werkende tools voor het hele traject van procesverkenning tot gecontroleerde uitvoering. Ze laten zien hoe we AI met governance bouwen; het zijn geen producten die we verkopen.',
+        'Zes werkende tools, van procesanalyse tot gecontroleerde uitvoering. Ze laten zien hoe wij controleerbare AI bouwen en zijn niet te koop.',
       ogDescription:
-        'Procesanalyse, document- en data-intelligence, een council van meerdere modellen, een agentworkflow met governance en een governance-dashboard. Door ons gebouwd en beheerd.',
+        'Procesanalyse, document- en data-intelligence, een council van AI-modellen, een gecontroleerde agentworkflow en een governance-dashboard.',
       imageAlt: 'DOME-tools: tools die we bouwen en beheren',
     },
     processAnalyzer: {
       name: 'Process Analyzer',
-      title: 'Process Analyzer: processen in kaart met AI en governance | DOME',
+      title: 'Process Analyzer: processen in kaart met AI | DOME',
       description:
-        'Zet een beschrijving van een bedrijfsproces in gewone taal om in een gestructureerde proceskaart, met een governance-analyse en een beoordeling van de automatiseringskansen.',
+        'Beschrijf een bedrijfsproces in uw eigen woorden en krijg een proceskaart, een governance-analyse en een beoordeling van wat u kunt automatiseren.',
       ogDescription:
-        'Beschrijf een bedrijfsproces in gewone taal. U krijgt een gestructureerde proceskaart, een analyse van governance-hiaten en een beoordeling van wat AI kan automatiseren.',
-      twitterDescription:
-        'Beschrijf een bedrijfsproces in gewone taal en krijg een gestructureerde kaart, governance-hiaten en automatiseringskansen.',
+        'Beschrijf een proces in uw eigen woorden. U krijgt een gestructureerde proceskaart, de hiaten in de governance en de kansen voor automatisering.',
+      twitterDescription: 'Van procesbeschrijving naar proceskaart, met governance-hiaten en automatiseringskansen.',
       imageAlt: 'DOME Process Analyzer: proceskaarten met governance',
       twitterImageAlt: 'DOME Process Analyzer',
     },
     dataIntelligence: {
       name: 'Data Intelligence',
-      title: 'Data Intelligence: AI-dashboards die u kunt controleren | DOME',
+      title: 'Data Intelligence: dashboards die u kunt controleren | DOME',
       description:
-        'Upload een spreadsheet en krijg een analysedashboard met governance, met automatische grafiekkeuze en een paneel voor vragen in gewone taal.',
+        'Upload een spreadsheet en krijg een analysedashboard met ingebouwde controles, automatisch gekozen grafieken en vragen in gewone taal.',
       ogDescription:
-        'Upload een spreadsheet. U krijgt een analysedashboard met governance, een deterministische grafiekkeuze en een paneel voor vragen in gewone taal, zonder handmatige configuratie.',
-      twitterDescription:
-        'Upload een spreadsheet en krijg een dashboard met governance, automatische grafiekkeuze en vragen in gewone taal, zonder configuratie.',
-      imageAlt: 'DOME Data Intelligence: analysedashboard met governance',
+        'Upload een spreadsheet. U krijgt een dashboard met deterministische grafiekkeuze en een paneel voor vragen in gewone taal, zonder configuratie.',
+      twitterDescription: 'Van spreadsheet naar gecontroleerd dashboard, met vragen in gewone taal en zonder configuratie.',
+      imageAlt: 'DOME Data Intelligence: analysedashboard met ingebouwde controles',
       twitterImageAlt: 'DOME Data Intelligence',
     },
     llmCouncil: {
       name: 'LLM Council',
-      title: 'LLM Council: beslisnotities van meerdere AI-modellen | DOME',
+      title: 'LLM Council: een afweging door drie AI-modellen | DOME',
       description:
-        'Leg een strategische vraag voor aan drie AI-adviseurs. Ze wegen de vraag onafhankelijk af, toetsen elkaars standpunten en komen tot een onderbouwd oordeel met een volledige audittrail.',
-      imageAlt: 'DOME LLM Council: AI-beraad met governance',
+        'Leg een strategische vraag voor aan drie AI-adviseurs. Ze redeneren los van elkaar, toetsen elkaars standpunten en komen tot een onderbouwd oordeel.',
+      imageAlt: 'DOME LLM Council: AI-afweging met governance',
       twitterImageAlt: 'DOME LLM Council',
     },
     documentIntelligence: {
       name: 'Document Intelligence',
-      title: 'Document Intelligence: controleerbare data-extractie met AI | DOME',
+      title: 'Document Intelligence: controleerbare data-extractie | DOME',
       description:
-        'Haal gestructureerde gegevens uit elk document: facturen, laboratoriumrapporten, energierekeningen, contracten. Met governance-validatie en een volledige audittrail.',
+        'Haal gestructureerde gegevens uit facturen, rapporten, energierekeningen en contracten, getoetst aan governanceregels en met een volledige audittrail.',
       ogDescription:
-        'Upload een document en krijg binnen enkele seconden een gestructureerde extractie met governance: veldwaarden, betrouwbaarheidsscores en een rapport op 16 governanceregels.',
-      twitterDescription:
-        'Haal gestructureerde gegevens uit elk document. Governance-validatie, betrouwbaarheidsscores en een volledige audittrail, zonder sjablonen.',
+        'Upload een document en krijg binnen enkele seconden de velden, betrouwbaarheidsscores en een rapport op 16 governanceregels.',
+      twitterDescription: 'Gestructureerde gegevens uit elk document, met governancecontroles, betrouwbaarheidsscores en een audittrail.',
       imageAlt: 'DOME Document Intelligence: documentextractie met governance',
       twitterImageAlt: 'DOME Document Intelligence',
     },
     governanceDashboard: {
       name: 'Governance Dashboard',
-      title: 'Governance Dashboard: een audittrail voor AI-beslissingen | DOME',
+      title: 'Governance Dashboard: audittrail voor AI-beslissingen | DOME',
       description:
-        'Een live audittrail, compliancerapporten en pdf-export voor alle DOME-tools: elke governance-gebeurtenis, betrouwbaarheidsscore en menselijke beslissing op één plek.',
+        'Eén audittrail voor alle DOME-tools: elke gebeurtenis, betrouwbaarheidsscore en menselijke beslissing op één plek, met pdf-rapporten voor audits.',
       ogDescription:
-        'Audittrail, compliancerapportage en pdf-export voor alle vier de AI-tools van DOME. Elke governance-gebeurtenis, betrouwbaarheidsscore en menselijke beslissing op één plek.',
-      twitterDescription: 'Realtime audittrail en compliancerapportage voor alle vier de AI-tools van DOME.',
+        'Audittrail, compliancerapportage en pdf-export voor alle vier de AI-tools van DOME, met elke menselijke beslissing op één plek.',
+      twitterDescription: 'Een live audittrail en compliancerapportage voor alle AI-tools van DOME.',
       imageAlt: 'DOME Governance Dashboard: audittrail en compliancerapportage voor alle tools',
       twitterImageAlt: 'DOME Governance Dashboard',
     },
     agentFlow: {
       name: 'Agent Flow',
-      title: 'Agent Flow: van factuur tot goedkeuring, met governance | DOME',
+      title: 'Agent Flow: van factuur tot goedkeuring | DOME',
       description:
-        'Een workflow van factuur tot goedkeuring met governance: documentextractie, een engine voor beleidsregels, een council van meerdere modellen en een menselijke goedkeuring, elke stap vastgelegd.',
+        'Van factuur tot goedkeuring: extractie, beleidsregels, een council van AI-modellen en een menselijke goedkeuring, met elke stap vastgelegd.',
       ogDescription:
-        'Een workflow van factuur tot goedkeuring over de DOME-tools heen, met een menselijke goedkeuringsstap en een volledige audittrail.',
-      twitterDescription: 'Van factuur tot goedkeuring, met een menselijke goedkeuringsstap en een volledige audittrail.',
-      imageAlt: 'DOME Agent Flow: workflow van factuur tot goedkeuring met governance',
+        'Een gecontroleerde workflow van factuur tot goedkeuring over de DOME-tools heen, met een menselijke goedkeuring en een volledige audittrail.',
+      twitterDescription: 'Van factuur tot goedkeuring, met een menselijke goedkeuring en een volledige audittrail.',
+      imageAlt: 'DOME Agent Flow: gecontroleerde workflow van factuur tot goedkeuring',
       twitterImageAlt: 'DOME Agent Flow',
     },
     about: {
       name: 'Over ons',
-      title: 'Advies over AI en product voor gereguleerde organisaties | DOME',
+      title: 'Advies over AI en product voor gereguleerde sectoren | DOME',
       description:
-        'DOME is een adviesbureau voor AI en product in Florence en werkt in heel Europa met teams voor inkoop, finance, compliance en supply chain in gereguleerde sectoren.',
+        'DOME is een adviesbureau voor AI en product in Florence, voor teams in inkoop, finance, compliance en supply chain in gereguleerde sectoren.',
       ogDescription:
-        'Eén verantwoordelijke lead, een netwerk van specialisten en een uitvoeringspartner. Hoe DOME is georganiseerd, en wat u van een opdracht kunt verwachten.',
+        'Eén eindverantwoordelijke, een netwerk van specialisten en een uitvoeringspartner. Zo is DOME georganiseerd, en dit kunt u van ons verwachten.',
       imageAlt: 'Over DOME',
     },
     contact: {
       name: 'Contact',
       title: 'Contact met DOME | Plan een gesprek of stuur een bericht',
       description:
-        'Plan een gesprek van 15 of 30 minuten, of stuur een bericht over uw project. We reageren binnen twee werkdagen, in het Engels of Italiaans.',
-      ogDescription: 'Plan een gesprek of stuur een bericht. We reageren binnen twee werkdagen.',
+        'Plan een gesprek van 15 of 30 minuten, of stuur een bericht over uw project. U hoort binnen twee werkdagen van ons, in het Engels of Italiaans.',
+      ogDescription:
+        'Plan een gesprek of stuur een bericht. U hoort binnen twee werkdagen van ons.',
       imageAlt: 'Contact met DOME',
     },
     caseStudies: {
       name: 'Cases',
       title: 'Cases | DOME',
       description:
-        'Geanonimiseerde verslagen van werk aan enterprise UX en AI-automatisering in retailinkoop, handelsfinanciering, voedselketens, compliance en digitale activa.',
+        'Geanonimiseerde cases over enterprise UX en AI-automatisering in retailinkoop, handelsfinanciering, voedselketens, compliance en digitale activa.',
       ogDescription:
-        'Wat we hebben gebouwd en wat er daardoor veranderde. Klantgegevens zijn overal geanonimiseerd.',
+        'Wat we bouwden en wat het opleverde. Klantgegevens zijn overal geanonimiseerd.',
       imageAlt: 'Cases van DOME',
     },
     privacy: {
       name: 'Privacybeleid',
       title: 'Privacybeleid | DOME',
       description:
-        'Hoe DOME persoonsgegevens van websitebezoekers en geregistreerde gebruikers van de tools verzamelt, gebruikt en beschermt, en hoe u uw rechten onder de AVG uitoefent.',
+        'Hoe DOME persoonsgegevens van bezoekers en gebruikers van de tools verzamelt, gebruikt en beschermt, en hoe u uw rechten onder de AVG uitoefent.',
       imageAlt: 'DOME',
     },
     terms: {
       name: 'Gebruiksvoorwaarden',
       title: 'Gebruiksvoorwaarden | DOME',
       description:
-        'De voorwaarden voor het gebruik van de DOME-tools: accounts, aanvaardbaar gebruik, verwerking door AI, disclaimers en toepasselijk recht.',
+        'De voorwaarden voor het gebruik van de DOME-tools: accounts, toegestaan gebruik, verwerking door AI, disclaimers en toepasselijk recht.',
       imageAlt: 'DOME',
     },
     cookies: {
       name: 'Cookiebeleid',
       title: 'Cookiebeleid | DOME',
       description:
-        'Elke cookie en elke opslag in de browser die domelayer.com en de DOME-tools gebruiken, wat erin staat, hoe lang het blijft en waarom niets daarvan toestemming vereist.',
+        'Elke cookie en elk opslagitem van domelayer.com en de DOME-tools: wat erin staat, hoe lang het blijft en waarom er geen toestemming nodig is.',
       imageAlt: 'DOME',
     },
   },
