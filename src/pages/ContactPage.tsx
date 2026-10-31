@@ -5,6 +5,7 @@ import { ContactForm } from '../components/page/ContactForm'
 import { SectionHeading } from '../components/ui/SectionHeading'
 import { useMessages } from '../i18n/useLocale'
 import { CAL_PUBLIC_URL } from '../lib/cal'
+import { COMPANY } from '../lib/company'
 import { localizedHref } from '../i18n/routes'
 import { useLocale } from '../i18n/useLocale'
 import { routeMeta } from '../lib/seo'
@@ -18,8 +19,8 @@ export default function ContactPage() {
   const t = messages.contactForm
   const p = messages.pages.contact
   const DETAILS = [
-    { label: p.details.email, value: 'hello@domelayer.com', href: 'mailto:hello@domelayer.com' },
-    { label: p.details.pec, value: 'francesco.prodomo@pec.it', href: 'mailto:francesco.prodomo@pec.it' },
+    { label: p.details.email, value: COMPANY.email, href: `mailto:${COMPANY.email}` },
+    { label: p.details.pec, value: COMPANY.pec, href: `mailto:${COMPANY.pec}` },
     { label: p.details.booking, value: 'cal.com/domelayer', href: CAL_PUBLIC_URL },
     { label: p.details.location, value: p.details.locationValue },
   ]

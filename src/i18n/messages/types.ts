@@ -140,6 +140,8 @@ export interface Messages {
   }
   footer: {
     tagline: string
+    /** Label before the certified email (PEC) address in the footer's legal line. */
+    pec: string
     privacy: string
     terms: string
     cookies: string
