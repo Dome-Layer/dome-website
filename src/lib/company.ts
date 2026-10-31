@@ -4,7 +4,8 @@
  * footer shows these on every page; the contact page and the structured data read them from here.
  *
  * The domicile stays at city level by decision (2026-10-31); the full street address is not
- * published. A Registro delle Imprese (REA) number goes here once confirmed.
+ * published. There is no Registro delle Imprese (REA) number to show: the business is a libero
+ * professionista with a partita IVA only, not entered in the register.
  */
 export const COMPANY = {
   legalName: 'Dome di Francesco Prodomo',
