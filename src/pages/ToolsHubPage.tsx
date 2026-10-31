@@ -443,6 +443,7 @@ const HUB_CSS = `
   .hub-bar-link {
     display: inline-flex;
     align-items: center;
+    gap: 6px;
     min-height: 44px;
     padding: 0 4px;
     color: #FFFFFF;

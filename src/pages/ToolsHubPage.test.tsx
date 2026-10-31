@@ -199,12 +199,12 @@ describe("ToolsHubPage: failures", () => {
 // the desktop links and Sign out are display:none there, and hidden elements have no accessible
 // name in jsdom, so those two tests select them by class.
 describe("ToolsHubPage: top bar", () => {
-  it("marks Start as the current page and links the governance dashboard (desktop)", () => {
+  it("marks All tools as the current page and links the governance dashboard (desktop)", () => {
     setHostname("domelayer.com");
     const { container } = renderHub();
     const links = [...container.querySelectorAll<HTMLAnchorElement>(".hub-bar-nav a")];
     expect(links.map((a) => [a.textContent, a.getAttribute("href"), a.getAttribute("aria-current")])).toEqual([
-      ["Start", "/app", "page"],
+      ["All tools", "/app", "page"],
       ["Governance dashboard", "https://governance.domelayer.com/", null],
     ]);
   });
@@ -223,7 +223,7 @@ describe("ToolsHubPage: top bar", () => {
     fireEvent.click(toggle);
     expect(toggle).toHaveAttribute("aria-expanded", "true");
     const menu = screen.getByRole("navigation", { name: "Signed in" });
-    expect(within(menu).getByRole("link", { name: "Start" })).toHaveAttribute("aria-current", "page");
+    expect(within(menu).getByRole("link", { name: "All tools" })).toHaveAttribute("aria-current", "page");
     expect(within(menu).getByRole("link", { name: "Governance dashboard" })).toHaveAttribute(
       "href",
       "https://governance.domelayer.com/"
