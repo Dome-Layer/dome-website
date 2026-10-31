@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest'
 import { CASE_STUDIES } from '../content/caseStudies'
 import { DEFAULT_LOCALE, LOCALES, isLocalePublished, publishFlags, publishedLocales } from './locales'
 import { MESSAGES } from './messages'
+import { pageMeta } from './pageMeta'
 import {
   CASE_STUDY_ROUTE_IDS,
   CLIENT_ONLY_PATHS,
@@ -128,6 +129,23 @@ describe('message catalogues', () => {
     }
     for (const doc of ['privacy', 'terms', 'cookies'] as const) expect(MESSAGES.en.pages[doc].binding).toBeUndefined()
   })
+})
+
+// Search results cut a description at about 155 to 160 characters and a title at about 60 (case
+// study titles include the " | DOME" pageMeta adds). Link previews show more, about 200.
+describe('search snippets', () => {
+  for (const locale of LOCALES) {
+    it(`fit in search results (${locale})`, () => {
+      const over: string[] = []
+      for (const id of ROUTE_IDS) {
+        const meta = pageMeta(id, locale)
+        if (meta.description.length > 160) over.push(`${id} description ${meta.description.length}`)
+        if (meta.ogDescription && meta.ogDescription.length > 200) over.push(`${id} og ${meta.ogDescription.length}`)
+        if (meta.title.length > 65) over.push(`${id} title ${meta.title.length}`)
+      }
+      expect(over).toEqual([])
+    })
+  }
 })
 
 describe('case studies', () => {
