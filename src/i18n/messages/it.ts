@@ -650,13 +650,13 @@ export const it: Messages = {
       },
       details: {
         eyebrow: 'Altri modi per raggiungerci',
-        heading: 'Dati aziendali',
+        heading: 'Contatti e dati legali',
         email: 'Email',
         pec: 'PEC',
         booking: 'Prenotazioni',
         locationValue: 'Firenze, Italia',
         location: 'Sede',
-        legal: 'Dome di Francesco Prodomo · P.IVA 07242670482',
+        legal: 'Francesco Prodomo · P.IVA 07242670482',
       },
     },
     tools: {
@@ -783,7 +783,7 @@ export const it: Messages = {
         {
           heading: 'Chi siamo',
           blocks: [
-            { p: 'Dome è gestito da Francesco Prodomo, imprenditore individuale con sede in Italia (P.IVA 07242670482), che opera con la denominazione Dome. In questa informativa, i termini “Dome”, “noi” e “ci” si riferiscono a Francesco Prodomo, operante come Dome.' },
+            { p: 'Dome è un progetto personale di Francesco Prodomo, libero professionista con partita IVA italiana (P.IVA 07242670482). In questa informativa, i termini “Dome”, “noi” e “ci” si riferiscono a Francesco Prodomo.' },
             { p: 'Sede: Firenze, Italia\nContatto per le questioni di privacy: [privacy@domelayer.com](mailto:privacy@domelayer.com)' },
             { p: 'Francesco Prodomo è il titolare del trattamento di tutti i dati personali raccolti tramite domelayer.com e gli strumenti collegati.' },
           ],
@@ -792,7 +792,7 @@ export const it: Messages = {
           heading: 'Ambito di questa informativa',
           blocks: [
             { p: 'Questa informativa spiega quali dati personali raccogliamo quando visitate domelayer.com o vi registrate per usare gli strumenti AI di Dome, perché li raccogliamo, per quanto tempo li conserviamo e quali diritti avete su di essi.' },
-            { p: 'Questa informativa si applica esclusivamente a domelayer.com e agli strumenti del portfolio Dome. Non si applica ai sistemi AI o al software che Dome progetta e rilascia per clienti terzi: tali incarichi sono regolati da contratti e accordi sul trattamento dei dati distinti, negoziati per ciascun progetto.' },
+            { p: 'Questa informativa si applica esclusivamente a domelayer.com e agli strumenti del portfolio Dome. Non si applica alle consulenze per clienti, in cui Francesco Prodomo progetta e rilascia sistemi AI o software: tali incarichi sono regolati da contratti e accordi sul trattamento dei dati distinti, negoziati per ciascun progetto.' },
             { p: 'Non vendiamo dati personali. Non usiamo dati personali a fini pubblicitari.' },
           ],
         },
@@ -945,7 +945,7 @@ export const it: Messages = {
         {
           heading: 'Contatti',
           blocks: [
-            { p: '[privacy@domelayer.com](mailto:privacy@domelayer.com)\nFrancesco Prodomo, operante come Dome · Firenze, Italia · P.IVA 07242670482' },
+            { p: '[privacy@domelayer.com](mailto:privacy@domelayer.com)\nFrancesco Prodomo · Firenze, Italia · P.IVA 07242670482' },
           ],
         },
       ],
@@ -1030,7 +1030,7 @@ export const it: Messages = {
           heading: 'Modifiche e contatti',
           blocks: [
             { p: 'Aggiorniamo questa pagina ogni volta che aggiungiamo, modifichiamo o rimuoviamo un cookie o una voce di memoria, e prima che una nuova venga usata. La data in alto indica la versione in vigore.' },
-            { p: '[privacy@domelayer.com](mailto:privacy@domelayer.com)\nFrancesco Prodomo, operante come Dome · Firenze, Italia · P.IVA 07242670482' },
+            { p: '[privacy@domelayer.com](mailto:privacy@domelayer.com)\nFrancesco Prodomo · Firenze, Italia · P.IVA 07242670482' },
           ],
         },
       ],
@@ -1038,7 +1038,7 @@ export const it: Messages = {
     },
     terms: {
       back: '← Torna a domelayer.com',
-      updated: 'Ultimo aggiornamento: settembre 2026',
+      updated: 'Ultimo aggiornamento: ottobre 2026',
       title: 'Termini di servizio',
       appliesTo:
         'Si applicano a: analyzer.domelayer.com, llm-council.domelayer.com, document-intelligence.domelayer.com, data-intelligence.domelayer.com, governance.domelayer.com',
@@ -1046,7 +1046,7 @@ export const it: Messages = {
         {
           heading: 'Chi fornisce questi strumenti',
           blocks: [
-            { p: 'Gli strumenti AI di Dome sono gestiti da Francesco Prodomo, imprenditore individuale con sede in Italia (P.IVA 07242670482), che opera con la denominazione Dome.' },
+            { p: 'Gli strumenti AI di Dome sono un progetto personale, gestito da Francesco Prodomo, libero professionista con partita IVA italiana (P.IVA 07242670482).' },
             { p: 'Sede: Firenze, Italia\nContatto: [hello@domelayer.com](mailto:hello@domelayer.com)' },
           ],
         },
@@ -1054,7 +1054,7 @@ export const it: Messages = {
           heading: 'Ambito di questi termini',
           blocks: [
             { p: 'Registrandovi e usando uno qualsiasi degli strumenti AI di Dome, accettate questi termini. Leggeteli prima di registrarvi. Se non li accettate, non usate gli strumenti.' },
-            { p: 'Questi termini si applicano agli strumenti del portfolio Dome disponibili ai sottodomini elencati sopra. Non regolano gli incarichi in cui Dome progetta o rilascia sistemi AI per organizzazioni terze: tali incarichi sono regolati da accordi di progetto distinti.' },
+            { p: 'Questi termini si applicano agli strumenti del portfolio Dome disponibili ai sottodomini elencati sopra. Non regolano le consulenze in cui Francesco Prodomo progetta o rilascia sistemi AI per altre organizzazioni: tali incarichi sono regolati da accordi di progetto distinti.' },
             { p: 'Questi termini si applicano insieme alla nostra [Informativa sulla privacy](privacy), che vi è richiamata e ne costituisce parte integrante.' },
           ],
         },
@@ -1146,7 +1146,7 @@ export const it: Messages = {
         {
           heading: 'Contatti',
           blocks: [
-            { p: '[hello@domelayer.com](mailto:hello@domelayer.com)\nFrancesco Prodomo, operante come Dome · Firenze, Italia · P.IVA 07242670482' },
+            { p: '[hello@domelayer.com](mailto:hello@domelayer.com)\nFrancesco Prodomo · Firenze, Italia · P.IVA 07242670482' },
           ],
         },
       ],
