@@ -28,12 +28,12 @@ describe('middleware', () => {
     expect(res.headers.get('x-middleware-next')).toBe('1')
   })
 
-  it('never redirects to Dutch or German unless their flags publish them', () => {
-    expect(get('/about', { 'accept-language': 'nl-NL' }).headers.get('x-middleware-next')).toBe('1')
-    vi.stubEnv('DOME_PUBLISH_NL', 'true')
+  it('redirects Dutch and German browsers, unless a flag unpublishes the language', () => {
     const res = get('/about', { 'accept-language': 'nl-NL' })
     expect(res.headers.get('location')).toBe('/nl/over-ons')
     expect(res.headers.get('set-cookie')).toMatch(/^dome_locale=nl;/)
+    expect(get('/about', { 'accept-language': 'de-DE' }).headers.get('location')).toBe('/de/ueber-uns')
+    vi.stubEnv('DOME_PUBLISH_DE', 'false')
     expect(get('/about', { 'accept-language': 'de-DE' }).headers.get('x-middleware-next')).toBe('1')
   })
 

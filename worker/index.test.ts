@@ -94,8 +94,8 @@ describe('worker', () => {
     expect(de.headers.get('set-cookie')).toMatch(/^dome_locale=de;/)
   })
 
-  it('never sends anyone to an unpublished locale, flag unset or false', async () => {
-    for (const env of [makeEnv(), makeEnv({ DOME_PUBLISH_NL: 'false', DOME_PUBLISH_DE: 'false' })]) {
+  it('never sends anyone to a locale whose flag is false', async () => {
+    for (const env of [makeEnv({ DOME_PUBLISH_NL: 'false', DOME_PUBLISH_DE: 'false' })]) {
       for (const language of ['nl-NL,nl;q=0.9', 'de-DE,de;q=0.9']) {
         const res = await get('https://domelayer.com/about', { 'accept-language': language }, env)
         expect(res.status).toBe(200)

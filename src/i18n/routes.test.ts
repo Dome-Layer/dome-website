@@ -170,48 +170,42 @@ describe('publishing', () => {
     expect(isLocalePublished('en', { DOME_PUBLISH_EN: 'false' })).toBe(true)
   })
 
-  it('publishes Italian outside Vercel so CI and local builds exercise it', () => {
-    expect(isLocalePublished('it', {})).toBe(true)
+  it('publishes Italian, Dutch and German outside Vercel, so CI and local builds exercise them', () => {
+    for (const locale of ['it', 'nl', 'de'] as const) expect(isLocalePublished(locale, {}), locale).toBe(true)
   })
 
-  it('publishes Italian on Vercel previews (staging) only when its flag is unset', () => {
-    expect(isLocalePublished('it', { VERCEL: '1', VERCEL_ENV: 'preview' })).toBe(true)
-    expect(isLocalePublished('it', { VERCEL: '1', VERCEL_ENV: 'production' })).toBe(false)
-    expect(isLocalePublished('it', { VERCEL: '1' })).toBe(false)
-  })
-
-  it('never publishes Dutch or German without their flag, wherever the build runs', () => {
-    for (const env of [{}, { VERCEL: '1', VERCEL_ENV: 'preview' }, { DOME_PUBLISH_IT: 'true' }, { DOME_PUBLISH_NL: 'yes' }, { DOME_PUBLISH_NL: 'TRUE' }]) {
-      expect(isLocalePublished('nl', env), JSON.stringify(env)).toBe(false)
-      expect(isLocalePublished('de', env), JSON.stringify(env)).toBe(false)
+  it('publishes them on Vercel previews (staging) only when their flags are unset', () => {
+    for (const locale of ['it', 'nl', 'de'] as const) {
+      expect(isLocalePublished(locale, { VERCEL: '1', VERCEL_ENV: 'preview' })).toBe(true)
+      expect(isLocalePublished(locale, { VERCEL: '1', VERCEL_ENV: 'production' })).toBe(false)
+      expect(isLocalePublished(locale, { VERCEL: '1' })).toBe(false)
     }
   })
 
   it('lets each DOME_PUBLISH_<LOCALE> flag decide its own locale, either way', () => {
     expect(isLocalePublished('it', { VERCEL: '1', VERCEL_ENV: 'production', DOME_PUBLISH_IT: 'true' })).toBe(true)
     expect(isLocalePublished('it', { DOME_PUBLISH_IT: 'false' })).toBe(false)
-    expect(isLocalePublished('nl', { DOME_PUBLISH_NL: 'true' })).toBe(true)
-    expect(isLocalePublished('de', { DOME_PUBLISH_NL: 'true' })).toBe(false)
-    expect(isLocalePublished('de', { DOME_PUBLISH_DE: 'true' })).toBe(true)
+    expect(isLocalePublished('nl', { DOME_PUBLISH_NL: 'false' })).toBe(false)
+    expect(isLocalePublished('de', { DOME_PUBLISH_NL: 'false' })).toBe(true)
+    expect(isLocalePublished('de', { DOME_PUBLISH_DE: 'false' })).toBe(false)
   })
 
   it('lists the published locales in order, English first', () => {
-    expect(publishedLocales({})).toEqual(['en', 'it'])
-    expect(publishedLocales({ DOME_PUBLISH_NL: 'true', DOME_PUBLISH_DE: 'true' })).toEqual(['en', 'it', 'nl', 'de'])
-    expect(publishedLocales({ DOME_PUBLISH_DE: 'true', DOME_PUBLISH_IT: 'false' })).toEqual(['en', 'de'])
+    expect(publishedLocales({})).toEqual(['en', 'it', 'nl', 'de'])
+    expect(publishedLocales({ DOME_PUBLISH_NL: 'false' })).toEqual(['en', 'it', 'de'])
+    expect(publishedLocales({ DOME_PUBLISH_IT: 'false', DOME_PUBLISH_NL: 'false', DOME_PUBLISH_DE: 'false' })).toEqual(['en'])
   })
 
   // The settings this PR ships (wrangler.jsonc and the deploy workflow).
-  it('publishes everything on staging and keeps Dutch and German out of production', () => {
-    const staging = { DOME_PUBLISH_IT: 'true', DOME_PUBLISH_NL: 'true', DOME_PUBLISH_DE: 'true' }
-    const production = { DOME_PUBLISH_IT: 'true', DOME_PUBLISH_NL: 'false', DOME_PUBLISH_DE: 'false' }
-    expect(publishedLocales(staging)).toEqual(['en', 'it', 'nl', 'de'])
-    expect(publishedLocales(production)).toEqual(['en', 'it'])
+  it('publishes all four languages on staging and in production', () => {
+    const deployed = { DOME_PUBLISH_IT: 'true', DOME_PUBLISH_NL: 'true', DOME_PUBLISH_DE: 'true' }
+    expect(publishedLocales(deployed)).toEqual(['en', 'it', 'nl', 'de'])
   })
 
   it('reads only the publish flags from a Worker environment', () => {
-    const env = { ASSETS: {}, DOME_PUBLISH_NL: 'true', VERCEL: '1', VERCEL_ENV: 'production' }
-    expect(publishFlags(env)).toEqual({ DOME_PUBLISH_EN: undefined, DOME_PUBLISH_IT: undefined, DOME_PUBLISH_NL: 'true', DOME_PUBLISH_DE: undefined })
-    expect(publishedLocales(publishFlags(env))).toEqual(['en', 'it', 'nl'])
+    const env = { ASSETS: {}, DOME_PUBLISH_NL: 'false', VERCEL: '1', VERCEL_ENV: 'production' }
+    expect(publishFlags(env)).toEqual({ DOME_PUBLISH_EN: undefined, DOME_PUBLISH_IT: undefined, DOME_PUBLISH_NL: 'false', DOME_PUBLISH_DE: undefined })
+    // The Vercel variables are dropped, so the unset flags fall back to published.
+    expect(publishedLocales(publishFlags(env))).toEqual(['en', 'it', 'de'])
   })
 })

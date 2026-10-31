@@ -27,10 +27,10 @@ export function publishFlag(locale: Locale): string {
 
 /**
  * Whether each locale is published when its flag is not set. Italian has been live since
- * 2026-09-28. Dutch and German stay unpublished until a native reader has reviewed them, so a
- * build or a Worker that misses their flag can never publish them by accident.
+ * 2026-09-28, Dutch and German since 2026-11. A new locale starts at false, so a build or a Worker
+ * that misses its flag cannot publish it before it is ready.
  */
-const PUBLISHED_BY_DEFAULT: Record<Locale, boolean> = { en: true, it: true, nl: false, de: false }
+const PUBLISHED_BY_DEFAULT: Record<Locale, boolean> = { en: true, it: true, nl: true, de: true }
 
 /**
  * Whether a locale is published in this build or runtime. English always is.
@@ -38,8 +38,8 @@ const PUBLISHED_BY_DEFAULT: Record<Locale, boolean> = { en: true, it: true, nl: 
  * An unpublished locale leaves no trace: none of its pages are prerendered, the switcher does not
  * offer it, the redirect never sends anyone to it, and the sitemap, hreflang and llms.txt leave it
  * out. `DOME_PUBLISH_<LOCALE>=true|false` (for example `DOME_PUBLISH_NL`) forces it either way.
- * Otherwise a locale that is unpublished by default stays unpublished, and Italian keeps its
- * original rule: a Vercel build publishes it on previews only, any other build publishes it.
+ * Otherwise a locale that is unpublished by default stays unpublished, and a published one keeps
+ * Italian's original rule: a Vercel build publishes it on previews only, any other build publishes it.
  */
 export function isLocalePublished(locale: Locale, env: Env): boolean {
   if (locale === DEFAULT_LOCALE) return true

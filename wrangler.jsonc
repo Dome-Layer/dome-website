@@ -22,13 +22,13 @@
   // Bindings are not inherited by environments, so staging repeats it with its own namespace.
   "ratelimits": [{ "name": "CONTACT_RATE_LIMITER", "namespace_id": "1001", "simple": { "limit": 3, "period": 60 } }],
   // One flag per locale, read at runtime by the Worker (the first-visit redirect and the 404 per
-  // locale). They must match the build's flags in .github/workflows/deploy-cloudflare.yml. Dutch and
-  // German stay unpublished in production until a native reader has reviewed them.
+  // locale). They must match the build's flags in .github/workflows/deploy-cloudflare.yml. All four
+  // languages are published in production since 2026-11.
   "vars": {
     "ENVIRONMENT": "production",
     "DOME_PUBLISH_IT": "true",
-    "DOME_PUBLISH_NL": "false",
-    "DOME_PUBLISH_DE": "false",
+    "DOME_PUBLISH_NL": "true",
+    "DOME_PUBLISH_DE": "true",
     "CONTACT_EMAIL": "hello@domelayer.com"
   },
   "observability": { "enabled": true },
