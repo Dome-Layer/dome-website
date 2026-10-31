@@ -650,13 +650,13 @@ export const de: Messages = {
       },
       details: {
         eyebrow: 'Weitere Kontaktwege',
-        heading: 'Unternehmensangaben',
+        heading: 'Kontakt und rechtliche Angaben',
         email: 'E-Mail',
         pec: 'Zertifizierte E-Mail (PEC)',
         booking: 'Termin',
         locationValue: 'Florenz, Italien',
         location: 'Standort',
-        legal: 'Dome di Francesco Prodomo · USt-IdNr. IT07242670482',
+        legal: 'Francesco Prodomo · USt-IdNr. IT07242670482',
       },
     },
     tools: {
@@ -787,7 +787,7 @@ export const de: Messages = {
         {
           heading: 'Wer wir sind',
           blocks: [
-            { p: 'Dome wird von Francesco Prodomo betrieben, einem in Italien eingetragenen Einzelunternehmer (USt-IdNr. IT07242670482), der unter dem Namen Dome tätig ist. Wenn in dieser Erklärung von „Dome“, „wir“ oder „uns“ die Rede ist, ist Francesco Prodomo gemeint, tätig unter dem Namen Dome.' },
+            { p: 'Dome ist ein persönliches Projekt von Francesco Prodomo, freiberuflich tätig in Italien (USt-IdNr. IT07242670482). Wenn in dieser Erklärung von „Dome“, „wir“ oder „uns“ die Rede ist, ist Francesco Prodomo gemeint.' },
             { p: 'Standort: Florenz, Italien\nKontakt in Datenschutzfragen: [privacy@domelayer.com](mailto:privacy@domelayer.com)' },
             { p: 'Francesco Prodomo ist der Verantwortliche für alle personenbezogenen Daten, die über domelayer.com und die zugehörigen Tools erhoben werden.' },
           ],
@@ -796,7 +796,7 @@ export const de: Messages = {
           heading: 'Wofür diese Erklärung gilt',
           blocks: [
             { p: 'Diese Erklärung beschreibt, welche personenbezogenen Daten wir erheben, wenn Sie domelayer.com besuchen oder sich für die KI-Tools von Dome registrieren, warum wir sie erheben, wie lange wir sie aufbewahren und welche Rechte Sie daran haben.' },
-            { p: 'Diese Erklärung gilt ausschließlich für domelayer.com und die Portfolio-Tools von Dome. Sie gilt nicht für KI-Systeme oder Software, die Dome für externe Kunden entwirft und einführt: Für diese Projekte gelten eigene Verträge und Auftragsverarbeitungsverträge, die je Projekt vereinbart werden.' },
+            { p: 'Diese Erklärung gilt ausschließlich für domelayer.com und die Portfolio-Tools von Dome. Sie gilt nicht für Beratungsprojekte, in denen Francesco Prodomo KI-Systeme oder Software für Kunden entwirft und einführt: Für diese Projekte gelten eigene Verträge und Auftragsverarbeitungsverträge, die je Projekt vereinbart werden.' },
             { p: 'Wir verkaufen keine personenbezogenen Daten. Wir verwenden personenbezogene Daten nicht für Werbung.' },
           ],
         },
@@ -949,7 +949,7 @@ export const de: Messages = {
         {
           heading: 'Kontakt',
           blocks: [
-            { p: '[privacy@domelayer.com](mailto:privacy@domelayer.com)\nFrancesco Prodomo, tätig als Dome · Florenz, Italien · USt-IdNr. IT07242670482' },
+            { p: '[privacy@domelayer.com](mailto:privacy@domelayer.com)\nFrancesco Prodomo · Florenz, Italien · USt-IdNr. IT07242670482' },
           ],
         },
       ],
@@ -1038,7 +1038,7 @@ export const de: Messages = {
           heading: 'Änderungen und Kontakt',
           blocks: [
             { p: 'Wir aktualisieren diese Seite, sobald wir ein Cookie oder einen Speichereintrag hinzufügen, ändern oder entfernen, und bevor ein neuer verwendet wird. Das Datum oben zeigt die aktuelle Fassung.' },
-            { p: '[privacy@domelayer.com](mailto:privacy@domelayer.com)\nFrancesco Prodomo, tätig als Dome · Florenz, Italien · USt-IdNr. IT07242670482' },
+            { p: '[privacy@domelayer.com](mailto:privacy@domelayer.com)\nFrancesco Prodomo · Florenz, Italien · USt-IdNr. IT07242670482' },
           ],
         },
       ],
@@ -1046,7 +1046,7 @@ export const de: Messages = {
     },
     terms: {
       back: '← Zurück zu domelayer.com',
-      updated: 'Zuletzt aktualisiert: September 2026',
+      updated: 'Zuletzt aktualisiert: Oktober 2026',
       title: 'Nutzungsbedingungen',
       appliesTo:
         'Gilt für: analyzer.domelayer.com, llm-council.domelayer.com, document-intelligence.domelayer.com, data-intelligence.domelayer.com, governance.domelayer.com',
@@ -1058,7 +1058,7 @@ export const de: Messages = {
         {
           heading: 'Wer diese Tools anbietet',
           blocks: [
-            { p: 'Die KI-Tools von Dome werden von Francesco Prodomo betrieben, einem in Italien eingetragenen Einzelunternehmer (USt-IdNr. IT07242670482), der unter dem Namen Dome tätig ist.' },
+            { p: 'Die KI-Tools von Dome sind ein persönliches Projekt von Francesco Prodomo, freiberuflich tätig in Italien (USt-IdNr. IT07242670482).' },
             { p: 'Standort: Florenz, Italien\nKontakt: [hello@domelayer.com](mailto:hello@domelayer.com)' },
           ],
         },
@@ -1066,7 +1066,7 @@ export const de: Messages = {
           heading: 'Wofür diese Bedingungen gelten',
           blocks: [
             { p: 'Mit der Registrierung für ein KI-Tool von Dome und seiner Nutzung stimmen Sie diesen Bedingungen zu. Bitte lesen Sie sie vor der Registrierung. Wenn Sie nicht zustimmen, nutzen Sie die Tools bitte nicht.' },
-            { p: 'Diese Bedingungen gelten für die Portfolio-Tools von Dome unter den oben genannten Subdomains. Sie gelten nicht für Projekte, in denen Dome KI-Systeme für andere Organisationen entwirft oder einführt: Dafür gelten eigene Projektverträge.' },
+            { p: 'Diese Bedingungen gelten für die Portfolio-Tools von Dome unter den oben genannten Subdomains. Sie gelten nicht für Beratungsprojekte, in denen Francesco Prodomo KI-Systeme für andere Organisationen entwirft oder einführt: Dafür gelten eigene Projektverträge.' },
             { p: 'Diese Bedingungen gelten zusammen mit unserer [Datenschutzerklärung](privacy), die durch Verweis Bestandteil dieser Bedingungen ist.' },
           ],
         },
@@ -1158,7 +1158,7 @@ export const de: Messages = {
         {
           heading: 'Kontakt',
           blocks: [
-            { p: '[hello@domelayer.com](mailto:hello@domelayer.com)\nFrancesco Prodomo, tätig als Dome · Florenz, Italien · USt-IdNr. IT07242670482' },
+            { p: '[hello@domelayer.com](mailto:hello@domelayer.com)\nFrancesco Prodomo · Florenz, Italien · USt-IdNr. IT07242670482' },
           ],
         },
       ],

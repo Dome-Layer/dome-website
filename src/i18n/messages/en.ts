@@ -638,13 +638,13 @@ export const en: Messages = {
       },
       details: {
         eyebrow: 'Other ways to reach us',
-        heading: 'Company details',
+        heading: 'Contact and legal details',
         email: 'Email',
         pec: 'Certified email (PEC)',
         booking: 'Booking',
         locationValue: 'Florence, Italy',
         location: 'Location',
-        legal: 'Dome di Francesco Prodomo · P.IVA 07242670482',
+        legal: 'Francesco Prodomo · P.IVA 07242670482',
       },
     },
     tools: {
@@ -771,7 +771,7 @@ export const en: Messages = {
         {
           heading: 'Who we are',
           blocks: [
-            { p: 'Dome is operated by Francesco Prodomo, a sole trader registered in Italy (P.IVA 07242670482), trading as Dome. References to "Dome", "we", or "us" in this policy refer to Francesco Prodomo trading as Dome.' },
+            { p: 'Dome is a personal project by Francesco Prodomo, a self-employed professional registered for VAT in Italy (P.IVA 07242670482). References to "Dome", "we", or "us" in this policy refer to Francesco Prodomo.' },
             { p: 'Location: Florence, Italy\nContact for privacy matters: [privacy@domelayer.com](mailto:privacy@domelayer.com)' },
             { p: 'Francesco Prodomo is the data controller for all personal data collected through domelayer.com and its associated tools.' },
           ],
@@ -780,7 +780,7 @@ export const en: Messages = {
           heading: 'What this policy covers',
           blocks: [
             { p: 'This policy explains what personal data we collect when you visit domelayer.com or register to use the Dome AI tools, why we collect it, how long we keep it, and what rights you have over it.' },
-            { p: 'This policy applies exclusively to domelayer.com and the Dome portfolio tools. It does not apply to AI systems or software that Dome designs and deploys for third-party clients: those engagements are governed by separate contracts and data processing agreements negotiated per project.' },
+            { p: 'This policy applies exclusively to domelayer.com and the Dome portfolio tools. It does not apply to consulting work for clients, in which Francesco Prodomo designs and deploys AI systems or software: those engagements are governed by separate contracts and data processing agreements negotiated per project.' },
             { p: 'We do not sell personal data. We do not use personal data for advertising.' },
           ],
         },
@@ -933,7 +933,7 @@ export const en: Messages = {
         {
           heading: 'Contact',
           blocks: [
-            { p: '[privacy@domelayer.com](mailto:privacy@domelayer.com)\nFrancesco Prodomo trading as Dome · Florence, Italy · P.IVA 07242670482' },
+            { p: '[privacy@domelayer.com](mailto:privacy@domelayer.com)\nFrancesco Prodomo · Florence, Italy · P.IVA 07242670482' },
           ],
         },
       ],
@@ -1018,7 +1018,7 @@ export const en: Messages = {
           heading: 'Changes and contact',
           blocks: [
             { p: 'We update this page whenever we add, change or remove a cookie or a storage entry, and before a new one is used. The date at the top shows the current version.' },
-            { p: '[privacy@domelayer.com](mailto:privacy@domelayer.com)\nFrancesco Prodomo trading as Dome · Florence, Italy · P.IVA 07242670482' },
+            { p: '[privacy@domelayer.com](mailto:privacy@domelayer.com)\nFrancesco Prodomo · Florence, Italy · P.IVA 07242670482' },
           ],
         },
       ],
@@ -1026,7 +1026,7 @@ export const en: Messages = {
     },
     terms: {
       back: '← Back to domelayer.com',
-      updated: 'Last updated: September 2026',
+      updated: 'Last updated: October 2026',
       title: 'Terms of service',
       appliesTo:
         'Applies to: analyzer.domelayer.com, llm-council.domelayer.com, document-intelligence.domelayer.com, data-intelligence.domelayer.com, governance.domelayer.com',
@@ -1034,7 +1034,7 @@ export const en: Messages = {
         {
           heading: 'Who provides these tools',
           blocks: [
-            { p: 'The Dome AI tools are operated by Francesco Prodomo, a sole trader registered in Italy (P.IVA 07242670482), trading as Dome.' },
+            { p: 'The Dome AI tools are a personal project, operated by Francesco Prodomo, a self-employed professional registered for VAT in Italy (P.IVA 07242670482).' },
             { p: 'Location: Florence, Italy\nContact: [hello@domelayer.com](mailto:hello@domelayer.com)' },
           ],
         },
@@ -1042,7 +1042,7 @@ export const en: Messages = {
           heading: 'What these terms cover',
           blocks: [
             { p: 'By registering for and using any Dome AI tool, you agree to these terms. Please read them before registering. If you do not agree, do not use the tools.' },
-            { p: 'These terms apply to the Dome portfolio tools available at the subdomains listed above. They do not govern engagements where Dome designs or deploys AI systems for third-party organisations: those are governed by separate project agreements.' },
+            { p: 'These terms apply to the Dome portfolio tools available at the subdomains listed above. They do not govern consulting work in which Francesco Prodomo designs or deploys AI systems for other organisations: that work is governed by separate project agreements.' },
             { p: 'These terms apply alongside our [Privacy Policy](privacy), which is incorporated by reference.' },
           ],
         },
@@ -1134,7 +1134,7 @@ export const en: Messages = {
         {
           heading: 'Contact',
           blocks: [
-            { p: '[hello@domelayer.com](mailto:hello@domelayer.com)\nFrancesco Prodomo trading as Dome · Florence, Italy · P.IVA 07242670482' },
+            { p: '[hello@domelayer.com](mailto:hello@domelayer.com)\nFrancesco Prodomo · Florence, Italy · P.IVA 07242670482' },
           ],
         },
       ],

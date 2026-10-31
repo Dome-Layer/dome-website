@@ -648,13 +648,13 @@ export const nl: Messages = {
       },
       details: {
         eyebrow: 'Andere manieren om ons te bereiken',
-        heading: 'Bedrijfsgegevens',
+        heading: 'Contact- en juridische gegevens',
         email: 'E-mail',
         pec: 'Gecertificeerde e-mail (PEC)',
         booking: 'Gesprek plannen',
         locationValue: 'Florence, Italië',
         location: 'Vestiging',
-        legal: 'Dome di Francesco Prodomo · btw-nummer IT07242670482',
+        legal: 'Francesco Prodomo · btw-nummer IT07242670482',
       },
     },
     tools: {
@@ -785,7 +785,7 @@ export const nl: Messages = {
         {
           heading: 'Wie we zijn',
           blocks: [
-            { p: 'Dome wordt geëxploiteerd door Francesco Prodomo, eenmanszaak geregistreerd in Italië (btw-nummer IT07242670482), handelend onder de naam Dome. Waar dit beleid spreekt van ‘Dome’, ‘we’ of ‘ons’, wordt Francesco Prodomo bedoeld, handelend onder de naam Dome.' },
+            { p: 'Dome is een persoonlijk project van Francesco Prodomo, zelfstandig professional met een Italiaans btw-nummer (IT07242670482). Waar dit beleid spreekt van ‘Dome’, ‘we’ of ‘ons’, wordt Francesco Prodomo bedoeld.' },
             { p: 'Vestiging: Florence, Italië\nContact voor privacyzaken: [privacy@domelayer.com](mailto:privacy@domelayer.com)' },
             { p: 'Francesco Prodomo is de verwerkingsverantwoordelijke voor alle persoonsgegevens die via domelayer.com en de bijbehorende tools worden verzameld.' },
           ],
@@ -794,7 +794,7 @@ export const nl: Messages = {
           heading: 'Waarover dit beleid gaat',
           blocks: [
             { p: 'Dit beleid legt uit welke persoonsgegevens we verzamelen wanneer u domelayer.com bezoekt of zich registreert voor de AI-tools van Dome, waarom we ze verzamelen, hoe lang we ze bewaren en welke rechten u erover hebt.' },
-            { p: 'Dit beleid geldt uitsluitend voor domelayer.com en de portfoliotools van Dome. Het geldt niet voor AI-systemen of software die Dome voor externe klanten ontwerpt en implementeert: voor die opdrachten gelden afzonderlijke contracten en verwerkersovereenkomsten die per project worden afgesproken.' },
+            { p: 'Dit beleid geldt uitsluitend voor domelayer.com en de portfoliotools van Dome. Het geldt niet voor adviesopdrachten waarin Francesco Prodomo AI-systemen of software voor klanten ontwerpt en implementeert: voor die opdrachten gelden afzonderlijke contracten en verwerkersovereenkomsten die per project worden afgesproken.' },
             { p: 'We verkopen geen persoonsgegevens. We gebruiken geen persoonsgegevens voor advertenties.' },
           ],
         },
@@ -947,7 +947,7 @@ export const nl: Messages = {
         {
           heading: 'Contact',
           blocks: [
-            { p: '[privacy@domelayer.com](mailto:privacy@domelayer.com)\nFrancesco Prodomo, handelend als Dome · Florence, Italië · btw-nummer IT07242670482' },
+            { p: '[privacy@domelayer.com](mailto:privacy@domelayer.com)\nFrancesco Prodomo · Florence, Italië · btw-nummer IT07242670482' },
           ],
         },
       ],
@@ -1036,7 +1036,7 @@ export const nl: Messages = {
           heading: 'Wijzigingen en contact',
           blocks: [
             { p: 'We werken deze pagina bij telkens als we een cookie of opslagitem toevoegen, wijzigen of verwijderen, en voordat een nieuw item in gebruik wordt genomen. De datum bovenaan geeft de huidige versie aan.' },
-            { p: '[privacy@domelayer.com](mailto:privacy@domelayer.com)\nFrancesco Prodomo, handelend als Dome · Florence, Italië · btw-nummer IT07242670482' },
+            { p: '[privacy@domelayer.com](mailto:privacy@domelayer.com)\nFrancesco Prodomo · Florence, Italië · btw-nummer IT07242670482' },
           ],
         },
       ],
@@ -1044,7 +1044,7 @@ export const nl: Messages = {
     },
     terms: {
       back: '← Terug naar domelayer.com',
-      updated: 'Laatst bijgewerkt: september 2026',
+      updated: 'Laatst bijgewerkt: oktober 2026',
       title: 'Gebruiksvoorwaarden',
       appliesTo:
         'Van toepassing op: analyzer.domelayer.com, llm-council.domelayer.com, document-intelligence.domelayer.com, data-intelligence.domelayer.com, governance.domelayer.com',
@@ -1056,7 +1056,7 @@ export const nl: Messages = {
         {
           heading: 'Wie deze tools aanbiedt',
           blocks: [
-            { p: 'De AI-tools van Dome worden geëxploiteerd door Francesco Prodomo, eenmanszaak geregistreerd in Italië (btw-nummer IT07242670482), handelend onder de naam Dome.' },
+            { p: 'De AI-tools van Dome zijn een persoonlijk project, geëxploiteerd door Francesco Prodomo, zelfstandig professional met een Italiaans btw-nummer (IT07242670482).' },
             { p: 'Vestiging: Florence, Italië\nContact: [hello@domelayer.com](mailto:hello@domelayer.com)' },
           ],
         },
@@ -1064,7 +1064,7 @@ export const nl: Messages = {
           heading: 'Waarover deze voorwaarden gaan',
           blocks: [
             { p: 'Door u te registreren voor en gebruik te maken van een AI-tool van Dome, gaat u akkoord met deze voorwaarden. Lees ze voordat u zich registreert. Als u er niet mee akkoord gaat, gebruik de tools dan niet.' },
-            { p: 'Deze voorwaarden gelden voor de portfoliotools van Dome op de hierboven genoemde subdomeinen. Ze gelden niet voor opdrachten waarin Dome AI-systemen ontwerpt of implementeert voor andere organisaties: daarvoor gelden afzonderlijke projectovereenkomsten.' },
+            { p: 'Deze voorwaarden gelden voor de portfoliotools van Dome op de hierboven genoemde subdomeinen. Ze gelden niet voor adviesopdrachten waarin Francesco Prodomo AI-systemen ontwerpt of implementeert voor andere organisaties: daarvoor gelden afzonderlijke projectovereenkomsten.' },
             { p: 'Deze voorwaarden gelden naast ons [privacybeleid](privacy), dat door verwijzing deel uitmaakt van deze voorwaarden.' },
           ],
         },
@@ -1156,7 +1156,7 @@ export const nl: Messages = {
         {
           heading: 'Contact',
           blocks: [
-            { p: '[hello@domelayer.com](mailto:hello@domelayer.com)\nFrancesco Prodomo, handelend als Dome · Florence, Italië · btw-nummer IT07242670482' },
+            { p: '[hello@domelayer.com](mailto:hello@domelayer.com)\nFrancesco Prodomo · Florence, Italië · btw-nummer IT07242670482' },
           ],
         },
       ],

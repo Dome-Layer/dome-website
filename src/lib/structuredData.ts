@@ -21,7 +21,10 @@ type Node = Record<string, unknown>
 const SERVICE_ROUTE_IDS = ['aiProcessAutomation', 'enterpriseUx'] as const satisfies readonly RouteId[]
 
 /**
- * DOME the company. Deliberately no Product, Offer, OfferCatalog or SoftwareApplication: the tools
+ * DOME, with Francesco Prodomo as its legal name: DOME is a personal project, not a business
+ * (DOME_DECISIONS 2026-10-31). It stays a ProfessionalService only while the service pages are still
+ * on this site; step 2 of that decision moves them to francescoprodomo.com and reshapes this node.
+ * Deliberately no Product, Offer, OfferCatalog or SoftwareApplication: the tools
  * are capability proof and never for sale. The consulting services are named in `knowsAbout` (from the
  * catalogue, one entry per service including process mapping, business analysis and data visualisation) and
  * described as `Service` nodes on their own pages, which says what DOME does without an offer.

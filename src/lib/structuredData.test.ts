@@ -17,9 +17,9 @@ describe('structured data', () => {
     expect(JSON.stringify(graph('home'))).not.toContain('Offer')
   })
 
-  it('identifies the business: legal name, VAT ID, email and city, without a street address', () => {
+  it('identifies the person behind DOME: legal name, VAT ID, email and city, without a street address', () => {
     const org = byType(graph('home'), 'ProfessionalService')!
-    expect(org.legalName).toBe('Dome di Francesco Prodomo')
+    expect(org.legalName).toBe('Francesco Prodomo')
     expect(org.vatID).toBe('IT07242670482')
     expect(org.email).toBe('hello@domelayer.com')
     expect(org.address).toEqual({ '@type': 'PostalAddress', addressLocality: 'Florence', addressCountry: 'IT' })
