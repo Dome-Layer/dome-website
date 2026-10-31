@@ -9,9 +9,6 @@ import type { Messages } from './types'
 // professionals actually use: Audit-Trail, Compliance, Governance, UX, Dashboard, Workflow. Tool
 // names and the DOME phase names stay English. GDPR is "DSGVO". Compounds with English words take a
 // hyphen (Enterprise-Plattform, Governance-Ereignis).
-//
-// Not yet reviewed by a native reader: keep this locale unpublished in production until it is
-// (DOME_PUBLISH_DE, see src/i18n/locales.ts).
 export const de: Messages = {
   site: {
     description:

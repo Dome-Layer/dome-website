@@ -7,9 +7,6 @@ import type { Messages } from './types'
 // Keep the terms Dutch professionals actually use: AI, audittrail, compliance, governance, UX,
 // dashboard, workflow. Tool names and the DOME phase names stay English. GDPR is "AVG". Compounds
 // are written as one word or with a hyphen (enterpriseplatform, AI-tools), never as two words.
-//
-// Not yet reviewed by a native reader: keep this locale unpublished in production until it is
-// (DOME_PUBLISH_NL, see src/i18n/locales.ts).
 export const nl: Messages = {
   site: {
     description:

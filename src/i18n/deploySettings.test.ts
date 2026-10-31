@@ -17,14 +17,13 @@ describe('publish settings as deployed', () => {
     expect(publishedLocales(publishFlags(wrangler.env.staging.vars))).toEqual(['en', 'it', 'nl', 'de'])
   })
 
-  it('keeps Dutch and German out of production, and Italian in', () => {
-    expect(publishedLocales(publishFlags(wrangler.vars))).toEqual(['en', 'it'])
+  it('publishes all four languages in production', () => {
+    expect(publishedLocales(publishFlags(wrangler.vars))).toEqual(['en', 'it', 'nl', 'de'])
   })
 
   it('builds with the same flags in the deploy workflow', () => {
-    expect(workflow).toContain("DOME_PUBLISH_IT: 'true'")
-    for (const flag of ['DOME_PUBLISH_NL', 'DOME_PUBLISH_DE']) {
-      expect(workflow).toContain(`${flag}: \${{ github.ref_name == 'main' && 'false' || 'true' }}`)
+    for (const flag of ['DOME_PUBLISH_IT', 'DOME_PUBLISH_NL', 'DOME_PUBLISH_DE']) {
+      expect(workflow).toContain(`${flag}: 'true'`)
     }
   })
 })

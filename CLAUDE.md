@@ -61,9 +61,9 @@ security headers. `wrangler.jsonc` holds the Worker config and the per-environme
 - `src/routes.ts` registers every public page once per locale. A locale that is not published is registered but
   not prerendered, so it 404s. Each locale has its own flag, `DOME_PUBLISH_<LOCALE>` (`true` or `false`), set
   for the build in the deploy workflow and for the Worker in `wrangler.jsonc`; the two must agree (a test checks).
-  Italian is published by default and has been live in production since 2026-09-28. Dutch and German are
-  unpublished unless their flag is `true`: staging publishes them, production does not until a native reader
-  has reviewed them. To see them locally: `DOME_PUBLISH_NL=true DOME_PUBLISH_DE=true npm run dev`.
+  Italian has been live in production since 2026-09-28, Dutch and German since 2026-11; all three are
+  published by default and set to `true` on staging and production. A new locale starts unpublished by
+  default (`PUBLISHED_BY_DEFAULT` in `locales.ts`) until its flag is `true`.
 - hreflang, the sitemap, llms.txt, the language switcher, `Content-Language` (`inLanguage`), `og:locale`, the
   first-visit redirect, the 404 per locale and the `dome_locale` cookie all follow `LOCALES` and the publish
   flags; an unpublished locale leaves no trace in them, and its social images are left out of the build.
