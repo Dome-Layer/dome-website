@@ -118,7 +118,8 @@ function LanguageMenu({ locale, published, href, className }: LanguageMenuProps)
         aria-expanded={open}
         aria-controls={panelId}
         // The name keeps the visible code (WCAG 2.5.3, label in name) and says what the button is for.
-        aria-label={`${t.language}: ${LOCALE_NAMES[locale]} (${code})`}
+        // The code stands as its own word: axe does not count it inside parentheses, "English (EN)".
+        aria-label={`${t.language}: ${LOCALE_NAMES[locale]}, ${code}`}
         onClick={() => setOpen((value) => !value)}
         className={control}
       >

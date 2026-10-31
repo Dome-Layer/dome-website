@@ -54,7 +54,7 @@ describe('LanguageSwitcher with four published languages', () => {
 
   it('shows the current language and opens a list of all four', () => {
     renderAt('/nl/over-ons?utm_source=email')
-    const toggle = screen.getByRole('button', { name: 'Taal: Nederlands (NL)' })
+    const toggle = screen.getByRole('button', { name: 'Taal: Nederlands, NL' })
     expect(toggle).toHaveTextContent('NL')
     expect(toggle).toHaveAttribute('aria-expanded', 'false')
     const list = screen.getByRole('list', { hidden: true })
@@ -83,7 +83,7 @@ describe('LanguageSwitcher with four published languages', () => {
 
   it('closes on Escape and hands focus back to the button', () => {
     renderAt('/')
-    const toggle = screen.getByRole('button', { name: 'Language: English (EN)' })
+    const toggle = screen.getByRole('button', { name: 'Language: English, EN' })
     fireEvent.click(toggle)
     screen.getByRole('link', { name: /Italiano/ }).focus()
     fireEvent.keyDown(document, { key: 'Escape' })
@@ -93,7 +93,7 @@ describe('LanguageSwitcher with four published languages', () => {
 
   it('closes on a click elsewhere, and when focus leaves it', () => {
     renderAt('/de')
-    const toggle = screen.getByRole('button', { name: 'Sprache: Deutsch (DE)' })
+    const toggle = screen.getByRole('button', { name: 'Sprache: Deutsch, DE' })
     fireEvent.click(toggle)
     fireEvent.pointerDown(document.body)
     expect(toggle).toHaveAttribute('aria-expanded', 'false')
@@ -105,7 +105,7 @@ describe('LanguageSwitcher with four published languages', () => {
 
   it('stays open while focus moves inside it', () => {
     renderAt('/it')
-    const toggle = screen.getByRole('button', { name: 'Lingua: Italiano (IT)' })
+    const toggle = screen.getByRole('button', { name: 'Lingua: Italiano, IT' })
     fireEvent.click(toggle)
     fireEvent.blur(toggle, { relatedTarget: screen.getByRole('link', { name: /English/ }) })
     expect(toggle).toHaveAttribute('aria-expanded', 'true')
