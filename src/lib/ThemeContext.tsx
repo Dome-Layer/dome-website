@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState, type ReactNode } from 'react'
-import { cookieDomain, isHttpsHost } from '@dome-layer/dome-ui/utils'
+import { cookieDomain, isHttpsHost, isStagingHost } from '@dome-layer/dome-ui/utils'
 
 type Theme = 'light' | 'dark'
 
@@ -10,13 +10,25 @@ interface ThemeContextValue {
 
 const ThemeContext = createContext<ThemeContextValue | null>(null)
 
-const COOKIE_NAME = 'dome-theme'
+/** localStorage is per origin, so its key needs no environment split. */
+const STORAGE_KEY = 'dome-theme'
 const COOKIE_MAX_AGE = 60 * 60 * 24 * 365 // 1 year
 
 // Host/cookie-domain helpers come from dome-ui (cookieDomain, isHttpsHost); see imports.
 
+/**
+ * `dome-theme-staging` on staging hosts, `dome-theme` elsewhere (same rule as dome-ui v1.6.0
+ * `themeCookieName`). The production cookie (`Domain=.domelayer.com`) also reaches every staging
+ * host and, being older, was read first, so a choice made on staging reverted on every load.
+ * The staging name never exists on domelayer.com itself, so the cookie policy lists `dome-theme` only.
+ */
+function themeCookieName(): string {
+  return isStagingHost(window.location.hostname) ? 'dome-theme-staging' : 'dome-theme'
+}
+
 function readThemeCookie(): Theme | null {
-  const match = document.cookie.split('; ').find(r => r.startsWith(`${COOKIE_NAME}=`))
+  const name = themeCookieName()
+  const match = document.cookie.split('; ').find(r => r.startsWith(`${name}=`))
   if (!match) return null
   const val = match.split('=')[1]
   return val === 'light' || val === 'dark' ? val : null
@@ -26,7 +38,7 @@ function writeThemeCookie(theme: Theme): void {
   const domain = cookieDomain()
   const domainPart = domain ? `; Domain=${domain}` : ''
   const secure = isHttpsHost() ? '; Secure' : ''
-  document.cookie = `${COOKIE_NAME}=${theme}; Path=/; SameSite=Lax; Max-Age=${COOKIE_MAX_AGE}${domainPart}${secure}`
+  document.cookie = `${themeCookieName()}=${theme}; Path=/; SameSite=Lax; Max-Age=${COOKIE_MAX_AGE}${domainPart}${secure}`
 }
 
 /**
@@ -35,7 +47,7 @@ function writeThemeCookie(theme: Theme): void {
  * DOME is a dark-first brand, so the OS `prefers-color-scheme` is deliberately not consulted: a
  * visitor whose system is set to light still sees the site as designed. Only an explicit choice
  * through the theme toggle switches it, and that choice is remembered in the `dome-theme` cookie,
- * which is set for `*.domelayer.com` so it follows them into the tools.
+ * which is set for every host of the environment so it follows them into the tools.
  *
  * Keep in step with `public/theme-init.js`, which applies the same rule before first paint.
  */
@@ -44,7 +56,7 @@ function readInitialTheme(): Theme {
   const cookie = readThemeCookie()
   if (cookie) return cookie
   try {
-    const stored = localStorage.getItem(COOKIE_NAME)
+    const stored = localStorage.getItem(STORAGE_KEY)
     if (stored === 'light' || stored === 'dark') return stored
   } catch {
     // localStorage may be unavailable
@@ -80,7 +92,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     setTheme(prev => {
       const next: Theme = prev === 'dark' ? 'light' : 'dark'
       try {
-        localStorage.setItem(COOKIE_NAME, next)
+        localStorage.setItem(STORAGE_KEY, next)
       } catch {
         // localStorage may be unavailable; the cookie still carries the choice.
       }

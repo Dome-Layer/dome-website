@@ -7,7 +7,8 @@ import { HUB_PATH } from "../../lib/routes";
 
 /**
  * The signed-in hub's top bar (DESIGN_SYSTEM v2.7, "Signed-in hub `/app`"). The same bar as the
- * public pages (white content on `--color-bar`), but with the signed-in links: Start, the
+ * public pages (white content on `--color-bar`), but with the signed-in links: All tools (named as
+ * in the tools' own bar, so the way back reads the same everywhere), the
  * Governance dashboard, the theme switch and Sign out. Transparent over the hub's blue band, as at
  * the top of the home page, and solid once the page scrolls or the phone menu is open. Below 768px
  * the links move into a page-colour menu.
@@ -50,7 +51,8 @@ export function HubBar({ governanceHref }: { governanceHref: string }) {
           </a>
           <nav aria-label="Signed in" className="hub-bar-nav">
             <a href={HUB_PATH} aria-current="page" className="hub-bar-link">
-              Start
+              <GridIcon />
+              All tools
             </a>
             <a href={governanceHref} className="hub-bar-link">
               Governance dashboard
@@ -81,7 +83,7 @@ export function HubBar({ governanceHref }: { governanceHref: string }) {
         <div id={menuId} className="hub-bar-panel on-page-surface">
           <nav aria-label="Signed in">
             <a href={HUB_PATH} aria-current="page" onClick={() => setMenuOpen(false)}>
-              Start
+              All tools
             </a>
             <a href={governanceHref}>Governance dashboard</a>
             <button type="button" onClick={signOut}>
@@ -91,5 +93,17 @@ export function HubBar({ governanceHref }: { governanceHref: string }) {
         </div>
       )}
     </header>
+  );
+}
+
+/** Lucide's layout-grid, the icon the tools' bar uses for All tools (dome-ui ToolHeader). */
+function GridIcon() {
+  return (
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <rect width="7" height="7" x="3" y="3" rx="1" />
+      <rect width="7" height="7" x="14" y="3" rx="1" />
+      <rect width="7" height="7" x="14" y="14" rx="1" />
+      <rect width="7" height="7" x="3" y="14" rx="1" />
+    </svg>
   );
 }
