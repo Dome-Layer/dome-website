@@ -88,7 +88,9 @@ jobs:
           check /de/ueber-uns 200
           sitemap=$(curl -s "$host/sitemap.xml?deploy=${GITHUB_SHA::7}")
           for prefix in it nl de; do
-            if ! echo "$sitemap" | grep -q "domelayer.com/$prefix<"; then
+            # A here-string, not echo piped to grep -q: grep stops at the first match and echo would
+            # then log "write error: Broken pipe" on a passing check.
+            if ! grep -q "domelayer.com/$prefix<" <<<"$sitemap"; then
               echo "::error::sitemap is missing /$prefix"; fail=1
             fi
           done
