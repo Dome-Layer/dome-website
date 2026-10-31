@@ -45,6 +45,7 @@ export const de: Messages = {
   },
   footer: {
     tagline: 'Beratung für KI und Produktentwicklung in regulierten Branchen, mit Governance von Anfang an.',
+    pec: 'PEC',
     privacy: 'Datenschutzerklärung',
     terms: 'Nutzungsbedingungen',
     cookies: 'Cookie-Richtlinie',

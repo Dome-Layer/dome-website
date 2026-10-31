@@ -1,6 +1,7 @@
 import { DomeLogo } from './DomeLogo'
 import { Container } from './Container'
 import { localizedHref } from '../i18n/routes'
+import { COMPANY } from '../lib/company'
 import { LINKEDIN_URL } from '../lib/structuredData'
 import { useLocale, useMessages } from '../i18n/useLocale'
 
@@ -11,14 +12,16 @@ import { useLocale, useMessages } from '../i18n/useLocale'
  * 1c) so it sits where someone went looking for it, beside the booking calendar and the company
  * details.
  *
- * The legal line names the entity and its VAT number, which a business website has to carry
- * (D.Lgs. 70/2003 art. 7). Whether "Florence, Italy" is a sufficient domicile is still with the
- * lawyer, so only what is confirmed appears here.
+ * The legal line identifies the business on every page, as Italian law asks of a business website
+ * (D.Lgs. 70/2003 art. 7): name, VAT number, domicile, email and certified email (PEC). The domicile
+ * stays at city level by decision (src/lib/company.ts). Name, VAT and city come from the catalogue,
+ * so each language shows them as its contact page does.
  */
 export function Footer() {
   const locale = useLocale()
   const messages = useMessages()
   const t = messages.footer
+  const details = messages.pages.contact.details
 
   const links = [
     { href: localizedHref('aiProcessAutomation', locale), label: messages.nav.aiAutomation },
@@ -48,24 +51,41 @@ export function Footer() {
           </nav>
         </div>
 
-        <div className="mt-16 flex flex-col items-start justify-between gap-4 border-t border-dome-dark-edge pt-8 text-caption text-dome-nickel/80 sm:flex-row sm:items-center">
-          <span>Dome di Francesco Prodomo &middot; P.IVA 07242670482 &middot; Florence, Italy</span>
-          <div className="flex items-center gap-3">
-            <a href={localizedHref('privacy', locale)} className="transition-colors hover:text-dome-nickel">
-              {t.privacy}
+        <div className="mt-16 flex flex-col gap-4 border-t border-dome-dark-edge pt-8 text-caption text-dome-nickel/80">
+          <p className="flex flex-wrap gap-x-2 gap-y-1" data-legal-line>
+            <span>{details.legal}</span>
+            <span aria-hidden="true">&middot;</span>
+            <span>{details.locationValue}</span>
+            <span aria-hidden="true">&middot;</span>
+            <a href={`mailto:${COMPANY.email}`} className="transition-colors hover:text-dome-nickel">
+              {COMPANY.email}
             </a>
             <span aria-hidden="true">&middot;</span>
-            <a href={localizedHref('terms', locale)} className="transition-colors hover:text-dome-nickel">
-              {t.terms}
-            </a>
-            <span aria-hidden="true">&middot;</span>
-            <a href={localizedHref('cookies', locale)} className="transition-colors hover:text-dome-nickel">
-              {t.cookies}
-            </a>
+            <span>
+              {t.pec}{' '}
+              <a href={`mailto:${COMPANY.pec}`} className="transition-colors hover:text-dome-nickel">
+                {COMPANY.pec}
+              </a>
+            </span>
+          </p>
+          <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
+            <div className="flex items-center gap-3">
+              <a href={localizedHref('privacy', locale)} className="transition-colors hover:text-dome-nickel">
+                {t.privacy}
+              </a>
+              <span aria-hidden="true">&middot;</span>
+              <a href={localizedHref('terms', locale)} className="transition-colors hover:text-dome-nickel">
+                {t.terms}
+              </a>
+              <span aria-hidden="true">&middot;</span>
+              <a href={localizedHref('cookies', locale)} className="transition-colors hover:text-dome-nickel">
+                {t.cookies}
+              </a>
+            </div>
+            <span>
+              &copy; {new Date().getFullYear()} DOME. {t.rights}
+            </span>
           </div>
-          <span>
-            &copy; {new Date().getFullYear()} DOME. {t.rights}
-          </span>
         </div>
       </Container>
     </footer>

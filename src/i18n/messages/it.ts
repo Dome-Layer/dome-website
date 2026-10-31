@@ -43,6 +43,7 @@ export const it: Messages = {
   },
   footer: {
     tagline: 'Consulenza AI e di prodotto per imprese regolamentate, con la governance integrata.',
+    pec: 'PEC',
     privacy: 'Informativa sulla privacy',
     terms: 'Termini di servizio',
     cookies: 'Cookie policy',

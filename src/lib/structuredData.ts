@@ -3,6 +3,7 @@ import { MESSAGES } from '../i18n/messages'
 import { pageMeta } from '../i18n/pageMeta'
 import { CASE_STUDY_ROUTE_IDS, PUBLIC_ROUTES, TOOL_ROUTE_IDS, localizedHref, type RouteId } from '../i18n/routes'
 import { socialImagePath } from '../seo/socialImages'
+import { COMPANY } from './company'
 
 export const SITE_URL = 'https://domelayer.com'
 
@@ -24,20 +25,22 @@ const SERVICE_ROUTE_IDS = ['aiProcessAutomation', 'enterpriseUx'] as const satis
  * are capability proof and never for sale. The consulting services are named in `knowsAbout` (from the
  * catalogue, one entry per service including process mapping, business analysis and data visualisation) and
  * described as `Service` nodes on their own pages, which says what DOME does without an offer.
- * The postal address is added once the legal notice address is settled.
+ * The address stays at city level, as on the site (see src/lib/company.ts).
  */
 function organization(locale: Locale): Node {
   return {
     '@type': 'ProfessionalService',
     '@id': ORGANIZATION_ID,
     name: 'DOME',
-    legalName: 'Dome di Francesco Prodomo',
+    legalName: COMPANY.legalName,
     url: `${SITE_URL}/`,
     logo: `${SITE_URL}/logo-512.png`,
     image: absoluteUrl(socialImagePath('home', locale)),
     sameAs: [LINKEDIN_URL],
     description: MESSAGES[locale].site.description,
-    vatID: 'IT07242670482',
+    vatID: COMPANY.vatId,
+    email: COMPANY.email,
+    address: { '@type': 'PostalAddress', addressLocality: COMPANY.locality, addressCountry: COMPANY.countryCode },
     areaServed: { '@type': 'Place', name: 'European Union' },
     knowsLanguage: ['en', 'it'],
     knowsAbout: MESSAGES[locale].site.knowsAbout,

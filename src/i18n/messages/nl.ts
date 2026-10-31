@@ -43,6 +43,7 @@ export const nl: Messages = {
   },
   footer: {
     tagline: 'Advies over AI en productontwerp voor gereguleerde sectoren, met governance vanaf het begin.',
+    pec: 'PEC',
     privacy: 'Privacybeleid',
     terms: 'Gebruiksvoorwaarden',
     cookies: 'Cookiebeleid',
