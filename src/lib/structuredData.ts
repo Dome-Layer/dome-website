@@ -10,8 +10,11 @@ export const SITE_URL = 'https://domelayer.com'
 const ORGANIZATION_ID = `${SITE_URL}/#organization`
 const WEBSITE_ID = `${SITE_URL}/#website`
 
-/** DOME's company page on LinkedIn, also linked from the footer. */
-export const LINKEDIN_URL = 'https://www.linkedin.com/company/domelayer/'
+/**
+ * Francesco's own LinkedIn profile, linked from the footer and the founder node. DOME has no LinkedIn
+ * page: it is a project, not a company, and the page made for it was deactivated on 2026-11-02.
+ */
+export const LINKEDIN_URL = 'https://www.linkedin.com/in/francesco-prodomo'
 
 export const absoluteUrl = (path: string) => (path === '/' ? `${SITE_URL}/` : `${SITE_URL}${path}`)
 
@@ -39,7 +42,6 @@ function organization(locale: Locale): Node {
     url: `${SITE_URL}/`,
     logo: `${SITE_URL}/logo-512.png`,
     image: absoluteUrl(socialImagePath('home', locale)),
-    sameAs: [LINKEDIN_URL],
     description: MESSAGES[locale].site.description,
     vatID: COMPANY.vatId,
     email: COMPANY.email,
@@ -57,7 +59,7 @@ function organization(locale: Locale): Node {
       '@type': 'Person',
       name: 'Francesco Prodomo',
       url: 'https://francescoprodomo.com',
-      sameAs: ['https://francescoprodomo.com', 'https://www.linkedin.com/in/francesco-prodomo'],
+      sameAs: ['https://francescoprodomo.com', LINKEDIN_URL],
     },
   }
 }

@@ -140,6 +140,10 @@ export interface Messages {
   }
   footer: {
     tagline: string
+    /** Accessible name of the footer navigation. */
+    navLabel: string
+    /** Footer link to Francesco's LinkedIn profile (DOME has no LinkedIn page). */
+    linkedin: string
     /** Label before the certified email (PEC) address in the footer's legal line. */
     pec: string
     privacy: string

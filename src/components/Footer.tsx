@@ -30,7 +30,7 @@ export function Footer() {
     { href: localizedHref('caseStudies', locale), label: messages.nav.caseStudies },
     { href: localizedHref('about', locale), label: messages.nav.about },
     { href: localizedHref('contact', locale), label: messages.nav.contact },
-    { href: LINKEDIN_URL, label: 'LinkedIn' },
+    { href: LINKEDIN_URL, label: t.linkedin },
   ]
 
   return (
@@ -42,7 +42,7 @@ export function Footer() {
             <p className="mt-4 max-w-md text-body-sm text-dome-nickel">{t.tagline}</p>
           </div>
 
-          <nav className="grid grid-cols-2 gap-3 text-body-sm text-dome-nickel" aria-label="Footer">
+          <nav className="grid grid-cols-2 gap-3 text-body-sm text-dome-nickel" aria-label={t.navLabel}>
             {links.map((link) => (
               <a key={link.href} href={link.href} className="transition-colors hover:text-dome-signal-blue">
                 {link.label}

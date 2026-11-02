@@ -31,6 +31,8 @@ export const en: Messages = {
   },
   footer: {
     tagline: 'AI and product consulting for regulated enterprises, with governance built in.',
+    navLabel: 'Footer',
+    linkedin: 'Francesco on LinkedIn',
     pec: 'PEC',
     privacy: 'Privacy policy',
     terms: 'Terms of service',

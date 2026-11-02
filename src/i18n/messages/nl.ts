@@ -43,6 +43,8 @@ export const nl: Messages = {
   },
   footer: {
     tagline: 'Advies over AI en productontwerp voor gereguleerde sectoren, met governance vanaf het begin.',
+    navLabel: 'Voettekst',
+    linkedin: 'Francesco op LinkedIn',
     pec: 'PEC',
     privacy: 'Privacybeleid',
     terms: 'Gebruiksvoorwaarden',
