@@ -43,6 +43,8 @@ export const it: Messages = {
   },
   footer: {
     tagline: 'Consulenza AI e di prodotto per imprese regolamentate, con la governance integrata.',
+    navLabel: 'Piè di pagina',
+    linkedin: 'Francesco su LinkedIn',
     pec: 'PEC',
     privacy: 'Informativa sulla privacy',
     terms: 'Termini di servizio',

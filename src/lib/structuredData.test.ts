@@ -25,9 +25,10 @@ describe('structured data', () => {
     expect(org.address).toEqual({ '@type': 'PostalAddress', addressLocality: 'Florence', addressCountry: 'IT' })
   })
 
-  it('links the LinkedIn company page and uses the social image of the language', () => {
+  it('links no LinkedIn page for DOME, only Francesco\'s profile, and uses the social image of the language', () => {
     const org = byType(graph('home', 'it'), 'ProfessionalService')!
-    expect(org.sameAs).toEqual(['https://www.linkedin.com/company/domelayer/'])
+    expect(org.sameAs).toBeUndefined()
+    expect((org.founder as Node).sameAs).toEqual(['https://francescoprodomo.com', 'https://www.linkedin.com/in/francesco-prodomo'])
     expect(org.image).toBe('https://domelayer.com/social/home-it.jpg')
   })
 
