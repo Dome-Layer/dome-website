@@ -52,17 +52,33 @@ export interface PlainHeroText {
  * Shape of every message catalogue. Each locale's catalogue is typed with it, so a missing or
  * misspelt key fails `tsc`. Page body copy moves in here when the pages are rebuilt (plan 1c, 1d).
  */
-/** A DOME tool's detail page under /dome. Tool and DOME phase names stay English. */
+/** One of the three "what it does" points on a tool page: a short figure, a title and a line. */
+export interface ToolFeature {
+  figure: string
+  title: string
+  body: string
+}
+
+/**
+ * A tool's page under /dome (tool pages redesign, canvas signed off 2026-11-03). Tool names and the
+ * DOME phase names stay English in every locale; the governance event fields shown under "What it
+ * records" are code identifiers and live in `src/content/toolPages.ts`, not here.
+ */
 export interface ToolPageText {
-  /** Hero eyebrow: the DOME phase the tool belongs to. */
+  /** The DOME phase the tool belongs to. */
   phase: string
+  /** The line under the tool name. */
+  tagline: string
   lead: string
   /** Launch button, e.g. "Open Process Analyzer". */
   open: string
-  whatItDoes: string
+  /** The screenshot of the tool: what it shows, and the caption saying the data is made up. */
+  shot: { alt: string; caption: string }
+  features: { heading: string; items: readonly [ToolFeature, ToolFeature, ToolFeature] }
   howItWorks: { heading: string; steps: readonly ItemText[] }
-  /** "DOME method: <phase>" section: the phase name and its paragraph. */
-  method: { phase: string; body: string }
+  record: { heading: string; lead: string }
+  method: { heading: string; body: string }
+  closing: ProjectClosingText
 }
 
 /**
@@ -280,27 +296,38 @@ export interface Messages {
       }
       hire: { heading: string; text: string }
     }
-    /** The DOME tool detail pages. Their copy was hardcoded in English until 2026-09-28. */
+    /** The DOME tool pages. Their copy was hardcoded in English until 2026-09-28. */
     tools: {
-      /** Back link to the DOME page. */
+      /** Back link to the tools page. */
       back: string
       whatItDoes: string
       howItWorks: string
-      /** Prefix of the "DOME method: <phase>" eyebrow. */
-      method: string
+      whatItRecords: string
+      /** Eyebrow of the method strip. */
+      inMethod: string
+      /** Marks the current tool in the method strip. */
+      thisPage: string
+      allTools: string
       processAnalyzer: ToolPageText
       llmCouncil: ToolPageText
       documentIntelligence: ToolPageText
       dataIntelligence: ToolPageText
       governanceDashboard: ToolPageText
+      /** Agent Flow's page, with the governed invoice case merged in (site split, 2026-11-01). */
       agentFlow: {
         phase: string
-        heading: string
+        tagline: string
         lead: string
+        shot: { alt: string; caption: string }
+        /** Launch button, used only once Agent Flow is self-serve (AGENT_FLOW_LIVE). */
         openQueue: string
         askDemo: string
         demoNote: string
-        steps: readonly ItemText[]
+        why: { eyebrow: string; heading: string; paragraphs: readonly string[]; outcomes: readonly ItemText[] }
+        run: { eyebrow: string; heading: string; lead: string; stages: readonly (ItemText & { tool: string })[] }
+        record: { heading: string; lead: string; cta: string; events: readonly { what: string; review: string }[] }
+        method: { heading: string; body: string }
+        closing: ProjectClosingText
       }
     }
     privacy: LegalDocumentText

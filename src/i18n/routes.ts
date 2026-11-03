@@ -23,27 +23,27 @@ export const PUBLIC_ROUTES = {
   processAnalyzer: {
     file: 'pages/ProcessAnalyzerPage.tsx',
     path: { en: '/dome/process-analyzer', it: '/it/dome/process-analyzer', nl: '/nl/dome/process-analyzer', de: '/de/dome/process-analyzer' },
-    updatedAt: '2026-09-28',
+    updatedAt: '2026-11-03',
   },
   dataIntelligence: {
     file: 'pages/DataIntelligencePage.tsx',
     path: { en: '/dome/data-intelligence', it: '/it/dome/data-intelligence', nl: '/nl/dome/data-intelligence', de: '/de/dome/data-intelligence' },
-    updatedAt: '2026-09-28',
+    updatedAt: '2026-11-03',
   },
   llmCouncil: {
     file: 'pages/LlmCouncilPage.tsx',
     path: { en: '/dome/llm-council', it: '/it/dome/llm-council', nl: '/nl/dome/llm-council', de: '/de/dome/llm-council' },
-    updatedAt: '2026-09-28',
+    updatedAt: '2026-11-03',
   },
   documentIntelligence: {
     file: 'pages/DocumentIntelligencePage.tsx',
     path: { en: '/dome/document-intelligence', it: '/it/dome/document-intelligence', nl: '/nl/dome/document-intelligence', de: '/de/dome/document-intelligence' },
-    updatedAt: '2026-09-28',
+    updatedAt: '2026-11-03',
   },
   governanceDashboard: {
     file: 'pages/GovernanceDashboardPage.tsx',
     path: { en: '/dome/governance-dashboard', it: '/it/dome/governance-dashboard', nl: '/nl/dome/governance-dashboard', de: '/de/dome/governance-dashboard' },
-    updatedAt: '2026-09-28',
+    updatedAt: '2026-11-03',
   },
   agentFlow: {
     file: 'pages/AgentFlowPage.tsx',

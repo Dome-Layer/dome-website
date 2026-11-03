@@ -3,11 +3,10 @@ import { render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router";
 import AgentFlowPage from "./AgentFlowPage";
 
-// The site layout (navigation, footer) imports react-router-dom, which vitest loads as a
-// separate copy from the react-router the page's locale hook uses, so the two would need
-// two routers. This test is about the page body, so the layout is a pass-through.
-vi.mock("../layouts/ToolPageLayout", () => ({
-  ToolPageLayout: ({ children }: { children: React.ReactNode }) => <>{children}</>,
+// The site shell (navigation, footer, cookie notice) needs the theme provider and the router of
+// the whole app; this test is about the page body, so the shell is a pass-through.
+vi.mock("../layouts/PublicPage", () => ({
+  PublicPage: ({ children }: { children: React.ReactNode }) => <>{children}</>,
 }));
 import { AGENT_FLOW_LIVE } from "../lib/tools";
 
@@ -39,7 +38,7 @@ function renderPage(path = "/dome/agent-flow") {
 describe.skipIf(AGENT_FLOW_LIVE)("AgentFlowPage: private demo", () => {
   it("sends 'Ask for demo access' to the contact page, with demo access picked", () => {
     renderPage();
-    const cta = screen.getByRole("link", { name: "Ask for demo access" });
+    const [cta] = screen.getAllByRole("link", { name: "Ask for demo access" });
     // Was "/#contact", an anchor that no longer exists after the 2026-09 restructure,
     // so the button silently landed on the top of the home page.
     expect(cta).toHaveAttribute("href", "/contact?topic=demo");

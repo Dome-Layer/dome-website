@@ -171,7 +171,7 @@ export const MEDIA = {
     decorative: false,
     source: 'ai',
     aiLabel: true,
-    usedOn: 'Not on a page yet: process automation scene',
+    usedOn: 'Agent Flow page, how a run works',
   },
   enterpriseUxHero: {
     kind: 'image',
@@ -203,7 +203,7 @@ export const MEDIA = {
     decorative: false,
     source: 'ai',
     aiLabel: true,
-    usedOn: 'Not on a page yet: process maps scene',
+    usedOn: 'Governance Dashboard page, how it works',
   },
   contactHero: {
     kind: 'image',
@@ -239,7 +239,7 @@ export const MEDIA = {
     decorative: false,
     source: 'ai',
     aiLabel: true,
-    usedOn: 'Not on a page yet: procurement workflow scene',
+    usedOn: 'Document Intelligence page, how it works',
   },
   caseAiComplianceAssessments: {
     kind: 'image',
@@ -247,7 +247,7 @@ export const MEDIA = {
     decorative: false,
     source: 'ai',
     aiLabel: true,
-    usedOn: 'Not on a page yet: compliance assessment scene',
+    usedOn: 'LLM Council page, how it works',
   },
   caseMetalsTradingPlatform: {
     kind: 'image',
@@ -255,7 +255,7 @@ export const MEDIA = {
     decorative: false,
     source: 'ai',
     aiLabel: true,
-    usedOn: 'Not on a page yet: metals trading scene',
+    usedOn: 'Data Intelligence page, how it works',
   },
   caseFoodTraceabilityPlatform: {
     kind: 'image',
@@ -279,7 +279,7 @@ export const MEDIA = {
     decorative: false,
     source: 'ai',
     aiLabel: true,
-    usedOn: 'Not on a page yet: procurement platform scene',
+    usedOn: 'Process Analyzer page, how it works',
   },
   caseAiTrainingVideos: {
     kind: 'image',

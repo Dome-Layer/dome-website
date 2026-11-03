@@ -24,20 +24,20 @@ no on-page label, so they are listed here instead.
 | Home hero background | Francesco Prodomo | Decorative, no label |
 | Home hero poster frame | Francesco Prodomo | Decorative, no label |
 | Home hero, still alternative to the video | AI-generated | Yes |
-| Not on a page yet: process automation scene | AI-generated | Yes |
+| Agent Flow page, how a run works | AI-generated | Yes |
 | Not on a page yet: design workshop scene | AI-generated | Yes |
 | DOME capabilities hero | AI-generated | Yes |
 | About hero | AI-generated | Yes |
-| Not on a page yet: process maps scene | AI-generated | Yes |
+| Governance Dashboard page, how it works | AI-generated | Yes |
 | Contact hero | AI-generated | Yes |
 | How we work, and the call-to-action backgrounds | AI-generated | Decorative, listed here |
 | Built for regulated work, and Where we work | AI-generated | Decorative, listed here |
-| Not on a page yet: procurement workflow scene | AI-generated | Yes |
-| Not on a page yet: compliance assessment scene | AI-generated | Yes |
-| Not on a page yet: metals trading scene | AI-generated | Yes |
+| Document Intelligence page, how it works | AI-generated | Yes |
+| LLM Council page, how it works | AI-generated | Yes |
+| Data Intelligence page, how it works | AI-generated | Yes |
 | Not on a page yet: food traceability scene | AI-generated | Yes |
 | Not on a page yet: trading app scene | AI-generated | Yes |
-| Not on a page yet: procurement platform scene | AI-generated | Yes |
+| Process Analyzer page, how it works | AI-generated | Yes |
 | Not on a page yet: training video scene | AI-generated | Yes |
 | About, and the leadership card | Photograph of Francesco Prodomo, AI-edited: only the clothing was changed | No |
 | About, and DOME capabilities | Ionita Consulting, used with permission | No |
