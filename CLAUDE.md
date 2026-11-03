@@ -37,8 +37,8 @@ React 19, React Router 7 in framework mode with a static prerender (`react-route
 Tailwind CSS 4, Framer Motion. `worker/` is the Cloudflare Worker: it serves the prerendered pages, the real 404
 (`/404`, `/it/404` and one per other published locale), the contact form (Resend, a rate-limit binding) and
 security headers. `wrangler.jsonc` holds the Worker config and the per-environment vars.
-The Worker applies the `redirects`, `rewrites` and `headers` in `vercel.json` (the file outlived Vercel and is still the
-single source for them). The service pages and case studies moved to francescoprodomo.com in the site split
+The Worker applies the `redirects`, `rewrites` and `headers` in `site.config.json`, the single source for them (it
+was `vercel.json` until Vercel was retired and keeps that rule syntax; `worker/routing.ts` implements it). The service pages and case studies moved to francescoprodomo.com in the site split
 (2026-11-01); their old URLs answer 308, listed in `src/seo/site-split-redirects.csv` and tested row by row.
 
 ## House rules

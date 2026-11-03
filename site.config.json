@@ -1,7 +1,4 @@
 {
-  "installCommand": "rm -rf node_modules/@dome-layer/dome-ui && npm install",
-  "buildCommand": "npm run build",
-  "outputDirectory": "build/client",
   "headers": [
     {
       "source": "/favicon(.*)",
@@ -53,11 +50,6 @@
     {
       "source": "/(.*)",
       "has": [{ "type": "host", "value": "staging.domelayer.com" }],
-      "headers": [{ "key": "X-Robots-Tag", "value": "noindex" }]
-    },
-    {
-      "source": "/(.*)",
-      "has": [{ "type": "host", "value": { "suf": ".vercel.app" } }],
       "headers": [{ "key": "X-Robots-Tag", "value": "noindex" }]
     }
   ],

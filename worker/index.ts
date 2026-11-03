@@ -1,4 +1,4 @@
-import siteConfig from '../vercel.json';
+import siteConfig from '../site.config.json';
 import { localeCookie } from '../src/i18n/cookie';
 import { localeRedirectTarget } from '../src/i18n/detect';
 import { publishedLocales, publishFlags } from '../src/i18n/locales';
@@ -18,9 +18,8 @@ import {
  * (see run_worker_first in wrangler.jsonc); /assets/* and /media/* are served straight from the
  * static assets, which do not count against the free plan's daily request limit.
  *
- * Order matches Vercel: redirects, then the contact function, then the locale redirect that
- * middleware.ts does on Vercel, then rewrites and the static page, with vercel.json's header rules
- * on every response.
+ * Order: redirects, then the contact function, then the first-visit locale redirect, then rewrites
+ * and the static page, with site.config.json's header rules on every response.
  */
 
 export interface Env extends ContactEnv {
@@ -42,7 +41,7 @@ function withSiteHeaders(response: Response, url: URL, env: Env): Response {
   for (const [key, value] of Object.entries(headersFor(headerRules, url))) {
     result.headers.set(key, value);
   }
-  // vercel.json's noindex rules name Vercel hosts; these are the Cloudflare equivalents.
+  // site.config.json's noindex rule names the staging host; these cover the other Cloudflare hosts.
   if (env.DOME_NOINDEX === 'true' || url.host.endsWith('.workers.dev')) {
     result.headers.set('X-Robots-Tag', 'noindex');
   }

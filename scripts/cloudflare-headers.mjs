@@ -1,15 +1,15 @@
 // Writes build/client/_headers and build/client/.assetsignore for Cloudflare (Sprint H phase 1).
 //
-// The Worker applies vercel.json's header rules to pages and the API. /assets/* and /media/* are
+// The Worker applies site.config.json's header rules to pages and the API. /assets/* and /media/* are
 // served without the Worker, so they need the same rules as a static _headers file. Only the
 // rules that apply to those paths without a host condition are translated; noindex for staging
 // is added when DOME_NOINDEX=true at build time.
 import { readFileSync, writeFileSync } from 'node:fs'
 
-const config = JSON.parse(readFileSync(new URL('../vercel.json', import.meta.url), 'utf8'))
+const config = JSON.parse(readFileSync(new URL('../site.config.json', import.meta.url), 'utf8'))
 const noindex = process.env.DOME_NOINDEX === 'true'
 
-// Vercel sources that reach /assets or /media, translated to _headers path syntax.
+// Rule sources that reach /assets or /media, translated to _headers path syntax.
 const toCloudflarePath = (source) => {
   if (source === '/(.*)') return '/*'
   if (source.startsWith('/media/') || source.startsWith('/assets/')) return source.replace('(.*)', '*')

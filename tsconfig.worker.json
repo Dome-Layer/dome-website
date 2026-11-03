@@ -12,5 +12,5 @@
     "composite": true,
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.worker.tsbuildinfo"
   },
-  "include": ["worker/**/*.ts", "vercel.json", "src/i18n/cookie.ts", "src/i18n/detect.ts", "src/i18n/locales.ts", "src/i18n/routes.ts"]
+  "include": ["worker/**/*.ts", "site.config.json", "src/i18n/cookie.ts", "src/i18n/detect.ts", "src/i18n/locales.ts", "src/i18n/routes.ts"]
 }
