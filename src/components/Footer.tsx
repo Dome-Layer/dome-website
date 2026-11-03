@@ -3,14 +3,13 @@ import { Container } from './Container'
 import { localizedHref } from '../i18n/routes'
 import { COMPANY } from '../lib/company'
 import { LINKEDIN_URL } from '../lib/structuredData'
+import { FRANCESCO_SITE_URL, GITHUB_URL } from '../lib/project'
 import { useLocale, useMessages } from '../i18n/useLocale'
 
 /**
- * The site footer: brand, navigation and the legal line.
- *
- * The contact form used to live here, under every page. It moved to the contact page (plan phase
- * 1c) so it sits where someone went looking for it, beside the booking calendar and the company
- * details.
+ * The site footer: brand, the project's pages, the links off the site, and the legal line. The
+ * hire link stays quiet: "Work with Francesco" here and one line above the footer on the pages
+ * that have it (DOME_DECISIONS 2026-11-02).
  *
  * The legal line identifies the business on every page, as Italian law asks of a business website
  * (D.Lgs. 70/2003 art. 7): name, VAT number, domicile, email and certified email (PEC). The domicile
@@ -23,14 +22,24 @@ export function Footer() {
   const t = messages.footer
   const details = messages.pages.contact.details
 
-  const links = [
-    { href: localizedHref('aiProcessAutomation', locale), label: messages.nav.aiAutomation },
-    { href: localizedHref('enterpriseUx', locale), label: messages.nav.enterpriseUx },
-    { href: localizedHref('dome', locale), label: messages.nav.dome },
-    { href: localizedHref('caseStudies', locale), label: messages.nav.caseStudies },
-    { href: localizedHref('about', locale), label: messages.nav.about },
-    { href: localizedHref('contact', locale), label: messages.nav.contact },
-    { href: LINKEDIN_URL, label: t.linkedin },
+  const columns = [
+    {
+      heading: t.project,
+      links: [
+        { href: localizedHref('dome', locale), label: messages.nav.tools },
+        { href: localizedHref('agentFlow', locale), label: messages.nav.agentFlow },
+        { href: localizedHref('about', locale), label: messages.nav.about },
+        { href: localizedHref('contact', locale), label: messages.nav.contact },
+      ],
+    },
+    {
+      heading: t.elsewhere,
+      links: [
+        { href: FRANCESCO_SITE_URL, label: t.workWith },
+        { href: GITHUB_URL, label: t.github },
+        { href: LINKEDIN_URL, label: t.linkedin },
+      ],
+    },
   ]
 
   return (
@@ -42,11 +51,16 @@ export function Footer() {
             <p className="mt-4 max-w-md text-body-sm text-dome-nickel">{t.tagline}</p>
           </div>
 
-          <nav className="grid grid-cols-2 gap-3 text-body-sm text-dome-nickel" aria-label={t.navLabel}>
-            {links.map((link) => (
-              <a key={link.href} href={link.href} className="transition-colors hover:text-dome-signal-blue">
-                {link.label}
-              </a>
+          <nav className="grid grid-cols-2 gap-8 text-body-sm" aria-label={t.navLabel}>
+            {columns.map((column) => (
+              <div key={column.heading} className="flex flex-col gap-3">
+                <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-dome-nickel">{column.heading}</p>
+                {column.links.map((link) => (
+                  <a key={link.href} href={link.href} className="text-[#F5F5F5] transition-colors hover:text-dome-signal-blue">
+                    {link.label}
+                  </a>
+                ))}
+              </div>
             ))}
           </nav>
         </div>

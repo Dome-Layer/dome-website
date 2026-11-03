@@ -11,7 +11,7 @@ import { isStagingHost } from "./auth";
  * It is not, by decision (DOME_DECISIONS 2026-09-28): Agent Flow runs as a private
  * demo shown in a live walkthrough, because every run makes paid model calls and
  * anyone can sign up to DOME. While this is false, every Agent Flow entry point
- * offers "Book a private demo" instead of a launch link, and
+ * offers "Ask for demo access" instead of a launch link, and
  * agent-flow.domelayer.com has no DNS record.
  *
  * Flip to true only if Agent Flow becomes self-serve, in the same change that makes

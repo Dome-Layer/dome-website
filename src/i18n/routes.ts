@@ -22,7 +22,7 @@ interface PublicRoute {
  * to the matcher in middleware.ts (a test checks the last two).
  */
 export const PUBLIC_ROUTES = {
-  home: { file: 'pages/HomePage.tsx', path: { en: '/', it: '/it', nl: '/nl', de: '/de' }, updatedAt: '2026-10-13' },
+  home: { file: 'pages/HomePage.tsx', path: { en: '/', it: '/it', nl: '/nl', de: '/de' }, updatedAt: '2026-11-03' },
   aiProcessAutomation: {
     file: 'pages/AiProcessAutomationPage.tsx',
     path: {
@@ -43,7 +43,7 @@ export const PUBLIC_ROUTES = {
     },
     updatedAt: '2026-10-13',
   },
-  dome: { file: 'pages/DomePage.tsx', path: { en: '/dome', it: '/it/dome', nl: '/nl/dome', de: '/de/dome' }, updatedAt: '2026-09-22' },
+  dome: { file: 'pages/DomePage.tsx', path: { en: '/dome', it: '/it/dome', nl: '/nl/dome', de: '/de/dome' }, updatedAt: '2026-11-03' },
   processAnalyzer: {
     file: 'pages/ProcessAnalyzerPage.tsx',
     path: { en: '/dome/process-analyzer', it: '/it/dome/process-analyzer', nl: '/nl/dome/process-analyzer', de: '/de/dome/process-analyzer' },
@@ -72,10 +72,10 @@ export const PUBLIC_ROUTES = {
   agentFlow: {
     file: 'pages/AgentFlowPage.tsx',
     path: { en: '/dome/agent-flow', it: '/it/dome/agent-flow', nl: '/nl/dome/agent-flow', de: '/de/dome/agent-flow' },
-    updatedAt: '2026-09-28',
+    updatedAt: '2026-11-03',
   },
-  about: { file: 'pages/AboutPage.tsx', path: { en: '/about', it: '/it/chi-siamo', nl: '/nl/over-ons', de: '/de/ueber-uns' }, updatedAt: '2026-09-22' },
-  contact: { file: 'pages/ContactPage.tsx', path: { en: '/contact', it: '/it/contatti', nl: '/nl/contact', de: '/de/kontakt' }, updatedAt: '2026-09-22' },
+  about: { file: 'pages/AboutPage.tsx', path: { en: '/about', it: '/it/chi-siamo', nl: '/nl/over-ons', de: '/de/ueber-uns' }, updatedAt: '2026-11-03' },
+  contact: { file: 'pages/ContactPage.tsx', path: { en: '/contact', it: '/it/contatti', nl: '/nl/contact', de: '/de/kontakt' }, updatedAt: '2026-11-03' },
   caseStudies: {
     file: 'pages/CaseStudiesPage.tsx',
     path: { en: '/case-studies', it: '/it/casi-studio', nl: '/nl/cases', de: '/de/fallstudien' },
@@ -169,9 +169,9 @@ export const PUBLIC_ROUTES = {
     updatedAt: '2026-09-22',
     caseStudy: 'training',
   },
-  privacy: { file: 'pages/PrivacyPage.tsx', path: { en: '/privacy', it: '/it/privacy', nl: '/nl/privacy', de: '/de/datenschutz' }, updatedAt: '2026-10-01' },
+  privacy: { file: 'pages/PrivacyPage.tsx', path: { en: '/privacy', it: '/it/privacy', nl: '/nl/privacy', de: '/de/datenschutz' }, updatedAt: '2026-11-03' },
   terms: { file: 'pages/TermsPage.tsx', path: { en: '/terms', it: '/it/termini', nl: '/nl/voorwaarden', de: '/de/nutzungsbedingungen' }, updatedAt: '2026-09-28' },
-  cookies: { file: 'pages/CookiesPage.tsx', path: { en: '/cookies', it: '/it/cookie', nl: '/nl/cookies', de: '/de/cookies' }, updatedAt: '2026-10-30' },
+  cookies: { file: 'pages/CookiesPage.tsx', path: { en: '/cookies', it: '/it/cookie', nl: '/nl/cookies', de: '/de/cookies' }, updatedAt: '2026-11-03' },
 } satisfies Record<string, PublicRoute>
 
 export type RouteId = keyof typeof PUBLIC_ROUTES

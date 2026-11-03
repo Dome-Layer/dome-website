@@ -6,6 +6,7 @@ import { Container } from '../components/Container'
 import { TextReveal } from '../components/TextReveal'
 import { fadeUp, dramaticFadeUp, viewportConfig } from '../lib/motion'
 import { AGENT_FLOW_LIVE, useToolHref } from '../lib/tools'
+import { DEMO_TOPIC_QUERY } from '../lib/project'
 import { routeMeta } from '../lib/seo'
 import { localizedHref } from '../i18n/routes'
 import { useLocale, useMessages } from '../i18n/useLocale'
@@ -67,13 +68,13 @@ export default function AgentFlowPage() {
               ) : (
                 <>
                   <a
-                    href={localizedHref('contact', locale)}
+                    href={`${localizedHref('contact', locale)}?${DEMO_TOPIC_QUERY}`}
                     className="inline-flex items-center gap-1.5 px-5 py-2.5 text-[13px] font-semibold text-white rounded-lg transition-colors duration-150"
                     style={{ backgroundColor: ACCENT }}
                     onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = ACCENT_HOVER)}
                     onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = ACCENT)}
                   >
-                    {text.bookDemo}
+                    {text.askDemo}
                   </a>
                   <span className="text-[13px] text-[var(--color-text-secondary)]">
                     {text.demoNote}

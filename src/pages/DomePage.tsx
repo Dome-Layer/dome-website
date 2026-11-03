@@ -3,12 +3,13 @@ import { PublicPage } from '../layouts/PublicPage'
 import { PageHero } from '../components/page/PageHero'
 import { FullBleedSection } from '../components/media/FullBleedSection'
 import { MediaSplit } from '../components/media/MediaSplit'
-import { NumberedSteps } from '../components/page/NumberedSteps'
-import { ClosingCta } from '../components/page/ClosingCta'
+import { RunSection } from '../components/project/RunSection'
+import { ProjectClosing } from '../components/project/ProjectClosing'
 import { ForwardLink } from '../components/ui/Button'
 import { Eyebrow } from '../components/ui/Eyebrow'
 import { SectionHeading } from '../components/ui/SectionHeading'
-import { AGENT_FLOW_LIVE, useToolHref } from '../lib/tools'
+import { useToolHref } from '../lib/tools'
+import { DEMO_TOPIC_QUERY, RUN_ANCHOR, useTryHref } from '../lib/project'
 import { localizedHref, type RouteId } from '../i18n/routes'
 import { useLocale, useMessages } from '../i18n/useLocale'
 import { routeMeta } from '../lib/seo'
@@ -60,6 +61,8 @@ export default function DomePage() {
   const messages = useMessages()
   const t = messages.pages.dome
   const dashboardHref = useToolHref('governance.domelayer.com')
+  const tryHref = useTryHref()
+  const demoHref = `${localizedHref('contact', locale)}?${DEMO_TOPIC_QUERY}`
 
   return (
     <PublicPage>
@@ -68,8 +71,9 @@ export default function DomePage() {
         eyebrow={t.hero.eyebrow}
         heading={t.hero.heading}
         lead={t.hero.lead}
-        primary={{ label: t.hero.primary, to: localizedHref('contact', locale) }}
-        secondary={{ label: t.hero.secondary, to: '/login' }}
+        primary={{ label: t.hero.primary, to: tryHref }}
+        secondary={{ label: t.hero.secondary, to: `#${RUN_ANCHOR}` }}
+        note={t.hero.note}
       />
 
       <section className="bg-[var(--color-bg-base)] py-20 md:py-24">
@@ -83,36 +87,29 @@ export default function DomePage() {
         </div>
       </section>
 
-      <FullBleedSection media="textureNetwork">
-        <div className="grid gap-12 py-20 md:py-28 lg:grid-cols-2 lg:gap-16">
-          <div className="flex flex-col gap-4">
-            <div className="flex flex-wrap items-center gap-3">
-              <Eyebrow>{t.agentFlow.eyebrow}</Eyebrow>
-              {!AGENT_FLOW_LIVE && (
-                <span className="rounded-full border border-[var(--color-border-accent)] bg-[var(--color-accent-subtle)] px-3 py-1 text-[11px] font-semibold text-[var(--color-text-accent)]">
-                  {t.agentFlow.badge}
-                </span>
-              )}
-            </div>
-            <h2 className="text-[32px] font-bold leading-[1.15] tracking-[-0.025em] md:text-[40px]">
-              {t.agentFlow.heading}
-            </h2>
-            <p className="text-[17px] leading-[1.7] text-[var(--color-text-secondary)] md:text-[18px]">
-              {t.agentFlow.lead}
-            </p>
+      <RunSection
+        className="border-y border-[var(--color-border-subtle)] bg-[var(--color-bg-subtle)]"
+        eyebrow={t.agentFlow.eyebrow}
+        heading={t.agentFlow.heading}
+        lead={t.agentFlow.lead}
+        links={
+          <>
             <ForwardLink to={localizedHref('agentFlow', locale)}>{t.agentFlow.cta}</ForwardLink>
-          </div>
-          <NumberedSteps steps={t.agentFlow.steps} columns={2} />
-        </div>
-      </FullBleedSection>
+            <Link
+              to={demoHref}
+              className="text-sm font-medium text-[var(--color-text-secondary)] underline underline-offset-[3px] hover:text-[var(--color-text-primary)]"
+            >
+              {messages.common.askDemo}
+            </Link>
+          </>
+        }
+      />
 
       <MediaSplit
-        className="border-y border-[var(--color-border-subtle)] bg-[var(--color-bg-subtle)]"
         media={
           <img
             src="/DOME%20iPad%20Mockup.png"
-            alt=""
-            aria-hidden="true"
+            alt={messages.media.tabletMockup}
             width={760}
             height={570}
             loading="lazy"
@@ -145,50 +142,27 @@ export default function DomePage() {
         </div>
       </MediaSplit>
 
-      <section className="bg-[var(--color-bg-base)] py-20 md:py-24">
-        <div className="mx-auto flex max-w-[1280px] flex-col gap-12 px-6 md:px-12">
+      <FullBleedSection media="textureNetwork">
+        <div className="flex flex-col gap-12 py-20 md:py-28">
           <SectionHeading eyebrow={t.standards.eyebrow} heading={t.standards.heading} />
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
             {t.standards.items.map((item) => (
-              <div key={item.title} className="flex flex-col gap-3 border-t border-[var(--color-border-default)] pt-6">
+              <div key={item.title} className="flex flex-col gap-3 border-t border-[var(--color-border-strong)] pt-6">
                 <h3 className="text-lg font-semibold leading-[1.3]">{item.title}</h3>
                 <p className="text-[15px] leading-[1.65] text-[var(--color-text-secondary)]">{item.body}</p>
               </div>
             ))}
           </div>
         </div>
-      </section>
+      </FullBleedSection>
 
-      <section className="bg-[var(--color-bg-base)] pb-20 md:pb-24">
-        <div className="mx-auto max-w-[1280px] px-6 md:px-12">
-          <div className="flex flex-col items-start justify-between gap-6 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-subtle)] p-8 md:flex-row md:items-center">
-            <div className="flex flex-col items-start gap-4 sm:flex-row sm:items-center">
-              <img
-                src="/media/partner-ionita-logo-light-bg.svg"
-                alt={messages.media.ionitaLogo}
-                width={300}
-                height={150}
-                loading="lazy"
-                className="h-10 w-auto dark:hidden"
-              />
-              <img
-                src="/media/partner-ionita-logo-dark-bg.svg"
-                alt={messages.media.ionitaLogo}
-                width={300}
-                height={150}
-                loading="lazy"
-                className="hidden h-10 w-auto dark:block"
-              />
-              <p className="text-[15px] leading-[1.65] text-[var(--color-text-secondary)]">
-                {t.partner.text}
-              </p>
-            </div>
-            <ForwardLink to={localizedHref('about', locale)}>{t.partner.cta}</ForwardLink>
-          </div>
-        </div>
-      </section>
-
-      <ClosingCta text={t.closing} />
+      <ProjectClosing
+        className="pt-20 md:pt-24"
+        text={t.closing}
+        primary={{ label: t.hero.primary, to: tryHref }}
+        secondary={{ label: messages.common.askDemo, to: demoHref }}
+        hire={t.hire}
+      />
     </PublicPage>
   )
 }

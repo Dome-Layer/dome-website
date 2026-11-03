@@ -34,15 +34,15 @@ function renderPage(path = "/dome/agent-flow") {
   );
 }
 
-// Agent Flow is a private demo (DOME_DECISIONS 2026-09-28), so the page books a demo
+// Agent Flow is a private demo (DOME_DECISIONS 2026-09-28), so the page asks for demo access
 // instead of launching the app.
 describe.skipIf(AGENT_FLOW_LIVE)("AgentFlowPage: private demo", () => {
-  it("sends 'Book a private demo' to the contact page", () => {
+  it("sends 'Ask for demo access' to the contact page, with demo access picked", () => {
     renderPage();
-    const cta = screen.getByRole("link", { name: "Book a private demo" });
+    const cta = screen.getByRole("link", { name: "Ask for demo access" });
     // Was "/#contact", an anchor that no longer exists after the 2026-09 restructure,
     // so the button silently landed on the top of the home page.
-    expect(cta).toHaveAttribute("href", "/contact");
+    expect(cta).toHaveAttribute("href", "/contact?topic=demo");
   });
 
   it("never links to an agent-flow host", () => {

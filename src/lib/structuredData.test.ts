@@ -8,11 +8,11 @@ const graph = (id: Parameters<typeof pageStructuredData>[0], locale: 'en' | 'it'
 const byType = (nodes: Node[], type: string) => nodes.find((n) => n['@type'] === type)
 
 describe('structured data', () => {
-  it('names the services and a contact point on the organisation, with a raster logo', () => {
+  it('names what the project covers and a contact point on the organisation, with a raster logo', () => {
     const org = byType(graph('home'), 'ProfessionalService')!
     expect(org.logo).toBe('https://domelayer.com/logo-512.png')
-    expect(org.knowsAbout).toEqual(expect.arrayContaining(['AI process automation', 'Business analysis', 'Data visualisation']))
-    expect(byType(graph('home', 'it'), 'ProfessionalService')!.knowsAbout).toContain('Analisi di business')
+    expect(org.knowsAbout).toEqual(expect.arrayContaining(['AI governance', 'Audit trails for AI', 'Human-in-the-loop approval']))
+    expect(byType(graph('home', 'it'), 'ProfessionalService')!.knowsAbout).toContain('Governance dell’AI')
     expect((org.contactPoint as Node).url).toBe('https://domelayer.com/contact')
     expect(JSON.stringify(graph('home'))).not.toContain('Offer')
   })
