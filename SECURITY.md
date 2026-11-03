@@ -1,6 +1,6 @@
 # Security Policy
 
-If you believe you have found a security vulnerability in this project, please report it privately — **not** via a public GitHub issue.
+If you believe you have found a security vulnerability in this project, please report it privately, **not** via a public GitHub issue.
 
 ## Reporting a vulnerability
 
@@ -14,7 +14,7 @@ You should receive an acknowledgement within 72 hours. We will work with you on 
 
 ## Scope
 
-This repository covers the `domelayer.com` marketing site and the cross-subdomain SSO entry point. Vulnerabilities in the individual Dome AI tools (process analyzer, data intelligence, LLM council, etc.) or their backend services can also be reported here — we will route them internally.
+This repository covers the `domelayer.com` marketing site and the cross-subdomain SSO entry point. Vulnerabilities in the individual Dome AI tools (process analyzer, data intelligence, LLM council, etc.) or their backend services can also be reported here; we will route them internally.
 
 ## Out of scope
 
@@ -32,7 +32,7 @@ Good-faith security research conducted in accordance with this policy will not b
 
 This repo follows the Dome portfolio standard:
 
-- Real secrets live in Vercel environment variables, never in the repo.
+- Real secrets live in Cloudflare (Worker secrets) and GitHub environments, never in the repo.
 - `.env.example` is committed; any `.env*` file with real values is local-only and gitignored.
 - Secrets are rotated when there is any suspicion of exposure, on contractor offboarding, and at least annually.
 
@@ -40,16 +40,16 @@ This repo follows the Dome portfolio standard:
 
 | Variable | Where used | Sensitivity |
 |---|---|---|
-| `RESEND_API_KEY` | Vercel serverless `api/contact.ts`; Cloudflare Worker `worker/contact.ts` (a Wrangler secret) | Secret — controls outbound transactional email |
-| `CONTACT_EMAIL` | Vercel serverless `api/contact.ts`; Worker var in `wrangler.jsonc` | Config (not secret) |
+| `RESEND_API_KEY` | Cloudflare Worker `worker/contact.ts` (a Wrangler secret) | Secret: controls outbound transactional email |
+| `CONTACT_EMAIL` | Worker var in `wrangler.jsonc` | Config (not secret) |
 | `VITE_SUPABASE_URL` | Frontend build | Public by Vite convention |
-| `VITE_SUPABASE_ANON_KEY` | Frontend build | Public — RLS-enforced |
+| `VITE_SUPABASE_ANON_KEY` | Frontend build | Public, RLS-enforced |
 | `VITE_AUTH_BACKEND` | Frontend build | Public |
 
 ### Rotation log
 
 | Date | Reason | Notes |
 |------|--------|-------|
-| 2026-04 | Pre-publication audit — repo made public | Keys rotated as part of pre-publication hardening |
-| 2026-05-06 | P0-7 — added Upstash rate limiting to `/api/contact` | New token issued at provisioning; nothing to rotate from |
+| 2026-04 | Pre-publication audit: repo made public | Keys rotated as part of pre-publication hardening |
+| 2026-05-06 | P0-7: added Upstash rate limiting to `/api/contact` | New token issued at provisioning; nothing to rotate from |
 | 2026-09-30 | Upstash removed from `/api/contact` | Its database had been deleted, so the limiter was failing open; rate limiting moved to Cloudflare's rate-limiting binding (no secret). The Cloudflare Worker got its own Resend key |

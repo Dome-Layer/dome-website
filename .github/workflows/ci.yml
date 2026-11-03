@@ -36,7 +36,7 @@ jobs:
       - name: Externalise inline scripts (CSP has no 'unsafe-inline')
         run: node scripts/externalize-inline-scripts.mjs && node scripts/externalize-inline-scripts.mjs --check
       - name: Security audit (npm audit)
-        # DA-007: gate on production deps only. Dev-tool advisories (vite/vitest/
-        # esbuild and the Vercel CLI chain -> path-to-regexp/undici) don't ship to
-        # users; Dependabot tracks them instead, so they can't block CI.
+        # DA-007: gate on production deps only. Dev-tool advisories (vite, vitest,
+        # esbuild, wrangler) don't ship to users; Dependabot tracks them instead,
+        # so they can't block CI.
         run: npm audit --omit=dev --audit-level=high

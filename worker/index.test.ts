@@ -2,6 +2,7 @@ import { describe, expect, it, vi } from 'vitest'
 import worker, { type Env } from './index'
 import siteConfig from '../site.config.json'
 import { findRedirect, findRewrite, headersFor, type HeaderRule, type RedirectRule } from './routing'
+import { ROUTE_IDS, localizedHref } from '../src/i18n/routes'
 
 const CHROME = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 14_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0 Safari/537.36'
 
@@ -66,6 +67,8 @@ describe('routing (site.config.json rules)', () => {
     const rules = siteConfig.headers as HeaderRule[]
     const prod = headersFor(rules, new URL('https://domelayer.com/'))
     expect(prod['Content-Security-Policy']).toContain("default-src 'self'")
+    // Nothing is framed since Cal.com left (#150), so frames fall back to default-src 'self'.
+    expect(prod['Content-Security-Policy']).not.toContain('frame-src')
     expect(prod['X-Frame-Options']).toBe('DENY')
     expect(prod['X-Robots-Tag']).toBeUndefined()
     expect(headersFor(rules, new URL('https://staging.domelayer.com/'))['X-Robots-Tag']).toBe('noindex')
@@ -94,6 +97,22 @@ describe('worker', () => {
     expect(res.status).toBe(307)
     expect(res.headers.get('location')).toBe('/it/dome/agent-flow?utm_source=email')
     expect(res.headers.get('set-cookie')).toMatch(/^dome_locale=it; Path=\/; Max-Age=31536000; SameSite=Lax; Secure$/)
+    expect(res.headers.get('cache-control')).toBe('private, no-store')
+    expect(res.headers.get('vary')).toBe('Accept-Language, Cookie')
+  })
+
+  // On Vercel a middleware matcher listed these paths; the Worker relies on localeRedirectTarget alone.
+  it('does the locale redirect on every English public page, and on nothing else', async () => {
+    for (const id of ROUTE_IDS) {
+      const res = await get(`https://domelayer.com${localizedHref(id, 'en')}`, { 'accept-language': 'it-IT' })
+      expect(res.status, id).toBe(307)
+      expect(res.headers.get('location'), id).toBe(localizedHref(id, 'it'))
+    }
+    for (const path of ['/it/chi-siamo', '/login', '/app', '/media/hero.webm', '/nope']) {
+      const res = await get(`https://domelayer.com${path}`, { 'accept-language': 'it-IT' })
+      expect(res.status, path).not.toBe(307)
+      expect(res.headers.get('set-cookie'), path).toBeNull()
+    }
   })
 
   it('sends Dutch and German browsers to their language once those are published', async () => {

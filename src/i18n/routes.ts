@@ -11,10 +11,11 @@ interface PublicRoute {
 /**
  * Every public, prerendered page and its URL in each locale. English sits at the root, every other
  * locale under /<locale>/ with slugs in its own language (tool slugs stay English, like the names). src/routes.ts, the prerender list, hreflang, the sitemap, the
- * language switcher and the redirect middleware all read from here.
+ * language switcher and the first-visit locale redirect (src/i18n/detect.ts, run by the Worker) all
+ * read from here.
  *
- * Adding a route: add it here, add its meta to every message catalogue and add its English path
- * to the matcher in middleware.ts (a test checks the last two).
+ * Adding a route: add it here and add its meta to every message catalogue (a test checks it).
+ * The locale redirect picks it up from here.
  */
 export const PUBLIC_ROUTES = {
   home: { file: 'pages/HomePage.tsx', path: { en: '/', it: '/it', nl: '/nl', de: '/de' }, updatedAt: '2026-11-03' },

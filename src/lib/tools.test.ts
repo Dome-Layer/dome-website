@@ -35,8 +35,8 @@ describe("toolHref", () => {
     expect(toolHref("governance.domelayer.com")).toBe("https://governance.staging.domelayer.com/");
   });
 
-  it("falls back to production on localhost and Vercel previews", () => {
-    for (const host of ["localhost", "dome-website-git-some-branch.vercel.app"]) {
+  it("falls back to production on localhost and workers.dev previews", () => {
+    for (const host of ["localhost", "dome-website-staging.dome-website.workers.dev"]) {
       setHostname(host);
       expect(toolHref("data-intelligence.domelayer.com")).toBe(
         "https://data-intelligence.domelayer.com/"
