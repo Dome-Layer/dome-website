@@ -22,8 +22,8 @@ export const AGENT_FLOW_LIVE = false as boolean;
 /**
  * Host-aware tool URL. On a staging host the tool lives at `<sub>.staging.domelayer.com`
  * (per the staging runbook); on production, and anywhere else such as localhost or a
- * Vercel preview, it points at the production `<sub>.domelayer.com`, the only reachable
- * real target.
+ * workers.dev preview, it points at the production `<sub>.domelayer.com`, the only
+ * reachable real target.
  *
  * Every link from the website to a tool must go through this. Hardcoded production URLs
  * send staging visitors to production, which is how the 2026-09-11 staging smoke test

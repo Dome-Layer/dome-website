@@ -38,17 +38,14 @@ const PUBLISHED_BY_DEFAULT: Record<Locale, boolean> = { en: true, it: true, nl: 
  * An unpublished locale leaves no trace: none of its pages are prerendered, the switcher does not
  * offer it, the redirect never sends anyone to it, and the sitemap, hreflang and llms.txt leave it
  * out. `DOME_PUBLISH_<LOCALE>=true|false` (for example `DOME_PUBLISH_NL`) forces it either way.
- * Otherwise a locale that is unpublished by default stays unpublished, and a published one keeps
- * Italian's original rule: a Vercel build publishes it on previews only, any other build publishes it.
+ * Otherwise the locale follows `PUBLISHED_BY_DEFAULT`.
  */
 export function isLocalePublished(locale: Locale, env: Env): boolean {
   if (locale === DEFAULT_LOCALE) return true
   const flag = env[publishFlag(locale)]
   if (flag === 'true') return true
   if (flag === 'false') return false
-  if (!PUBLISHED_BY_DEFAULT[locale]) return false
-  if (env.VERCEL === '1') return env.VERCEL_ENV === 'preview'
-  return true
+  return PUBLISHED_BY_DEFAULT[locale]
 }
 
 /** The published locales, English first, in `LOCALES` order. */

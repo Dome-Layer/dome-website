@@ -140,20 +140,12 @@ describe('publishing', () => {
     expect(isLocalePublished('en', { DOME_PUBLISH_EN: 'false' })).toBe(true)
   })
 
-  it('publishes Italian, Dutch and German outside Vercel, so CI and local builds exercise them', () => {
+  it('publishes Italian, Dutch and German when their flags are unset, so CI and local builds exercise them', () => {
     for (const locale of ['it', 'nl', 'de'] as const) expect(isLocalePublished(locale, {}), locale).toBe(true)
   })
 
-  it('publishes them on Vercel previews (staging) only when their flags are unset', () => {
-    for (const locale of ['it', 'nl', 'de'] as const) {
-      expect(isLocalePublished(locale, { VERCEL: '1', VERCEL_ENV: 'preview' })).toBe(true)
-      expect(isLocalePublished(locale, { VERCEL: '1', VERCEL_ENV: 'production' })).toBe(false)
-      expect(isLocalePublished(locale, { VERCEL: '1' })).toBe(false)
-    }
-  })
-
   it('lets each DOME_PUBLISH_<LOCALE> flag decide its own locale, either way', () => {
-    expect(isLocalePublished('it', { VERCEL: '1', VERCEL_ENV: 'production', DOME_PUBLISH_IT: 'true' })).toBe(true)
+    expect(isLocalePublished('it', { DOME_PUBLISH_IT: 'true' })).toBe(true)
     expect(isLocalePublished('it', { DOME_PUBLISH_IT: 'false' })).toBe(false)
     expect(isLocalePublished('nl', { DOME_PUBLISH_NL: 'false' })).toBe(false)
     expect(isLocalePublished('de', { DOME_PUBLISH_NL: 'false' })).toBe(true)
@@ -173,9 +165,9 @@ describe('publishing', () => {
   })
 
   it('reads only the publish flags from a Worker environment', () => {
-    const env = { ASSETS: {}, DOME_PUBLISH_NL: 'false', VERCEL: '1', VERCEL_ENV: 'production' }
+    const env = { ASSETS: {}, DOME_PUBLISH_NL: 'false', ENVIRONMENT: 'production' }
     expect(publishFlags(env)).toEqual({ DOME_PUBLISH_EN: undefined, DOME_PUBLISH_IT: undefined, DOME_PUBLISH_NL: 'false', DOME_PUBLISH_DE: undefined })
-    // The Vercel variables are dropped, so the unset flags fall back to published.
+    // Every other binding is dropped, so the unset flags fall back to published.
     expect(publishedLocales(publishFlags(env))).toEqual(['en', 'it', 'de'])
   })
 })

@@ -1,10 +1,10 @@
 import { Resend } from 'resend';
 
-// The contact form endpoint for the Cloudflare Worker: api/contact.ts ported from Vercel's
-// (req, res) handler to the Web Request/Response API, with the same validation and email.
+// The contact form endpoint for the Cloudflare Worker, on the Web Request/Response API. It
+// replaced the Vercel function api/contact.ts (Sprint H phase 1) with the same validation and
+// email; that file was removed after Vercel was retired (2026-10-12).
 // Rate limiting uses Cloudflare's rate-limiting binding (3 per minute per IP, counted per
 // Cloudflare location, nothing stored) instead of the Upstash database, which was deleted.
-// api/contact.ts is deleted when Vercel is retired (Sprint H phase 1).
 
 export interface ContactEnv {
   RESEND_API_KEY?: string;
@@ -74,7 +74,7 @@ export async function handleContact(request: Request, env: ContactEnv): Promise<
     return json(405, { error: 'Method not allowed' }, headers);
   }
 
-  // Vercel parsed JSON bodies for us; here a missing or malformed body reads as empty.
+  // A missing or malformed body reads as empty.
   const body = (await request.json().catch(() => ({}))) as Record<string, unknown> | null;
   const { name, email, company, topic, message, hp } = body ?? {};
 
