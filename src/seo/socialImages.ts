@@ -1,8 +1,7 @@
-import { caseStudy } from '../content/caseStudies'
 import { MEDIA, largest, type MediaId } from '../content/media'
 import type { Locale } from '../i18n/locales'
 import { MESSAGES } from '../i18n/messages'
-import { ROUTE_IDS, TOOL_ROUTE_IDS, caseStudyIdFor, type RouteId } from '../i18n/routes'
+import { ROUTE_IDS, TOOL_ROUTE_IDS, type RouteId } from '../i18n/routes'
 
 /**
  * The social images: the Open Graph and Twitter card for every page, 1200x630 JPEG in
@@ -12,7 +11,7 @@ import { ROUTE_IDS, TOOL_ROUTE_IDS, caseStudyIdFor, type RouteId } from '../i18n
  * (DESIGN_SYSTEM v2.4 and v2.5), like the page it opens.
  *
  * `npm run social-images` renders them from this file. Rerun it after changing a hero eyebrow or
- * heading, a case study title or descriptor, a hero image, or after adding a locale; the test in
+ * heading, a hero image, or after adding a locale; the test in
  * socialImages.test.ts fails while a page points at an image that does not exist.
  */
 
@@ -48,24 +47,10 @@ export interface SocialImageSpec {
 
 /** Background photograph of each page with its own hero, except home (see `socialImageSpec`). */
 const HERO_MEDIA = {
-  aiProcessAutomation: 'aiProcessAutomationHero',
-  enterpriseUx: 'enterpriseUxHero',
   dome: 'capabilitiesHero',
-  caseStudies: 'caseStudiesHero',
   about: 'aboutHero',
   contact: 'contactHero',
 } as const satisfies Partial<Record<RouteId, MediaId>>
-
-function heroText(id: keyof typeof HERO_MEDIA, locale: Locale): { eyebrow: string; heading: string } {
-  const pages = MESSAGES[locale].pages
-  switch (id) {
-    case 'aiProcessAutomation':
-    case 'enterpriseUx':
-      return pages.services[id].hero
-    default:
-      return pages[id].hero
-  }
-}
 
 function spec(eyebrow: string, heading: string, media: MediaId, locale: Locale): SocialImageSpec {
   const asset = MEDIA[media]
@@ -81,20 +66,12 @@ function spec(eyebrow: string, heading: string, media: MediaId, locale: Locale):
 
 /** What the image for a route shows. `id` must be in SOCIAL_IMAGE_ROUTE_IDS. */
 export function socialImageSpec(id: RouteId, locale: Locale): SocialImageSpec {
-  const studyId = caseStudyIdFor(id)
-  if (studyId) {
-    const study = caseStudy(studyId)
-    if (!study) throw new Error(`Route "${id}" names case study "${studyId}", which does not exist`)
-    // The DOME capability study shows a tablet mockup on its page; its card uses the capabilities hero.
-    const media = study.media === 'tabletMockup' ? 'capabilitiesHero' : study.media
-    return spec(study.descriptor[locale], study.title[locale], media, locale)
-  }
   if (id === 'home') {
     const { eyebrow, heading } = MESSAGES[locale].pages.home.hero
     return { eyebrow, heading, surface: true }
   }
   if (!(id in HERO_MEDIA)) throw new Error(`Route "${id}" has no social image of its own`)
   const heroId = id as keyof typeof HERO_MEDIA
-  const { eyebrow, heading } = heroText(heroId, locale)
+  const { eyebrow, heading } = MESSAGES[locale].pages[heroId].hero
   return spec(eyebrow, heading, HERO_MEDIA[heroId], locale)
 }

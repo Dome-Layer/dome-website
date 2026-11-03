@@ -13,17 +13,14 @@ export const it: Messages = {
       'DOME è un progetto personale di Francesco Prodomo, con base a Firenze: strumenti AI funzionanti che mostrano come l’AI può lavorare dentro processi regolamentati restando governata, misurabile e spiegabile. Ogni strumento registra le proprie decisioni in un unico audit trail.',
     llmsIntro:
       'DOME è un insieme di strumenti AI costruiti e gestiti da una sola persona, Francesco Prodomo, come progetto sull’AI governata. Ogni strumento copre una fase di un metodo (discover, orchestrate, model, execute): analisi dei processi, un consiglio multi-modello, document e data intelligence, e Agent Flow, un flusso governato dalla fattura all’approvazione. Ogni strumento registra le proprie decisioni in un unico audit trail, visibile nella Governance Dashboard, e una persona nominata firma dove la policy lo richiede. Cinque strumenti si provano gratis dopo l’accesso; Agent Flow è una demo privata. Il codice è pubblico su GitHub. Il lavoro di consulenza di Francesco è su francescoprodomo.com.',
-    llmsSections: { pages: 'Pagine', tools: 'Gli strumenti', caseStudies: 'Casi studio', legal: 'Note legali' },
+    llmsSections: { pages: 'Pagine', tools: 'Gli strumenti', legal: 'Note legali' },
     knowsAbout: ['Governance dell’AI', 'Flussi AI governati', 'Audit trail per l’AI', 'Approvazione con una persona nel ciclo', 'Document intelligence', 'Analisi dei processi', 'Revisione AI multi-modello', 'Design system'],
   },
   nav: {
     homeLabel: 'DOME, home',
     tools: 'Strumenti',
     agentFlow: 'Agent Flow',
-    enterpriseUx: 'UX enterprise',
-    aiAutomation: 'Automazione AI',
     dome: 'DOME',
-    caseStudies: 'Casi studio',
     about: 'Il progetto',
     contact: 'Contatti',
     signIn: 'Accedi',
@@ -101,24 +98,6 @@ export const it: Messages = {
         'Sei strumenti AI e un solo audit trail. Provateli gratis, o guardate una fattura passare dall’arrivo a un approvatore nominativo.',
       twitterDescription: 'Strumenti di AI funzionanti, che potete verificare. Provarli è gratis.',
       imageAlt: 'DOME: strumenti di AI funzionanti, verificabili',
-    },
-    enterpriseUx: {
-      name: 'UX enterprise e prodotto',
-      title: 'UX enterprise, prodotto e visualizzazione dati | DOME',
-      description:
-        'Ricerca utente, service design, interfacce e visualizzazione dei dati per piattaforme enterprise complesse, con un design system pronto per lo sviluppo.',
-      ogDescription:
-        'Semplifichiamo strumenti interni e piattaforme complesse: ricerca, service design, progettazione di interfacce e un design system pronto per lo sviluppo.',
-      imageAlt: 'DOME, consulenza UX enterprise e prodotto',
-    },
-    aiProcessAutomation: {
-      name: 'Automazione dei processi con AI',
-      title: 'Automazione dei processi con AI e analisi di business | DOME',
-      description:
-        'Mappiamo e analizziamo i processi, automatizziamo i passaggi con regole chiare e affidiamo il resto al vostro team, con sintesi decisionale e audit trail.',
-      ogDescription:
-        'Automatizzare un processo senza perderne il controllo: regole chiare dove si applicano, una decisione umana dove non bastano, e un audit trail completo.',
-      imageAlt: 'DOME, automazione dei processi con AI',
     },
     dome: {
       name: 'Strumenti',
@@ -213,15 +192,6 @@ export const it: Messages = {
         'Scrivetemi degli strumenti. Rispondo entro due giorni lavorativi.',
       imageAlt: 'Contatti DOME',
     },
-    caseStudies: {
-      name: 'Casi studio',
-      title: 'Casi studio | DOME',
-      description:
-        'Progetti anonimizzati di UX enterprise e automazione AI: acquisti retail, trade finance, filiere alimentari, compliance e asset digitali.',
-      ogDescription:
-        'Che cosa abbiamo costruito e che cosa è cambiato. I dati dei clienti sono sempre anonimizzati.',
-      imageAlt: 'Casi studio DOME',
-    },
     privacy: {
       name: 'Informativa privacy',
       title: 'Informativa privacy | DOME',
@@ -273,10 +243,6 @@ export const it: Messages = {
   aiGeneratedLabel: 'Immagine generata con AI',
 
   common: {
-    sendMessage: 'Scriveteci',
-    relatedWork: 'Progetti collegati',
-    anonymised: 'I dati dei clienti sono anonimizzati.',
-    viewAllCaseStudies: 'Tutti i casi studio',
     topics: ['Feedback', 'Accesso alla demo', 'Altro'],
     tryTool: 'Prova uno strumento',
     watchRun: 'Guarda il flusso',
@@ -334,111 +300,6 @@ export const it: Messages = {
       },
       hire: 'Volete lavorare con Francesco? Il suo lavoro di consulenza è su',
     },
-
-    services: {
-      breadcrumb: 'Servizi',
-      aiProcessAutomation: {
-        hero: {
-          eyebrow: 'Automazione dei processi con AI',
-          heading: 'Automatizzate la routine. Le decisioni restano alle persone.',
-          lead: 'Mappiamo e analizziamo i vostri processi di finance, acquisti e compliance, poi automatizziamo i passaggi ben definiti, con regole leggibili e traccia di ogni decisione.',
-          primary: 'Prenotate un assessment',
-          secondary: 'Come funziona',
-        },
-        intro: {
-          eyebrow: 'Dove serve davvero',
-          heading: 'Processi pronti per essere automatizzati',
-          items: [
-            { title: 'Volumi alti, regole chiare', body: 'Ricezione fatture, controlli di onboarding fornitori, classificazione documenti: lavoro che segue una policy ma occupa comunque tempo specialistico.' },
-            { title: 'Decisioni che vanno tracciate', body: 'Approvazioni ed eccezioni su cui auditor e autorità faranno domande, a volte mesi dopo.' },
-            { title: 'Dati chiusi nei documenti', body: 'Contratti, certificati e report che oggi qualcuno reinserisce a mano in un altro sistema.' },
-          ],
-        },
-        band: {
-          eyebrow: 'Governance integrata',
-          heading: 'Ogni decisione automatica si può spiegare.',
-          lead: 'Quando qualcuno chiede perché una fattura è stata approvata o un documento segnalato, la risposta è già agli atti.',
-          points: [
-            'Un indice di confidenza su ogni campo estratto',
-            'Regole di policy fuori dal modello, leggibili dal vostro team',
-            'Una persona con nome e cognome firma dove la policy lo richiede',
-            'Un audit trail esportabile per ogni esecuzione',
-            'Gira su un modello open-weight locale se i dati non possono uscire dalla vostra rete',
-          ],
-        },
-        steps: {
-          eyebrow: 'Come lo facciamo',
-          heading: 'Quattro passaggi, concordati prima che parta qualsiasi cosa',
-          items: [
-            { title: 'Mappare e analizzare il processo', body: 'Percorriamo il flusso con chi lo gestisce, ne analizziamo volumi, costi e rischi, e segniamo quali passaggi seguono regole, quali richiedono giudizio e dove l’automazione ripaga.' },
-            { title: 'Progettare i controlli', body: 'Regole, soglie di confidenza e punti di approvazione si concordano con voi prima di automatizzare qualsiasi passaggio.' },
-            { title: 'Costruire e integrare', body: 'Ci colleghiamo ai sistemi che già usate e teniamo le regole fuori dal modello, così il vostro team può leggerle e cambiarle.' },
-            { title: 'Far girare e misurare', body: 'Ogni decisione viene registrata. Rivediamo l’accuratezza con voi e aggiustiamo le soglie al variare dei volumi.' },
-          ],
-        },
-        related: 'Automazione sul campo',
-        closing: {
-          heading: 'Partite da un processo solo.',
-          body: 'In un assessment mappiamo un flusso con il vostro team, ne analizziamo il valore per il business e vi diciamo che cosa vale la pena automatizzare, e che cosa no.',
-          primary: 'Prenotate un assessment',
-        },
-      },
-      enterpriseUx: {
-        hero: {
-          eyebrow: 'UX enterprise e prodotto',
-          heading: 'Strumenti interni che i team usano volentieri.',
-          lead: 'Ridisegniamo piattaforme enterprise complesse, dai flussi di acquisto alle schermate di trading, dalle dashboard alla visualizzazione dei dati, intorno a chi le usa ogni giorno.',
-          primary: 'Prenotate una UX review',
-          secondary: 'Come lavoriamo',
-        },
-        intro: {
-          eyebrow: 'Quando serve',
-          heading: 'Segnali che un sistema lavora contro chi lo usa',
-          items: [
-            { title: 'L’adozione è bassa', body: 'Le persone aggirano il sistema con fogli di calcolo ed email, perché lo strumento si mette in mezzo al lavoro.' },
-            { title: 'La formazione non finisce mai', body: 'Ogni nuovo arrivato richiede settimane di supporto e le stesse domande tornano all’help desk.' },
-            { title: 'Ogni modifica costa', body: 'Ogni requisito diventa un’altra schermata su misura e l’interfaccia è sempre più difficile da mantenere.' },
-          ],
-        },
-        deliver: {
-          eyebrow: 'Che cosa consegniamo',
-          heading: 'Dalla ricerca a un design system pronto per i vostri sviluppatori',
-          items: [
-            { title: 'Ricerca utente e service design', body: 'Interviste, affiancamento sul flusso e journey map che mostrano dove si perdono tempo e fiducia.' },
-            { title: 'Interfacce, dashboard e visualizzazione dei dati', body: 'Schermate e dashboard pensate per i volumi e la densità reali del lavoro enterprise, con grafici che mettono in primo piano i numeri su cui si decide, testate con chi le usa.' },
-            { title: 'Design system', body: 'Una libreria di componenti e linee guida su cui i vostri sviluppatori possono costruire, così la coerenza sopravvive al rilascio successivo.' },
-            { title: 'Rilascio e adozione', body: 'Restiamo durante sviluppo e rilascio, con materiali di formazione e misure che dicono se le persone usano davvero il nuovo strumento.' },
-          ],
-        },
-        band: {
-          eyebrow: 'Pensato per contesti regolamentati',
-          heading: 'Progettato per decisioni di cui si risponde.',
-          lead: 'Gli strumenti di finance, acquisti e compliance non portano solo attività. Portano approvazioni, evidenze e responsabilità, e l’interfaccia deve renderle chiare.',
-          points: [
-            'Accessibile per impostazione, secondo WCAG 2.1 AA',
-            'Approvazioni e relativo storico visibili dove si decide',
-            'Viste per ruolo: richiedenti, approvatori e auditor',
-            'Un solo design system, così ogni schermata si comporta allo stesso modo',
-          ],
-        },
-        steps: {
-          eyebrow: 'Come lo facciamo',
-          heading: 'Dalla prima intervista al rilascio',
-          items: [
-            { title: 'Osservare', body: 'Affianchiamo chi usa il sistema e mappiamo dove si perdono tempo e fiducia.' },
-            { title: 'Progettare', body: 'Disegniamo flussi e schermate con il vostro team, un processo alla volta.' },
-            { title: 'Validare', body: 'Testiamo i prototipi con utenti reali prima che qualcosa entri in sviluppo.' },
-            { title: 'Rilasciare', body: 'Seguiamo lo sviluppo, scriviamo i materiali di formazione e misuriamo l’adozione dopo il lancio.' },
-          ],
-        },
-        related: 'UX e prodotto sul campo',
-        closing: {
-          heading: 'Partite da un flusso solo.',
-          body: 'In una UX review osserviamo un flusso con il vostro team e vi mostriamo dove perde tempo, e da cosa conviene partire.',
-          primary: 'Prenotate una UX review',
-        },
-      },
-    },
     dome: {
       hero: {
         eyebrow: 'Gli strumenti',
@@ -488,43 +349,6 @@ export const it: Messages = {
         body: 'Accedete e provate gratis uno qualsiasi dei cinque strumenti. Per Agent Flow, chiedete l’accesso alla demo e vi preparo tutto io.',
       },
       hire: 'Volete una dimostrazione sul vostro processo? Fa parte della revisione dell’automazione su',
-    },
-    caseStudies: {
-      hero: {
-        eyebrow: 'Casi studio',
-        heading: 'Che cosa abbiamo costruito, e che cosa è cambiato.',
-        lead: 'Racconti anonimizzati del lavoro: il problema come lo ha descritto il cliente, che cosa abbiamo fatto e i risultati che l’incarico ha davvero prodotto.',
-        primary: 'Parliamo del vostro progetto',
-        secondary: 'Guardate cosa costruiamo',
-      },
-      groups: [
-        { eyebrow: 'Automazione dei processi con AI', heading: 'Lavoro che segue una policy' },
-        { eyebrow: 'UX enterprise e prodotto', heading: 'Piattaforme che si usano ogni giorno' },
-        { eyebrow: 'Strumenti DOME', heading: 'Il metodo dall’inizio alla fine' },
-      ],
-      note: 'I dati dei clienti sono sempre anonimizzati: descriviamo il settore e la funzione, mai l’organizzazione. Dichiariamo solo i risultati che l’incarico ha davvero prodotto.',
-      closing: {
-        heading: 'Riconoscete uno di questi problemi?',
-        body: 'Diteci quale, e vi diciamo come lo affronteremmo.',
-        primary: 'Prenotate una prima call',
-      },
-    },
-    caseStudy: {
-      back: 'Casi studio',
-      challenge: 'Il problema',
-      whatWeDid: 'Che cosa abbiamo fatto',
-      outcomes: 'Risultati',
-      client: 'Cliente',
-      role: 'Il nostro ruolo',
-      capabilities: 'Competenze',
-      cta: 'Parliamo di un progetto simile',
-      readNext: 'Da leggere dopo',
-      notFound: 'Caso studio non trovato',
-      closing: {
-        heading: 'Riconoscete questo problema?',
-        body: 'Diteci dove si blocca il vostro processo, e vi diciamo come lo affronteremmo.',
-        primary: 'Prenotate una prima call',
-      },
     },
     about: {
       hero: {

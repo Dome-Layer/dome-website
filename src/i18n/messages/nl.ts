@@ -13,17 +13,14 @@ export const nl: Messages = {
       'DOME is een persoonlijk project van Francesco Prodomo, gevestigd in Florence: werkende AI-tools die laten zien hoe AI binnen gereguleerde processen kan werken en daarbij controleerbaar, meetbaar en uitlegbaar blijft. Elke tool legt zijn beslissingen vast in één audittrail.',
     llmsIntro:
       'DOME is een set AI-tools die één persoon, Francesco Prodomo, bouwt en beheert als project over AI met governance. Elke tool dekt één fase van een methode (discover, orchestrate, model, execute): procesanalyse, een raad van meerdere AI-modellen, document- en data-intelligence, en Agent Flow, een gecontroleerde workflow van factuur tot goedkeuring. Elke tool legt zijn beslissingen vast in één audittrail, zichtbaar in het Governance Dashboard, en een medewerker op naam keurt goed waar het beleid dat eist. Vijf tools zijn na het inloggen gratis te proberen; Agent Flow draait als besloten demo. De code staat openbaar op GitHub. Het advieswerk van Francesco staat op francescoprodomo.com.',
-    llmsSections: { pages: 'Pagina’s', tools: 'De tools', caseStudies: 'Cases', legal: 'Juridisch' },
+    llmsSections: { pages: 'Pagina’s', tools: 'De tools', legal: 'Juridisch' },
     knowsAbout: ['AI-governance', 'Gecontroleerde AI-workflows', 'Audittrails voor AI', 'Goedkeuring door een mens', 'Document intelligence', 'Procesanalyse', 'AI-review met meerdere modellen', 'Designsystemen'],
   },
   nav: {
     homeLabel: 'DOME, home',
     tools: 'Tools',
     agentFlow: 'Agent Flow',
-    enterpriseUx: 'Enterprise UX',
-    aiAutomation: 'AI-automatisering',
     dome: 'DOME',
-    caseStudies: 'Cases',
     about: 'Over DOME',
     contact: 'Contact',
     signIn: 'Inloggen',
@@ -101,24 +98,6 @@ export const nl: Messages = {
         'Zes AI-tools en één audittrail. Probeer ze gratis, of bekijk hoe een factuur van binnenkomst bij een goedkeurder op naam komt.',
       twitterDescription: 'Werkende AI-tools die u kunt controleren. Gratis te proberen.',
       imageAlt: 'DOME: werkende AI-tools die u kunt controleren',
-    },
-    enterpriseUx: {
-      name: 'Enterprise UX en product',
-      title: 'Enterprise UX, product en datavisualisatie | DOME',
-      description:
-        'Gebruikersonderzoek, service design, interfaces en datavisualisatie voor complexe bedrijfsplatforms, met een designsystem voor uw ontwikkelaars.',
-      ogDescription:
-        'We maken complexe interne tools en klantplatforms overzichtelijk: onderzoek, service design, interfaces en een designsystem voor uw team.',
-      imageAlt: 'DOME, advies over enterprise UX en product',
-    },
-    aiProcessAutomation: {
-      name: 'AI-procesautomatisering',
-      title: 'AI-procesautomatisering en bedrijfsanalyse | DOME',
-      description:
-        'We brengen uw processen in kaart, automatiseren wat vaste regels volgt en leggen de rest bij uw team, met een beslisnotitie en volledige audittrail.',
-      ogDescription:
-        'Automatiseer een proces zonder de controle te verliezen: regels waar ze gelden, een menselijke beslissing waar niet, en een audittrail van begin tot eind.',
-      imageAlt: 'DOME AI-procesautomatisering',
     },
     dome: {
       name: 'Tools',
@@ -210,15 +189,6 @@ export const nl: Messages = {
         'Schrijf mij over de tools. Ik antwoord binnen twee werkdagen.',
       imageAlt: 'Contact met DOME',
     },
-    caseStudies: {
-      name: 'Cases',
-      title: 'Cases | DOME',
-      description:
-        'Geanonimiseerde cases over enterprise UX en AI-automatisering in retailinkoop, handelsfinanciering, voedselketens, compliance en digitale activa.',
-      ogDescription:
-        'Wat we bouwden en wat het opleverde. Klantgegevens zijn overal geanonimiseerd.',
-      imageAlt: 'Cases van DOME',
-    },
     privacy: {
       name: 'Privacybeleid',
       title: 'Privacybeleid | DOME',
@@ -269,10 +239,6 @@ export const nl: Messages = {
   },
   aiGeneratedLabel: 'Afbeelding gemaakt met AI',
   common: {
-    sendMessage: 'Stuur een bericht',
-    relatedWork: 'Vergelijkbaar werk',
-    anonymised: 'Klantgegevens zijn geanonimiseerd.',
-    viewAllCaseStudies: 'Alle cases',
     topics: ['Feedback', 'Toegang tot de demo', 'Iets anders'],
     tryTool: 'Probeer een tool',
     watchRun: 'Bekijk de doorloop',
@@ -330,111 +296,6 @@ export const nl: Messages = {
       },
       hire: 'Wilt u met Francesco samenwerken? Zijn advieswerk staat op',
     },
-
-    services: {
-      breadcrumb: 'Diensten',
-      aiProcessAutomation: {
-        hero: {
-          eyebrow: 'AI-procesautomatisering',
-          heading: 'Automatiseer het routinewerk. De beslissingen blijven bij mensen.',
-          lead: 'We brengen uw processen in finance, inkoop en compliance in kaart en analyseren ze. Daarna automatiseren we de stappen die duidelijk zijn afgebakend, met regels die u kunt lezen en een vastlegging van elke beslissing.',
-          primary: 'Plan een automatiseringsscan',
-          secondary: 'Zo werkt het',
-        },
-        intro: {
-          eyebrow: 'Waar het helpt',
-          heading: 'Processen die klaar zijn voor automatisering',
-          items: [
-            { title: 'Veel volume, duidelijke regels', body: 'Facturen verwerken, nieuwe leveranciers controleren, documenten classificeren: werk dat een vast beleid volgt, maar toch de tijd van specialisten opslokt.' },
-            { title: 'Beslissingen die u moet kunnen verantwoorden', body: 'Goedkeuringen en uitzonderingen waar auditors en toezichthouders naar vragen, soms maanden later.' },
-            { title: 'Gegevens die vastzitten in documenten', body: 'Contracten, certificaten en rapporten die iemand nu met de hand overtypt in een ander systeem.' },
-          ],
-        },
-        band: {
-          eyebrow: 'Governance ingebouwd',
-          heading: 'Elke geautomatiseerde beslissing is te verklaren.',
-          lead: 'Vraagt iemand waarom een factuur is goedgekeurd of een document is gemarkeerd? Dan ligt het antwoord al vast.',
-          points: [
-            'Een betrouwbaarheidsscore bij elk uitgelezen veld',
-            'Beleidsregels buiten het model, leesbaar voor uw team',
-            'Een medewerker keurt op naam goed waar het beleid dat eist',
-            'Een audittrail die u per run kunt exporteren',
-            'Draait op een lokaal open-weight model als gegevens uw netwerk niet mogen verlaten',
-          ],
-        },
-        steps: {
-          eyebrow: 'Hoe we het aanpakken',
-          heading: 'Vier stappen, met u afgestemd voordat er iets draait',
-          items: [
-            { title: 'Het proces in kaart brengen en analyseren', body: 'We lopen het proces door met de mensen die het uitvoeren en analyseren volumes, kosten en risico’s. Zo wordt duidelijk welke stappen regels volgen, welke om een oordeel vragen en waar automatisering loont.' },
-            { title: 'De controles ontwerpen', body: 'Regels, drempels voor betrouwbaarheid en goedkeuringsmomenten leggen we samen met u vast, nog voordat er één stap wordt geautomatiseerd.' },
-            { title: 'Bouwen en koppelen', body: 'We sluiten aan op de systemen die u al gebruikt en houden de regels buiten het model, zodat uw team ze kan lezen en aanpassen.' },
-            { title: 'Draaien en meten', body: 'Elke beslissing wordt vastgelegd. We bespreken de nauwkeurigheid met u en stellen de drempels bij als de volumes veranderen.' },
-          ],
-        },
-        related: 'Automatisering in de praktijk',
-        closing: {
-          heading: 'Begin met één proces.',
-          body: 'In een automatiseringsscan brengen we samen met uw team één proces in kaart, rekenen we de businesscase door en zeggen we eerlijk wat automatiseren oplevert en wat niet.',
-          primary: 'Plan een automatiseringsscan',
-        },
-      },
-      enterpriseUx: {
-        hero: {
-          eyebrow: 'Enterprise UX en product',
-          heading: 'Interne tools waar uw teams graag mee werken.',
-          lead: 'We ontwerpen complexe bedrijfsplatforms opnieuw, van inkoopprocessen en handelsschermen tot dashboards en datavisualisatie, rond de mensen die er elke dag mee werken.',
-          primary: 'Plan een UX-scan',
-          secondary: 'Zo werken we',
-        },
-        intro: {
-          eyebrow: 'Wanneer het helpt',
-          heading: 'Signalen dat een systeem zijn gebruikers tegenwerkt',
-          items: [
-            { title: 'Het systeem wordt gemeden', body: 'Mensen werken eromheen met spreadsheets en e-mail, omdat de tool hen bij hun werk in de weg zit.' },
-            { title: 'Inwerken houdt nooit op', body: 'Elke nieuwe collega heeft weken begeleiding nodig, en de helpdesk krijgt steeds dezelfde vragen.' },
-            { title: 'Elke wijziging is duur', body: 'Elke nieuwe eis wordt weer een maatwerkscherm, en met elke release wordt de interface lastiger te onderhouden.' },
-          ],
-        },
-        deliver: {
-          eyebrow: 'Wat we leveren',
-          heading: 'Van onderzoek tot een designsystem waar uw ontwikkelaars mee verder kunnen',
-          items: [
-            { title: 'Gebruikersonderzoek en service design', body: 'Interviews, meelopen met gebruikers en journey maps die laten zien waar tijd en vertrouwen verloren gaan.' },
-            { title: 'Interfaces, dashboards en datavisualisatie', body: 'Schermen en dashboards die passen bij het volume en de informatiedichtheid van zakelijk werk, met grafieken die de cijfers waarop mensen beslissen vooraan zetten. Getest met de mensen die ermee werken.' },
-            { title: 'Designsystems', body: 'Een componentenbibliotheek met richtlijnen waar uw ontwikkelaars mee verder kunnen, zodat de consistentie ook de volgende release overleeft.' },
-            { title: 'Invoering en gebruik', body: 'We blijven betrokken tijdens bouw en invoering, met trainingsmateriaal en metingen die laten zien of de nieuwe tool echt wordt gebruikt.' },
-          ],
-        },
-        band: {
-          eyebrow: 'Gemaakt voor gereguleerd werk',
-          heading: 'Ontworpen voor beslissingen waarop mensen worden afgerekend.',
-          lead: 'Tools voor finance, inkoop en compliance doen meer dan taken afhandelen. Ze dragen goedkeuringen, bewijs en verantwoordelijkheid, en de interface moet dat zichtbaar maken.',
-          points: [
-            'Standaard toegankelijk, volgens WCAG 2.1 AA',
-            'Goedkeuringen en hun geschiedenis zichtbaar op het moment van beslissen',
-            'Aparte weergaven voor aanvragers, goedkeurders en auditors',
-            'Eén designsystem, zodat elk scherm zich hetzelfde gedraagt',
-          ],
-        },
-        steps: {
-          eyebrow: 'Hoe we het aanpakken',
-          heading: 'Van eerste interview tot invoering',
-          items: [
-            { title: 'Observeren', body: 'We lopen mee met de mensen die het systeem gebruiken en brengen in kaart waar tijd en vertrouwen verloren gaan.' },
-            { title: 'Ontwerpen', body: 'We ontwerpen processen en schermen samen met uw team, één proces tegelijk.' },
-            { title: 'Valideren', body: 'We testen prototypes met echte gebruikers voordat er iets wordt gebouwd.' },
-            { title: 'Invoeren', body: 'We ondersteunen de bouw, schrijven het trainingsmateriaal en meten na de lancering hoe de tool wordt gebruikt.' },
-          ],
-        },
-        related: 'UX- en productwerk in de praktijk',
-        closing: {
-          heading: 'Begin met één proces.',
-          body: 'In een UX-scan kijken we samen met uw team naar één proces. We laten zien waar het tijd verliest en wat u als eerste moet aanpakken.',
-          primary: 'Plan een UX-scan',
-        },
-      },
-    },
     dome: {
       hero: {
         eyebrow: 'De tools',
@@ -484,43 +345,6 @@ export const nl: Messages = {
         body: 'Log in en probeer elk van de vijf tools gratis. Voor Agent Flow vraagt u demotoegang aan, dan regel ik het voor u.',
       },
       hire: 'Wilt u een rondleiding met uw eigen proces? Dat hoort bij de automatiseringsreview op',
-    },
-    caseStudies: {
-      hero: {
-        eyebrow: 'Cases',
-        heading: 'Wat we bouwden, en wat het opleverde.',
-        lead: 'Geanonimiseerde verslagen van ons werk: het probleem zoals de klant het beschreef, wat we deden en wat de opdracht aantoonbaar heeft opgeleverd.',
-        primary: 'Bespreek uw project',
-        secondary: 'Bekijk wat we bouwen',
-      },
-      groups: [
-        { eyebrow: 'AI-procesautomatisering', heading: 'Werk dat een beleid volgt' },
-        { eyebrow: 'Enterprise UX en product', heading: 'Platforms die mensen elke dag gebruiken' },
-        { eyebrow: 'DOME-tools', heading: 'De methode van begin tot eind' },
-      ],
-      note: 'Klantgegevens zijn overal geanonimiseerd: we noemen de sector en de functie, nooit de organisatie. En we vermelden alleen resultaten die de opdracht echt heeft opgeleverd.',
-      closing: {
-        heading: 'Herkent u een van deze problemen?',
-        body: 'Laat ons weten welk, dan vertellen we hoe wij het zouden aanpakken.',
-        primary: 'Plan een kennismakingsgesprek',
-      },
-    },
-    caseStudy: {
-      back: 'Cases',
-      challenge: 'De uitdaging',
-      whatWeDid: 'Wat we deden',
-      outcomes: 'Resultaat',
-      client: 'Klant',
-      role: 'Onze rol',
-      capabilities: 'Expertise',
-      cta: 'Bespreek een vergelijkbaar project',
-      readNext: 'Lees ook',
-      notFound: 'Case niet gevonden',
-      closing: {
-        heading: 'Herkent u dit probleem?',
-        body: 'Vertel ons waar uw proces vastloopt, dan vertellen we hoe wij het zouden aanpakken.',
-        primary: 'Plan een kennismakingsgesprek',
-      },
     },
     about: {
       hero: {

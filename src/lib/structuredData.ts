@@ -1,81 +1,74 @@
 import { CONTENT_LANGUAGE, type Locale } from '../i18n/locales'
 import { MESSAGES } from '../i18n/messages'
 import { pageMeta } from '../i18n/pageMeta'
-import { CASE_STUDY_ROUTE_IDS, PUBLIC_ROUTES, TOOL_ROUTE_IDS, localizedHref, type RouteId } from '../i18n/routes'
+import { TOOL_ROUTE_IDS, localizedHref, type RouteId } from '../i18n/routes'
 import { socialImagePath } from '../seo/socialImages'
 import { COMPANY } from './company'
 
 export const SITE_URL = 'https://domelayer.com'
 
-const ORGANIZATION_ID = `${SITE_URL}/#organization`
+const PERSON_ID = `${SITE_URL}/#person`
 const WEBSITE_ID = `${SITE_URL}/#website`
 
 /**
- * Francesco's own LinkedIn profile, linked from the footer and the founder node. DOME has no LinkedIn
- * page: it is a project, not a company, and the page made for it was deactivated on 2026-11-02.
+ * Francesco's own LinkedIn profile, linked from the footer, the About page and the person node. DOME
+ * has no LinkedIn page: it is a project, not a company, and the page made for it was deactivated on
+ * 2026-11-02.
  */
 export const LINKEDIN_URL = 'https://www.linkedin.com/in/francesco-prodomo'
+
+/** Francesco's own site, where the consulting work lives (the same address as `FRANCESCO_SITE_URL` in project.ts). */
+const FRANCESCO_SITE_URL = 'https://francescoprodomo.com'
 
 export const absoluteUrl = (path: string) => (path === '/' ? `${SITE_URL}/` : `${SITE_URL}${path}`)
 
 type Node = Record<string, unknown>
 
-/** The consulting services, each with its own page. They are described, not offered for sale online. */
-const SERVICE_ROUTE_IDS = ['aiProcessAutomation', 'enterpriseUx'] as const satisfies readonly RouteId[]
-
 /**
- * DOME, with Francesco Prodomo as its legal name: DOME is a personal project, not a business
- * (DOME_DECISIONS 2026-10-31). It stays a ProfessionalService only while the service pages are still
- * on this site; step 2 of that decision moves them to francescoprodomo.com and reshapes this node.
- * Deliberately no Product, Offer, OfferCatalog or SoftwareApplication: the tools
- * are capability proof and never for sale. The consulting services are named in `knowsAbout` (from the
- * catalogue, one entry per service including process mapping, business analysis and data visualisation) and
- * described as `Service` nodes on their own pages, which says what DOME does without an offer.
- * The address stays at city level, as on the site (see src/lib/company.ts).
+ * Francesco Prodomo, who builds and runs DOME. DOME is a personal project, not a business
+ * (DOME_DECISIONS 2026-10-31), so there is no Organization, ProfessionalService or Service node: the
+ * legal identity the site has to publish (src/lib/company.ts) belongs to the person, and the
+ * consulting work lives on francescoprodomo.com (site split, 2026-11-01). Deliberately no Product,
+ * Offer, OfferCatalog or SoftwareApplication either: the tools are a project and never for sale.
+ * `knowsAbout` names what the project covers, from the catalogue. The address stays at city level,
+ * as on the site.
  */
-function organization(locale: Locale): Node {
+function person(locale: Locale): Node {
   return {
-    '@type': 'ProfessionalService',
-    '@id': ORGANIZATION_ID,
-    name: 'DOME',
-    legalName: COMPANY.legalName,
-    url: `${SITE_URL}/`,
-    logo: `${SITE_URL}/logo-512.png`,
-    image: absoluteUrl(socialImagePath('home', locale)),
-    description: MESSAGES[locale].site.description,
+    '@type': 'Person',
+    '@id': PERSON_ID,
+    name: COMPANY.legalName,
+    url: FRANCESCO_SITE_URL,
+    sameAs: [FRANCESCO_SITE_URL, LINKEDIN_URL],
     vatID: COMPANY.vatId,
     email: COMPANY.email,
     address: { '@type': 'PostalAddress', addressLocality: COMPANY.locality, addressCountry: COMPANY.countryCode },
-    areaServed: { '@type': 'Place', name: 'European Union' },
-    knowsLanguage: ['en', 'it'],
     knowsAbout: MESSAGES[locale].site.knowsAbout,
     contactPoint: {
       '@type': 'ContactPoint',
-      contactType: 'sales',
+      contactType: 'general',
       url: absoluteUrl(localizedHref('contact', locale)),
       availableLanguage: ['English', 'Italian'],
-    },
-    founder: {
-      '@type': 'Person',
-      name: 'Francesco Prodomo',
-      url: 'https://francescoprodomo.com',
-      sameAs: ['https://francescoprodomo.com', LINKEDIN_URL],
     },
   }
 }
 
-function website(locales: readonly Locale[]): Node {
+/** DOME itself: the project's site, made and published by Francesco. */
+function website(locale: Locale, locales: readonly Locale[]): Node {
   return {
     '@type': 'WebSite',
     '@id': WEBSITE_ID,
     url: `${SITE_URL}/`,
     name: 'DOME',
+    description: MESSAGES[locale].site.description,
+    image: absoluteUrl(socialImagePath('home', locale)),
     inLanguage: locales.map((l) => CONTENT_LANGUAGE[l]),
-    publisher: { '@id': ORGANIZATION_ID },
+    author: { '@id': PERSON_ID },
+    publisher: { '@id': PERSON_ID },
   }
 }
 
-/** The JSON-LD graph for a public page: organisation, website, the page itself and, below home, a breadcrumb. */
+/** The JSON-LD graph for a public page: the person, the website, the page itself and, below home, a breadcrumb. */
 export function pageStructuredData(id: RouteId, locale: Locale, locales: readonly Locale[]): Node {
   const t = pageMeta(id, locale)
   const url = absoluteUrl(localizedHref(id, locale))
@@ -87,13 +80,11 @@ export function pageStructuredData(id: RouteId, locale: Locale, locales: readonl
     description: t.description,
     inLanguage: CONTENT_LANGUAGE[locale],
     isPartOf: { '@id': WEBSITE_ID },
-    publisher: { '@id': ORGANIZATION_ID },
+    author: { '@id': PERSON_ID },
   }
-  const graph: Node[] = [organization(locale), website(locales), page]
+  const graph: Node[] = [person(locale), website(locale, locales), page]
 
-  if (id === 'home') {
-    page.about = { '@id': ORGANIZATION_ID }
-  } else {
+  if (id !== 'home') {
     const breadcrumbId = `${url}#breadcrumb`
     page.breadcrumb = { '@id': breadcrumbId }
     graph.push({
@@ -107,31 +98,6 @@ export function pageStructuredData(id: RouteId, locale: Locale, locales: readonl
   }
   if ((TOOL_ROUTE_IDS as readonly RouteId[]).includes(id)) {
     page.about = { '@type': 'Thing', name: t.name, description: t.description }
-  }
-  if ((SERVICE_ROUTE_IDS as readonly RouteId[]).includes(id)) {
-    page.about = {
-      '@type': 'Service',
-      '@id': `${url}#service`,
-      name: t.name,
-      serviceType: t.name,
-      description: t.description,
-      provider: { '@id': ORGANIZATION_ID },
-      areaServed: { '@type': 'Place', name: 'European Union' },
-    }
-  }
-  if (CASE_STUDY_ROUTE_IDS.includes(id)) {
-    graph.push({
-      '@type': 'Article',
-      '@id': `${url}#article`,
-      headline: t.name,
-      description: t.description,
-      image: absoluteUrl(socialImagePath(id, locale)),
-      inLanguage: CONTENT_LANGUAGE[locale],
-      mainEntityOfPage: { '@id': `${url}#webpage` },
-      author: { '@id': ORGANIZATION_ID },
-      publisher: { '@id': ORGANIZATION_ID },
-      dateModified: PUBLIC_ROUTES[id].updatedAt,
-    })
   }
 
   return { '@context': 'https://schema.org', '@graph': graph }

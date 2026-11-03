@@ -1,15 +1,12 @@
 import { describe, expect, it } from 'vitest'
-import { CASE_STUDIES } from '../content/caseStudies'
 import { DEFAULT_LOCALE, LOCALES, isLocalePublished, publishFlags, publishedLocales } from './locales'
 import { MESSAGES } from './messages'
 import { pageMeta } from './pageMeta'
 import {
-  CASE_STUDY_ROUTE_IDS,
   CLIENT_ONLY_PATHS,
   NOT_FOUND_PATHS,
   PUBLIC_ROUTES,
   ROUTE_IDS,
-  caseStudyIdFor,
   localeFromPath,
   localizedHref,
   notFoundPath,
@@ -51,14 +48,6 @@ describe('route manifest', () => {
     expect(localeFromPath('/italy')).toBe('en')
     expect(localeFromPath('/nlx/about')).toBe('en')
     expect(localeFromPath('/de')).toBe('de')
-  })
-
-  it('gives each case study the slug its route ends with, in every locale', () => {
-    expect(CASE_STUDY_ROUTE_IDS).toHaveLength(CASE_STUDIES.length)
-    for (const id of CASE_STUDY_ROUTE_IDS) {
-      const study = CASE_STUDIES.find((s) => s.id === caseStudyIdFor(id))!
-      for (const l of LOCALES) expect(localizedHref(id, l).endsWith(`/${study.slug[l]}`), `${id} ${l}`).toBe(true)
-    }
   })
 
   it('has dated sitemap entries', () => {
@@ -109,10 +98,8 @@ describe('message catalogues', () => {
 
   // Formal address only: "u" in Dutch (decided 2026-09-29), "Sie" in German.
   it('address the reader formally', () => {
-    const caseText = (locale: 'nl' | 'de') =>
-      CASE_STUDIES.flatMap((s) => [s.title[locale], s.summary[locale], ...s.challenge[locale], ...s.outcomes[locale], ...s.steps[locale].flatMap((x) => [x.title, x.body])])
-    const nl = [...strings(MESSAGES.nl), ...caseText('nl')].join(' ')
-    const de = [...strings(MESSAGES.de), ...caseText('de')].join(' ')
+    const nl = strings(MESSAGES.nl).join(' ')
+    const de = strings(MESSAGES.de).join(' ')
     expect(nl.match(/\bu\b/g)?.length).toBeGreaterThan(20)
     expect(de.match(/\bSie\b/g)?.length).toBeGreaterThan(20)
     expect(nl.match(/\b(je|jij|jou|jouw|jullie)\b/gi)).toBeNull()
@@ -131,8 +118,8 @@ describe('message catalogues', () => {
   })
 })
 
-// Search results cut a description at about 155 to 160 characters and a title at about 60 (case
-// study titles include the " | DOME" pageMeta adds). Link previews show more, about 200.
+// Search results cut a description at about 155 to 160 characters and a title at about 60.
+// Link previews show more, about 200.
 describe('search snippets', () => {
   for (const locale of LOCALES) {
     it(`fit in search results (${locale})`, () => {
@@ -146,23 +133,6 @@ describe('search snippets', () => {
       expect(over).toEqual([])
     })
   }
-})
-
-describe('case studies', () => {
-  it('are complete in every locale, with no dashes', () => {
-    for (const study of CASE_STUDIES) {
-      for (const l of LOCALES) {
-        const text = [study.slug[l], study.descriptor[l], study.title[l], study.summary[l], study.client[l], study.role[l],
-          ...study.challenge[l], ...study.outcomes[l], ...study.capabilities[l], ...study.steps[l].flatMap((s) => [s.title, s.body])]
-        expect(text.every((s) => s.trim().length > 0), `${study.id} ${l}`).toBe(true)
-        expect(text.filter((s) => /[\u2013\u2014]/.test(s)), `${study.id} ${l}`).toEqual([])
-        expect(study.steps[l]).toHaveLength(study.steps.en.length)
-        expect(study.challenge[l]).toHaveLength(study.challenge.en.length)
-        expect(study.outcomes[l]).toHaveLength(study.outcomes.en.length)
-      }
-      for (const title of Object.values(study.metaTitle ?? {})) expect(title.trim(), study.id).toBeTruthy()
-    }
-  })
 })
 
 describe('publishing', () => {

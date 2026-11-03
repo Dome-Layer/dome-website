@@ -1,6 +1,6 @@
 # dome-website
 
-domelayer.com: the DOME company site (services, the DOME tools, case studies, about, contact, legal) and the
+domelayer.com: the DOME project site (home, the DOME tools, about, contact, legal) and the
 central sign-in for every DOME tool (`/login`, `/auth/callback`, the signed-in hub `/app`). DOME is a sole
 maintainer's portfolio of governed AI tools for regulated businesses; the tools live in sibling repos under the
 `Dome-Layer` organisation, each on its own `*.domelayer.com` host.
@@ -37,6 +37,9 @@ React 19, React Router 7 in framework mode with a static prerender (`react-route
 Tailwind CSS 4, Framer Motion. `worker/` is the Cloudflare Worker: it serves the prerendered pages, the real 404
 (`/404`, `/it/404` and one per other published locale), the contact form (Resend, a rate-limit binding) and
 security headers. `wrangler.jsonc` holds the Worker config and the per-environment vars.
+The Worker applies the `redirects`, `rewrites` and `headers` in `vercel.json` (the file outlived Vercel and is still the
+single source for them). The service pages and case studies moved to francescoprodomo.com in the site split
+(2026-11-01); their old URLs answer 308, listed in `src/seo/site-split-redirects.csv` and tested row by row.
 
 ## House rules
 
@@ -57,7 +60,7 @@ security headers. `wrangler.jsonc` holds the Worker config and the per-environme
 
 - `src/i18n/locales.ts`: `LOCALES` (`en`, `it`, `nl`, `de`). English sits at the root and is the x-default; every
   other locale lives under `/<locale>/`, with its own slugs in `src/i18n/routes.ts` (`PUBLIC_ROUTES`) and its own
-  catalogue in `src/i18n/messages/`. Case studies carry their copy per locale in `src/content/caseStudies.ts`.
+  catalogue in `src/i18n/messages/`.
 - `src/routes.ts` registers every public page once per locale. A locale that is not published is registered but
   not prerendered, so it 404s. Each locale has its own flag, `DOME_PUBLISH_<LOCALE>` (`true` or `false`), set
   for the build in the deploy workflow and for the Worker in `wrangler.jsonc`; the two must agree (a test checks).

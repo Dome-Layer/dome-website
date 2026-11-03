@@ -19,7 +19,7 @@ describe('beforeSend', () => {
   })
 
   it('keeps the query on public pages, where UTM tags live', () => {
-    const payload = { url: '/services/enterprise-ux?utm_source=linkedin' }
+    const payload = { url: '/dome/llm-council?utm_source=linkedin' }
     expect(beforeSend('event', payload)).toBe(payload)
   })
 })

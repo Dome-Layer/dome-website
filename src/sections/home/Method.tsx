@@ -7,7 +7,7 @@ import { ArrowRight } from '../../components/ui/icons'
 import { useMediaQuery } from '../../lib/useMediaQuery'
 import { useReducedMotion } from '../../lib/useReducedMotion'
 import { useToolHref } from '../../lib/tools'
-import { localizedHref, type StaticRouteId } from '../../i18n/routes'
+import { localizedHref, type RouteId } from '../../i18n/routes'
 import { useLocale, useMessages } from '../../i18n/useLocale'
 import type { ItemText } from '../../i18n/messages/types'
 
@@ -19,7 +19,7 @@ const PHASE_SHARE = 0.82
 const LETTERS = ['D', 'O', 'M', 'E']
 
 /** The tools under each phase, linked to their pages. Tool names stay English in every locale. */
-const PHASE_TOOLS: readonly (readonly StaticRouteId[])[] = [
+const PHASE_TOOLS: readonly (readonly RouteId[])[] = [
   ['processAnalyzer'],
   ['llmCouncil'],
   ['documentIntelligence', 'dataIntelligence'],

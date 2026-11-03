@@ -35,8 +35,8 @@ describe('social images', () => {
   it('give tool pages the capabilities image and legal pages the home image', () => {
     expect(socialImageRoute('llmCouncil')).toBe('dome')
     expect(socialImageRoute('privacy')).toBe('home')
-    expect(socialImageRoute('caseProcurement')).toBe('caseProcurement')
-    expect(socialImagePath('enterpriseUx', 'it')).toBe('/social/enterprise-ux-it.jpg')
+    expect(socialImageRoute('about')).toBe('about')
+    expect(socialImagePath('about', 'it')).toBe('/social/about-it.jpg')
   })
 
   it('have text and a real background for every image', () => {

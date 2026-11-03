@@ -164,14 +164,14 @@ export const MEDIA = {
     usedOn: 'Home hero, still alternative to the video',
   },
 
-  // ── Page heroes ──────────────────────────────────────────────────────────────────────────────
+  // ── Page heroes (the service and case study heroes are kept for the tool pages) ──────────────
   aiProcessAutomationHero: {
     kind: 'image',
     ...wideImage('hero-ai-process-automation'),
     decorative: false,
     source: 'ai',
     aiLabel: true,
-    usedOn: 'AI process automation hero',
+    usedOn: 'Not on a page yet: process automation scene',
   },
   enterpriseUxHero: {
     kind: 'image',
@@ -179,7 +179,7 @@ export const MEDIA = {
     decorative: false,
     source: 'ai',
     aiLabel: true,
-    usedOn: 'Enterprise UX hero',
+    usedOn: 'Not on a page yet: design workshop scene',
   },
   capabilitiesHero: {
     kind: 'image',
@@ -203,7 +203,7 @@ export const MEDIA = {
     decorative: false,
     source: 'ai',
     aiLabel: true,
-    usedOn: 'Case studies index hero',
+    usedOn: 'Not on a page yet: process maps scene',
   },
   contactHero: {
     kind: 'image',
@@ -232,14 +232,14 @@ export const MEDIA = {
     usedOn: 'Built for regulated work, and Where we work',
   },
 
-  // ── Case studies ─────────────────────────────────────────────────────────────────────────────
+  // ── Former case study images, kept for the tool pages (site split 2026-11-01) ────────────────
   caseProcurementWorkflowRedesign: {
     kind: 'image',
     ...wideImage('case-procurement-workflow-redesign'),
     decorative: false,
     source: 'ai',
     aiLabel: true,
-    usedOn: 'Case study: procurement workflow redesign',
+    usedOn: 'Not on a page yet: procurement workflow scene',
   },
   caseAiComplianceAssessments: {
     kind: 'image',
@@ -247,7 +247,7 @@ export const MEDIA = {
     decorative: false,
     source: 'ai',
     aiLabel: true,
-    usedOn: 'Case study: AI compliance assessments',
+    usedOn: 'Not on a page yet: compliance assessment scene',
   },
   caseMetalsTradingPlatform: {
     kind: 'image',
@@ -255,7 +255,7 @@ export const MEDIA = {
     decorative: false,
     source: 'ai',
     aiLabel: true,
-    usedOn: 'Case study: metals trading platform',
+    usedOn: 'Not on a page yet: metals trading scene',
   },
   caseFoodTraceabilityPlatform: {
     kind: 'image',
@@ -263,7 +263,7 @@ export const MEDIA = {
     decorative: false,
     source: 'ai',
     aiLabel: true,
-    usedOn: 'Case study: food traceability platform',
+    usedOn: 'Not on a page yet: food traceability scene',
   },
   caseTradingAppRedesign: {
     kind: 'image',
@@ -271,7 +271,7 @@ export const MEDIA = {
     decorative: false,
     source: 'ai',
     aiLabel: true,
-    usedOn: 'Case study: trading app redesign',
+    usedOn: 'Not on a page yet: trading app scene',
   },
   caseAiProcurementPlatform: {
     kind: 'image',
@@ -279,7 +279,7 @@ export const MEDIA = {
     decorative: false,
     source: 'ai',
     aiLabel: true,
-    usedOn: 'Case study: AI procurement platform',
+    usedOn: 'Not on a page yet: procurement platform scene',
   },
   caseAiTrainingVideos: {
     kind: 'image',
@@ -287,7 +287,7 @@ export const MEDIA = {
     decorative: false,
     source: 'ai',
     aiLabel: true,
-    usedOn: 'Case study: AI training videos',
+    usedOn: 'Not on a page yet: training video scene',
   },
 
   // ── People and partners ──────────────────────────────────────────────────────────────────────
@@ -321,8 +321,7 @@ export const MEDIA = {
 } satisfies Record<string, MediaAsset>
 
 /**
- * Not here yet: the invoice-to-approval case study wants **real DOME tool screenshots**, captured
- * in both themes. They get a `screenshot` entry here and a row in CREDITS.md when they land.
+ * Not here yet: the tool pages want **real DOME tool screenshots**, captured in both themes. They get a `screenshot` entry here and a row in CREDITS.md when they land.
  */
 
 export type MediaId = keyof typeof MEDIA

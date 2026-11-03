@@ -6,17 +6,14 @@ export const en: Messages = {
       'DOME is a personal project by Francesco Prodomo, based in Florence: working AI tools that show how AI can run inside regulated processes and stay governed, measurable and explainable. Every tool records its decisions in one audit trail.',
     llmsIntro:
       'DOME is a set of AI tools built and run by one person, Francesco Prodomo, as a project on governed AI. Each tool covers one phase of a method (discover, orchestrate, model, execute): process analysis, a multi-model council, document and data intelligence, and Agent Flow, a governed invoice-to-approval workflow. Every tool records its decisions in one audit trail, shown in the Governance Dashboard, and a named person signs off where a policy requires it. Five tools are free to try after signing in; Agent Flow runs as a private demo. The code is public on GitHub. Francesco\'s consulting work is on francescoprodomo.com.',
-    llmsSections: { pages: 'Pages', tools: 'The tools', caseStudies: 'Case studies', legal: 'Legal' },
+    llmsSections: { pages: 'Pages', tools: 'The tools', legal: 'Legal' },
     knowsAbout: ['AI governance', 'Governed AI workflows', 'Audit trails for AI', 'Human-in-the-loop approval', 'Document intelligence', 'Process analysis', 'Multi-model AI review', 'Design systems'],
   },
   nav: {
     homeLabel: 'DOME home',
     tools: 'Tools',
     agentFlow: 'Agent Flow',
-    enterpriseUx: 'Enterprise UX',
-    aiAutomation: 'AI automation',
     dome: 'DOME',
-    caseStudies: 'Case studies',
     about: 'About',
     contact: 'Contact',
     signIn: 'Sign in',
@@ -89,24 +86,6 @@ export const en: Messages = {
         'Six AI tools and one audit trail. Try them free, or watch an invoice go from intake to a named approver.',
       twitterDescription: 'Working AI tools you can audit. Free to try.',
       imageAlt: 'DOME: working AI tools you can audit',
-    },
-    enterpriseUx: {
-      name: 'Enterprise UX and product',
-      title: 'Enterprise UX, product and data visualisation | DOME',
-      description:
-        'User research, service design, interface and data visualisation design for complex enterprise platforms, with a design system your developers can build from.',
-      ogDescription:
-        'We untangle complex internal tools and customer platforms: research, service design, interface design and a design system your team can build from.',
-      imageAlt: 'DOME enterprise UX and product consulting',
-    },
-    aiProcessAutomation: {
-      name: 'AI process automation',
-      title: 'AI process automation and business analysis | DOME',
-      description:
-        'We map and analyse your business processes, automate the steps with clear rules and route the rest to your team with a decision brief and a full audit trail.',
-      ogDescription:
-        'Automate a process without losing control of it: clear rules where they apply, a human decision where they do not, and an audit trail throughout.',
-      imageAlt: 'DOME AI process automation',
     },
     dome: {
       name: 'Tools',
@@ -200,15 +179,6 @@ export const en: Messages = {
       ogDescription: 'Write about the tools. I reply within two working days.',
       imageAlt: 'Contact DOME',
     },
-    caseStudies: {
-      name: 'Case studies',
-      title: 'Case studies | DOME',
-      description:
-        'Anonymised accounts of enterprise UX and AI automation work in retail procurement, trade finance, food supply chains, compliance and digital assets.',
-      ogDescription:
-        'What we have built, and what changed as a result. Client details are anonymised throughout.',
-      imageAlt: 'DOME case studies',
-    },
     privacy: {
       name: 'Privacy policy',
       title: 'Privacy policy | DOME',
@@ -259,10 +229,6 @@ export const en: Messages = {
   },
   aiGeneratedLabel: 'AI-generated image',
   common: {
-    sendMessage: 'Send a message',
-    relatedWork: 'Related work',
-    anonymised: 'Client details are anonymised.',
-    viewAllCaseStudies: 'View all case studies',
     topics: ['Feedback', 'Demo access', 'Something else'],
     tryTool: 'Try a tool',
     watchRun: 'Watch the run',
@@ -320,111 +286,6 @@ export const en: Messages = {
       },
       hire: 'Want to work with Francesco? His consulting work is on',
     },
-
-    services: {
-      breadcrumb: 'Services',
-      aiProcessAutomation: {
-        hero: {
-          eyebrow: 'AI process automation',
-          heading: 'Automate the routine. Keep people on the decisions.',
-          lead: 'We map and analyse your finance, procurement and compliance workflows, then automate the well-defined steps, with rules you can read and a record of every decision.',
-          primary: 'Book an automation review',
-          secondary: 'See how it works',
-        },
-        intro: {
-          eyebrow: 'Where it helps',
-          heading: 'Processes that are ready for automation',
-          items: [
-            { title: 'High volume, clear rules', body: 'Invoice intake, supplier onboarding checks, document classification: work that follows a policy but still takes specialist time.' },
-            { title: 'Decisions that need a record', body: 'Approvals and exceptions that auditors and regulators will ask about, sometimes months after the fact.' },
-            { title: 'Data locked in documents', body: 'Contracts, certificates and reports that someone currently re-keys into another system by hand.' },
-          ],
-        },
-        band: {
-          eyebrow: 'Built-in governance',
-          heading: 'Every automated decision can be explained.',
-          lead: 'When someone asks why an invoice was approved or a document was flagged, the answer is already on record.',
-          points: [
-            'A confidence score on every extracted field',
-            'Policy rules kept outside the model, readable by your team',
-            'A named person signs off where the policy requires it',
-            'An audit trail you can export for each run',
-            'Runs against a local open-weight model where data cannot leave your network',
-          ],
-        },
-        steps: {
-          eyebrow: 'How we deliver it',
-          heading: 'Four steps, agreed with you before anything runs',
-          items: [
-            { title: 'Map and analyse the process', body: 'We walk the workflow with the people who run it, analyse its volumes, costs and risks, and mark which steps follow rules, which need judgement and where automation pays off.' },
-            { title: 'Design the controls', body: 'Rules, confidence thresholds and approval points are agreed with you before any step is automated.' },
-            { title: 'Build and integrate', body: 'We connect to the systems you already use and keep the rules outside the model, so your team can read and change them.' },
-            { title: 'Run and measure', body: 'Every decision is logged. We review accuracy with you and adjust thresholds as volumes change.' },
-          ],
-        },
-        related: 'Automation in practice',
-        closing: {
-          heading: 'Start with one process.',
-          body: 'In an automation review we map one workflow with your team, analyse the business case and tell you what is worth automating, and what is not.',
-          primary: 'Book an automation review',
-        },
-      },
-      enterpriseUx: {
-        hero: {
-          eyebrow: 'Enterprise UX and product',
-          heading: 'Internal tools your teams actually want to use.',
-          lead: 'We redesign complex enterprise platforms, from procurement workflows and trading screens to dashboards and data visualisation, around the people who use them every day.',
-          primary: 'Book a UX review',
-          secondary: 'See how we work',
-        },
-        intro: {
-          eyebrow: 'When it helps',
-          heading: 'Signs a system is working against its users',
-          items: [
-            { title: 'Adoption is low', body: 'People work around the system with spreadsheets and email, because the tool gets in the way of the job.' },
-            { title: 'Training never ends', body: 'Every new starter needs weeks of support, and the same questions reach the help desk again and again.' },
-            { title: 'Every change is expensive', body: 'Each new requirement becomes another custom screen, and the interface gets harder to maintain with every release.' },
-          ],
-        },
-        deliver: {
-          eyebrow: 'What we deliver',
-          heading: 'From research to a design system your developers can build from',
-          items: [
-            { title: 'User research and service design', body: 'Interviews, workflow shadowing and journey maps that show where time and trust are lost.' },
-            { title: 'Interfaces, dashboards and data visualisation', body: 'Screens and dashboards designed for the real volume and density of enterprise work, with charts that put the numbers people decide on first, tested with the people who use them.' },
-            { title: 'Design systems', body: 'A component library and guidelines your developers can build from, so consistency survives the next release.' },
-            { title: 'Rollout and adoption', body: 'We stay through build and rollout, with training material and measures that show whether people use the new tool.' },
-          ],
-        },
-        band: {
-          eyebrow: 'Built for regulated work',
-          heading: 'Designed for decisions people are accountable for.',
-          lead: 'Tools in finance, procurement and compliance carry more than tasks. They carry approvals, evidence and responsibility, and the interface has to make those clear.',
-          points: [
-            'Accessible by default, to WCAG 2.1 AA',
-            'Approvals and their history visible where decisions are made',
-            'Role-based views for requesters, approvers and auditors',
-            'One design system, so every screen behaves the same way',
-          ],
-        },
-        steps: {
-          eyebrow: 'How we deliver it',
-          heading: 'From first interview to rollout',
-          items: [
-            { title: 'Observe', body: 'We shadow the people who use the system and map where time and trust are lost.' },
-            { title: 'Design', body: 'We design the flows and screens with your team, one workflow at a time.' },
-            { title: 'Validate', body: 'We test prototypes with real users before anything goes into development.' },
-            { title: 'Roll out', body: 'We support the build, write the training material and measure adoption after launch.' },
-          ],
-        },
-        related: 'UX and product work in practice',
-        closing: {
-          heading: 'Start with one workflow.',
-          body: 'In a UX review we observe one workflow with your team and show you where it loses time, and what to fix first.',
-          primary: 'Book a UX review',
-        },
-      },
-    },
     dome: {
       hero: {
         eyebrow: 'The tools',
@@ -474,43 +335,6 @@ export const en: Messages = {
         body: 'Sign in and try any of the five tools for free. For Agent Flow, ask for demo access and I will set you up.',
       },
       hire: 'Want a walkthrough on your own process? That is part of the automation review on',
-    },
-    caseStudies: {
-      hero: {
-        eyebrow: 'Case studies',
-        heading: 'What we built, and what changed.',
-        lead: 'Anonymised accounts of the work: the problem as the client described it, what we did, and the outcomes the engagement actually produced.',
-        primary: 'Talk about your project',
-        secondary: 'See what we build',
-      },
-      groups: [
-        { eyebrow: 'AI process automation', heading: 'Work that follows a policy' },
-        { eyebrow: 'Enterprise UX and product', heading: 'Platforms people have to use every day' },
-        { eyebrow: 'DOME capabilities', heading: 'The method running end to end' },
-      ],
-      note: 'Client details are anonymised throughout: we describe the sector and the function, never the organisation. Only outcomes the engagement actually produced are claimed.',
-      closing: {
-        heading: 'Recognise one of these problems?',
-        body: 'Tell us which one, and we will tell you how we would approach it.',
-        primary: 'Book an introductory call',
-      },
-    },
-    caseStudy: {
-      back: 'Case studies',
-      challenge: 'The challenge',
-      whatWeDid: 'What we did',
-      outcomes: 'Outcomes',
-      client: 'Client',
-      role: 'Our role',
-      capabilities: 'Capabilities',
-      cta: 'Discuss a similar project',
-      readNext: 'Read next',
-      notFound: 'Case study not found',
-      closing: {
-        heading: 'Recognise this problem?',
-        body: 'Tell us where your process gets stuck, and we will tell you how we would approach it.',
-        primary: 'Book an introductory call',
-      },
     },
     about: {
       hero: {

@@ -8,7 +8,7 @@
  *   npm run social-images -- nl de   only the cards of the locales named (route ids and locales combine)
  *
  * The images are committed, not built in CI: rerun this after changing a hero eyebrow or heading,
- * a case study title or descriptor, a hero image, or after adding a locale. It drives a local
+ * a hero image, or after adding a locale. It drives a local
  * Chrome over the DevTools protocol (CHROME overrides the path), so the cards use the site's own
  * font, Inter, exactly as the browser draws it. The font and the photographs are inlined, so the
  * page needs no file access.

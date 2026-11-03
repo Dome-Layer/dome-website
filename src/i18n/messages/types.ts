@@ -1,6 +1,6 @@
 import type { DescribedMediaId } from '../../content/media'
 import type { Locale } from '../locales'
-import type { StaticRouteId } from '../routes'
+import type { RouteId } from '../routes'
 
 export interface PageMetaText {
   /** Short page name, used in breadcrumbs and llms.txt. */
@@ -35,13 +35,6 @@ export interface HeroText {
   secondary: string
 }
 
-/** The panel every page closes on. */
-export interface ClosingText {
-  heading: string
-  body: string
-  primary: string
-}
-
 /** The project pages' closing panel: its buttons are shared words (`common`), so only the question is here. */
 export interface ProjectClosingText {
   heading: string
@@ -53,18 +46,6 @@ export interface PlainHeroText {
   eyebrow: string
   heading: string
   lead: string
-}
-
-/** A service line page. Both service lines are built from the same sections. */
-export interface ServicePageText {
-  hero: HeroText
-  intro: SectionText & { items: readonly ItemText[] }
-  /** The UX page has a deliverables list; the automation page goes straight to its steps. */
-  deliver?: SectionText & { items: readonly ItemText[] }
-  band: SectionText & { points: readonly string[] }
-  steps: SectionText & { items: readonly ItemText[] }
-  related: string
-  closing: ClosingText
 }
 
 /**
@@ -122,7 +103,7 @@ export interface Messages {
     description: string
     /** Longer llms.txt introduction. */
     llmsIntro: string
-    llmsSections: { pages: string; tools: string; caseStudies: string; legal: string }
+    llmsSections: { pages: string; tools: string; legal: string }
     /** What DOME does, named one by one for the Organization's `knowsAbout` in the structured data. */
     knowsAbout: readonly string[]
   }
@@ -131,10 +112,7 @@ export interface Messages {
     /** The tools page (/dome). */
     tools: string
     agentFlow: string
-    enterpriseUx: string
-    aiAutomation: string
     dome: string
-    caseStudies: string
     about: string
     contact: string
     signIn: string
@@ -213,11 +191,8 @@ export interface Messages {
     homeLink: string
   }
   breadcrumbHome: string
-  /**
-   * Metadata for every page whose words are not already content. Case study routes are absent:
-   * their title and description come from the study itself, through `pageMeta`.
-   */
-  meta: Record<StaticRouteId, PageMetaText>
+  /** Metadata for every public page. */
+  meta: Record<RouteId, PageMetaText>
   /**
    * Alt text for every non-decorative asset in `src/content/media.ts`, keyed by media id. The
    * decorative assets are absent on purpose: they render `aria-hidden`.
@@ -231,10 +206,6 @@ export interface Messages {
 
   /** Copy shared by more than one page. */
   common: {
-    sendMessage: string
-    relatedWork: string
-    anonymised: string
-    viewAllCaseStudies: string
     /**
      * Topics offered on the contact form: feedback, demo access (preselected by `?topic=demo`),
      * something else. Sent with the message as written, so the inbox shows the visitor's language.
@@ -275,12 +246,6 @@ export interface Messages {
       /** The quiet hire line under the closing panel; the link to francescoprodomo.com follows it. */
       hire: string
     }
-    /** The two service lines share a shape; see `ServicePageText`. */
-    services: {
-      breadcrumb: string
-      aiProcessAutomation: ServicePageText
-      enterpriseUx: ServicePageText
-    }
     dome: {
       hero: HeroText & { note: string }
       blocks: SectionText & {
@@ -293,25 +258,6 @@ export interface Messages {
       standards: SectionText & { items: readonly ItemText[] }
       closing: ProjectClosingText
       hire: string
-    }
-    caseStudies: {
-      hero: HeroText
-      groups: readonly { eyebrow: string; heading: string }[]
-      note: string
-      closing: ClosingText
-    }
-    caseStudy: {
-      back: string
-      challenge: string
-      whatWeDid: string
-      outcomes: string
-      client: string
-      role: string
-      capabilities: string
-      cta: string
-      readNext: string
-      notFound: string
-      closing: ClosingText
     }
     about: {
       hero: PlainHeroText

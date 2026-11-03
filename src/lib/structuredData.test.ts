@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest'
-import { CASE_STUDY_ROUTE_IDS } from '../i18n/routes'
+import { LOCALES } from '../i18n/locales'
+import { ROUTE_IDS, TOOL_ROUTE_IDS } from '../i18n/routes'
 import { pageStructuredData } from './structuredData'
 
 type Node = Record<string, unknown>
@@ -8,43 +9,56 @@ const graph = (id: Parameters<typeof pageStructuredData>[0], locale: 'en' | 'it'
 const byType = (nodes: Node[], type: string) => nodes.find((n) => n['@type'] === type)
 
 describe('structured data', () => {
-  it('names what the project covers and a contact point on the organisation, with a raster logo', () => {
-    const org = byType(graph('home'), 'ProfessionalService')!
-    expect(org.logo).toBe('https://domelayer.com/logo-512.png')
-    expect(org.knowsAbout).toEqual(expect.arrayContaining(['AI governance', 'Audit trails for AI', 'Human-in-the-loop approval']))
-    expect(byType(graph('home', 'it'), 'ProfessionalService')!.knowsAbout).toContain('Governance dell’AI')
-    expect((org.contactPoint as Node).url).toBe('https://domelayer.com/contact')
-    expect(JSON.stringify(graph('home'))).not.toContain('Offer')
+  it('describes DOME as a website by a person, never as a business or a service', () => {
+    for (const id of ROUTE_IDS) {
+      for (const locale of LOCALES) {
+        const json = JSON.stringify(pageStructuredData(id, locale, [...LOCALES]))
+        expect(json, `${id} ${locale}`).not.toMatch(/"(ProfessionalService|LocalBusiness|Organization|Corporation|Service|Product|Offer|OfferCatalog)"|"offers"/)
+      }
+    }
+    const site = byType(graph('home'), 'WebSite')!
+    expect(site.name).toBe('DOME')
+    expect(site.url).toBe('https://domelayer.com/')
+    expect(site.publisher).toEqual({ '@id': 'https://domelayer.com/#person' })
+    expect(site.author).toEqual({ '@id': 'https://domelayer.com/#person' })
   })
 
   it('identifies the person behind DOME: legal name, VAT ID, email and city, without a street address', () => {
-    const org = byType(graph('home'), 'ProfessionalService')!
-    expect(org.legalName).toBe('Francesco Prodomo')
-    expect(org.vatID).toBe('IT07242670482')
-    expect(org.email).toBe('hello@domelayer.com')
-    expect(org.address).toEqual({ '@type': 'PostalAddress', addressLocality: 'Florence', addressCountry: 'IT' })
+    const person = byType(graph('home'), 'Person')!
+    expect(person['@id']).toBe('https://domelayer.com/#person')
+    expect(person.name).toBe('Francesco Prodomo')
+    expect(person.vatID).toBe('IT07242670482')
+    expect(person.email).toBe('hello@domelayer.com')
+    expect(person.address).toEqual({ '@type': 'PostalAddress', addressLocality: 'Florence', addressCountry: 'IT' })
   })
 
-  it('links no LinkedIn page for DOME, only Francesco\'s profile, and uses the social image of the language', () => {
-    const org = byType(graph('home', 'it'), 'ProfessionalService')!
-    expect(org.sameAs).toBeUndefined()
-    expect((org.founder as Node).sameAs).toEqual(['https://francescoprodomo.com', 'https://www.linkedin.com/in/francesco-prodomo'])
-    expect(org.image).toBe('https://domelayer.com/social/home-it.jpg')
+  it('links Francesco\'s own site and LinkedIn profile, and no LinkedIn page for DOME', () => {
+    const nodes = graph('home', 'it')
+    expect(byType(nodes, 'Person')!.sameAs).toEqual(['https://francescoprodomo.com', 'https://www.linkedin.com/in/francesco-prodomo'])
+    expect(byType(nodes, 'WebSite')!.sameAs).toBeUndefined()
+    expect(JSON.stringify(nodes)).not.toContain('linkedin.com/company')
   })
 
-  it('describes a service page as a Service provided by DOME', () => {
-    const page = byType(graph('aiProcessAutomation', 'it'), 'WebPage')!
-    const service = page.about as Node
-    expect(service['@type']).toBe('Service')
-    expect(service.provider).toEqual({ '@id': 'https://domelayer.com/#organization' })
+  it('names what the project covers and a contact point, in the language of the page', () => {
+    const person = byType(graph('home'), 'Person')!
+    expect(person.knowsAbout).toEqual(expect.arrayContaining(['AI governance', 'Audit trails for AI', 'Human-in-the-loop approval']))
+    expect(byType(graph('home', 'it'), 'Person')!.knowsAbout).toContain('Governance dell’AI')
+    expect((person.contactPoint as Node).url).toBe('https://domelayer.com/contact')
+    expect(byType(graph('home', 'it'), 'WebSite')!.image).toBe('https://domelayer.com/social/home-it.jpg')
   })
 
-  it('marks every case study up as an Article', () => {
-    for (const id of CASE_STUDY_ROUTE_IDS) {
-      const article = byType(graph(id), 'Article')!
-      expect(article.headline).toBeTruthy()
-      expect(article.image).toMatch(/^https:\/\/domelayer\.com\/social\/case-[a-z-]+-en\.jpg$/)
-      expect(article.dateModified).toMatch(/^\d{4}-\d{2}-\d{2}$/)
+  it('describes a tool page as the tool, part of the DOME website', () => {
+    for (const id of TOOL_ROUTE_IDS) {
+      const page = byType(graph(id), 'WebPage')!
+      expect((page.about as Node)['@type'], id).toBe('Thing')
+      expect((page.about as Node).name, id).toBeTruthy()
+      expect(page.isPartOf).toEqual({ '@id': 'https://domelayer.com/#website' })
     }
+  })
+
+  it('gives every page below home a breadcrumb', () => {
+    expect(byType(graph('home'), 'BreadcrumbList')).toBeUndefined()
+    const crumbs = byType(graph('about', 'it'), 'BreadcrumbList')!
+    expect((crumbs.itemListElement as Node[]).map((item) => item.item)).toEqual(['https://domelayer.com/it', 'https://domelayer.com/it/chi-siamo'])
   })
 })

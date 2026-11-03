@@ -72,10 +72,10 @@ describe('LanguageSwitcher with four published languages', () => {
   })
 
   it('remembers the choice in the language cookie', () => {
-    renderAt('/case-studies')
+    renderAt('/contact')
     fireEvent.click(button())
     const deutsch = screen.getByRole('link', { name: /Deutsch/ })
-    expect(deutsch).toHaveAttribute('href', '/de/fallstudien')
+    expect(deutsch).toHaveAttribute('href', '/de/kontakt')
     noFollow(deutsch)
     fireEvent.click(deutsch)
     expect(document.cookie).toContain('dome_locale=de')

@@ -6,11 +6,6 @@ interface PublicRoute {
   path: Record<Locale, string>
   /** Last meaningful content change, used for the sitemap lastmod (YYYY-MM-DD). */
   updatedAt: string
-  /**
-   * Case study this route renders, by id. Such a route takes its title and description from the
-   * case content rather than from the message catalogues, so a summary lives in exactly one place.
-   */
-  caseStudy?: string
 }
 
 /**
@@ -23,26 +18,6 @@ interface PublicRoute {
  */
 export const PUBLIC_ROUTES = {
   home: { file: 'pages/HomePage.tsx', path: { en: '/', it: '/it', nl: '/nl', de: '/de' }, updatedAt: '2026-11-03' },
-  aiProcessAutomation: {
-    file: 'pages/AiProcessAutomationPage.tsx',
-    path: {
-      en: '/services/ai-process-automation',
-      it: '/it/servizi/automazione-processi-ai',
-      nl: '/nl/diensten/ai-procesautomatisering',
-      de: '/de/leistungen/ki-prozessautomatisierung',
-    },
-    updatedAt: '2026-10-13',
-  },
-  enterpriseUx: {
-    file: 'pages/EnterpriseUxPage.tsx',
-    path: {
-      en: '/services/enterprise-ux',
-      it: '/it/servizi/ux-enterprise',
-      nl: '/nl/diensten/enterprise-ux',
-      de: '/de/leistungen/enterprise-ux',
-    },
-    updatedAt: '2026-10-13',
-  },
   dome: { file: 'pages/DomePage.tsx', path: { en: '/dome', it: '/it/dome', nl: '/nl/dome', de: '/de/dome' }, updatedAt: '2026-11-03' },
   processAnalyzer: {
     file: 'pages/ProcessAnalyzerPage.tsx',
@@ -76,99 +51,6 @@ export const PUBLIC_ROUTES = {
   },
   about: { file: 'pages/AboutPage.tsx', path: { en: '/about', it: '/it/chi-siamo', nl: '/nl/over-ons', de: '/de/ueber-uns' }, updatedAt: '2026-11-03' },
   contact: { file: 'pages/ContactPage.tsx', path: { en: '/contact', it: '/it/contatti', nl: '/nl/contact', de: '/de/kontakt' }, updatedAt: '2026-11-03' },
-  caseStudies: {
-    file: 'pages/CaseStudiesPage.tsx',
-    path: { en: '/case-studies', it: '/it/casi-studio', nl: '/nl/cases', de: '/de/fallstudien' },
-    updatedAt: '2026-09-22',
-  },
-  caseProcurement: {
-    file: 'pages/CaseStudyPage.tsx',
-    path: {
-      en: '/case-studies/procurement-workflow-redesign',
-      it: '/it/casi-studio/riprogettazione-acquisti',
-      nl: '/nl/cases/herontwerp-inkoopproces',
-      de: '/de/fallstudien/neugestaltung-einkaufsprozesse',
-    },
-    updatedAt: '2026-09-22',
-    caseStudy: 'procurement',
-  },
-  caseCompliance: {
-    file: 'pages/CaseStudyPage.tsx',
-    path: {
-      en: '/case-studies/ai-compliance-assessments',
-      it: '/it/casi-studio/valutazioni-conformita-ai',
-      nl: '/nl/cases/ai-compliancebeoordelingen',
-      de: '/de/fallstudien/ki-compliance-bewertungen',
-    },
-    updatedAt: '2026-09-22',
-    caseStudy: 'compliance',
-  },
-  caseInvoice: {
-    file: 'pages/CaseStudyPage.tsx',
-    path: {
-      en: '/case-studies/governed-invoice-approval',
-      it: '/it/casi-studio/approvazione-fatture-governata',
-      nl: '/nl/cases/factuurgoedkeuring-met-governance',
-      de: '/de/fallstudien/rechnungsfreigabe-mit-governance',
-    },
-    updatedAt: '2026-09-22',
-    caseStudy: 'invoice',
-  },
-  caseMetals: {
-    file: 'pages/CaseStudyPage.tsx',
-    path: {
-      en: '/case-studies/metals-trading-platform',
-      it: '/it/casi-studio/piattaforma-trading-metalli',
-      nl: '/nl/cases/handelsplatform-metalen',
-      de: '/de/fallstudien/handelsplattform-metalle',
-    },
-    updatedAt: '2026-09-22',
-    caseStudy: 'metals',
-  },
-  caseTraceability: {
-    file: 'pages/CaseStudyPage.tsx',
-    path: {
-      en: '/case-studies/food-traceability-platform',
-      it: '/it/casi-studio/piattaforma-tracciabilita-alimentare',
-      nl: '/nl/cases/traceerbaarheid-voedselketen',
-      de: '/de/fallstudien/rueckverfolgbarkeit-lebensmittel',
-    },
-    updatedAt: '2026-09-22',
-    caseStudy: 'traceability',
-  },
-  caseTrading: {
-    file: 'pages/CaseStudyPage.tsx',
-    path: {
-      en: '/case-studies/trading-app-redesign',
-      it: '/it/casi-studio/riprogettazione-app-trading',
-      nl: '/nl/cases/herontwerp-trading-app',
-      de: '/de/fallstudien/neugestaltung-trading-app',
-    },
-    updatedAt: '2026-09-22',
-    caseStudy: 'trading',
-  },
-  casePlatform: {
-    file: 'pages/CaseStudyPage.tsx',
-    path: {
-      en: '/case-studies/ai-procurement-platform',
-      it: '/it/casi-studio/piattaforma-acquisti-ai',
-      nl: '/nl/cases/ai-inkoopplatform',
-      de: '/de/fallstudien/ki-einkaufsplattform',
-    },
-    updatedAt: '2026-09-22',
-    caseStudy: 'platform',
-  },
-  caseTraining: {
-    file: 'pages/CaseStudyPage.tsx',
-    path: {
-      en: '/case-studies/ai-training-videos',
-      it: '/it/casi-studio/video-formativi-ai',
-      nl: '/nl/cases/ai-trainingsvideos',
-      de: '/de/fallstudien/ki-schulungsvideos',
-    },
-    updatedAt: '2026-09-22',
-    caseStudy: 'training',
-  },
   privacy: { file: 'pages/PrivacyPage.tsx', path: { en: '/privacy', it: '/it/privacy', nl: '/nl/privacy', de: '/de/datenschutz' }, updatedAt: '2026-11-03' },
   terms: { file: 'pages/TermsPage.tsx', path: { en: '/terms', it: '/it/termini', nl: '/nl/voorwaarden', de: '/de/nutzungsbedingungen' }, updatedAt: '2026-09-28' },
   cookies: { file: 'pages/CookiesPage.tsx', path: { en: '/cookies', it: '/it/cookie', nl: '/nl/cookies', de: '/de/cookies' }, updatedAt: '2026-11-03' },
@@ -178,29 +60,8 @@ export type RouteId = keyof typeof PUBLIC_ROUTES
 
 export const ROUTE_IDS = Object.keys(PUBLIC_ROUTES) as RouteId[]
 
-/** Routes whose metadata is hand-written in the message catalogues (everything but case studies). */
-export type StaticRouteId = Exclude<RouteId, 'caseProcurement' | 'caseCompliance' | 'caseInvoice' | 'caseMetals' | 'caseTraceability' | 'caseTrading' | 'casePlatform' | 'caseTraining'>
-
-/** Route ids that render a case study, in manifest order. */
-export const CASE_STUDY_ROUTE_IDS = ROUTE_IDS.filter((id) => caseStudyIdFor(id) !== undefined)
-
-/**
- * The case study a route renders, if it renders one. Widened to the declared interface because
- * `satisfies` keeps each entry's literal type, and `caseStudy` is absent from the ones that omit it.
- */
-export function caseStudyIdFor(id: RouteId): string | undefined {
-  return (PUBLIC_ROUTES[id] as PublicRoute).caseStudy
-}
-
-/** The route that renders a given case study, for linking from a card. */
-export function caseStudyHref(studyId: string, locale: Locale): string {
-  const id = ROUTE_IDS.find((routeId) => caseStudyIdFor(routeId) === studyId)
-  if (!id) throw new Error(`No route renders case study "${studyId}"`)
-  return localizedHref(id, locale)
-}
-
 /** Pages that are neither a tool nor legal: the ones llms.txt lists first. */
-export const PAGE_IDS = ['home', 'aiProcessAutomation', 'enterpriseUx', 'dome', 'caseStudies', 'about', 'contact'] as const satisfies readonly RouteId[]
+export const PAGE_IDS = ['home', 'dome', 'about', 'contact'] as const satisfies readonly RouteId[]
 
 /** Tool pages, in the order the site presents them. */
 export const TOOL_ROUTE_IDS = [
