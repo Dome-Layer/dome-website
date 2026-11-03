@@ -5,38 +5,14 @@ import { LOCALES } from '../i18n/locales'
 import { PUBLIC_ROUTES, TOOL_ROUTE_IDS, routeIdFromPath } from '../i18n/routes'
 import { findRedirect, type RedirectRule } from '../../worker/routing'
 
-interface Redirect {
-  source: string
-  destination: string
-  permanent?: boolean
-  has?: unknown
+const config = JSON.parse(readFileSync(resolve(__dirname, '../../site.config.json'), 'utf8')) as {
+  redirects: RedirectRule[]
 }
 
-const config = JSON.parse(
-  readFileSync(resolve(__dirname, '../../vercel.json'), 'utf8'),
-) as { redirects: Redirect[] }
-
-/** Resolve a path against Vercel's `:param` source syntax, or undefined if the rule does not match. */
-function applyRedirect(rule: Redirect, path: string): string | undefined {
-  if (rule.has) return undefined // host-gated rules are production-only
-  const names: string[] = []
-  const pattern = rule.source
-    .replace(/[.+?^${}()|[\]\\]/g, '\\$&')
-    .replace(/:(\w+)/g, (_, name: string) => {
-      names.push(name)
-      return '([^/]+)'
-    })
-  const match = new RegExp(`^${pattern}$`).exec(path)
-  if (!match) return undefined
-  return names.reduce((dest, name, i) => dest.replace(`:${name}`, match[i + 1]), rule.destination)
-}
-
+/** Where the Worker sends a domelayer.com path, and whether permanently (308), or undefined. */
 function redirectFor(path: string): { to: string; permanent: boolean } | undefined {
-  for (const rule of config.redirects) {
-    const to = applyRedirect(rule, path)
-    if (to !== undefined) return { to, permanent: rule.permanent === true }
-  }
-  return undefined
+  const found = findRedirect(config.redirects, new URL(path, 'https://domelayer.com'))
+  return found ? { to: found.location, permanent: found.status === 308 } : undefined
 }
 
 /**
@@ -99,18 +75,16 @@ describe('the consulting pages moved off the site', () => {
   })
 
   it('answers every old URL with a 308 to the address in the plan, as the Worker serves it', () => {
-    const rules = config.redirects as RedirectRule[]
     for (const row of rows) {
       const from = new URL(row.from)
-      const found = findRedirect(rules, from)
+      const found = findRedirect(config.redirects, from)
       expect(found?.status, row.from).toBe(Number(row.status))
       expect(new URL(found!.location, from).href, row.from).toBe(new URL(row.to).href)
-      expect(redirectFor(from.pathname), row.from).toEqual({ to: found!.location, permanent: true })
     }
   })
 
   it('keeps the query string, so campaign tags survive the move', () => {
-    const found = findRedirect(config.redirects as RedirectRule[], new URL('https://domelayer.com/case-studies?utm_source=linkedin'))
+    const found = findRedirect(config.redirects, new URL('https://domelayer.com/case-studies?utm_source=linkedin'))
     expect(found).toEqual({ location: 'https://francescoprodomo.com/work?utm_source=linkedin', status: 308 })
   })
 

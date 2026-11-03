@@ -1,9 +1,9 @@
 /**
- * Applies the redirects, rewrites and header rules in vercel.json the way Vercel does, so the
- * Cloudflare Worker and the Vercel deployment behave the same while both run (Sprint H phase 1).
- * vercel.json stays the single source of truth until Vercel is retired.
+ * Applies the redirects, rewrites and header rules in site.config.json, the single source for
+ * them. The file was vercel.json until Vercel was retired (2026-10-12) and keeps its rule syntax,
+ * which this module implements.
  *
- * Only the source syntax vercel.json actually uses is supported: literal paths, `:name` segments
+ * Only the source syntax site.config.json actually uses is supported: literal paths, `:name` segments
  * and `(.*)` groups, plus `host` conditions with a string or `{ suf }` value.
  */
 
@@ -76,7 +76,7 @@ function match(source: string, pathname: string): { named: Record<string, string
   if (!found) return null
   const groups = found.slice(1)
   const named: Record<string, string> = {}
-  // Named segments and (.*) groups share the capture list in source order; vercel.json never mixes
+  // Named segments and (.*) groups share the capture list in source order; site.config.json never mixes
   // them in one source, so mapping names onto the first captures is enough.
   params.forEach((name, i) => {
     named[name] = groups[i]

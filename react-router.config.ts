@@ -14,7 +14,7 @@ export default {
   // crawlers that do not run JavaScript still get real content and per-page metadata.
   ssr: false,
   async prerender({ getStaticPaths }) {
-    // Auth routes are served from the SPA fallback (vercel.json); unpublished locales not at all.
+    // Auth routes are served from the SPA fallback (site.config.json); unpublished locales not at all.
     // The 404 page is prerendered once per published locale (/404, /it/404, ...); the Worker serves it
     // with the 404 status for any address the site does not have.
     const pages = getStaticPaths().filter((path) => !CLIENT_ONLY.has(path) && LOCALES.includes(localeFromPath(path)))

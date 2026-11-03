@@ -1,6 +1,6 @@
 // Moves the inline <script> blocks React Router writes into prerendered HTML into external files.
 //
-// Our CSP (vercel.json) allows scripts from 'self' only, with no 'unsafe-inline'. React Router's
+// Our CSP (site.config.json) allows scripts from 'self' only, with no 'unsafe-inline'. React Router's
 // <Scripts /> and <ScrollRestoration /> emit inline scripts (router context, stream chunks, the module
 // bootstrap), which the browser blocks, so the app never hydrates. Hashes would differ per page and
 // nonces need a server, so after the build each inline script becomes /assets/inline/<hash>.js.

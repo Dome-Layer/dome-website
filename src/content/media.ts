@@ -7,7 +7,7 @@
  * so a missing translation fails `tsc` exactly like any other string.
  *
  * Everything is self-hosted, so the CSP's `default-src 'self'` already covers it and no `media-src`
- * entry is needed. If an asset ever moves to a CDN, add `media-src` to `vercel.json` at the same
+ * entry is needed. If an asset ever moves to a CDN, add `media-src` to `site.config.json` at the same
  * time.
  *
  * Adding an asset: add the files under `public/media/`, add an entry here, add its alt text to both

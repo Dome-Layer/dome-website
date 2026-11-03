@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from 'vitest'
 import worker, { type Env } from './index'
-import siteConfig from '../vercel.json'
+import siteConfig from '../site.config.json'
 import { findRedirect, findRewrite, headersFor, type HeaderRule, type RedirectRule } from './routing'
 
 const CHROME = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 14_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0 Safari/537.36'
@@ -19,7 +19,7 @@ function makeEnv(overrides: Partial<Env> = {}): Env {
 const get = (url: string, headers: Record<string, string> = {}, env = makeEnv()) =>
   worker.fetch(new Request(url, { headers: { 'user-agent': CHROME, ...headers } }), env)
 
-describe('routing (vercel.json semantics)', () => {
+describe('routing (site.config.json rules)', () => {
   const redirects = siteConfig.redirects as RedirectRule[]
 
   it('redirects /tools/:slug permanently to /dome/:slug, keeping the query', () => {
@@ -29,6 +29,10 @@ describe('routing (vercel.json semantics)', () => {
     })
     expect(findRedirect(redirects, new URL('https://domelayer.com/tools'))?.location).toBe('/dome')
     expect(findRedirect(redirects, new URL('https://domelayer.com/it/strumenti/x'))?.location).toBe('/it/dome/x')
+  })
+
+  it('holds only the rules the Worker applies', () => {
+    expect(Object.keys(siteConfig).sort()).toEqual(['headers', 'redirects', 'rewrites'])
   })
 
   it('sends www to the apex only for the www host', () => {
@@ -85,7 +89,7 @@ describe('worker', () => {
     expect(res.headers.get('location')).toBe('/it/chi-siamo?utm_source=email')
   })
 
-  it('does the first-visit locale redirect the Vercel middleware does', async () => {
+  it('does the first-visit locale redirect', async () => {
     const res = await get('https://domelayer.com/dome/agent-flow?utm_source=email', { 'accept-language': 'it-IT,it;q=0.9' })
     expect(res.status).toBe(307)
     expect(res.headers.get('location')).toBe('/it/dome/agent-flow?utm_source=email')
