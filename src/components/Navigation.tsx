@@ -11,15 +11,12 @@ import { useLocale, useMessages } from '../i18n/useLocale'
 import type { Messages } from '../i18n/messages/types'
 
 /**
- * The restructured site's primary navigation: real pages, not hash anchors into a one-page site.
- * The old section-anchor model and its Lenis scroll tracking went with the home page rebuild
- * (plan phase 1c).
+ * The project site's primary navigation: Tools, Agent Flow, About, Contact (DOME_DECISIONS
+ * 2026-11-02). The service lines and case studies moved to francescoprodomo.com.
  */
 const NAV_ITEMS = [
-  { key: 'aiAutomation', route: 'aiProcessAutomation' },
-  { key: 'enterpriseUx', route: 'enterpriseUx' },
-  { key: 'dome', route: 'dome' },
-  { key: 'caseStudies', route: 'caseStudies' },
+  { key: 'tools', route: 'dome' },
+  { key: 'agentFlow', route: 'agentFlow' },
   { key: 'about', route: 'about' },
   { key: 'contact', route: 'contact' },
 ] as const satisfies readonly { key: keyof Messages['nav']; route: RouteId }[]

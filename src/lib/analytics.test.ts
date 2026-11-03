@@ -55,14 +55,14 @@ describe('demo_cta_click', () => {
     return track
   }
 
-  it('counts links to the contact page and the booking calendar', () => {
+  it('counts links to the contact page, and says when they ask for demo access', () => {
     expect(clickLink('/contact')).toHaveBeenCalledWith('demo_cta_click', { from: '/', to: 'contact' })
-    expect(clickLink('/it/contatti#book')).toHaveBeenCalledWith('demo_cta_click', { from: '/', to: 'booking' })
+    expect(clickLink('/it/contatti?topic=demo')).toHaveBeenCalledWith('demo_cta_click', { from: '/', to: 'demo' })
   })
 
   it('ignores other links', () => {
     expect(clickLink('/about')).not.toHaveBeenCalled()
-    expect(clickLink('https://cal.com/domelayer')).not.toHaveBeenCalled()
+    expect(clickLink('https://francescoprodomo.com')).not.toHaveBeenCalled()
   })
 })
 

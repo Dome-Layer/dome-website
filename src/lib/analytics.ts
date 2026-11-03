@@ -1,4 +1,5 @@
 import { CLIENT_ONLY_PATHS, PUBLIC_ROUTES } from '../i18n/routes'
+import { DEMO_TOPIC_QUERY } from './project'
 
 /**
  * Aggregate, cookie-free measurement with Umami Cloud (Sprint C item 3, DOME_DECISIONS 2026-09-30).
@@ -12,10 +13,12 @@ import { CLIENT_ONLY_PATHS, PUBLIC_ROUTES } from '../i18n/routes'
  * honoured. The cookie page and the notice describe exactly this; change them together.
  */
 
-/** The five goal events (DOME_DECISIONS 2026-09-30). Names are reused if a tier 3 ever arrives. */
+/**
+ * The goal events (DOME_DECISIONS 2026-09-30). `booking_opened` went with the booking calendar
+ * (site split, 2026-11): booking a call lives on francescoprodomo.com.
+ */
 export type AnalyticsEvent =
   | 'contact_sent'
-  | 'booking_opened'
   | 'demo_cta_click'
   | 'sign_in_started'
   | 'locale_switch'
@@ -78,15 +81,15 @@ export function track(event: AnalyticsEvent, data?: Record<string, string>): voi
 const CONTACT_PATHS = new Set(Object.values(PUBLIC_ROUTES.contact.path))
 
 /**
- * demo_cta_click: any link that takes a visitor to the booking calendar or the contact page from
- * another page ("Book a private demo", "Request a demo", the closing CTAs). One listener instead of
- * one handler per button, so a new CTA is counted without remembering to wire it.
+ * demo_cta_click: any link that takes a visitor to the contact page from another page ("Ask for
+ * demo access", the contact links). `to` says whether it asked for demo access. One listener
+ * instead of one handler per link, so a new link is counted without remembering to wire it.
  */
 export function trackConversationCta(event: MouseEvent): void {
   const link = (event.target as Element | null)?.closest?.('a[href]') as HTMLAnchorElement | null
   if (!link || link.origin !== location.origin) return
   const target = link.pathname.replace(/\/+$/, '') || '/'
-  if (!CONTACT_PATHS.has(target) && link.hash !== '#book') return
-  if (target === (location.pathname.replace(/\/+$/, '') || '/') && link.hash !== '#book') return
-  track('demo_cta_click', { from: location.pathname, to: link.hash === '#book' ? 'booking' : 'contact' })
+  if (!CONTACT_PATHS.has(target)) return
+  if (target === (location.pathname.replace(/\/+$/, '') || '/')) return
+  track('demo_cta_click', { from: location.pathname, to: link.search.includes(DEMO_TOPIC_QUERY) ? 'demo' : 'contact' })
 }

@@ -42,6 +42,19 @@ export interface ClosingText {
   primary: string
 }
 
+/** The project pages' closing panel: its buttons are shared words (`common`), so only the question is here. */
+export interface ProjectClosingText {
+  heading: string
+  body: string
+}
+
+/** A page hero without buttons (About, Contact). */
+export interface PlainHeroText {
+  eyebrow: string
+  heading: string
+  lead: string
+}
+
 /** A service line page. Both service lines are built from the same sections. */
 export interface ServicePageText {
   hero: HeroText
@@ -115,6 +128,9 @@ export interface Messages {
   }
   nav: {
     homeLabel: string
+    /** The tools page (/dome). */
+    tools: string
+    agentFlow: string
     enterpriseUx: string
     aiAutomation: string
     dome: string
@@ -142,6 +158,13 @@ export interface Messages {
     tagline: string
     /** Accessible name of the footer navigation. */
     navLabel: string
+    /** Heading of the column of this site's pages. */
+    project: string
+    /** Heading of the column of links off the site. */
+    elsewhere: string
+    /** Link to francescoprodomo.com, the consulting site. */
+    workWith: string
+    github: string
     /** Footer link to Francesco's LinkedIn profile (DOME has no LinkedIn page). */
     linkedin: string
     /** Label before the certified email (PEC) address in the footer's legal line. */
@@ -169,9 +192,6 @@ export interface Messages {
     namePlaceholder: string
     emailLabel: string
     emailPlaceholder: string
-    companyLabel: string
-    companyOptional: string
-    companyPlaceholder: string
     topicLabel: string
     messageLabel: string
     messagePlaceholder: string
@@ -215,8 +235,23 @@ export interface Messages {
     relatedWork: string
     anonymised: string
     viewAllCaseStudies: string
-    /** Topics offered on the contact form and the booking calendar, in service-line order. */
-    topics: readonly [string, string, string, string]
+    /**
+     * Topics offered on the contact form: feedback, demo access (preselected by `?topic=demo`),
+     * something else. Sent with the message as written, so the inbox shows the visitor's language.
+     */
+    topics: readonly [string, string, string]
+    /** Sign in, then the /app hub (DOME_DECISIONS 2026-11-02). */
+    tryTool: string
+    watchRun: string
+    askDemo: string
+    /** The recorded Agent Flow run. Until the recording exists (roadmap row 7) it is this diagram and the steps. */
+    run: {
+      badge: string
+      /** Accessible name of the diagram, which reads the stages in order. */
+      diagramLabel: string
+      stages: readonly [string, string, string, string, string]
+      steps: readonly ItemText[]
+    }
   }
 
   /**
@@ -226,18 +261,19 @@ export interface Messages {
   pages: {
     home: {
       /** `scrollCue` is the small label under the home hero's scene; it is decorative, never read out. */
-      hero: HeroText & { scrollCue: string }
-      sectors: { eyebrow: string; items: readonly string[] }
-      services: SectionText & { items: readonly (ItemText & { cta: string })[] }
-      howWeWork: SectionText & {
+      hero: { eyebrow: string; heading: string; lead: string; note: string; scrollCue: string }
+      /** The DOME method: four phases, the tools under each, and the governance strip. */
+      method: SectionText & {
         phaseLabel: string
         phases: readonly ItemText[]
         governance: string
+        openDashboard: string
       }
-      selectedWork: { eyebrow: string; heading: string }
-      capabilities: SectionText & { tools: readonly string[]; cta: string }
-      operatingModel: SectionText & { cta: string; items: readonly ItemText[] }
-      closing: ClosingText
+      tools: SectionText & { all: string }
+      run: SectionText & { lead: string; cta: string }
+      closing: ProjectClosingText
+      /** The quiet hire line under the closing panel; the link to francescoprodomo.com follows it. */
+      hire: string
     }
     /** The two service lines share a shape; see `ServicePageText`. */
     services: {
@@ -246,17 +282,17 @@ export interface Messages {
       enterpriseUx: ServicePageText
     }
     dome: {
-      hero: HeroText
+      hero: HeroText & { note: string }
       blocks: SectionText & {
         openTool: string
         details: string
         items: readonly (ItemText & { phase: string })[]
       }
-      agentFlow: SectionText & { badge: string; cta: string; steps: readonly ItemText[] }
+      agentFlow: SectionText & { lead: string; cta: string }
       governance: SectionText & { openDashboard: string; details: string }
       standards: SectionText & { items: readonly ItemText[] }
-      partner: { text: string; cta: string }
-      closing: ClosingText
+      closing: ProjectClosingText
+      hire: string
     }
     caseStudies: {
       hero: HeroText
@@ -278,35 +314,25 @@ export interface Messages {
       closing: ClosingText
     }
     about: {
-      hero: HeroText
-      who: SectionText & { paragraphs: readonly string[] }
+      hero: PlainHeroText
+      why: SectionText & { paragraphs: readonly string[] }
       facts: readonly { figure: string; label: string }[]
-      setup: SectionText & { items: readonly ItemText[] }
-      expect: SectionText & { items: readonly ItemText[] }
-      partner: SectionText & { body: string }
-      leadership: SectionText & { name: string; role: string; bio: string; linkedin: string }
-      where: SectionText & { cta: string }
-      closing: ClosingText
+      builder: SectionText & { name: string; bio: string; workWith: string; github: string; linkedin: string }
+      closing: ProjectClosingText
     }
     contact: {
-      hero: HeroText
-      book: { heading: string; lead: string }
-      calendar: {
-        topicLegend: string
-        notLoaded: string
-        show30: string
-        show15: string
-        notice: string
-        noticeEnd: string
-      }
-      details: SectionText & {
+      hero: PlainHeroText
+      details: {
+        heading: string
         email: string
         pec: string
-        booking: string
         location: string
         locationValue: string
+        /** Label of the GitHub link. */
+        code: string
         legal: string
       }
+      hire: { heading: string; text: string }
     }
     /** The DOME tool detail pages. Their copy was hardcoded in English until 2026-09-28. */
     tools: {
@@ -326,7 +352,7 @@ export interface Messages {
         heading: string
         lead: string
         openQueue: string
-        bookDemo: string
+        askDemo: string
         demoNote: string
         steps: readonly ItemText[]
       }

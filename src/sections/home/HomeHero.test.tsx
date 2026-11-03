@@ -29,7 +29,9 @@ afterEach(() => {
 describe('HomeHero prerender', () => {
   it('carries the English copy, the scroll cue and the still frame, but no canvas', () => {
     const html = renderToString(hero('/'))
-    expect(html).toContain('Enterprise software people use, and AI you can audit.')
+    expect(html).toContain('Working AI tools you can audit.')
+    expect(html).toContain('href="/login"')
+    expect(html).toContain('#run"')
     expect(html).toContain('Scroll')
     expect(html).toContain('<svg')
     expect(html).not.toContain('<canvas')
@@ -38,7 +40,7 @@ describe('HomeHero prerender', () => {
 
   it('carries the Italian copy on /it', () => {
     const html = renderToString(hero('/it'))
-    expect(html).toContain('Software che le persone usano. AI che potete verificare.')
+    expect(html).toContain('Strumenti di AI funzionanti, che potete verificare.')
     expect(html).toContain('Scorri')
   })
 })

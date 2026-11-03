@@ -15,8 +15,11 @@ interface PageHeroProps {
   eyebrow: string
   heading: string
   lead: string
-  primary: { label: string; to: string }
-  secondary: { label: string; to: string }
+  /** The hero's two actions. The About and Contact heroes have none (project site canvas). */
+  primary?: { label: string; to: string }
+  secondary?: { label: string; to: string }
+  /** A short line under the actions, such as how signing in works. */
+  note?: string
 }
 
 /**
@@ -24,7 +27,7 @@ interface PageHeroProps {
  * legible by the same theme-keyed scrims the home hero uses, and fading into the page background
  * at the bottom edge.
  */
-export function PageHero({ media, breadcrumbs, eyebrow, heading, lead, primary, secondary }: PageHeroProps) {
+export function PageHero({ media, breadcrumbs, eyebrow, heading, lead, primary, secondary, note }: PageHeroProps) {
   return (
     <section className="relative overflow-hidden">
       <div className="absolute inset-0">
@@ -80,12 +83,17 @@ export function PageHero({ media, breadcrumbs, eyebrow, heading, lead, primary, 
           <p className="max-w-[560px] text-[15px] leading-[1.6] text-[var(--color-text-primary)] sm:text-[16px] md:text-[18px] md:leading-[1.7] md:text-[var(--color-text-secondary)]">
             {lead}
           </p>
-          <div className="mt-2 flex flex-wrap gap-3">
-            <ButtonLink to={primary.to}>{primary.label}</ButtonLink>
-            <ButtonLink to={secondary.to} variant="secondary">
-              {secondary.label}
-            </ButtonLink>
-          </div>
+          {(primary || secondary) && (
+            <div className="mt-2 flex flex-wrap gap-3">
+              {primary && <ButtonLink to={primary.to}>{primary.label}</ButtonLink>}
+              {secondary && (
+                <ButtonLink to={secondary.to} variant="secondary">
+                  {secondary.label}
+                </ButtonLink>
+              )}
+            </div>
+          )}
+          {note && <p className="text-[13px] leading-[1.6] text-[var(--color-text-secondary)]">{note}</p>}
         </div>
       </div>
 

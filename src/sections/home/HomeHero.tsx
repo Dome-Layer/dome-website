@@ -2,12 +2,13 @@ import { useRef } from 'react'
 import { HeroScene } from '../../components/hero/HeroScene'
 import { ButtonLink } from '../../components/ui/Button'
 import { Eyebrow } from '../../components/ui/Eyebrow'
-import { localizedHref } from '../../i18n/routes'
-import { useLocale, useMessages } from '../../i18n/useLocale'
+import { RUN_ANCHOR, useTryHref } from '../../lib/project'
+import { useMessages } from '../../i18n/useLocale'
 
 export function HomeHero() {
-  const locale = useLocale()
-  const t = useMessages().pages.home.hero
+  const messages = useMessages()
+  const t = messages.pages.home.hero
+  const tryHref = useTryHref()
   // The scene dims its particles behind this block, so the copy keeps its contrast.
   const copyRef = useRef<HTMLDivElement>(null)
 
@@ -33,11 +34,12 @@ export function HomeHero() {
             {t.lead}
           </p>
           <div className="mt-2 flex flex-wrap gap-3">
-            <ButtonLink to={localizedHref('contact', locale)}>{t.primary}</ButtonLink>
-            <ButtonLink to={localizedHref('caseStudies', locale)} variant="secondary">
-              {t.secondary}
+            <ButtonLink to={tryHref}>{messages.common.tryTool}</ButtonLink>
+            <ButtonLink to={`#${RUN_ANCHOR}`} variant="secondary">
+              {messages.common.watchRun}
             </ButtonLink>
           </div>
+          <p className="text-[13px] leading-[1.6] text-[var(--color-text-primary)]">{t.note}</p>
         </div>
       </div>
     </section>
