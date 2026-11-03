@@ -248,7 +248,7 @@ export const en: Messages = {
   pages: {
     home: {
       hero: {
-        eyebrow: 'A project by Francesco Prodomo',
+        eyebrow: 'Governed AI, in practice',
         heading: 'Working AI tools you can audit.',
         lead: 'DOME shows, with working tools, how AI can run inside regulated processes and stay governed, measurable and explainable.',
         note: 'Free to try. Sign in with a magic link, Google or GitHub.',

@@ -262,7 +262,7 @@ export const it: Messages = {
   pages: {
     home: {
       hero: {
-        eyebrow: 'Un progetto di Francesco Prodomo',
+        eyebrow: 'AI governata, nella pratica',
         heading: 'Strumenti di AI funzionanti, che potete verificare.',
         lead: 'DOME mostra, con strumenti che funzionano, come l’AI può lavorare dentro processi regolamentati restando governata, misurabile e spiegabile.',
         note: 'Provarli è gratis. Accedete con un magic link, Google o GitHub.',

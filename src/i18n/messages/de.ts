@@ -260,7 +260,7 @@ export const de: Messages = {
   pages: {
     home: {
       hero: {
-        eyebrow: 'Ein Projekt von Francesco Prodomo',
+        eyebrow: 'Kontrollierte KI in der Praxis',
         heading: 'Funktionierende KI-Tools, die Sie prüfen können.',
         lead: 'DOME zeigt mit funktionierenden Tools, wie KI in regulierten Prozessen laufen und dabei kontrolliert, messbar und erklärbar bleiben kann.',
         note: 'Kostenlos ausprobieren. Anmeldung per Magic Link, Google oder GitHub.',

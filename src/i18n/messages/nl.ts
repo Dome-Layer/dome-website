@@ -258,7 +258,7 @@ export const nl: Messages = {
   pages: {
     home: {
       hero: {
-        eyebrow: 'Een project van Francesco Prodomo',
+        eyebrow: 'AI met governance, in de praktijk',
         heading: 'Werkende AI-tools die u kunt controleren.',
         lead: 'DOME laat met werkende tools zien hoe AI binnen gereguleerde processen kan draaien en daarbij controleerbaar, meetbaar en uitlegbaar blijft.',
         note: 'Gratis te proberen. Log in met een magic link, Google of GitHub.',
