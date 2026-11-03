@@ -78,6 +78,226 @@
       "permanent": true
     },
     {
+      "source": "/services/ai-process-automation",
+      "destination": "https://francescoprodomo.com/services/ai-automation",
+      "permanent": true
+    },
+    {
+      "source": "/it/servizi/automazione-processi-ai",
+      "destination": "https://francescoprodomo.com/services/ai-automation",
+      "permanent": true
+    },
+    {
+      "source": "/nl/diensten/ai-procesautomatisering",
+      "destination": "https://francescoprodomo.com/services/ai-automation",
+      "permanent": true
+    },
+    {
+      "source": "/de/leistungen/ki-prozessautomatisierung",
+      "destination": "https://francescoprodomo.com/services/ai-automation",
+      "permanent": true
+    },
+    {
+      "source": "/services/enterprise-ux",
+      "destination": "https://francescoprodomo.com/services/ux-ui-design",
+      "permanent": true
+    },
+    {
+      "source": "/it/servizi/ux-enterprise",
+      "destination": "https://francescoprodomo.com/services/ux-ui-design",
+      "permanent": true
+    },
+    {
+      "source": "/nl/diensten/enterprise-ux",
+      "destination": "https://francescoprodomo.com/services/ux-ui-design",
+      "permanent": true
+    },
+    {
+      "source": "/de/leistungen/enterprise-ux",
+      "destination": "https://francescoprodomo.com/services/ux-ui-design",
+      "permanent": true
+    },
+    {
+      "source": "/case-studies",
+      "destination": "https://francescoprodomo.com/work",
+      "permanent": true
+    },
+    {
+      "source": "/it/casi-studio",
+      "destination": "https://francescoprodomo.com/work",
+      "permanent": true
+    },
+    {
+      "source": "/nl/cases",
+      "destination": "https://francescoprodomo.com/work",
+      "permanent": true
+    },
+    {
+      "source": "/de/fallstudien",
+      "destination": "https://francescoprodomo.com/work",
+      "permanent": true
+    },
+    {
+      "source": "/case-studies/procurement-workflow-redesign",
+      "destination": "https://francescoprodomo.com/work/ahold-delhaize-procurement",
+      "permanent": true
+    },
+    {
+      "source": "/it/casi-studio/riprogettazione-acquisti",
+      "destination": "https://francescoprodomo.com/work/ahold-delhaize-procurement",
+      "permanent": true
+    },
+    {
+      "source": "/nl/cases/herontwerp-inkoopproces",
+      "destination": "https://francescoprodomo.com/work/ahold-delhaize-procurement",
+      "permanent": true
+    },
+    {
+      "source": "/de/fallstudien/neugestaltung-einkaufsprozesse",
+      "destination": "https://francescoprodomo.com/work/ahold-delhaize-procurement",
+      "permanent": true
+    },
+    {
+      "source": "/case-studies/ai-compliance-assessments",
+      "destination": "https://francescoprodomo.com/work/ai-compliance-assessments",
+      "permanent": true
+    },
+    {
+      "source": "/it/casi-studio/valutazioni-conformita-ai",
+      "destination": "https://francescoprodomo.com/work/ai-compliance-assessments",
+      "permanent": true
+    },
+    {
+      "source": "/nl/cases/ai-compliancebeoordelingen",
+      "destination": "https://francescoprodomo.com/work/ai-compliance-assessments",
+      "permanent": true
+    },
+    {
+      "source": "/de/fallstudien/ki-compliance-bewertungen",
+      "destination": "https://francescoprodomo.com/work/ai-compliance-assessments",
+      "permanent": true
+    },
+    {
+      "source": "/case-studies/governed-invoice-approval",
+      "destination": "/dome/agent-flow",
+      "permanent": true
+    },
+    {
+      "source": "/it/casi-studio/approvazione-fatture-governata",
+      "destination": "/it/dome/agent-flow",
+      "permanent": true
+    },
+    {
+      "source": "/nl/cases/factuurgoedkeuring-met-governance",
+      "destination": "/nl/dome/agent-flow",
+      "permanent": true
+    },
+    {
+      "source": "/de/fallstudien/rechnungsfreigabe-mit-governance",
+      "destination": "/de/dome/agent-flow",
+      "permanent": true
+    },
+    {
+      "source": "/case-studies/metals-trading-platform",
+      "destination": "https://francescoprodomo.com/work/metals-trading-platform",
+      "permanent": true
+    },
+    {
+      "source": "/it/casi-studio/piattaforma-trading-metalli",
+      "destination": "https://francescoprodomo.com/work/metals-trading-platform",
+      "permanent": true
+    },
+    {
+      "source": "/nl/cases/handelsplatform-metalen",
+      "destination": "https://francescoprodomo.com/work/metals-trading-platform",
+      "permanent": true
+    },
+    {
+      "source": "/de/fallstudien/handelsplattform-metalle",
+      "destination": "https://francescoprodomo.com/work/metals-trading-platform",
+      "permanent": true
+    },
+    {
+      "source": "/case-studies/food-traceability-platform",
+      "destination": "https://francescoprodomo.com/work/albert-heijn-traceability",
+      "permanent": true
+    },
+    {
+      "source": "/it/casi-studio/piattaforma-tracciabilita-alimentare",
+      "destination": "https://francescoprodomo.com/work/albert-heijn-traceability",
+      "permanent": true
+    },
+    {
+      "source": "/nl/cases/traceerbaarheid-voedselketen",
+      "destination": "https://francescoprodomo.com/work/albert-heijn-traceability",
+      "permanent": true
+    },
+    {
+      "source": "/de/fallstudien/rueckverfolgbarkeit-lebensmittel",
+      "destination": "https://francescoprodomo.com/work/albert-heijn-traceability",
+      "permanent": true
+    },
+    {
+      "source": "/case-studies/trading-app-redesign",
+      "destination": "https://francescoprodomo.com/work/trading-app-redesign",
+      "permanent": true
+    },
+    {
+      "source": "/it/casi-studio/riprogettazione-app-trading",
+      "destination": "https://francescoprodomo.com/work/trading-app-redesign",
+      "permanent": true
+    },
+    {
+      "source": "/nl/cases/herontwerp-trading-app",
+      "destination": "https://francescoprodomo.com/work/trading-app-redesign",
+      "permanent": true
+    },
+    {
+      "source": "/de/fallstudien/neugestaltung-trading-app",
+      "destination": "https://francescoprodomo.com/work/trading-app-redesign",
+      "permanent": true
+    },
+    {
+      "source": "/case-studies/ai-procurement-platform",
+      "destination": "https://francescoprodomo.com/work/ai-procurement-platform",
+      "permanent": true
+    },
+    {
+      "source": "/it/casi-studio/piattaforma-acquisti-ai",
+      "destination": "https://francescoprodomo.com/work/ai-procurement-platform",
+      "permanent": true
+    },
+    {
+      "source": "/nl/cases/ai-inkoopplatform",
+      "destination": "https://francescoprodomo.com/work/ai-procurement-platform",
+      "permanent": true
+    },
+    {
+      "source": "/de/fallstudien/ki-einkaufsplattform",
+      "destination": "https://francescoprodomo.com/work/ai-procurement-platform",
+      "permanent": true
+    },
+    {
+      "source": "/case-studies/ai-training-videos",
+      "destination": "https://francescoprodomo.com/work/ai-training-videos",
+      "permanent": true
+    },
+    {
+      "source": "/it/casi-studio/video-formativi-ai",
+      "destination": "https://francescoprodomo.com/work/ai-training-videos",
+      "permanent": true
+    },
+    {
+      "source": "/nl/cases/ai-trainingsvideos",
+      "destination": "https://francescoprodomo.com/work/ai-training-videos",
+      "permanent": true
+    },
+    {
+      "source": "/de/fallstudien/ki-schulungsvideos",
+      "destination": "https://francescoprodomo.com/work/ai-training-videos",
+      "permanent": true
+    },
+    {
       "source": "/(.*)",
       "has": [{ "type": "host", "value": "www.domelayer.com" }],
       "destination": "https://domelayer.com/$1",

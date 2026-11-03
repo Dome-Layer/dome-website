@@ -21,7 +21,7 @@ describe('buildMeta', () => {
   })
 
   it('gives each page the social image of its own language', () => {
-    expect(buildMeta('enterpriseUx', 'it')).toContainEqual({ property: 'og:image', content: 'https://domelayer.com/social/enterprise-ux-it.jpg' })
+    expect(buildMeta('contact', 'it')).toContainEqual({ property: 'og:image', content: 'https://domelayer.com/social/contact-it.jpg' })
     expect(buildMeta('llmCouncil', 'en')).toContainEqual({ name: 'twitter:image', content: 'https://domelayer.com/social/dome-en.jpg' })
   })
 
@@ -58,9 +58,9 @@ describe('buildMeta', () => {
     expect(links(nl, 'canonical')[0].href).toBe('https://domelayer.com/nl/over-ons')
     expect(nl).toContainEqual({ property: 'og:locale', content: 'nl_NL' })
     expect(nl).toContainEqual({ property: 'og:image', content: 'https://domelayer.com/social/about-nl.jpg' })
-    const de = buildMeta('caseInvoice', 'de', [...LOCALES])
-    expect(de[0]).toEqual({ title: 'Kontrollierter Workflow von der Rechnung zur Freigabe | DOME' })
-    expect(links(de, 'canonical')[0].href).toBe('https://domelayer.com/de/fallstudien/rechnungsfreigabe-mit-governance')
+    const de = buildMeta('contact', 'de', [...LOCALES])
+    expect(de[0]).toEqual({ title: 'Kontakt | DOME' })
+    expect(links(de, 'canonical')[0].href).toBe('https://domelayer.com/de/kontakt')
   })
 
   it('never describes DOME as something for sale in structured data', () => {
@@ -68,7 +68,8 @@ describe('buildMeta', () => {
       for (const locale of LOCALES) {
         const ld = buildMeta(id, locale, [...LOCALES]).find((m) => 'script:ld+json' in m)
         const json = JSON.stringify(ld)
-        expect(json).toContain('"ProfessionalService"')
+        expect(json).toContain('"WebSite"')
+        expect(json).not.toContain('"ProfessionalService"')
         expect(json).not.toMatch(/"(Product|Offer|OfferCatalog|AggregateOffer|SoftwareApplication|WebApplication)"|"offers"|"price/)
       }
     }

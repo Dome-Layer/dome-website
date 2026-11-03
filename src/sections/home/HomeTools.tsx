@@ -1,11 +1,11 @@
 import { MediaSplit } from '../../components/media/MediaSplit'
 import { ForwardLink } from '../../components/ui/Button'
 import { Eyebrow } from '../../components/ui/Eyebrow'
-import { localizedHref, type StaticRouteId } from '../../i18n/routes'
+import { localizedHref, type RouteId } from '../../i18n/routes'
 import { useLocale, useMessages } from '../../i18n/useLocale'
 
 /** In the order of the method, the dashboard and Agent Flow last. */
-const TOOLS: readonly StaticRouteId[] = [
+const TOOLS: readonly RouteId[] = [
   'processAnalyzer',
   'llmCouncil',
   'documentIntelligence',

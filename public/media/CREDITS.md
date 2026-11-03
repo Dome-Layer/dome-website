@@ -24,21 +24,21 @@ no on-page label, so they are listed here instead.
 | Home hero background | Francesco Prodomo | Decorative, no label |
 | Home hero poster frame | Francesco Prodomo | Decorative, no label |
 | Home hero, still alternative to the video | AI-generated | Yes |
-| AI process automation hero | AI-generated | Yes |
-| Enterprise UX hero | AI-generated | Yes |
+| Not on a page yet: process automation scene | AI-generated | Yes |
+| Not on a page yet: design workshop scene | AI-generated | Yes |
 | DOME capabilities hero | AI-generated | Yes |
 | About hero | AI-generated | Yes |
-| Case studies index hero | AI-generated | Yes |
+| Not on a page yet: process maps scene | AI-generated | Yes |
 | Contact hero | AI-generated | Yes |
 | How we work, and the call-to-action backgrounds | AI-generated | Decorative, listed here |
 | Built for regulated work, and Where we work | AI-generated | Decorative, listed here |
-| Case study: procurement workflow redesign | AI-generated | Yes |
-| Case study: AI compliance assessments | AI-generated | Yes |
-| Case study: metals trading platform | AI-generated | Yes |
-| Case study: food traceability platform | AI-generated | Yes |
-| Case study: trading app redesign | AI-generated | Yes |
-| Case study: AI procurement platform | AI-generated | Yes |
-| Case study: AI training videos | AI-generated | Yes |
+| Not on a page yet: procurement workflow scene | AI-generated | Yes |
+| Not on a page yet: compliance assessment scene | AI-generated | Yes |
+| Not on a page yet: metals trading scene | AI-generated | Yes |
+| Not on a page yet: food traceability scene | AI-generated | Yes |
+| Not on a page yet: trading app scene | AI-generated | Yes |
+| Not on a page yet: procurement platform scene | AI-generated | Yes |
+| Not on a page yet: training video scene | AI-generated | Yes |
 | About, and the leadership card | Photograph of Francesco Prodomo, AI-edited: only the clothing was changed | No |
 | About, and DOME capabilities | Ionita Consulting, used with permission | No |
 

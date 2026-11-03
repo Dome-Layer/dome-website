@@ -15,17 +15,14 @@ export const de: Messages = {
       'DOME ist ein persönliches Projekt von Francesco Prodomo mit Sitz in Florenz: funktionierende KI-Tools, die zeigen, wie KI in regulierten Prozessen arbeiten und dabei kontrolliert, messbar und erklärbar bleiben kann. Jedes Tool hält seine Entscheidungen in einem gemeinsamen Audit-Trail fest.',
     llmsIntro:
       'DOME ist eine Reihe von KI-Tools, die eine einzelne Person, Francesco Prodomo, als Projekt zu kontrollierter KI entwickelt und betreibt. Jedes Tool deckt eine Phase einer Methode ab (discover, orchestrate, model, execute): Prozessanalyse, ein Rat aus mehreren KI-Modellen, Dokumenten- und Datenanalyse sowie Agent Flow, ein kontrollierter Workflow von der Rechnung bis zur Freigabe. Jedes Tool hält seine Entscheidungen in einem gemeinsamen Audit-Trail fest, sichtbar im Governance Dashboard, und eine namentlich benannte Person gibt frei, wo die Richtlinie es verlangt. Fünf Tools lassen sich nach der Anmeldung kostenlos ausprobieren; Agent Flow läuft als private Demo. Der Code ist auf GitHub öffentlich. Francescos Beratung finden Sie auf francescoprodomo.com.',
-    llmsSections: { pages: 'Seiten', tools: 'Die Tools', caseStudies: 'Fallstudien', legal: 'Rechtliches' },
+    llmsSections: { pages: 'Seiten', tools: 'Die Tools', legal: 'Rechtliches' },
     knowsAbout: ['KI-Governance', 'Kontrollierte KI-Workflows', 'Audit-Trails für KI', 'Freigabe durch einen Menschen', 'Document Intelligence', 'Prozessanalyse', 'KI-Prüfung mit mehreren Modellen', 'Designsysteme'],
   },
   nav: {
     homeLabel: 'DOME, Startseite',
     tools: 'Tools',
     agentFlow: 'Agent Flow',
-    enterpriseUx: 'Enterprise UX',
-    aiAutomation: 'KI-Automatisierung',
     dome: 'DOME',
-    caseStudies: 'Fallstudien',
     about: 'Über DOME',
     contact: 'Kontakt',
     signIn: 'Anmelden',
@@ -103,24 +100,6 @@ export const de: Messages = {
         'Sechs KI-Tools und ein Audit-Trail. Probieren Sie sie kostenlos aus, oder sehen Sie, wie eine Rechnung vom Eingang zu einer namentlich benannten Freigabe gelangt.',
       twitterDescription: 'Funktionierende KI-Tools, die Sie prüfen können. Kostenlos ausprobieren.',
       imageAlt: 'DOME: funktionierende KI-Tools, die Sie prüfen können',
-    },
-    enterpriseUx: {
-      name: 'Enterprise UX und Produkt',
-      title: 'Enterprise UX, Produkt und Datenvisualisierung | DOME',
-      description:
-        'Nutzerforschung, Service Design, Oberflächen und Datenvisualisierung für komplexe Plattformen, mit einem Designsystem für Ihre Entwickler.',
-      ogDescription:
-        'Wir bringen Ordnung in interne Tools und Kundenplattformen: Forschung, Service Design, Oberflächen und ein Designsystem für Ihr Team.',
-      imageAlt: 'DOME, Beratung für Enterprise UX und Produkt',
-    },
-    aiProcessAutomation: {
-      name: 'KI-Prozessautomatisierung',
-      title: 'KI-Prozessautomatisierung und Geschäftsanalyse | DOME',
-      description:
-        'Wir erfassen Ihre Prozesse, automatisieren, was klaren Regeln folgt, und übergeben den Rest Ihrem Team, mit Entscheidungsvorlage und Audit-Trail.',
-      ogDescription:
-        'Prozesse automatisieren, ohne die Kontrolle abzugeben: Regeln, wo sie gelten, menschliche Entscheidungen, wo nicht, und ein durchgehender Audit-Trail.',
-      imageAlt: 'DOME KI-Prozessautomatisierung',
     },
     dome: {
       name: 'Tools',
@@ -212,15 +191,6 @@ export const de: Messages = {
         'Schreiben Sie mir zu den Tools. Ich antworte innerhalb von zwei Werktagen.',
       imageAlt: 'Kontakt zu DOME',
     },
-    caseStudies: {
-      name: 'Fallstudien',
-      title: 'Fallstudien | DOME',
-      description:
-        'Anonymisierte Fallstudien zu Enterprise UX und KI-Automatisierung aus Handelseinkauf, Handelsfinanzierung, Lebensmittelketten und Compliance.',
-      ogDescription:
-        'Was wir gebaut haben und was es bewirkt hat. Kundenangaben sind durchgehend anonymisiert.',
-      imageAlt: 'Fallstudien von DOME',
-    },
     privacy: {
       name: 'Datenschutzerklärung',
       title: 'Datenschutzerklärung | DOME',
@@ -271,10 +241,6 @@ export const de: Messages = {
   },
   aiGeneratedLabel: 'Mit KI erstelltes Bild',
   common: {
-    sendMessage: 'Nachricht senden',
-    relatedWork: 'Ähnliche Projekte',
-    anonymised: 'Kundenangaben sind anonymisiert.',
-    viewAllCaseStudies: 'Alle Fallstudien',
     topics: ['Feedback', 'Demo-Zugang', 'Etwas anderes'],
     tryTool: 'Tool ausprobieren',
     watchRun: 'Ablauf ansehen',
@@ -332,111 +298,6 @@ export const de: Messages = {
       },
       hire: 'Sie möchten mit Francesco zusammenarbeiten? Seine Beratung finden Sie auf',
     },
-
-    services: {
-      breadcrumb: 'Leistungen',
-      aiProcessAutomation: {
-        hero: {
-          eyebrow: 'KI-Prozessautomatisierung',
-          heading: 'Routine automatisieren. Entscheidungen bleiben beim Menschen.',
-          lead: 'Wir erfassen und analysieren Ihre Abläufe in Finanzen, Einkauf und Compliance. Dann automatisieren wir die klar definierten Schritte, mit Regeln, die Sie lesen können, und einem Nachweis jeder Entscheidung.',
-          primary: 'Automatisierungs-Check vereinbaren',
-          secondary: 'So funktioniert es',
-        },
-        intro: {
-          eyebrow: 'Wo es hilft',
-          heading: 'Prozesse, die reif für Automatisierung sind',
-          items: [
-            { title: 'Hohes Volumen, klare Regeln', body: 'Rechnungseingang, Prüfungen bei neuen Lieferanten, Dokumentenklassifizierung: Arbeit, die einer Richtlinie folgt und trotzdem Zeit von Fachleuten bindet.' },
-            { title: 'Entscheidungen, die belegbar sein müssen', body: 'Freigaben und Ausnahmen, nach denen Prüfer und Aufsicht fragen, manchmal Monate später.' },
-            { title: 'Daten, die in Dokumenten stecken', body: 'Verträge, Zertifikate und Berichte, die heute jemand von Hand in ein anderes System abtippt.' },
-          ],
-        },
-        band: {
-          eyebrow: 'Eingebaute Governance',
-          heading: 'Jede automatisierte Entscheidung lässt sich erklären.',
-          lead: 'Fragt jemand, warum eine Rechnung freigegeben oder ein Dokument markiert wurde, ist die Antwort bereits dokumentiert.',
-          points: [
-            'Ein Konfidenzwert für jedes ausgelesene Feld',
-            'Richtlinien als Regeln außerhalb des Modells, lesbar für Ihr Team',
-            'Eine namentlich benannte Person gibt frei, wo die Richtlinie es verlangt',
-            'Ein Audit-Trail, den Sie für jeden Durchlauf exportieren können',
-            'Betrieb mit einem lokalen Open-Weight-Modell, wenn Daten Ihr Netzwerk nicht verlassen dürfen',
-          ],
-        },
-        steps: {
-          eyebrow: 'So setzen wir es um',
-          heading: 'Vier Schritte, mit Ihnen abgestimmt, bevor etwas läuft',
-          items: [
-            { title: 'Prozess erfassen und analysieren', body: 'Wir gehen den Ablauf mit den Menschen durch, die ihn ausführen, und analysieren Volumen, Kosten und Risiken. So wird klar, welche Schritte Regeln folgen, welche Urteilsvermögen brauchen und wo sich Automatisierung lohnt.' },
-            { title: 'Kontrollen festlegen', body: 'Regeln, Konfidenzschwellen und Freigabepunkte legen wir gemeinsam mit Ihnen fest, bevor auch nur ein Schritt automatisiert wird.' },
-            { title: 'Entwickeln und anbinden', body: 'Wir binden die Systeme an, die Sie bereits nutzen, und halten die Regeln außerhalb des Modells, damit Ihr Team sie lesen und ändern kann.' },
-            { title: 'Betreiben und messen', body: 'Jede Entscheidung wird protokolliert. Wir prüfen die Genauigkeit gemeinsam mit Ihnen und passen die Schwellen an, wenn sich die Volumen ändern.' },
-          ],
-        },
-        related: 'Automatisierung in der Praxis',
-        closing: {
-          heading: 'Beginnen Sie mit einem Prozess.',
-          body: 'Im Automatisierungs-Check erfassen wir mit Ihrem Team einen Ablauf, rechnen den Business Case durch und sagen Ihnen offen, was sich zu automatisieren lohnt und was nicht.',
-          primary: 'Automatisierungs-Check vereinbaren',
-        },
-      },
-      enterpriseUx: {
-        hero: {
-          eyebrow: 'Enterprise UX und Produkt',
-          heading: 'Interne Tools, mit denen Ihre Teams gern arbeiten.',
-          lead: 'Wir gestalten komplexe Unternehmensplattformen neu, von Einkaufsprozessen und Handelsoberflächen bis zu Dashboards und Datenvisualisierung, ausgerichtet auf die Menschen, die täglich damit arbeiten.',
-          primary: 'UX-Check vereinbaren',
-          secondary: 'So arbeiten wir',
-        },
-        intro: {
-          eyebrow: 'Wann es hilft',
-          heading: 'Woran Sie merken, dass ein System gegen seine Nutzer arbeitet',
-          items: [
-            { title: 'Das System wird umgangen', body: 'Menschen weichen auf Tabellen und E-Mails aus, weil das Tool ihnen bei der Arbeit im Weg steht.' },
-            { title: 'Die Einarbeitung hört nie auf', body: 'Neue Mitarbeitende brauchen wochenlang Unterstützung, und beim Helpdesk landen immer wieder dieselben Fragen.' },
-            { title: 'Jede Änderung ist teuer', body: 'Jede neue Anforderung wird zur nächsten Sonderlösung, und mit jedem Release wird die Oberfläche schwerer zu pflegen.' },
-          ],
-        },
-        deliver: {
-          eyebrow: 'Was wir liefern',
-          heading: 'Von der Nutzerforschung bis zum Designsystem, mit dem Ihre Entwickler weiterarbeiten können',
-          items: [
-            { title: 'Nutzerforschung und Service Design', body: 'Interviews, Beobachtung am Arbeitsplatz und Journey Maps, die zeigen, wo Zeit und Vertrauen verloren gehen.' },
-            { title: 'Oberflächen, Dashboards und Datenvisualisierung', body: 'Ansichten und Dashboards für das echte Volumen und die Informationsdichte im Unternehmensalltag, mit Diagrammen, die die entscheidenden Zahlen nach vorn stellen. Getestet mit den Menschen, die damit arbeiten.' },
-            { title: 'Designsysteme', body: 'Eine Komponentenbibliothek mit Richtlinien, mit der Ihre Entwickler weiterarbeiten können, damit die Oberfläche auch nach dem nächsten Release einheitlich bleibt.' },
-            { title: 'Einführung und Nutzung', body: 'Wir begleiten Entwicklung und Einführung, mit Schulungsmaterial und Messungen, die zeigen, ob das neue Tool tatsächlich genutzt wird.' },
-          ],
-        },
-        band: {
-          eyebrow: 'Für regulierte Arbeit gemacht',
-          heading: 'Gestaltet für Entscheidungen, für die jemand geradesteht.',
-          lead: 'Tools in Finanzen, Einkauf und Compliance bilden mehr ab als Aufgaben: Freigaben, Nachweise und Verantwortung. Die Oberfläche muss das sichtbar machen.',
-          points: [
-            'Barrierefrei von Anfang an, nach WCAG 2.1 AA',
-            'Freigaben und ihre Historie dort sichtbar, wo entschieden wird',
-            'Eigene Ansichten für Anfragende, Freigebende und Prüfende',
-            'Ein Designsystem, damit sich jede Ansicht gleich verhält',
-          ],
-        },
-        steps: {
-          eyebrow: 'So setzen wir es um',
-          heading: 'Vom ersten Interview bis zur Einführung',
-          items: [
-            { title: 'Beobachten', body: 'Wir begleiten die Menschen, die das System nutzen, und erfassen, wo Zeit und Vertrauen verloren gehen.' },
-            { title: 'Gestalten', body: 'Wir entwerfen Abläufe und Ansichten gemeinsam mit Ihrem Team, einen Ablauf nach dem anderen.' },
-            { title: 'Validieren', body: 'Wir testen Prototypen mit echten Nutzern, bevor etwas entwickelt wird.' },
-            { title: 'Einführen', body: 'Wir begleiten die Entwicklung, schreiben das Schulungsmaterial und messen nach dem Start, wie das Tool genutzt wird.' },
-          ],
-        },
-        related: 'UX- und Produktarbeit in der Praxis',
-        closing: {
-          heading: 'Beginnen Sie mit einem Ablauf.',
-          body: 'Im UX-Check beobachten wir mit Ihrem Team einen Ablauf und zeigen Ihnen, wo er Zeit verliert und was Sie zuerst angehen sollten.',
-          primary: 'UX-Check vereinbaren',
-        },
-      },
-    },
     dome: {
       hero: {
         eyebrow: 'Die Tools',
@@ -486,43 +347,6 @@ export const de: Messages = {
         body: 'Melden Sie sich an und probieren Sie jedes der fünf Tools kostenlos aus. Für Agent Flow fragen Sie Demo-Zugang an, dann richte ich ihn für Sie ein.',
       },
       hire: 'Sie möchten eine Vorführung mit Ihrem eigenen Prozess? Das gehört zur Automatisierungsprüfung auf',
-    },
-    caseStudies: {
-      hero: {
-        eyebrow: 'Fallstudien',
-        heading: 'Was wir gebaut haben und was es bewirkt hat.',
-        lead: 'Anonymisierte Berichte aus unseren Projekten: das Problem, wie der Kunde es beschrieben hat, was wir getan haben und was das Projekt nachweislich erreicht hat.',
-        primary: 'Über Ihr Projekt sprechen',
-        secondary: 'Was wir bauen',
-      },
-      groups: [
-        { eyebrow: 'KI-Prozessautomatisierung', heading: 'Arbeit, die einer Richtlinie folgt' },
-        { eyebrow: 'Enterprise UX und Produkt', heading: 'Plattformen, mit denen Menschen täglich arbeiten' },
-        { eyebrow: 'DOME-Tools', heading: 'Die Methode von Anfang bis Ende' },
-      ],
-      note: 'Kundenangaben sind durchgehend anonymisiert: Wir nennen Branche und Funktion, nie die Organisation. Und wir nennen nur Ergebnisse, die das Projekt tatsächlich erreicht hat.',
-      closing: {
-        heading: 'Kommt Ihnen eines dieser Probleme bekannt vor?',
-        body: 'Sagen Sie uns, welches, und wir erklären Ihnen, wie wir es angehen würden.',
-        primary: 'Erstgespräch vereinbaren',
-      },
-    },
-    caseStudy: {
-      back: 'Fallstudien',
-      challenge: 'Ausgangslage',
-      whatWeDid: 'Unser Vorgehen',
-      outcomes: 'Ergebnisse',
-      client: 'Kunde',
-      role: 'Unsere Rolle',
-      capabilities: 'Kompetenzen',
-      cta: 'Über ein ähnliches Projekt sprechen',
-      readNext: 'Weiterlesen',
-      notFound: 'Fallstudie nicht gefunden',
-      closing: {
-        heading: 'Kommt Ihnen das bekannt vor?',
-        body: 'Sagen Sie uns, wo Ihr Prozess hakt, und wir erklären Ihnen, wie wir ihn angehen würden.',
-        primary: 'Erstgespräch vereinbaren',
-      },
     },
     about: {
       hero: {

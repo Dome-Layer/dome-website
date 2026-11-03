@@ -73,10 +73,10 @@ describe('robots.txt and llms.txt', () => {
     expect(txt).toContain('(https://domelayer.com/it/termini)')
   })
 
-  it('lists every sitemap URL, case studies included', () => {
+  it('lists every sitemap URL', () => {
     const txt = buildLlmsTxt([...LOCALES])
     const urls = [...buildSitemap([...LOCALES]).matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1])
-    expect(urls.length).toBeGreaterThan(80)
+    expect(urls).toHaveLength(ROUTE_IDS.length * LOCALES.length)
     expect(txt).toContain('## Nederlands')
     expect(txt).toContain('## Deutsch')
     expect(txt).toContain('(https://domelayer.com/de/nutzungsbedingungen)')

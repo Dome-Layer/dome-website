@@ -2,7 +2,7 @@ import type { MetaDescriptor, MetaFunction } from 'react-router'
 import { DEFAULT_LOCALE, OG_LOCALE, type Locale } from '../i18n/locales'
 import { PUBLISHED_LOCALES } from '../i18n/published'
 import { pageMeta } from '../i18n/pageMeta'
-import { localeFromPath, localizedHref, routeIdFromPath, type RouteId } from '../i18n/routes'
+import { localeFromPath, localizedHref, type RouteId } from '../i18n/routes'
 import { socialImagePath } from '../seo/socialImages'
 import { SITE_URL, absoluteUrl, pageStructuredData } from './structuredData'
 
@@ -49,15 +49,4 @@ export function buildMeta(id: RouteId, locale: Locale, locales: readonly Locale[
 /** A route module's `meta` export: the locale comes from the URL being rendered. */
 export function routeMeta(id: RouteId): MetaFunction {
   return ({ location }) => buildMeta(id, localeFromPath(location.pathname))
-}
-
-/**
- * A `meta` export for a route module that several routes share, as the case study pages do: the
- * route is resolved from the URL being rendered rather than named up front.
- */
-export function pathRouteMeta(): MetaFunction {
-  return ({ location }) => {
-    const id = routeIdFromPath(location.pathname)
-    return id ? buildMeta(id, localeFromPath(location.pathname)) : []
-  }
 }

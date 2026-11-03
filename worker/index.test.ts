@@ -38,6 +38,15 @@ describe('routing (vercel.json semantics)', () => {
     expect(findRedirect(redirects, new URL('https://domelayer.com/about'))).toBeNull()
   })
 
+  it('sends a removed consulting page to francescoprodomo.com before any language redirect', async () => {
+    const res = await get('https://domelayer.com/case-studies/ai-training-videos?utm_source=x', { 'accept-language': 'de-DE' })
+    expect(res.status).toBe(308)
+    expect(res.headers.get('location')).toBe('https://francescoprodomo.com/work/ai-training-videos?utm_source=x')
+    const invoice = await get('https://domelayer.com/nl/cases/factuurgoedkeuring-met-governance')
+    expect(invoice.status).toBe(308)
+    expect(invoice.headers.get('location')).toBe('/nl/dome/agent-flow')
+  })
+
   it('does not treat /tools/a/b as a single :slug', () => {
     expect(findRedirect(redirects, new URL('https://domelayer.com/tools/a/b'))).toBeNull()
   })
@@ -89,8 +98,8 @@ describe('worker', () => {
     expect(nl.status).toBe(307)
     expect(nl.headers.get('location')).toBe('/nl/over-ons?utm_source=email')
     expect(nl.headers.get('set-cookie')).toMatch(/^dome_locale=nl;/)
-    const de = await get('https://domelayer.com/case-studies', { 'accept-language': 'de-AT,de;q=0.9' }, staging)
-    expect(de.headers.get('location')).toBe('/de/fallstudien')
+    const de = await get('https://domelayer.com/contact', { 'accept-language': 'de-AT,de;q=0.9' }, staging)
+    expect(de.headers.get('location')).toBe('/de/kontakt')
     expect(de.headers.get('set-cookie')).toMatch(/^dome_locale=de;/)
   })
 
