@@ -46,7 +46,7 @@ describe('routing (site.config.json rules)', () => {
   it('sends a removed consulting page to francescoprodomo.com before any language redirect', async () => {
     const res = await get('https://domelayer.com/case-studies/ai-training-videos?utm_source=x', { 'accept-language': 'de-DE' })
     expect(res.status).toBe(308)
-    expect(res.headers.get('location')).toBe('https://francescoprodomo.com/work/ai-training-videos?utm_source=x')
+    expect(res.headers.get('location')).toBe('https://francescoprodomo.com/work/ahold-delhaize-procurement?utm_source=x')
     const invoice = await get('https://domelayer.com/nl/cases/factuurgoedkeuring-met-governance')
     expect(invoice.status).toBe(308)
     expect(invoice.headers.get('location')).toBe('/nl/dome/agent-flow')
