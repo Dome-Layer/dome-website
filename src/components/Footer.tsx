@@ -28,6 +28,7 @@ export function Footer() {
       links: [
         { href: localizedHref('dome', locale), label: messages.nav.tools },
         { href: localizedHref('agentFlow', locale), label: messages.nav.agentFlow },
+        { href: localizedHref('openData', locale), label: messages.nav.openData },
         { href: localizedHref('about', locale), label: messages.nav.about },
         { href: localizedHref('contact', locale), label: messages.nav.contact },
       ],

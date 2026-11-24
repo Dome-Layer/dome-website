@@ -50,6 +50,11 @@ export const PUBLIC_ROUTES = {
     path: { en: '/dome/agent-flow', it: '/it/dome/agent-flow', nl: '/nl/dome/agent-flow', de: '/de/dome/agent-flow' },
     updatedAt: '2026-11-03',
   },
+  openData: {
+    file: 'pages/OpenDataPage.tsx',
+    path: { en: '/dome/open-data', it: '/it/dome/open-data', nl: '/nl/dome/open-data', de: '/de/dome/open-data' },
+    updatedAt: '2026-11-24',
+  },
   about: { file: 'pages/AboutPage.tsx', path: { en: '/about', it: '/it/chi-siamo', nl: '/nl/over-ons', de: '/de/ueber-uns' }, updatedAt: '2026-11-03' },
   contact: { file: 'pages/ContactPage.tsx', path: { en: '/contact', it: '/it/contatti', nl: '/nl/contact', de: '/de/kontakt' }, updatedAt: '2026-11-03' },
   privacy: { file: 'pages/PrivacyPage.tsx', path: { en: '/privacy', it: '/it/privacy', nl: '/nl/privacy', de: '/de/datenschutz' }, updatedAt: '2026-11-03' },
@@ -62,7 +67,7 @@ export type RouteId = keyof typeof PUBLIC_ROUTES
 export const ROUTE_IDS = Object.keys(PUBLIC_ROUTES) as RouteId[]
 
 /** Pages that are neither a tool nor legal: the ones llms.txt lists first. */
-export const PAGE_IDS = ['home', 'dome', 'about', 'contact'] as const satisfies readonly RouteId[]
+export const PAGE_IDS = ['home', 'dome', 'openData', 'about', 'contact'] as const satisfies readonly RouteId[]
 
 /** Tool pages, in the order the site presents them. */
 export const TOOL_ROUTE_IDS = [

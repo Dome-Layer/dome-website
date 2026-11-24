@@ -21,6 +21,10 @@
   // Contact form: 3 submissions per minute per IP, counted per Cloudflare location, nothing stored.
   // Bindings are not inherited by environments, so staging repeats it with its own namespace.
   "ratelimits": [{ "name": "CONTACT_RATE_LIMITER", "namespace_id": "1001", "simple": { "limit": 3, "period": 60 } }],
+  // The open data ledger page reads one object (public/ledger.json) out of the collector's bucket.
+  // The bucket stays private: worker/ledger.ts is GET-only and can address that one key, so
+  // nothing under raw/, clean/ or catalog/ is reachable from the site.
+  "r2_buckets": [{ "binding": "OPEN_DATA", "bucket_name": "dome-open-data" }],
   // One flag per locale, read at runtime by the Worker (the first-visit redirect and the 404 per
   // locale). They must match the build's flags in .github/workflows/deploy-cloudflare.yml. All four
   // languages are published in production since 2026-11.
@@ -36,6 +40,9 @@
     "staging": {
       "name": "dome-website-staging",
       "ratelimits": [{ "name": "CONTACT_RATE_LIMITER", "namespace_id": "1002", "simple": { "limit": 3, "period": 60 } }],
+      // Bindings are not inherited by an environment, so staging repeats it. Same bucket: the
+      // ledger is a single read-only object, and a second copy of it would only go stale.
+      "r2_buckets": [{ "binding": "OPEN_DATA", "bucket_name": "dome-open-data" }],
       "vars": {
         "ENVIRONMENT": "staging",
         "DOME_PUBLISH_IT": "true",

@@ -187,7 +187,7 @@ export const MEDIA = {
     decorative: false,
     source: 'ai',
     aiLabel: true,
-    usedOn: 'DOME capabilities hero',
+    usedOn: 'DOME capabilities hero, and the open data ledger page',
   },
   aboutHero: {
     kind: 'image',

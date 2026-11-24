@@ -20,6 +20,8 @@ const LEGAL_ROUTE_IDS: readonly RouteId[] = ['privacy', 'terms', 'cookies']
 /** The page whose image a route uses: tool pages share the capabilities image, legal pages the home one. */
 export function socialImageRoute(id: RouteId): RouteId {
   if ((TOOL_ROUTE_IDS as readonly RouteId[]).includes(id)) return 'dome'
+  // The ledger page sits in the DOME section and shares its image.
+  if (id === 'openData') return 'dome'
   if (LEGAL_ROUTE_IDS.includes(id)) return 'home'
   return id
 }

@@ -20,6 +20,7 @@ export const it: Messages = {
     homeLabel: 'DOME, home',
     tools: 'Strumenti',
     agentFlow: 'Agent Flow',
+    openData: 'Dati aperti',
     dome: 'DOME',
     about: 'Il progetto',
     contact: 'Contatti',
@@ -89,6 +90,15 @@ export const it: Messages = {
   },
   breadcrumbHome: 'Home',
   meta: {
+    openData: {
+      name: 'Registro dati aperti',
+      title: 'Registro dati aperti: cosa contiene l’archivio | DOME',
+      description:
+        'Fonti, licenze, versioni datate conservate e ogni esecuzione, errori compresi, dell’archivio dietro DOME.',
+      ogDescription:
+        'Dieci fonti pubbliche, ogni versione datata conservata e ogni esecuzione a registro, errori compresi.',
+      imageAlt: 'Gli strumenti DOME',
+    },
     home: {
       name: 'Home',
       title: 'DOME | Strumenti di AI funzionanti, verificabili',
@@ -260,6 +270,53 @@ export const it: Messages = {
     },
   },
   pages: {
+    openData: {
+      hero: {
+        eyebrow: 'Dati aperti',
+        heading: 'L’archivio tiene il proprio registro.',
+        lead: 'Un collettore raccoglie dati economici pubblici a intervalli regolari e conserva ogni versione datata, così una cifra si può rileggere come era stata pubblicata e non come è stata rivista in seguito. Questa pagina è il suo registro, pubblicato così com’è.',
+      },
+      note: 'Solo metadati: cosa è stato raccolto e quando. Nessuna cifra dei dati stessi viene pubblicata qui.',
+      totals: {
+        heading: 'Cosa contiene l’archivio',
+        sources: 'Fonti',
+        vintages: 'Versioni datate',
+        series: 'Serie',
+        rows: 'Righe nella versione più recente',
+        objects: 'Oggetti archiviati',
+        asOf: 'Al {time}',
+      },
+      table: {
+        eyebrow: 'Tutte le fonti',
+        heading: 'Cosa è stato raccolto e cosa è andato storto.',
+        lead: 'Una fonte è in ritardo quando la sua versione più recente è più vecchia dell’intervallo che il suo editore rispetta. Le esecuzioni fallite restano a registro: un registro che mostrasse solo le settimane buone non varrebbe nulla.',
+        columns: {
+          source: 'Fonte',
+          cadence: 'Controllo',
+          newest: 'Versione più recente',
+          vintages: 'Versioni',
+          series: 'Serie',
+          rows: 'Righe',
+          licence: 'Licenza',
+          runs: 'Ultime esecuzioni',
+        },
+      },
+      cadence: { daily: 'Giornaliero', weekly: 'Settimanale', monthly: 'Mensile', yearly: 'Annuale' },
+      status: {
+        fresh: 'Puntuale',
+        stale: 'In ritardo',
+        never: 'Mai raccolta',
+        collected: 'Raccolta',
+        unchanged: 'Nulla di nuovo',
+        failed: 'Errore',
+      },
+      licence: { commercial: 'Uso commerciale', yes: 'sì', ask: 'da chiedere all’editore', no: 'no', shareAlike: 'Condividi allo stesso modo' },
+      caveat: 'Un’esecuzione che non trovava nulla di nuovo non lasciava traccia prima del {date}. Un vuoto nello storico precedente a quella data significa che non c’era nulla da raccogliere, non che un’esecuzione è mancata.',
+      loading: 'Lettura del registro.',
+      error: 'Il registro non è leggibile in questo momento.',
+      raw: 'Lo stesso registro in JSON',
+      code: 'Il collettore su GitHub',
+    },
     home: {
       hero: {
         eyebrow: 'AI governata, nella pratica',

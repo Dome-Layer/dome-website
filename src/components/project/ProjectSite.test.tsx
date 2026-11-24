@@ -41,6 +41,7 @@ describe('the footer', () => {
     expect(hrefs).toEqual([
       '/it/dome',
       '/it/dome/agent-flow',
+      '/it/dome/open-data',
       '/it/chi-siamo',
       '/it/contatti',
       'https://francescoprodomo.com',

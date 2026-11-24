@@ -49,6 +49,63 @@ export interface PlainHeroText {
 }
 
 /**
+ * The open data ledger page (`/dome/open-data`, decided 2026-11-17). Deliberately short on prose:
+ * the substance is the data, which the Worker serves from the collector's own record, so the only
+ * copy here is the lead, the column headings and the words for a status. Source names, licence
+ * names and attributions come from the registry, not from a catalogue: they are the publishers'
+ * own wording and are not translated.
+ */
+export interface OpenDataText {
+  hero: PlainHeroText
+  /** The promise the page has to make plainly: metadata only, no figures from the data itself. */
+  note: string
+  totals: {
+    heading: string
+    sources: string
+    vintages: string
+    series: string
+    rows: string
+    objects: string
+    /** "as of <time>", with {time} replaced. */
+    asOf: string
+  }
+  table: {
+    eyebrow: string
+    heading: string
+    lead: string
+    columns: {
+      source: string
+      cadence: string
+      newest: string
+      vintages: string
+      series: string
+      rows: string
+      licence: string
+      runs: string
+    }
+  }
+  cadence: { daily: string; weekly: string; monthly: string; yearly: string }
+  status: {
+    fresh: string
+    stale: string
+    never: string
+    collected: string
+    unchanged: string
+    failed: string
+  }
+  /** `commercial` labels the row; yes / ask / no are the registry's three values, in words. */
+  licence: { commercial: string; yes: string; ask: string; no: string; shareAlike: string }
+  /** Why the run history has gaps before a date, with {date} replaced. */
+  caveat: string
+  loading: string
+  error: string
+  /** Label of the link to the raw JSON. */
+  raw: string
+  /** Label of the link to the collector's repository. */
+  code: string
+}
+
+/**
  * Shape of every message catalogue. Each locale's catalogue is typed with it, so a missing or
  * misspelt key fails `tsc`. Page body copy moves in here when the pages are rebuilt (plan 1c, 1d).
  */
@@ -128,6 +185,8 @@ export interface Messages {
     /** The tools page (/dome). */
     tools: string
     agentFlow: string
+    /** Footer link to the open data ledger. */
+    openData: string
     dome: string
     about: string
     contact: string
@@ -330,6 +389,8 @@ export interface Messages {
         closing: ProjectClosingText
       }
     }
+    /** The open data ledger (decided 2026-11-17): the store's own record, published. */
+    openData: OpenDataText
     privacy: LegalDocumentText
     terms: LegalDocumentText
     /** The cookie policy (Sprint C item 2): every cookie and browser storage entry, and why. */
