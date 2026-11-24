@@ -22,6 +22,7 @@ export const de: Messages = {
     homeLabel: 'DOME, Startseite',
     tools: 'Tools',
     agentFlow: 'Agent Flow',
+    openData: 'Offene Daten',
     dome: 'DOME',
     about: 'Über DOME',
     contact: 'Kontakt',
@@ -91,6 +92,15 @@ export const de: Messages = {
   },
   breadcrumbHome: 'Startseite',
   meta: {
+    openData: {
+      name: 'Register offene Daten',
+      title: 'Register offene Daten: was der Speicher enthält | DOME',
+      description:
+        'Quellen, Lizenzen, vorhandene datierte Fassungen und jeder Lauf, die fehlgeschlagenen eingeschlossen, des Speichers hinter DOME.',
+      ogDescription:
+        'Zehn öffentliche Quellen, jede datierte Fassung behalten und jeder Lauf im Protokoll, die fehlgeschlagenen eingeschlossen.',
+      imageAlt: 'Die DOME-Tools',
+    },
     home: {
       name: 'Startseite',
       title: 'DOME | Funktionierende KI-Tools, die Sie prüfen können',
@@ -258,6 +268,53 @@ export const de: Messages = {
     },
   },
   pages: {
+    openData: {
+      hero: {
+        eyebrow: 'Offene Daten',
+        heading: 'Der Speicher führt sein eigenes Protokoll.',
+        lead: 'Ein Collector holt öffentliche Wirtschaftsdaten nach Zeitplan und behält jede datierte Fassung, sodass eine Zahl so nachgelesen werden kann, wie sie veröffentlicht wurde, und nicht so, wie sie später revidiert wurde. Diese Seite ist dieses Protokoll, veröffentlicht wie es ist.',
+      },
+      note: 'Nur Metadaten: was wann gesammelt wurde. Zahlen aus den Daten selbst stehen hier nicht.',
+      totals: {
+        heading: 'Was der Speicher enthält',
+        sources: 'Quellen',
+        vintages: 'Datierte Fassungen',
+        series: 'Reihen',
+        rows: 'Zeilen in der neuesten Fassung',
+        objects: 'Gespeicherte Objekte',
+        asOf: 'Stand {time}',
+      },
+      table: {
+        eyebrow: 'Alle Quellen',
+        heading: 'Was gesammelt wurde, und was fehlschlug.',
+        lead: 'Eine Quelle ist verspätet, wenn ihre neueste Fassung älter ist als der Abstand, den ihr Herausgeber einhält. Fehlgeschlagene Läufe bleiben im Protokoll: ein Protokoll, das nur die guten Wochen zeigte, wäre nichts wert.',
+        columns: {
+          source: 'Quelle',
+          cadence: 'Prüfung',
+          newest: 'Neueste Fassung',
+          vintages: 'Fassungen',
+          series: 'Reihen',
+          rows: 'Zeilen',
+          licence: 'Lizenz',
+          runs: 'Letzte Läufe',
+        },
+      },
+      cadence: { daily: 'Täglich', weekly: 'Wöchentlich', monthly: 'Monatlich', yearly: 'Jährlich' },
+      status: {
+        fresh: 'Pünktlich',
+        stale: 'Verspätet',
+        never: 'Nie gesammelt',
+        collected: 'Gesammelt',
+        unchanged: 'Nichts Neues',
+        failed: 'Fehlgeschlagen',
+      },
+      licence: { commercial: 'Kommerzielle Nutzung', yes: 'ja', ask: 'beim Herausgeber erfragen', no: 'nein', shareAlike: 'Weitergabe unter gleichen Bedingungen' },
+      caveat: 'Ein Lauf, der nichts Neues fand, hinterließ vor dem {date} keine Zeile. Eine Lücke in der Historie vor diesem Datum bedeutet, dass es nichts zu sammeln gab, und nicht, dass ein Lauf fehlte.',
+      loading: 'Das Protokoll wird gelesen.',
+      error: 'Das Protokoll ist gerade nicht lesbar.',
+      raw: 'Dasselbe Protokoll als JSON',
+      code: 'Der Collector auf GitHub',
+    },
     home: {
       hero: {
         eyebrow: 'Kontrollierte KI in der Praxis',

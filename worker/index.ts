@@ -4,6 +4,8 @@ import { localeRedirectTarget } from '../src/i18n/detect';
 import { publishedLocales, publishFlags } from '../src/i18n/locales';
 import { NOT_FOUND_PATHS, notFoundPath } from '../src/i18n/routes';
 import { handleContact, type ContactEnv } from './contact';
+import { LEDGER_PATH } from '../src/lib/ledger';
+import { handleLedger, type LedgerEnv } from './ledger';
 import {
   findRedirect,
   findRewrite,
@@ -22,7 +24,7 @@ import {
  * and the static page, with site.config.json's header rules on every response.
  */
 
-export interface Env extends ContactEnv {
+export interface Env extends ContactEnv, LedgerEnv {
   ASSETS: Fetcher;
   /** "true" or "false" per locale; must match the build's flags (see isLocalePublished). */
   DOME_PUBLISH_IT?: string;
@@ -70,6 +72,12 @@ export default {
 
     if (url.pathname === '/api/contact') {
       return withSiteHeaders(await handleContact(request, env), url, env);
+    }
+
+    // The open data ledger, read straight from R2: the page at /dome/open-data asks for it on load.
+    // Before the locale redirect, because it is data and has no language.
+    if (url.pathname === LEDGER_PATH) {
+      return withSiteHeaders(await handleLedger(request, env), url, env);
     }
 
     // Only the flags: an unset flag must read the same here as in the build.

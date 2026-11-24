@@ -26,7 +26,7 @@ no on-page label, so they are listed here instead.
 | Home hero, still alternative to the video | AI-generated | Yes |
 | Agent Flow page, how a run works | AI-generated | Yes |
 | Not on a page yet: design workshop scene | AI-generated | Yes |
-| DOME capabilities hero | AI-generated | Yes |
+| DOME capabilities hero, and the open data ledger page | AI-generated | Yes |
 | About hero | AI-generated | Yes |
 | Governance Dashboard page, how it works | AI-generated | Yes |
 | Contact hero | AI-generated | Yes |

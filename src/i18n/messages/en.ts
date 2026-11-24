@@ -13,6 +13,7 @@ export const en: Messages = {
     homeLabel: 'DOME home',
     tools: 'Tools',
     agentFlow: 'Agent Flow',
+    openData: 'Open data',
     dome: 'DOME',
     about: 'About',
     contact: 'Contact',
@@ -77,6 +78,15 @@ export const en: Messages = {
   },
   breadcrumbHome: 'Home',
   meta: {
+    openData: {
+      name: 'Open data ledger',
+      title: 'Open data ledger: what the store holds | DOME',
+      description:
+        'Sources, licences, dated versions held and every collection run, failures included, for the store behind DOME.',
+      ogDescription:
+        'Ten public data sources, every dated version kept, and every run on the record, failures included.',
+      imageAlt: 'The DOME tools',
+    },
     home: {
       name: 'Home',
       title: 'DOME | Working AI tools you can audit',
@@ -246,6 +256,53 @@ export const en: Messages = {
     },
   },
   pages: {
+    openData: {
+      hero: {
+        eyebrow: 'Open data',
+        heading: 'The store keeps its own record.',
+        lead: 'A collector gathers public economic data on a schedule and keeps every dated version, so a figure can be read back exactly as it was published rather than as it was later revised. This page is its log, published as it stands.',
+      },
+      note: 'Metadata only: what was collected and when. No figures from the data itself are published here.',
+      totals: {
+        heading: 'What the store holds',
+        sources: 'Sources',
+        vintages: 'Dated versions',
+        series: 'Series',
+        rows: 'Rows in the newest version',
+        objects: 'Objects stored',
+        asOf: 'As of {time}',
+      },
+      table: {
+        eyebrow: 'Every source',
+        heading: 'What was collected, and what failed.',
+        lead: 'A source is late when its newest version is older than the gap its publisher keeps to. Failed runs stay on the record: a log that showed only the good weeks would be worth nothing.',
+        columns: {
+          source: 'Source',
+          cadence: 'Checked',
+          newest: 'Newest version',
+          vintages: 'Versions',
+          series: 'Series',
+          rows: 'Rows',
+          licence: 'Licence',
+          runs: 'Last runs',
+        },
+      },
+      cadence: { daily: 'Daily', weekly: 'Weekly', monthly: 'Monthly', yearly: 'Yearly' },
+      status: {
+        fresh: 'On time',
+        stale: 'Late',
+        never: 'Never collected',
+        collected: 'Collected',
+        unchanged: 'Nothing new',
+        failed: 'Failed',
+      },
+      licence: { commercial: 'Commercial use', yes: 'yes', ask: 'ask the publisher', no: 'no', shareAlike: 'Share-alike' },
+      caveat: 'A run that found nothing new left no entry before {date}. A gap in the history before that date means there was nothing to collect, not that a run was missed.',
+      loading: 'Reading the record.',
+      error: 'The record could not be read just now.',
+      raw: 'The same record as JSON',
+      code: 'The collector on GitHub',
+    },
     home: {
       hero: {
         eyebrow: 'Governed AI, in practice',

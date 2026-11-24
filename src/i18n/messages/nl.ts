@@ -20,6 +20,7 @@ export const nl: Messages = {
     homeLabel: 'DOME, home',
     tools: 'Tools',
     agentFlow: 'Agent Flow',
+    openData: 'Open data',
     dome: 'DOME',
     about: 'Over DOME',
     contact: 'Contact',
@@ -89,6 +90,15 @@ export const nl: Messages = {
   },
   breadcrumbHome: 'Home',
   meta: {
+    openData: {
+      name: 'Register open data',
+      title: 'Register open data: wat de opslag bevat | DOME',
+      description:
+        'Bronnen, licenties, bewaarde gedateerde versies en elke run, mislukte runs inbegrepen, van de opslag achter DOME.',
+      ogDescription:
+        'Tien openbare bronnen, elke gedateerde versie bewaard en elke run in het logboek, mislukte runs inbegrepen.',
+      imageAlt: 'De DOME-tools',
+    },
     home: {
       name: 'Home',
       title: 'DOME | Werkende AI-tools die u kunt controleren',
@@ -256,6 +266,53 @@ export const nl: Messages = {
     },
   },
   pages: {
+    openData: {
+      hero: {
+        eyebrow: 'Open data',
+        heading: 'De opslag houdt zijn eigen logboek bij.',
+        lead: 'Een collector haalt volgens een schema openbare economische data op en bewaart elke gedateerde versie, zodat een cijfer teruggelezen kan worden zoals het gepubliceerd was en niet zoals het later is herzien. Deze pagina is dat logboek, gepubliceerd zoals het is.',
+      },
+      note: 'Alleen metadata: wat er is opgehaald en wanneer. Cijfers uit de data zelf staan hier niet.',
+      totals: {
+        heading: 'Wat de opslag bevat',
+        sources: 'Bronnen',
+        vintages: 'Gedateerde versies',
+        series: 'Reeksen',
+        rows: 'Rijen in de nieuwste versie',
+        objects: 'Opgeslagen objecten',
+        asOf: 'Per {time}',
+      },
+      table: {
+        eyebrow: 'Alle bronnen',
+        heading: 'Wat is opgehaald, en wat misging.',
+        lead: 'Een bron is te laat wanneer de nieuwste versie ouder is dan het interval dat de uitgever aanhoudt. Mislukte runs blijven in het logboek staan: een logboek met alleen de goede weken zou niets waard zijn.',
+        columns: {
+          source: 'Bron',
+          cadence: 'Controle',
+          newest: 'Nieuwste versie',
+          vintages: 'Versies',
+          series: 'Reeksen',
+          rows: 'Rijen',
+          licence: 'Licentie',
+          runs: 'Laatste runs',
+        },
+      },
+      cadence: { daily: 'Dagelijks', weekly: 'Wekelijks', monthly: 'Maandelijks', yearly: 'Jaarlijks' },
+      status: {
+        fresh: 'Op tijd',
+        stale: 'Te laat',
+        never: 'Nooit opgehaald',
+        collected: 'Opgehaald',
+        unchanged: 'Niets nieuws',
+        failed: 'Mislukt',
+      },
+      licence: { commercial: 'Commercieel gebruik', yes: 'ja', ask: 'navragen bij de uitgever', no: 'nee', shareAlike: 'Gelijk delen' },
+      caveat: 'Een run die niets nieuws vond, liet voor {date} geen regel achter. Een gat in de geschiedenis van voor die datum betekent dat er niets te halen was, niet dat een run is overgeslagen.',
+      loading: 'Het logboek wordt gelezen.',
+      error: 'Het logboek kan nu niet gelezen worden.',
+      raw: 'Hetzelfde logboek als JSON',
+      code: 'De collector op GitHub',
+    },
     home: {
       hero: {
         eyebrow: 'AI met governance, in de praktijk',
