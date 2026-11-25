@@ -383,7 +383,16 @@ export interface Messages {
         askDemo: string
         demoNote: string
         why: { eyebrow: string; heading: string; paragraphs: readonly string[]; outcomes: readonly ItemText[] }
-        run: { eyebrow: string; heading: string; lead: string; stages: readonly (ItemText & { tool: string })[] }
+        run: {
+          eyebrow: string
+          heading: string
+          lead: string
+          stages: readonly (ItemText & { tool: string })[]
+          /** The recorded run (roadmap row 2, 2026-11-25): one screen per stage. */
+          recorded: string
+          tablist: string
+          shots: readonly { alt: string; caption: string }[]
+        }
         record: { heading: string; lead: string; cta: string; events: readonly { what: string; review: string }[] }
         method: { heading: string; body: string }
         closing: ProjectClosingText

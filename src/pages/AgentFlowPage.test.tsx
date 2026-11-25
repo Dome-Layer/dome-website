@@ -50,3 +50,40 @@ describe.skipIf(AGENT_FLOW_LIVE)("AgentFlowPage: private demo", () => {
     expect(hrefs.some((h) => h.includes("agent-flow."))).toBe(false);
   });
 });
+
+// The recorded run (roadmap row 2): five stages, five screens, the list switches the screen.
+describe("AgentFlowPage: the recorded run", () => {
+  it("has one tab per stage and switches the screen on click", async () => {
+    const { default: userEvent } = await import("@testing-library/user-event");
+    renderPage();
+    const tabs = screen.getAllByRole("tab", { hidden: true });
+    expect(tabs).toHaveLength(5);
+    expect(tabs[0]).toHaveAttribute("aria-selected", "true");
+    await userEvent.click(tabs[3]);
+    expect(tabs[3]).toHaveAttribute("aria-selected", "true");
+    const panel = screen.getByRole("tabpanel", { hidden: true });
+    expect(panel).toHaveAttribute("aria-labelledby", "run-tab-3");
+    expect(panel.querySelector("img")?.getAttribute("src")).toBe("/screens/run-4-council-light-800.jpg");
+  });
+
+  it("moves between stages with the arrow keys", async () => {
+    const { default: userEvent } = await import("@testing-library/user-event");
+    renderPage();
+    const tabs = screen.getAllByRole("tab", { hidden: true });
+    tabs[0].focus();
+    await userEvent.keyboard("{ArrowUp}");
+    expect(tabs[4]).toHaveAttribute("aria-selected", "true");
+    expect(tabs[4]).toHaveFocus();
+  });
+
+  it("ships every screen it references", async () => {
+    const { existsSync } = await import("node:fs");
+    renderPage();
+    const srcs = [...document.querySelectorAll("img, source")].flatMap((el) =>
+      (el.getAttribute("srcset") ?? el.getAttribute("src") ?? "").split(",").map((s) => s.trim().split(" ")[0]),
+    );
+    const run = [...new Set(srcs.filter((s) => s.startsWith("/screens/run-")))];
+    expect(run.length).toBeGreaterThan(0);
+    for (const s of run) expect(existsSync(`public${s}`), s).toBe(true);
+  });
+});

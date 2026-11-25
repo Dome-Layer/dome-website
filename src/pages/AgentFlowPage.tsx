@@ -7,13 +7,12 @@ import {
   ExternalButton,
   MethodStrip,
   PhaseLabel,
-  StepsTimeline,
   TOOL_CONTAINER,
   ToolHero,
-  ToolPhoto,
   ToolScreen,
   ToolSectionHeading,
 } from '../components/tools/ToolParts'
+import { RunWalkthrough } from '../components/tools/RunWalkthrough'
 import { TOOL_PAGES } from '../content/toolPages'
 import { AGENT_FLOW_LIVE, useToolHref } from '../lib/tools'
 import { DEMO_TOPIC_QUERY, RUN_ANCHOR } from '../lib/project'
@@ -23,13 +22,17 @@ import { routeMeta } from '../lib/seo'
 
 export const meta = routeMeta('agentFlow')
 
-/** The record of one run, in the order it was written. Times and tools are data; the words are not. */
+/**
+ * The record of the recorded run (invoice-2026-11-25-521829ae, staging, times in UTC), in the order
+ * its governance events were written. Times and tools are data; the words are not.
+ */
+const RUN_ID = 'invoice-2026-11-25-521829ae'
 const EVENTS = [
-  { time: '08:41', tool: 'Agent Flow', tone: 'text-[var(--color-text-tertiary)]' },
-  { time: '08:41', tool: 'Document Intelligence', tone: 'text-[#15803D] dark:text-[#4ADE80]' },
-  { time: '08:41', tool: 'Rules engine', tone: 'text-[#B45309] dark:text-[#F59E0B]' },
-  { time: '08:42', tool: 'LLM Council', tone: 'text-[var(--color-text-accent)]' },
-  { time: '09:10', tool: 'Approver', tone: 'text-[#BE185D] dark:text-[#EC4899]' },
+  { time: '10:34', tool: 'Agent Flow', tone: 'text-[var(--color-text-tertiary)]' },
+  { time: '10:34', tool: 'Document Intelligence', tone: 'text-[#15803D] dark:text-[#4ADE80]' },
+  { time: '10:34', tool: 'Rules engine', tone: 'text-[#B45309] dark:text-[#F59E0B]' },
+  { time: '10:36', tool: 'LLM Council', tone: 'text-[var(--color-text-accent)]' },
+  { time: '10:38', tool: 'Approver', tone: 'text-[#BE185D] dark:text-[#EC4899]' },
 ] as const
 
 /**
@@ -123,15 +126,11 @@ export default function AgentFlowPage() {
         className="scroll-mt-20 border-y border-[var(--color-border-subtle)] bg-[var(--color-bg-subtle)] py-20 md:py-24"
       >
         <div className={`flex flex-col gap-12 ${TOOL_CONTAINER}`}>
-          <ToolSectionHeading id="run-heading" eyebrow={text.run.eyebrow} heading={text.run.heading} lead={text.run.lead} />
-          <div className="grid items-start gap-10 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] lg:gap-16">
-            <StepsTimeline
-              steps={text.run.stages}
-              accent={config.accent}
-              kicker={(index) => `${String(index + 1).padStart(2, '0')} · ${text.run.stages[index].tool}`}
-            />
-            <ToolPhoto id={config.photo} />
+          <div className="flex flex-col gap-3">
+            <ToolSectionHeading id="run-heading" eyebrow={text.run.eyebrow} heading={text.run.heading} lead={text.run.lead} />
+            <p className="max-w-[720px] text-[14px] leading-[1.6] text-[var(--color-text-tertiary)]">{text.run.recorded}</p>
           </div>
+          <RunWalkthrough stages={text.run.stages} shots={text.run.shots} label={text.run.tablist} accent={config.accent} />
         </div>
       </section>
 
@@ -149,7 +148,7 @@ export default function AgentFlowPage() {
           </div>
           <div className="overflow-hidden rounded-[var(--radius-lg)] border border-[var(--color-border-strong)] bg-[var(--color-bg-base)]">
             <div className="flex flex-wrap justify-between gap-3 border-b border-[var(--color-border-default)] px-5 py-3.5 text-[13px]">
-              <span className="font-mono font-semibold">run-7f3a1c</span>
+              <span className="font-mono font-semibold">{RUN_ID}</span>
               <span className="text-[var(--color-text-tertiary)]">Nordlicht Packaging GmbH · €49,123.20</span>
             </div>
             <ol>
