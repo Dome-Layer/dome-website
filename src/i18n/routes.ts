@@ -48,7 +48,7 @@ export const PUBLIC_ROUTES = {
   agentFlow: {
     file: 'pages/AgentFlowPage.tsx',
     path: { en: '/dome/agent-flow', it: '/it/dome/agent-flow', nl: '/nl/dome/agent-flow', de: '/de/dome/agent-flow' },
-    updatedAt: '2026-11-03',
+    updatedAt: '2026-11-25',
   },
   openData: {
     file: 'pages/OpenDataPage.tsx',
